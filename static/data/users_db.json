@@ -1,0 +1,29 @@
+[
+    {
+        "name": "jacob", 
+        "password": "pettersson",
+        "id":1,
+        "autholevel":1
+    }, 
+    {
+        "name": "sofia", 
+        "password": "lundqvist",
+        "id":2,
+        "autholevel":1
+        
+    }, 
+    {
+        "name": "philip", 
+        "password": "devries",
+        "id":3,
+        "autholevel":2
+        
+    }, 
+    {
+        "name": "jari", 
+        "password": "rosenstrom",
+        "id":4,
+        "autholevel":2
+        
+    }
+]
