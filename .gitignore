@@ -1,2 +1,3 @@
 /session/container_file/*
 /session/container_file_lock/*
+*.pyc
