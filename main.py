@@ -42,9 +42,9 @@ def log_out():
 
 @route('/admin')
 def admin():
-	if log.validate_autho() == True: #and log.get_user_level() == 2
-		username = log.get_user_name()
-		user_level = log.get_user_level()
+	if log.validate_autho() == True: #and log.get_user_level() == 2 | kontrollerar om användaren är inloggad (returnerar true eller false)
+		username = log.get_user_name() #hämtar användarens namn från DB (returnerar en sträng)
+		user_level = log.get_user_level() #kollar om användaren är uppdragstagare eller student (returnerar 1 eller 2)
 		if user_level == 1:
 			return template('admin', user=username, level="student")
 		else:
