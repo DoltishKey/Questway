@@ -37,7 +37,7 @@ def validate_autho():
 		return True
 
 	except:
-		return False
+		redirect('/login')
 			
 def get_user_id(username):
 	users = read_data('users_db')
