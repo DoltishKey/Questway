@@ -15,10 +15,13 @@ function checkLogIn(){
 			data: $(this).serialize(),
 			success: function(response) {
            		if (response == 'ok'){
-	        		$('#logIn').submit();  	
+	        		document.getElementById("logIn").submit();  	
+           		}
+           		else if(response=='error'){
+	           		$('#error').html('Fel användarnamn eller lösenord!');
            		}
            		else{
-	           		$('#error').html('Fel användarnamn eller lösenord!');	
+	           		$('#error').html('Något har blivit fel!');	
            		}
 		   	}
 		});
