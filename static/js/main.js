@@ -17,8 +17,11 @@ function checkLogIn(){
            		if (response == 'ok'){
 	        		$('#logIn').submit();  	
            		}
+           		else if(response=='error'){
+	           		$('#error').html('Fel användarnamn eller lösenord!');
+           		}
            		else{
-	           		$('#error').html('Fel användarnamn eller lösenord!');	
+	           		$('#error').html('Något har blivit fel!');	
            		}
 		   	}
 		});
