@@ -16,7 +16,7 @@
             </nav>
         </header>
         <div id="content">
-        <img src="bild1.jpg" alt="computer">
+        <img src="static/img/bild1.jpg" alt="computer">
             <div id="slogan"><p>Lorem ipsum dolor sit amet, </br>consectetur adipiscing elit.</p></div>
 		<form name="logIn" id="logIn" method="post" action="/do_login">
             <h3>Logga in</h3>
