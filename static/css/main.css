@@ -1,0 +1,93 @@
+body {
+    font-family: Tahoma, sans-serif;
+    margin: 0;
+}
+
+header {
+    padding: 40px;
+    height: 50px;
+}
+
+#content {
+    margin: 0;
+    position: relative;
+}
+
+footer {
+    height: 100px;
+    text-align: center;
+    line-height: 6;
+    background-color: #EBE8E4;
+    margin: 0;
+}
+
+#content > img {
+    position: relative;
+}
+
+#slogan {
+    position: absolute;
+    top: 200px;
+    left: 230px;
+    font-size: 55px;
+    color: black;
+}
+
+/* Styling för formuläret */
+#logIn {
+    width: 300px;
+    border: 1px solid black;
+    background-color: #242729;
+    color: #b9bdc1;
+    padding: 40px;
+    font-family: tahoma;
+    position: absolute;
+    top: 200px;
+    right: 230px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+#logIn input, label {
+    display: block;
+    margin-top: 10px;
+}
+
+#logIn > input {
+    height: 25px;
+    width: 296px;
+    font-size: 15px;
+}
+
+#logIn > h3 {
+    margin: 0;
+}
+
+#logIn > #logInButton {
+    width: 120px;
+    float: right;
+    height: 50px;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+/* _____________ */
+
+header h1 {
+    margin: 0;
+    padding: 0;
+    display: inline;
+}
+
+header nav {
+    width: 260px;
+    float: right;
+}
+
+header nav > a {
+    padding-left: 15px;
+}
+
+#back-button {
+    position: absolute;
+    left: 50px;
+    bottom: 50px;
+}
