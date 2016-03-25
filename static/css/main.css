@@ -1,26 +1,44 @@
+html{
+    height: 100%;
+    overflow: hidden;
+}
 body {
+    height: 100%;
     font-family: Tahoma, sans-serif;
     margin: 0;
+    background-image: url(../img/qwback.jpg);
+    background-size: cover;
+    background-position: center;
+    color: #fff;
 }
 
 header {
     padding: 40px;
     height: 50px;
 }
-
+.options{
+    background-color: #336e7b;
+    color: #fff;
+    padding: 3%;
+    border-style: solid; border-width: thin;
+    border-radius: 5px; border-color: #ccc #999 #999 #ccc;
+}
 #content {
-    margin: 0;
+    margin:60px auto;
     position: relative;
 }
-
-footer {
-    height: 100px;
-    text-align: center;
-    line-height: 6;
-    background-color: #EBE8E4;
-    margin: 0;
+form h3, form input{
+    color: #fff;
 }
-
+footer {
+    color: #777;
+    height: 10%;
+    text-align: center;
+    line-height: 5;
+    background: rgba(0,0,0,0.8);
+    margin-top: 27.5%;
+}
+/**
 #content > img {
     position: relative;
 }
@@ -32,10 +50,10 @@ footer {
     font-size: 55px;
     color: black;
 }
-
-/* Styling för formuläret */
+**/
+/* Styling för formuläret 
 #logIn {
-    width: 300px;
+    width: 25%;
     border: 1px solid black;
     background-color: #242729;
     color: #b9bdc1;
@@ -45,6 +63,16 @@ footer {
     top: 200px;
     right: 230px;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+*/
+#logIn{
+    width: 25%;
+    color: #000;
+    margin: auto;
+}
+#username, #password{
+    background: rgba(255,255,255,0.5);
+    color: #000;
 }
 
 #logIn input, label {
@@ -58,15 +86,13 @@ footer {
     font-size: 15px;
 }
 
-#logIn > h3 {
-    margin: 0;
-}
-
-#logIn > #logInButton {
-    width: 120px;
+#logIn #logInButton {
+    width: 100px;
     float: right;
     height: 50px;
+    background-color: #336e7b;
     box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 5px;
 }
 
 /* _____________ */
