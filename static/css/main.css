@@ -27,8 +27,20 @@ header {
     margin:60px auto;
     position: relative;
 }
-form h3, form input{
+form h3{
     color: #fff;
+}
+::-webkit-input-placeholder {
+   color: white; text-align: center;
+}
+:-moz-placeholder { /* Firefox 18- */
+   color: white; text-align: center;  
+}
+::-moz-placeholder {  /* Firefox 19+ */
+   color: white; text-align: center;
+}
+:-ms-input-placeholder {  
+   color: white; text-align: center;
 }
 footer {
     color: #777;
@@ -36,7 +48,7 @@ footer {
     text-align: center;
     line-height: 5;
     background: rgba(0,0,0,0.8);
-    margin-top: 27.5%;
+    margin-top: 22%;
 }
 /**
 #content > img {
@@ -85,10 +97,9 @@ footer {
     width: 296px;
     font-size: 15px;
 }
-
 #logIn #logInButton {
+    margin: 20px auto;
     width: 100px;
-    float: right;
     height: 50px;
     background-color: #336e7b;
     box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
@@ -116,4 +127,15 @@ header nav > a {
     position: absolute;
     left: 50px;
     bottom: 50px;
+}
+@media screen and (max-width:600px){
+    #logIn{
+        width: 80%;
+    }
+    #logIn input{
+        margin: 15px auto;
+    }
+    footer{
+        margin-top: 70.3%;
+    }
 }
