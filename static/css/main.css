@@ -16,20 +16,20 @@ header {
     padding: 40px;
     height: 50px;
 }
+
 .options{
     background-color: #336e7b;
     color: #fff;
     padding: 3%;
     border-style: solid; border-width: thin;
     border-radius: 5px; border-color: #ccc #999 #999 #ccc;
+    text-decoration: none;
 }
 #content {
     margin:60px auto;
     position: relative;
 }
-form h3{
-    color: #fff;
-}
+
 ::-webkit-input-placeholder {
    color: white; text-align: center;
 }
@@ -42,14 +42,15 @@ form h3{
 :-ms-input-placeholder {  
    color: white; text-align: center;
 }
+
 footer {
     color: #777;
-    height: 10%;
+    height: 100px;
     text-align: center;
     line-height: 5;
     background: rgba(0,0,0,0.8);
-    margin-top: 22%;
 }
+
 /**
 #content > img {
     position: relative;
@@ -77,11 +78,18 @@ footer {
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 */
+
 #logIn{
     width: 25%;
     color: #000;
     margin: auto;
 }
+
+form h3{
+    color: #fff;
+    text-align: center;
+}
+
 #username, #password{
     background: rgba(255,255,255,0.5);
     color: #000;
@@ -89,12 +97,12 @@ footer {
 
 #logIn input, label {
     display: block;
-    margin-top: 10px;
+    margin: 10px auto;
 }
 
 #logIn > input {
     height: 25px;
-    width: 296px;
+    width: 300px;
     font-size: 15px;
 }
 #logIn #logInButton {
@@ -112,6 +120,7 @@ header h1 {
     margin: 0;
     padding: 0;
     display: inline;
+    font-size: 40px;
 }
 
 header nav {
@@ -138,4 +147,20 @@ header nav > a {
     footer{
         margin-top: 70.3%;
     }
+}
+
+/* Sticky footer av Ryan Fait */
+
+* {
+	margin: 0;
+}
+
+.wrapper {
+	min-height: 100%;
+	height: auto !important; /* This line and the next line are not necessary unless you need IE6 support */
+	height: 100%;
+	margin: 0 auto -100px; /* the bottom margin is the negative value of the footer's height */
+}
+.push {
+	height: 100px; /* .push must be the same height as footer */
 }
