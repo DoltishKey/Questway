@@ -10,6 +10,7 @@
         <div class="wrapper">
             <header>
                 <h1>Questway</h1>
+                <!--<img src="../static/img/logga.jpg" alt="logotyp">-->
                 <nav>
                     <a class="options" href="">Logga in</a>
                     <a class="options" href="">Registrera</a>
@@ -17,18 +18,16 @@
                 </nav>
             </header>
             <div id="content">
-            <!--<img src="../static/img/qwback.jpg" alt="qwbackground">
-                <div id="slogan"><p>Lorem ipsum dolor sit amet, <br>consectetur adipiscing elit.</p></div>-->
             <form name="logIn" id="logIn" method="post" action="/do_login">
-                <h3>Logga in</h3>
+                <h2>Logga in</h2>
                 <!--<label for="username">Användarnamn</label>-->
                 <input placeholder="Användarnamn" type="input" name="username" id="username" value="">
                 <!--<label for="password">Lösenord</label>-->
                 <input placeholder="Lösenord" type="password" name="password" id="password" value="">
-                <input id="logInButton" type="submit" value="Logga in">		
+                <input class="myButton" type="submit" value="Logga in">		
             </form>
             <p id="error"></p>
-            <a href="/" id="back-button">Tillbaka</a>
+            <!-- <a href="/" id="back-button">Tillbaka</a> -->
             </div>
             <div class="push"></div> <!-- Är till för att footer ska hamna längst ner, ta ej bort -->
         </div>
