@@ -26,7 +26,7 @@ def read_data(file):
 def validate_user(username, password):
 	users = read_data('users_db')
 	for user in users:
-		if username == user['name'] and password == user['password']:
+		if username.lower() == user['username'].lower() and password == user['password']:
 			return True
 	return False
 	
@@ -42,15 +42,19 @@ def validate_autho():
 def get_user_id(username):
 	users = read_data('users_db')
 	for user in users:
-		if username == user['name']:
+		if username == user['username']:
 			return user['id']
 
 def get_user_name():
 	session = request.environ.get('beaker.session')
-	users = read_data('users_db')
+	if get_user_level() == 1:
+		users = read_data('students')
+	else:
+		users = read_data('employers')
+	
 	for user in users:
 		if session['userId'] == user['id']:
-			return user['name']
+			return user['first_name']
 
 def get_user_level():
 	session = request.environ.get('beaker.session')
@@ -62,7 +66,7 @@ def get_user_level():
 		
 '''*********Funktioner*********'''	
 def login():
-	username = request.forms.get('username')
+	username = request.forms.get('email')
 	password = request.forms.get('password')
 	if validate_user(username, password) == True:
 		userID = get_user_id(username)
@@ -80,7 +84,7 @@ def log_out():
 	session.save()
 
 def ajax_validation():
-	username = request.forms.get('username')
+	username = request.forms.get('email')
 	password = request.forms.get('password')
 	print username
 	print password
