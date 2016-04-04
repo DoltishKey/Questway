@@ -1,6 +1,7 @@
 # *-* coding:utf-8 *-*
 import bottle
 from modules import log
+from modules import createUsers
 from bottle import route, get, post, run, template, error, static_file, request, redirect, abort, response, app
 from beaker.middleware import SessionMiddleware
 import json
@@ -25,7 +26,7 @@ def ajax_validation():
 		return 'error'
 	else:
 		return 'ok'
-		
+				
 @route('/do_login', method = 'POST')
 def do_login():
 	response = log.login()	
@@ -49,7 +50,47 @@ def admin():
 		return template('admin', user=username, level="student")
 	else:
 		return template('admin', user=username, level="arbetsgivare")
-		 
+
+@route('/create')
+def create_user():
+	return template('create_user')		 
+
+
+@route('/ajax_create_user', method="POST")
+def ajax_validation():
+	result = createUsers.ajax_new_user_validation()
+	if result['result'] == False and result['error'] == 'Bad input':
+		return 'Bad input'
+	elif result['result'] == False and result['error'] == 'User exists': 
+		return 'User exists'	
+	else:
+		return 'ok'
+		
+		
+@route('/do_create_employer', method = 'POST')
+def do_create_employer():
+	response = createUsers.create_employer()
+	if response['result'] == True:
+		redirect('/admin') 
+	else:
+		return response['error']
+		
+@route('/do_create_student', method = 'POST')
+def do_create_employer():
+	response = createUsers.create_student()
+	if response['result'] == True:
+		redirect('/admin') 
+	else:
+		return response['error']
+
+@route('/profiles/<user>')
+def profiles(user):
+	user_profile_data = createUsers.show_student_profile(user)
+	if user_profile_data['exists'] == True:
+		return template('user_profile', student_id = user)
+	
+	else:
+		return 'Användaren finns inte!'
 
 @error(404)
 def error404(error):

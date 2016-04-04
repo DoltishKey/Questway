@@ -12,7 +12,7 @@
                 <h1>Questway</h1>
                 <nav>
                     <a class="options" href="">Logga in</a>
-                    <a class="options" href="">Registrera</a>
+                    <a class="options" href="/create">Registrera</a>
                     <a class="options" href="">Om oss</a>
                 </nav>
             </header>
@@ -21,8 +21,8 @@
                 <div id="slogan"><p>Lorem ipsum dolor sit amet, <br>consectetur adipiscing elit.</p></div>-->
             <form name="logIn" id="logIn" method="post" action="/do_login">
                 <h3>Logga in</h3>
-                <!--<label for="username">Användarnamn</label>-->
-                <input placeholder="Användarnamn" type="input" name="username" id="username" value="">
+                <!--<label for="email">Användarnamn</label>-->
+                <input placeholder="Email" type="input" name="email" id="email" value="">
                 <!--<label for="password">Lösenord</label>-->
                 <input placeholder="Lösenord" type="password" name="password" id="password" value="">
                 <input id="logInButton" type="submit" value="Logga in">		
