@@ -28,7 +28,6 @@ def create_ad_DB():
     
 '''*********Create the AD*********'''
 def do_ad():
-    checkAdinfo=False
     mydict={}
     mylist=['ad_title', 'ad_text', 'ad_orgNr', 'ad_corpName']
     for i in mylist:
@@ -79,8 +78,8 @@ def check_adID(number):
 
 '''*********Choose a specific AD*********'''
 
-def choose_ad(annons, db, status):
+def choose_ad(annonsID, db, status):
     for each in db:
-        if int(each['uniq_adNr']) == int(annons) and str(each['status'])==str(status):
+        if int(each['uniq_adNr']) == int(annonsID) and str(each['status'])==str(status):
             return each
         
