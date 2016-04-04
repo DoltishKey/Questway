@@ -1,7 +1,7 @@
 <ul>
     %for i in annons:
     
-        <li><a href="/wiki/{{i['ad_corpName']}}"> {{i['ad_corpName']}}</a></li>
+        <li><a href="/{{i['ad_corpName']}}"> {{i['ad_corpName']}}</a></li>
     
         <h1>{{i['ad_title']}}</h1>
     

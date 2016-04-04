@@ -109,9 +109,9 @@ def ad_done():
 @post('/del_ad/<annons>')
 def del_ad(annons):
     all_adds=addmod.load_adds('ads')
-    for each in all_adds:
-        if int(each['uniq_adNr']) == int(annons):
-            all_adds.remove(each)
+    which_ad_to_delete=addmod.choose_ad(annons, all_adds, 'Ingen vald')
+    all_adds.remove(which_ad_to_delete)
+    
     with open('static//data/ads.json', 'w') as fil:
         json.dump(all_adds, fil, indent=4)
     redirect('/showadds')
