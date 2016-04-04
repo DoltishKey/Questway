@@ -101,30 +101,11 @@ def profiles(user):
 def show_adds():
     all_adds=addmod.load_adds('ads')
     return template('adsform.tpl', annons=all_adds)
-    
 
 @post('/make_ad')
 def ad_done():
-    #checkAdinfo=False
-    #all_adds=load_adds('ads')
-    mydict={}
-    mylist=['ad_title', 'ad_text', 'ad_orgNr', 'ad_corpName']
-    for i in mylist:
-        j=request.forms.get(i)
-        mydict.update({i:j})
-    
-    content=addmod.load_adds('ads')
+    addmod.do_ad()
 
-    uniq_number=1
-    adID=addmod.check_adID(uniq_number)
-    mydict.update({'uniq_adNr':adID})
-        
-    content.append(mydict)
-    with open('static/data/ads.json', "w") as fil:
-        json.dump(content, fil, indent=4)
-    redirect('/showadds')
-
-    
 @post('/del_ad/<annons>')
 def del_ad(annons):
     all_adds=addmod.load_adds('ads')
