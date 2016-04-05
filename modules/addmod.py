@@ -56,9 +56,14 @@ def do_ad():
 
 def check_ad_info(ad_info):
     former_ad_info=load_adds('ads')
+    s=list(ad_info)
     
-    if not ad_info:
+    if not ad_info: 
         return False
+    elif s[0]==' ':
+        s[0]=''
+        ad_info=''.join(s)
+        return check_ad_info(ad_info)
     elif len(former_ad_info)==0:
         return True
     else:
