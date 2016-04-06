@@ -15,6 +15,10 @@ def startPage():
 	return template('index')
 
 
+
+'''*********Login*********'''
+
+
 @route('/login')
 def login():
 	return template('login')
@@ -52,6 +56,10 @@ def admin():
 	else:
 		return template('admin', user=username, level="arbetsgivare")
 
+
+
+'''********Create-user********'''
+
 @route('/create')
 def create_user():
 	return template('create_user')		 
@@ -72,6 +80,7 @@ def ajax_validation():
 def do_create_employer():
 	response = createUsers.create_employer()
 	if response['result'] == True:
+		log.log_in_new_user(response['email'], response['password'])
 		redirect('/admin') 
 	else:
 		return response['error']
@@ -80,6 +89,7 @@ def do_create_employer():
 def do_create_employer():
 	response = createUsers.create_student()
 	if response['result'] == True:
+		log.log_in_new_user(response['email'], response['password'])
 		redirect('/admin') 
 	else:
 		return response['error']
@@ -87,8 +97,15 @@ def do_create_employer():
 @route('/profiles/<user>')
 def profiles(user):
 	user_profile_data = createUsers.show_student_profile(user)
+	is_user_logged_in = log.is_user_logged_in()
+	if is_user_logged_in == True:
+		user_levle = log.get_user_level()
+	
+	else:
+		user_levle = 0
+		
 	if user_profile_data['exists'] == True:
-		return template('user_profile', student_id = user)
+		return template('user_profile', user_autho = user_levle, student_id = user)	
 	
 	else:
 		return 'Användaren finns inte!'

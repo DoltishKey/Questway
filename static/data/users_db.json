@@ -1,6 +1,6 @@
 [
     {
-        "username": "Jacob@jacob.nu", 
+        "username": "jacob@jacob.nu", 
         "password": "jacob", 
         "autholevel": 1, 
         "id": 1
@@ -10,5 +10,17 @@
         "autholevel": 2, 
         "password": "calle", 
         "id": 2
+    }, 
+    {
+        "username": "nisse@nisse.nu", 
+        "password": "nisse", 
+        "autholevel": 1, 
+        "id": 3
+    }, 
+    {
+        "username": "jacob@ab.nu", 
+        "autholevel": 2, 
+        "password": "jacob", 
+        "id": 4
     }
 ]

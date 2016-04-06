@@ -119,7 +119,7 @@ def create_employer():
 	org_nr = request.forms.get('org_nr')
 	first_name = request.forms.get('first_name')
 	last_name = request.forms.get('last_name')
-	email = request.forms.get('email')
+	email = request.forms.get('email').lower()
 	password = request.forms.get('password')
 	user_inputs=[company_name, org_nr, first_name,last_name,email,password]
 	for user_input in user_inputs:
@@ -137,7 +137,7 @@ def create_employer():
 		user_level = 2		
 		new_user_id = add_new_user(email, password, user_level)
 		add_new_employer(company_name, org_nr, first_name, last_name, new_user_id)
-		return {'result':True}
+		return {'result':True, 'email':email, 'password':password}
 
 		
 def create_student():
@@ -145,7 +145,7 @@ def create_student():
 	last_name = request.forms.get('last_name')
 	program = request.forms.get('program')
 	year = request.forms.get('year')
-	email = request.forms.get('email')
+	email = request.forms.get('email').lower()
 	password = request.forms.get('password')
 	
 	user_inputs=[first_name, last_name, program, year, email, password]
@@ -163,7 +163,7 @@ def create_student():
 		user_level = 1		
 		new_user_id = add_new_user(email, password, user_level)
 		add_new_student(first_name, last_name, program, year, new_user_id)
-		return {'result':True}
+		return {'result':True, 'email':email, 'password':password}
 
 
 def ajax_new_user_validation():

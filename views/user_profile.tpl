@@ -9,11 +9,15 @@
 	<body>
 		<header>
 			<h1>Questway</h1>
-			<nav>
-				<a class="options" href="/login">Logga in</a>
-				<a class="options" href="">Registrera</a>
-				<a class="options" href="">Om oss</a>
-			</nav>
+			%if user_autho == 1:
+				% include('nav_students.tpl')
+				
+			%elif user_autho == 2:
+				% include('nav_employers.tpl')
+			%else:
+				% include('nav.tpl')
+			
+			%end
 		</header>
 		<main>
 			<h1>Hello World!</h1>

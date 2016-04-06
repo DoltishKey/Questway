@@ -38,6 +38,14 @@ def validate_autho():
 
 	except:
 		redirect('/login')
+		
+def is_user_logged_in():
+	session = request.environ.get('beaker.session')
+	try:
+		session['userId']
+		return True
+	except:
+		return False	
 			
 def get_user_id(username):
 	users = read_data('users_db')
@@ -77,6 +85,15 @@ def login():
 	
 	else:
 		return False
+
+def log_in_new_user(email, password):
+	if validate_user(email, password) == True:
+		userID = get_user_id(email)
+		session = request.environ.get('beaker.session')
+		session['userId'] = userID
+		session.save()
+	
+
 
 def log_out():
 	session = request.environ.get('beaker.session')
