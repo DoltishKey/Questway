@@ -9,9 +9,7 @@
 	<body>
         <header>
             <nav>
-                <a class="menuButtons">Start</a>
-                <a class="menuButtons"></a>
-                <a class="menuButtons"></a>
+                
             </nav>
         </header>
 		<content>
