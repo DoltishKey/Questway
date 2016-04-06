@@ -12,7 +12,7 @@ import json
 
 @route('/')
 def startPage():
-	return template('index')
+	return template('login')
 
 
 
@@ -22,7 +22,6 @@ def startPage():
 @route('/login')
 def login():
 	return template('login')
-
 
 @route('/ajax', method="POST")
 def ajax_validation():
@@ -34,12 +33,11 @@ def ajax_validation():
 				
 @route('/do_login', method = 'POST')
 def do_login():
-	response = log.login()	
-	if response == True:
-		redirect('/admin')
-	
-	else:
-		return 'Tyvärr - användaren finns inte!'
+    response = log.login()	
+    if response == True:
+        redirect('/admin')
+    else:
+        return 'Tyvärr - användaren finns inte!'
 
 @route('/log_out')
 def log_out():
@@ -52,9 +50,9 @@ def admin():
 	username = log.get_user_name() #hämtar användarens namn från DB (returnerar en sträng)
 	user_level = log.get_user_level() #kollar om användaren är uppdragstagare eller student (returnerar 1 eller 2)
 	if user_level == 1:
-		return template('admin', user=username, level="student")
+		return template('student_start', user=username, level="student")
 	else:
-		return template('admin', user=username, level="arbetsgivare")
+		return template('employer_start', user=username, level="arbetsgivare")
 
 
 

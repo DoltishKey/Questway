@@ -1,16 +1,23 @@
 [
     {
-        "last_name": "Jacob", 
-        "first_name": "Jacob", 
         "program": "1", 
+        "first_name": "Jacob", 
+        "last_name": "Jacob", 
         "id": 1, 
         "year": "1"
     }, 
     {
-        "program": "1", 
-        "first_name": "Nisse", 
         "last_name": "Nilsson", 
+        "first_name": "Nisse", 
+        "program": "1", 
         "id": 3, 
+        "year": "1"
+    }, 
+    {
+        "program": "1", 
+        "first_name": "Sofia", 
+        "last_name": "Lundkvist", 
+        "id": 5, 
         "year": "1"
     }
 ]

@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Logga in</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-		<link rel="stylesheet" type="text/css" href="/static/main.css">
-	</head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+        <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+    </head>
 	<body>
         <header>
-            <nav>
-                
+            <nav class="menu">
+                <a class="menuButton" href="">Uppdrag</a>
+                <a class="menuButton" href="">Profil</a>
+                <a class="menuButton" href="/log_out">Logga ut</a>
             </nav>
         </header>
 		<content>

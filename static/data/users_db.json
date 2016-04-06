@@ -1,26 +1,32 @@
 [
     {
         "username": "jacob@jacob.nu", 
-        "password": "jacob", 
         "autholevel": 1, 
+        "password": "jacob", 
         "id": 1
     }, 
     {
         "username": "calle@calle.nu", 
-        "autholevel": 2, 
         "password": "calle", 
+        "autholevel": 2, 
         "id": 2
     }, 
     {
         "username": "nisse@nisse.nu", 
-        "password": "nisse", 
         "autholevel": 1, 
+        "password": "nisse", 
         "id": 3
     }, 
     {
         "username": "jacob@ab.nu", 
-        "autholevel": 2, 
         "password": "jacob", 
+        "autholevel": 2, 
         "id": 4
+    }, 
+    {
+        "username": "sofialundkvist@outlook.com", 
+        "autholevel": 1, 
+        "password": "hejhej", 
+        "id": 5
     }
 ]
