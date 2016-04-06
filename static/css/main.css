@@ -20,7 +20,7 @@ header {
     background-color: #336e7b;
     color: #fff;
     padding: 3%;
-    border-style: solid; border-width: thin;
+    border-style: solid; border-width: ;
     border-radius: 5px; border-color: #ccc #999 #999 #ccc;
 }
 #content {
@@ -127,15 +127,37 @@ header nav > a {
     position: absolute;
     left: 50px;
     bottom: 50px;
+    color: #999
 }
 @media screen and (max-width:600px){
     #logIn{
         width: 80%;
     }
+    header nav{
+        display: block;
+        margin: 20px auto;
+        float: none;
+        width: 100%;
+        display: flex;
+    }
+   header nav a{
+        float: none;
+        margin: 0px auto;
+        display: inline-flex;
+        width: 20%;
+        text-align: center;
+    }
+    header h1{
+        text-align: center;
+        display: block;
+        float: none;
+        margin: 20px auto;
+        width: 100%;
+    }
     #logIn input{
         margin: 15px auto;
     }
     footer{
-        margin-top: 70.3%;
+        margin-top: 69.1%;
     }
 }
