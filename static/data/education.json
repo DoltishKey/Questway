@@ -1,13 +1,60 @@
 [
     {
-        "title": "Informations arkitekt",
         "tag_line": "Den bästa utbildninen på Mah",
         "subject_one": "Vi brinner för UX!",
-        "subject_two": "Vi brinner för programmering!",
         "subject_three": "Vi brinner för datavetenskap!",
-        "tags": ["Python", "UX", "HTML", "CSS"],
+
+        "tags": [
+            "Python",
+            "UX",
+            "HTML",
+            "CSS"
+        ],
+        "subject_two": "Vi brinner f\u00f6r programmering!",
+        "year": 1,
+        "img3": "/static/img/#",
+        "img2": "/static/img/#",
+        "img1": "/static/img/#",
         "id": 1,
-        "year":1,
-        "url":"http://edu.mah.se/sv/Program/TGIAA"
+        "title": "Informations arkitekt",
+        "url": "http://edu.mah.se/sv/Program/TGIAA",
+    },
+    {
+        "tags": [
+            "Java",
+            "Databaser",
+            "Mer Java",
+            "Och mer Java"
+        ],
+        "subject_two": "Vi brinner f\u00f6r programmering!",
+        "year": 1,
+        "img3": "/static/img/#",
+        "img2": "/static/img/#",
+        "img1": "/static/img/#",
+        "id": 2,
+        "subject_one": "Vi brinner f\u00f6r UX!",
+        "title": "Systemutvecklare",
+        "url": "http://edu.mah.se/sv/Program/TGIAA",
+        "subject_three": "Vi brinner f\u00f6r datavetenskap!",
+        "tag_line": "Inte den b\u00e4sta utbildninen p\u00e5 Mah"
+    },
+    {
+        "tags": [
+            "Python",
+            "UX",
+            "HTML",
+            "CSS"
+        ],
+        "subject_two": "Vi brinner f\u00f6r programmering!",
+        "year": 3,
+        "img3": "/static/img/#",
+        "img2": "/static/img/#",
+        "img1": "/static/img/#",
+        "id": 1,
+        "subject_one": "Vi brinner f\u00f6r UX!",
+        "title": "Informations arkitekt",
+        "url": "http://edu.mah.se/sv/Program/TGIAA",
+        "subject_three": "Vi brinner f\u00f6r datavetenskap!",
+        "tag_line": "Den b\u00e4sta utbildninen p\u00e5 Mah"
     }
 ]

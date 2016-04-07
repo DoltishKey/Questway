@@ -1,23 +1,37 @@
 [
     {
-        "program": "1", 
-        "first_name": "Jacob", 
-        "last_name": "Jacob", 
-        "id": 1, 
+        "program": "1",
+        "first_name": "Jacob",
+        "last_name": "Jacob",
+        "id": 1,
         "year": "1"
-    }, 
+    },
     {
-        "last_name": "Nilsson", 
-        "first_name": "Nisse", 
-        "program": "1", 
-        "id": 3, 
+        "last_name": "Nilsson",
+        "first_name": "Nisse",
+        "program": "1",
+        "id": 3,
         "year": "1"
-    }, 
+    },
     {
-        "program": "1", 
-        "first_name": "Sofia", 
-        "last_name": "Lundkvist", 
-        "id": 5, 
+        "program": "1",
+        "first_name": "Sofia",
+        "last_name": "Lundkvist",
+        "id": 5,
+        "year": "1"
+    },
+    {
+        "last_name": "sandberg",
+        "first_name": "jenny",
+        "program": "2", 
+        "id": 6,
+        "year": "1"
+    },
+    {
+        "program": "1",
+        "first_name": "ville",
+        "last_name": "hansson",
+        "id": 7,
         "year": "1"
     }, 
     {

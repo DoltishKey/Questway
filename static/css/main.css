@@ -1,7 +1,7 @@
 html{
     height: 100%;
-    overflow: hidden;
 }
+
 body {
     height: 100%;
     font-family: Tahoma, sans-serif;
@@ -9,7 +9,7 @@ body {
 }
 
 .wrapperLogin {
-    background-image: url(../img/qwback.jpg);
+    background-image: url(../img/background1.jpg);
     background-size: cover;
     background-position: center;
     color: #fff;
@@ -22,33 +22,28 @@ body {
 header {
     padding: 40px;
     height: 50px;
+    background-color: #EEEAE8;
 }
 
 .options{
-    background-color: #51120F;
+    background-color: #BD6822; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left top, #BD6822, #815734); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, #BD6822, #815734); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, #BD6822, #815734); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, #BD6822, #C28C5F); /* Standard syntax */
     color: #fff;
-    padding: 3%;
-    border-style: solid; border-width: ;
-    border-radius: 5px; border-color: #ccc #999 #999 #ccc;
-    border: solid 5px #3B1715;
-    border-width: thin;
-    border-radius: 5px;
-    /*border-color: #ccc #999 #999 #ccc;*/
+    padding: 4%;
+    border-radius: 7px;
     text-decoration: none;
     box-shadow: 0px 5px 7px -2px #000;
 }
 
 .menu {
-    background-color: navy;
+    background-color: #BD6822;
 }
 
 .menuButton {
     
-}
-
-#content {
-    margin:60px auto;
-    position: relative;
 }
 
 ::-webkit-input-placeholder {
@@ -65,51 +60,28 @@ header {
 }
 
 footer {
-    color: #777;
+    color: #000;
     height: 100px;
     text-align: center;
     line-height: 5;
-    background: rgba(0,0,0,0.8);
+    background: #EEEAE8;
 }
-
-/**
-#content > img {
-    position: relative;
-}
-
-#slogan {
-    position: absolute;
-    top: 200px;
-    left: 230px;
-    font-size: 55px;
-    color: black;
-}
-**/
-/* Styling för formuläret 
-#logIn {
-    width: 25%;
-    border: 1px solid black;
-    background-color: #242729;
-    color: #b9bdc1;
-    padding: 40px;
-    font-family: tahoma;
-    position: absolute;
-    top: 200px;
-    right: 230px;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-}
-*/
 
 #logIn{
     width: 25%;
     color: #000;
-    margin: auto;
-    background-color: gray;
-    padding: 20px;
-    opacity: 0.6;
+    margin: 150px auto 0 auto;
+    /*background-color: #898684;*/
+    padding: 50px 20px;
+    /*opacity: 0.6;
     filter: alpha(opacity=60); /* För IE8 och tidigare versioner */
+    background-color: rgba(137, 134, 132, 0.5);*/
     border-radius: 10px;
     box-shadow: 0px 10px 14px -7px #000;
+}
+
+placeholder {
+    color: gray;
 }
 
 form h2{
@@ -118,8 +90,8 @@ form h2{
     margin-top: 10px;
 } 
 
-#username, #password{
-    background: rgba(255,255,255,0.5);
+#email, #password{
+    background: #FFF9F6;
     color: #000;
     height: 30px;
     width: 300px;
@@ -132,6 +104,7 @@ form h2{
 #logIn input, label {
     display: block;
     margin: 25px auto;
+    color: #000;
 }
 
 /* För att input-fält med autofill-uppgifter ska vara vitt och inte gult i Chrome*/
@@ -154,17 +127,48 @@ header h1 {
 .loginNav {
     width: 320px;
     float: right;
+    display: inline;
 }
 
 .loginNav > a {
     padding-left: 15px;
 }
 
+.content2 {
+    background-color: #C0B4AD; 
+    width: 100%;
+    padding: 50px 0px;
+}
+
+#wrapContent {
+    width: 900px;
+    margin: auto;
+}
+
+.contentInContent {
+    width: 347px;
+    display: inline-block;
+    padding: 50px;
+    text-align: center;
+}
+
+.roundBox {
+    background: black;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    margin: auto;
+    text-align: center;
+    line-height: 300px;
+    color: white;
+}
+
 #back-button {
     position: absolute;
     left: 50px;
     bottom: 50px;
-    color: #999
+    color: #191919;
+}
 
  /* Design för knappar */
 .myButton {
@@ -238,20 +242,4 @@ header h1 {
     footer{
         margin-top: 69.1%;
     }
-}
-
-/* Sticky footer av Ryan Fait */
-
-* {
-	margin: 0;
-}
-
-.wrapper {
-	min-height: 100%;
-	height: auto !important; /* This line and the next line are not necessary unless you need IE6 support */
-	height: 100%;
-	margin: 0 auto -100px; /* the bottom margin is the negative value of the footer's height */
-}
-.push {
-	height: 100px; /* .push must be the same height as footer */
 }
