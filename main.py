@@ -51,18 +51,29 @@ def admin():
 	log.validate_autho() #and log.get_user_level() == 2 | kontrollerar om användaren är inloggad
 	username = log.get_user_name() #hämtar användarens namn från DB (returnerar en sträng)
 	user_level = log.get_user_level() #kollar om användaren är uppdragstagare eller student (returnerar 1 eller 2)
+	all_adds=addmod.load_adds('ads')
+	complete_adds = addmod.get_corp_name(all_adds)
 	if user_level == 1:
-		return template('student_start', user=username, level="student")
+		return template('student_start', user=username, level="student", annons=complete_adds)
 	else:
-		return template('employer_start', user=username, level="arbetsgivare")
+		#här ska arbetsgivarnas annonser med
+		userid = log.get_user_id_logged_in()
+		return template('employer_start', user=username, user_id=userid,  level="arbetsgivare", annons=complete_adds)
 
 
 
 '''********Create-user********'''
-
 @route('/create')
-def create_user():
+def create_employer():
 	return template('create_user')
+
+@route('/create_student')
+def create_student():
+	return template('create_student')
+
+@route('/create_employer')
+def create_employer():
+	return template('create_employer')
 
 
 @route('/ajax_create_user', method="POST")

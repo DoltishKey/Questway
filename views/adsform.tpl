@@ -17,7 +17,7 @@
         
     </form>
             
-        % include('adds.tpl')
+       
 
 </body>
 </html>
