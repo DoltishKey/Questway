@@ -19,7 +19,7 @@
             </header>
             <div id="content">
             <form name="logIn" id="logIn" method="post" action="/do_login">
-                <h3>Logga in</h3>
+                <h2>Logga in</h2>
                 <!--<label for="email">Användarnamn</label>-->
                 <input placeholder="Email" type="input" name="email" id="email" value="">
                 <!--<label for="password">Lösenord</label>-->
