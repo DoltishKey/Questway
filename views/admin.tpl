@@ -7,7 +7,13 @@
 		<link rel="stylesheet" type="text/css" href="/static/main.css">
 	</head>
 	<body>
-        <header></header>
+        <header>
+            <nav>
+                <a class="menuButtons">Start</a>
+                <a class="menuButtons"></a>
+                <a class="menuButtons"></a>
+            </nav>
+        </header>
 		<content>
             <h1>Admin, {{user}}</h1>
             <h2>Du är inloggad som {{level}}</h2>

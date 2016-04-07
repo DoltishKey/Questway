@@ -6,10 +6,17 @@ body {
     height: 100%;
     font-family: Tahoma, sans-serif;
     margin: 0;
+}
+
+.wrapperLogin {
     background-image: url(../img/qwback.jpg);
     background-size: cover;
     background-position: center;
     color: #fff;
+    min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -100px;
 }
 
 header {
@@ -21,18 +28,24 @@ header {
     background-color: #51120F;
     color: #fff;
     padding: 3%;
-<<<<<<< HEAD
     border-style: solid; border-width: ;
     border-radius: 5px; border-color: #ccc #999 #999 #ccc;
-=======
     border: solid 5px #3B1715;
     border-width: thin;
     border-radius: 5px;
     /*border-color: #ccc #999 #999 #ccc;*/
     text-decoration: none;
     box-shadow: 0px 5px 7px -2px #000;
->>>>>>> origin/master
 }
+
+.menu {
+    background-color: navy;
+}
+
+.menuButton {
+    
+}
+
 #content {
     margin:60px auto;
     position: relative;
@@ -138,22 +151,21 @@ header h1 {
     font-size: 40px;
 }
 
-header nav {
-    width: 260px;
+.loginNav {
+    width: 320px;
     float: right;
 }
 
-header nav > a {
+.loginNav > a {
     padding-left: 15px;
 }
 
-<<<<<<< HEAD
 #back-button {
     position: absolute;
     left: 50px;
     bottom: 50px;
     color: #999
-=======
+
  /* Design för knappar */
 .myButton {
     -moz-box-shadow: 0px 10px 14px -7px #276873;

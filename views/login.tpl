@@ -7,11 +7,11 @@
 		<link rel="stylesheet" type="text/css" href="../static/css/main.css">
 	</head>
 	<body>
-        <div class="wrapper">
+        <div class="wrapperLogin">
             <header>
                 <h1>Questway</h1>
                 <!--<img src="../static/img/logga.jpg" alt="logotyp">-->
-                <nav>
+                <nav class="loginNav">
                     <a class="options" href="">Logga in</a>
                     <a class="options" href="/create">Registrera</a>
                     <a class="options" href="">Om oss</a>
@@ -19,6 +19,12 @@
             </header>
             <div id="content">
             <form name="logIn" id="logIn" method="post" action="/do_login">
+<<<<<<< HEAD
+=======
+                <h2>Logga in</h2>
+                <!--<label for="username">Användarnamn</label>-->
+                <input placeholder="Användarnamn" type="input" name="username" id="username" value="">
+>>>>>>> origin/master
                 <h3>Logga in</h3>
                 <!--<label for="email">Användarnamn</label>-->
                 <input placeholder="Email" type="input" name="email" id="email" value="">
