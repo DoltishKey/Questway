@@ -19,9 +19,11 @@
             </header>
             <div id="content">
             <form name="logIn" id="logIn" method="post" action="/do_login">
-                <h2>Logga in</h2>
-                <input type="input" name="email" id="email" value="" placeholder="Email">
-                <input type="password" name="password" id="password" value="" placeholder="Lösenord">
+                <h3>Logga in</h3>
+                <!--<label for="email">Användarnamn</label>-->
+                <input placeholder="Email" type="input" name="email" id="email" value="">
+                <!--<label for="password">Lösenord</label>-->
+                <input placeholder="Lösenord" type="password" name="password" id="password" value="">
                 <input class="myButton" type="submit" value="Logga in">		
             </form>
             <p id="error"></p>

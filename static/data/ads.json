@@ -7,5 +7,23 @@
         "uniq_adNr": 1, 
         "ad_title": "Svetsare", 
         "date_of_adcreation": "06/04/2016"
+    },
+    {
+        "status": "Ingen vald", 
+        "who_applied": [], 
+        "creator": 4, 
+        "ad_text": "hejehehejej", 
+        "uniq_adNr": 1, 
+        "ad_title": "Sågare", 
+        "date_of_adcreation": "06/04/2016"
+    },
+    {
+        "status": "Ingen vald", 
+        "who_applied": [], 
+        "creator": 2, 
+        "ad_text": "hejehehejej", 
+        "uniq_adNr": 1, 
+        "ad_title": "Snickare", 
+        "date_of_adcreation": "06/04/2016"
     }
 ]

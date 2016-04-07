@@ -39,5 +39,10 @@
                 </div>-->
             </section>
         </div>
+            
+            <a href="/log_out">Logga ut</a>
+            <a href="/">Till start</a>
+        </content>
+>>>>>>> origin/master
 	</body>
 </html>
