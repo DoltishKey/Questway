@@ -1,7 +1,7 @@
 html{
     height: 100%;
-    overflow: hidden;
 }
+
 body {
     height: 100%;
     font-family: Tahoma, sans-serif;
@@ -26,21 +26,20 @@ header {
 }
 
 .options{
-    background-color: #51120F;
+    background-color: #BD6822; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left top, #BD6822, #815734); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, #BD6822, #815734); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, #BD6822, #815734); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, #BD6822, #C28C5F); /* Standard syntax */
     color: #fff;
-    padding: 3%;
-    border-style: solid; border-width: ;
-    border-radius: 5px; border-color: #ccc #999 #999 #ccc;
-    border: solid 5px #3B1715;
-    border-width: thin;
-    border-radius: 5px;
-    /*border-color: #ccc #999 #999 #ccc;*/
+    padding: 4%;
+    border-radius: 7px;
     text-decoration: none;
     box-shadow: 0px 5px 7px -2px #000;
 }
 
 .menu {
-    background-color: navy;
+    background-color: #BD6822;
 }
 
 .menuButton {
@@ -62,7 +61,7 @@ header {
 
 footer {
     color: #000;
-    height: 200px;
+    height: 100px;
     text-align: center;
     line-height: 5;
     background: #EEEAE8;
@@ -72,10 +71,11 @@ footer {
     width: 25%;
     color: #000;
     margin: 150px auto 0 auto;
-    background-color: gray;
+    /*background-color: #898684;*/
     padding: 50px 20px;
-    opacity: 0.6;
+    /*opacity: 0.6;
     filter: alpha(opacity=60); /* För IE8 och tidigare versioner */
+    background-color: rgba(137, 134, 132, 0.5);*/
     border-radius: 10px;
     box-shadow: 0px 10px 14px -7px #000;
 }
@@ -91,7 +91,7 @@ form h2{
 } 
 
 #email, #password{
-    background: rgba(255,255,255,0.5);
+    background: #FFF9F6;
     color: #000;
     height: 30px;
     width: 300px;
@@ -132,6 +132,35 @@ header h1 {
 
 .loginNav > a {
     padding-left: 15px;
+}
+
+.content2 {
+    background-color: #C0B4AD; 
+    width: 100%;
+    padding: 50px 0px;
+}
+
+#wrapContent {
+    width: 900px;
+    margin: auto;
+}
+
+.contentInContent {
+    width: 347px;
+    display: inline-block;
+    padding: 50px;
+    text-align: center;
+}
+
+.roundBox {
+    background: black;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    margin: auto;
+    text-align: center;
+    line-height: 300px;
+    color: white;
 }
 
 #back-button {
