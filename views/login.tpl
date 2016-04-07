@@ -19,15 +19,9 @@
             </header>
             <div id="content">
             <form name="logIn" id="logIn" method="post" action="/do_login">
-<<<<<<< HEAD
-                <h2>Logga in</h2>
-                <!--<label for="username">Användarnamn</label>-->
-                <input placeholder="Användarnamn" type="input" name="username" id="username" value="">
-=======
                 <h3>Logga in</h3>
                 <!--<label for="email">Användarnamn</label>-->
                 <input placeholder="Email" type="input" name="email" id="email" value="">
->>>>>>> origin/master
                 <!--<label for="password">Lösenord</label>-->
                 <input placeholder="Lösenord" type="password" name="password" id="password" value="">
                 <input class="myButton" type="submit" value="Logga in">		

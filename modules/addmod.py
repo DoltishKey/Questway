@@ -2,6 +2,8 @@
 import json
 from bottle import request, redirect 
 import time
+import log
+import createUsers
 
 
     
@@ -16,8 +18,7 @@ def load_adds(file):
         
     except (ValueError, IOError):
         data=create_ad_DB()
-        return data
-
+        return data   
 
 def create_ad_DB():
     with open('static/data/ads.json', 'w') as fil:
@@ -29,7 +30,7 @@ def create_ad_DB():
 '''*********Create the AD*********'''
 def do_ad():
     mydict={}
-    mylist=['ad_title', 'ad_text', 'ad_orgNr', 'ad_corpName']
+    mylist=['ad_title', 'ad_text']
     for i in mylist:
         j=request.forms.get(i)
         mydict.update({i:j})
@@ -40,7 +41,8 @@ def do_ad():
         date_ad_created=time.strftime('%d/%m/%Y')
         uniq_number=1
         ad_ID=check_adID(uniq_number)
-        mydict.update({'uniq_adNr':ad_ID, 'status':'Ingen vald', 'who_applied':[], 'creator':'', 'date_of_adcreation':date_ad_created})
+        creator = log.get_user_id_logged_in()
+        mydict.update({'uniq_adNr':ad_ID, 'status':'Ingen vald', 'who_applied':[], 'creator':creator, 'date_of_adcreation':date_ad_created})
         
         content=load_adds('ads')
         content.append(mydict)
@@ -79,7 +81,17 @@ def check_adID(number):
             number+=1
             return check_adID(number)
     return number
-
+    
+def get_corp_name(all_adds):
+	corps = createUsers.read_data('employers')
+	for add in all_adds:
+		for corp in corps:
+			if add['creator'] == corp ['id']:
+				add.update({'ad_corpName':corp['company_name']})
+	
+	return all_adds
+			
+				
 
 '''*********Choose a specific AD*********'''
 

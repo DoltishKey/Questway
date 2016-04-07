@@ -13,12 +13,6 @@
         <label for="ad_text">Annonstext</label>
         <input type="input" name="ad_text" id="ad_title" value="">
         
-        <label for="ad_orgNr">Org.nr</label>
-        <input type="input" name="ad_orgNr" id="ad_title" value="">
-        
-        <label for="ad_corpName">Företagsnamn</label>
-        <input type="input" name="ad_corpName" id="ad_title" value="">
-        
         <input type="submit" value="Skapa annons" name='uniq_adNr'>
         
     </form>

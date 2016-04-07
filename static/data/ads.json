@@ -1,57 +1,11 @@
 [
     {
-        "ad_corpName": "", 
         "status": "Ingen vald", 
         "who_applied": [], 
-        "creator": "", 
-        "ad_text": "", 
-        "uniq_adNr": 2, 
-        "ad_title": "2", 
-        "ad_orgNr": "", 
-        "date_of_adcreation": "05/04/2016"
-    }, 
-    {
-        "ad_corpName": "", 
-        "status": "Ingen vald", 
-        "who_applied": [], 
-        "creator": "", 
-        "ad_text": "", 
-        "uniq_adNr": 3, 
-        "ad_title": "4", 
-        "ad_orgNr": "", 
-        "date_of_adcreation": "05/04/2016"
-    }, 
-    {
-        "ad_corpName": "", 
-        "status": "Ingen vald", 
-        "who_applied": [], 
-        "creator": "", 
-        "ad_text": "", 
+        "creator": 2, 
+        "ad_text": "hejehehejej", 
         "uniq_adNr": 1, 
-        "ad_title": " 1 ", 
-        "ad_orgNr": "", 
-        "date_of_adcreation": "05/04/2016"
-    }, 
-    {
-        "ad_corpName": "", 
-        "status": "Ingen vald", 
-        "who_applied": [], 
-        "creator": "", 
-        "ad_text": "", 
-        "uniq_adNr": 4, 
-        "ad_title": "1", 
-        "ad_orgNr": "", 
-        "date_of_adcreation": "05/04/2016"
-    }, 
-    {
-        "ad_corpName": "", 
-        "status": "Ingen vald", 
-        "who_applied": [], 
-        "creator": "", 
-        "ad_text": "", 
-        "uniq_adNr": 5, 
-        "ad_title": "       2", 
-        "ad_orgNr": "", 
-        "date_of_adcreation": "05/04/2016"
+        "ad_title": "Svetsare", 
+        "date_of_adcreation": "06/04/2016"
     }
 ]

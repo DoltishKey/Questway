@@ -53,6 +53,10 @@ def get_user_id(username):
 		if username == user['username']:
 			return user['id']
 
+def get_user_id_logged_in():
+	session = request.environ.get('beaker.session')
+	return session['userId']
+
 def get_user_name():
 	session = request.environ.get('beaker.session')
 	if get_user_level() == 1:
@@ -103,8 +107,6 @@ def log_out():
 def ajax_validation():
 	username = request.forms.get('email')
 	password = request.forms.get('password')
-	print username
-	print password
 	if validate_user(username, password) == True:
 		return True
 	
