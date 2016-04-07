@@ -19,5 +19,33 @@
         "last_name": "Lundkvist", 
         "id": 5, 
         "year": "1"
+    }, 
+    {
+        "last_name": "sandberg", 
+        "first_name": "jenny", 
+        "program": "1", 
+        "id": 6, 
+        "year": "1"
+    }, 
+    {
+        "program": "1", 
+        "first_name": "ville", 
+        "last_name": "hansson", 
+        "id": 7, 
+        "year": "1"
+    }, 
+    {
+        "last_name": "panna", 
+        "first_name": "anna", 
+        "program": "1", 
+        "id": 8, 
+        "year": "1"
+    }, 
+    {
+        "program": "1", 
+        "first_name": "jari", 
+        "last_name": "rosenstrom", 
+        "id": 9, 
+        "year": "1"
     }
 ]

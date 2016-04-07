@@ -1,11 +1,13 @@
 [
     {
-        "title": "jacob@jacob.nu", 
-        "tag_line": "jacob", 
-        "subject_one": 1,
-        "subject_two": 1,
-        "subject_three": 1,
-        "tags": [], 
-        "id": 1
+        "title": "Informations arkitekt",
+        "tag_line": "Den bästa utbildninen på Mah",
+        "subject_one": "Vi brinner för UX!",
+        "subject_two": "Vi brinner för programmering!",
+        "subject_three": "Vi brinner för datavetenskap!",
+        "tags": ["Python", "UX", "HTML", "CSS"],
+        "id": 1,
+        "year":1,
+        "url":"http://edu.mah.se/sv/Program/TGIAA"
     }
 ]
