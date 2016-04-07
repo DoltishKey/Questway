@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="sv">
 	<head>
 		<title>Logga in</title>
 		<meta charset="utf-8">
@@ -19,23 +19,14 @@
             </header>
             <div id="content">
             <form name="logIn" id="logIn" method="post" action="/do_login">
-<<<<<<< HEAD
-=======
                 <h2>Logga in</h2>
-                <!--<label for="username">Användarnamn</label>-->
-                <input placeholder="Användarnamn" type="input" name="username" id="username" value="">
->>>>>>> origin/master
-                <h3>Logga in</h3>
-                <!--<label for="email">Användarnamn</label>-->
-                <input placeholder="Email" type="input" name="email" id="email" value="">
-                <!--<label for="password">Lösenord</label>-->
-                <input placeholder="Lösenord" type="password" name="password" id="password" value="">
+                <input type="input" name="email" id="email" value="" placeholder="Email">
+                <input type="password" name="password" id="password" value="" placeholder="Lösenord">
                 <input class="myButton" type="submit" value="Logga in">		
             </form>
             <p id="error"></p>
-            <!-- <a href="/" id="back-button">Tillbaka</a> -->
             </div>
-            <div class="push"></div> <!-- Är till för att footer ska hamna längst ner, ta ej bort -->
+            <!--<div class="push"></div> <!-- Är till för att footer ska hamna längst ner, ta ej bort -->
         </div>
         <footer>© Questway, 2016</footer>
 	</body>
