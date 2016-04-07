@@ -116,7 +116,9 @@ def profiles(user):
 		user_levle = 0
 
 	if user_profile_data['exists'] == True:
-		return template('user_profile', user_autho = user_levle, student_id = user)
+		education_info = user_profile_data['education_info']
+		student_info = user_profile_data['student_info']
+		return template('user_profile', user_autho = user_levle, student_id = user, student= student_info, education = education_info)
 
 	else:
 		return 'Användaren finns inte!'

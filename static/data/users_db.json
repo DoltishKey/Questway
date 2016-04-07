@@ -28,5 +28,17 @@
         "autholevel": 1, 
         "password": "hejhej", 
         "id": 5
+    }, 
+    {
+        "username": "jenny@jenny.nu", 
+        "password": "jenny", 
+        "autholevel": 1, 
+        "id": 6
+    }, 
+    {
+        "username": "ville@ville.nu", 
+        "autholevel": 1, 
+        "password": "ville", 
+        "id": 7
     }
 ]
