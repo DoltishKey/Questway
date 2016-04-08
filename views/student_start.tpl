@@ -19,6 +19,7 @@
                 <a class="menuButton" href="/log_out">Logga ut</a>
             </nav>
         </header>
+        
         <!-- Länkar till tabbarna: -->
         <ul id="tabs">
             <li><a href="#lediga_uppdrag" onclick="showTab()">Lediga uppdrag</a></li>

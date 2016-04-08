@@ -116,7 +116,9 @@ def profiles(user):
 		user_levle = 0
 
 	if user_profile_data['exists'] == True:
-		return template('user_profile', user_autho = user_levle, student_id = user)
+		education_info = user_profile_data['education_info']
+		student_info = user_profile_data['student_info']
+		return template('user_profile', user_autho = user_levle, student_id = user, student= student_info, education = education_info)
 
 	else:
 		return 'Användaren finns inte!'
@@ -158,7 +160,28 @@ def del_ad(annons):
 
 	else:
 		return 'Behörighet saknas!'
-
+    
+@post('/sok_annons/<annons>')
+def sok_annons(annons):
+    log.validate_autho()
+    all_adds=addmod.load_adds('ads')
+    user=log.get_user_id_logged_in()
+    
+    what_add=addmod.choose_ad(annons, all_adds, None)
+       
+    for add in all_adds:
+        if int(add['uniq_adNr'])==int(annons):
+            if user in add['who_applied']:
+                return "Du har redan ansökt på denna annons!"
+            else:
+                what_add['who_applied'].append(user)
+                add['who_applied']=what_add['who_applied']
+    
+    with open('static/data/ads.json', 'w') as fil:
+        json.dump(all_adds, fil, indent=4)
+    
+    redirect('/admin')
+            
 
 '''********Övriga Routes********'''
 
