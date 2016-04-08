@@ -13,15 +13,15 @@ body {
     background-size: cover;
     background-position: center;
     color: #fff;
-    min-height: 100%;
-	height: auto !important;
+    /*min-height: 100%;*/
+	/*height: auto !important;*/
 	height: 100%;
-	margin: 0 auto -100px;
+	margin: 0px;
 }
 
 header {
     padding: 40px;
-    height: 50px;
+    height: 120px;
     background-color: #EEEAE8;
 }
 
@@ -39,12 +39,109 @@ header {
 }
 
 .menu {
-    background-color: #BD6822;
+    border-top: 3px solid #BD6822;
+    border-bottom: 3px solid #BD6822;
+    text-align: center;
+    padding: 0;
+    width: 470px;
+    float: right;
+    clear: both;
+    margin-right: 60px;
 }
 
-.menuButton {
-    
+.menu > a {
+    width: 150px;
+    height: 30px;
+    padding: 10px 0px;
+    margin: 0;
+    text-decoration: none;
+    color: #BD6822;
+    display: inline-block;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-left: 1px solid black;
 }
+
+.menu > a:last-child {
+    border-right: 1px solid black;
+}
+
+.menu > a:hover {
+    background-color: #55504C;
+}
+
+.inline {
+    display: inline;
+}
+
+.courtesyNav {
+    float: right;
+    margin-right: 60px;
+}
+
+.courtesyNavItem {
+    padding: 0 10px;
+}
+
+
+.pageTitle {
+    text-align: center;
+    margin: 0 0 50px 0;
+}
+
+/*Tabbar: */
+
+.add {
+    padding: 20px;
+    background-color: white;
+}
+
+ul#tabs { 
+    list-style-type: none; 
+    margin: 100px 100px 0 100px; 
+    padding: 0 0 0.6em 0; 
+}
+
+ul#tabs li { 
+    display: inline; 
+}
+
+ul#tabs li a { 
+    color: #42454a; 
+    background-color: #dedbde; 
+    border: 1px solid #c9c3ba; 
+    border-bottom: none; 
+    padding: 0.6em; 
+    text-decoration: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 10px;
+}
+
+ul#tabs li a:hover { 
+    background-color: #f1f0ee; 
+}
+
+ul#tabs li a.selected { 
+    color: #000; 
+    background-color: #898684; 
+    font-weight: bold; 
+    padding: 0.7em 0.3em 0.78em 0.3em; 
+}
+
+div.tabContent { 
+    padding: 1em; 
+    background-color: #898684; 
+    margin-left: 100px;
+    margin-right: 100px;
+    min-height: 100%;
+}
+
+div.tabContent.hide { 
+    display: none; 
+}
+
+/* ______________________ */
 
 ::-webkit-input-placeholder {
    color: white; text-align: center;
@@ -70,14 +167,11 @@ footer {
 #logIn{
     width: 25%;
     color: #000;
-    margin: 150px auto 0 auto;
-    /*background-color: #898684;*/
+    margin: 0px auto 0 auto;
     padding: 50px 20px;
-    /*opacity: 0.6;
-    filter: alpha(opacity=60); /* För IE8 och tidigare versioner */
     background-color: rgba(137, 134, 132, 0.5);*/
-    border-radius: 10px;
     box-shadow: 0px 10px 14px -7px #000;
+    border-radius: 10px;
 }
 
 placeholder {
@@ -118,10 +212,11 @@ input:-webkit-autofill:active {
 /* _____________ */
 
 header h1 {
-    margin: 0;
+    margin-left: 60px;
     padding: 0;
-    display: inline;
+    display: inline-block;
     font-size: 40px;
+    clear: both;
 }
 
 .loginNav {

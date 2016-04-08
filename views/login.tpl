@@ -7,16 +7,16 @@
 		<link rel="stylesheet" type="text/css" href="../static/css/main.css">
 	</head>
 	<body>
+        <header>
+            <h1>Questway</h1>
+            <!--<img src="../static/img/logga.jpg" alt="logotyp">-->
+            <nav class="loginNav">
+                <a class="options" href="">Logga in</a>
+                <a class="options" href="/create">Registrera</a>
+                <a class="options" href="">Om oss</a>
+            </nav>
+        </header>
         <div class="wrapperLogin">
-            <header>
-                <h1>Questway</h1>
-                <!--<img src="../static/img/logga.jpg" alt="logotyp">-->
-                <nav class="loginNav">
-                    <a class="options" href="">Logga in</a>
-                    <a class="options" href="/create">Registrera</a>
-                    <a class="options" href="">Om oss</a>
-                </nav>
-            </header>
             <form name="logIn" id="logIn" method="post" action="/do_login">
                 <h2>Logga in</h2>
                 <!--<label for="email">Användarnamn</label>-->
