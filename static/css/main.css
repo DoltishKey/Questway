@@ -15,60 +15,66 @@ body {
     color: #fff;
     /*min-height: 100%;*/
 	/*height: auto !important;*/
-	height: 100%;
-	margin: 0px;
+	height: 650px;
+    width: 100%;
+	margin-top: 0px;
+    overflow: auto;
 }
 
 header {
     padding: 40px;
-    height: 120px;
+    /*height: 120px;*/
     background-color: #EEEAE8;
 }
 
-.options{
-    background-color: #BD6822; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(left top, #BD6822, #815734); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(bottom right, #BD6822, #815734); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(bottom right, #BD6822, #815734); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to bottom right, #BD6822, #C28C5F); /* Standard syntax */
-    color: #fff;
-    padding: 4%;
-    border-radius: 7px;
-    text-decoration: none;
-    box-shadow: 0px 5px 7px -2px #000;
+header h1 {
+    margin-left: 60px;
+    padding: 0;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 40px;
+    clear: both;
+    margin-top: 26.8px;
 }
 
 .menu {
-    border-top: 3px solid #BD6822;
-    border-bottom: 3px solid #BD6822;
     text-align: center;
     padding: 0;
-    width: 470px;
+    width: 452px;
     float: right;
     clear: both;
     margin-right: 60px;
+    margin-top: 26.8px;
 }
 
 .menu > a {
     width: 150px;
-    height: 30px;
-    padding: 10px 0px;
-    margin: 0;
+    padding: 15px 0px;
+    margin: 0px 0px;
     text-decoration: none;
-    color: #BD6822;
+    color: #FBFBFB;
     display: inline-block;
+    vertical-align: top;
     text-align: center;
     text-transform: uppercase;
     font-weight: bold;
     border-left: 1px solid black;
+    float: left;
+    background-color: #BD6822;
 }
 
-.menu > a:last-child {
-    border-right: 1px solid black;
+.menu > a:first-child {
+    border-left: none;
 }
 
 .menu > a:hover {
     background-color: #55504C;
+    transition: background-color 0.7s ease;
+    color: #BD6822;
+}
+
+.menu > a:active {
+    background-color: #2F2D2C;
 }
 
 .inline {
@@ -144,16 +150,16 @@ div.tabContent.hide {
 /* ______________________ */
 
 ::-webkit-input-placeholder {
-   color: white; text-align: center;
+   color: lightgray; text-align: center;
 }
 :-moz-placeholder { /* Firefox 18- */
-   color: white; text-align: center;  
+   color: lightgray; text-align: center;  
 }
 ::-moz-placeholder {  /* Firefox 19+ */
-   color: white; text-align: center;
+   color: lightgray; text-align: center;
 }
 :-ms-input-placeholder {  
-   color: white; text-align: center;
+   color: lightgray; text-align: center;
 }
 
 footer {
@@ -165,17 +171,13 @@ footer {
 }
 
 #logIn{
-    width: 25%;
+    width: 30%;
     color: #000;
-    margin: 0px auto 0 auto;
+    margin: 147.5px auto 0 auto;
     padding: 50px 20px;
     background-color: rgba(137, 134, 132, 0.5);*/
     box-shadow: 0px 10px 14px -7px #000;
     border-radius: 10px;
-}
-
-placeholder {
-    color: gray;
 }
 
 form h2{
@@ -188,7 +190,7 @@ form h2{
     background: #FFF9F6;
     color: #000;
     height: 30px;
-    width: 300px;
+    width: 75%;
     font-size: 15px;
     background: white;
     text-align: center;
@@ -198,7 +200,6 @@ form h2{
 #logIn input, label {
     display: block;
     margin: 25px auto;
-    color: #000;
 }
 
 /* För att input-fält med autofill-uppgifter ska vara vitt och inte gult i Chrome*/
@@ -206,28 +207,10 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-    transition: background-color 5000s ease-in-out 0s;
+transition: background-color 5000s ease-in-out 0s;
 }
 
 /* _____________ */
-
-header h1 {
-    margin-left: 60px;
-    padding: 0;
-    display: inline-block;
-    font-size: 40px;
-    clear: both;
-}
-
-.loginNav {
-    width: 320px;
-    float: right;
-    display: inline;
-}
-
-.loginNav > a {
-    padding-left: 15px;
-}
 
 .content2 {
     background-color: #C0B4AD; 
@@ -283,7 +266,7 @@ header h1 {
     -moz-border-radius:17px;
 	-webkit-border-radius:17px;
 	border-radius:17px;
-    color: white;
+    color: #C0C0C0;
     border: 0px;
     text-shadow:0px 1px 0px #3d768a;
 }
@@ -303,7 +286,52 @@ header h1 {
 
 .myButton:focus {
     outline:0;
->>>>>>> origin/master
+}
+
+@media screen and (max-width:1300px){
+    #logIn {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width:960px){
+    
+    .menu {
+        width: 302px;
+    }
+    
+    .menu a {
+        width: 100px;
+        font-size: 80%;
+    }
+    
+    #wrapContent {
+    width: 667px;
+    margin: auto;
+    }
+    
+    .contentInContent {
+        width: 231px;
+        display: inline-block;
+        padding: 50px;
+        text-align: center;
+    }
+    
+    .roundBox {
+        background: black;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        margin: auto;
+        text-align: center;
+        line-height: 200px;
+        color: white;
+    }
+    
+    .roundBox h2 {
+        font-size: ;
+    }
+    
 }
 
 @media screen and (max-width:600px){

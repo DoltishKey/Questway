@@ -13,10 +13,10 @@
                 <p class="courtesyNavItem">Inloggad som <strong>{{user}}</strong></p>
             </div>
             <h1>Questway</h1>
-            <nav class="menu inline">
-                <a class="menuButton" href="">Uppdrag</a>
-                <a class="menuButton" href="">Profil</a>
-                <a class="menuButton" href="/log_out">Logga ut</a>
+            <nav class="menu">
+                <a href="">Uppdrag</a>
+                <a href="">Profil</a>
+                <a href="/log_out">Logga ut</a>
             </nav>
         </header>
         

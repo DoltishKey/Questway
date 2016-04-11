@@ -10,10 +10,10 @@
         <header>
             <h1>Questway</h1>
             <!--<img src="../static/img/logga.jpg" alt="logotyp">-->
-            <nav class="loginNav">
-                <a class="options" href="">Logga in</a>
-                <a class="options" href="/create">Registrera</a>
-                <a class="options" href="">Om oss</a>
+            <nav class="menu">
+                <a href="/login">Logga in</a>
+                <a href="/create">Registrera</a>
+                <a href="">Om oss</a>
             </nav>
         </header>
         <div class="wrapperLogin">
