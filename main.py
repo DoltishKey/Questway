@@ -160,15 +160,15 @@ def del_ad(annons):
 
 	else:
 		return 'Behörighet saknas!'
-    
+
 @post('/sok_annons/<annons>')
 def sok_annons(annons):
     log.validate_autho()
     all_adds=addmod.load_adds('ads')
     user=log.get_user_id_logged_in()
-    
+
     what_add=addmod.choose_ad(annons, all_adds, None)
-       
+
     for add in all_adds:
         if int(add['uniq_adNr'])==int(annons):
             if user in add['who_applied']:
@@ -176,12 +176,30 @@ def sok_annons(annons):
             else:
                 what_add['who_applied'].append(user)
                 add['who_applied']=what_add['who_applied']
-    
+
     with open('static/data/ads.json', 'w') as fil:
         json.dump(all_adds, fil, indent=4)
-    
+
     redirect('/admin')
-            
+
+@route('/ad_done/<annons>', method="POST")
+def ad_done(annons):
+	log.validate_autho()
+	if log.get_user_level() == 2:
+		response = addmod.move_ad_to_complete(int(annons))
+		if response['response'] == False:
+			return response['error']
+		else:
+			redirect('/admin')
+	else:
+		return 'Behörighet saknas!'
+
+
+@route('/give_feedback/<ad_nr>')
+def give_feedback(ad_nr):
+	return template('feedback', adnr=ad_nr)
+
+
 
 '''********Övriga Routes********'''
 

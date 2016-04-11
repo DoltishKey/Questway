@@ -40,7 +40,6 @@
         "autholevel": 1, 
         "password": "ville", 
         "id": 7
-<<<<<<< HEAD
     }, 
     {
         "username": "anna@panna.se", 
@@ -53,7 +52,5 @@
         "autholevel": 1, 
         "password": "tjo", 
         "id": 9
-=======
->>>>>>> origin/master
     }
 ]
