@@ -1,17 +1,25 @@
-<ul>
-    %for i in annons:
+
     
-        <li><a href="/{{i['ad_corpName']}}"> {{i['ad_corpName']}}</a></li>
+
+%for add in adds:
+        
+        <h1>{{add['ad_title']}}</h1>
     
-        <h1>{{i['ad_title']}}</h1>
-    
-        <p>{{i['ad_text']}}</p>
-        <form  name="delete_ad" id="delete_ad" method="POST" action="/del_ad/{{i['uniq_adNr']}}">
+        <p>{{add['ad_text']}}</p>
+        
+        <ul>
+        %for who in add['who_applied']:
+            %for student in students:
+                %if student['id'] == who:
+                    
+                        <li><a href="#">{{student['first_name'] + " "+student['last_name']}}</a></li>
+                        
+                   
+                %end
+            %end
+        %end
+         </ul>
+        <form  name="delete_ad" id="delete_ad" method="POST" action="/del_ad/{{add['uniq_adNr']}}">
             <input type="submit" value="Ta bort annons">
         </form>
-    
-        <form  name="sok_annons" id="sok_annons" method="POST" action="/sok_annons/{{i['uniq_adNr']}}">
-            <input type="submit" value="Sök annons">
-        </form>
-    %end
-</ul>
+%end

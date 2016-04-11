@@ -1,16 +1,23 @@
 [
     {
-        "org_nr": "1234", 
-        "first_name": "Calle", 
         "last_name": "Hansson", 
+        "first_name": "Calle", 
+        "org_nr": "1234", 
         "company_name": "Calle AB", 
         "id": 2
     }, 
     {
-        "last_name": "Pettersson", 
-        "first_name": "Jacob", 
         "org_nr": "1234", 
+        "first_name": "Jacob", 
+        "last_name": "Pettersson", 
         "company_name": "Jacobs AB", 
         "id": 4
+    }, 
+    {
+        "last_name": "rosenstr\u00f6m", 
+        "first_name": "Jari", 
+        "org_nr": "1337", 
+        "company_name": "jariro", 
+        "id": 10
     }
 ]
