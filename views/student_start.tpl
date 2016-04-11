@@ -14,7 +14,7 @@
             </div>
             <h1>Questway</h1>
             <nav class="menu">
-                <a href="">Uppdrag</a>
+                <a class="currentMenuItem" href="">Uppdrag</a>
                 <a href="">Profil</a>
                 <a href="/log_out">Logga ut</a>
             </nav>

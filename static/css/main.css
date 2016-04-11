@@ -77,6 +77,11 @@ header h1 {
     background-color: #2F2D2C;
 }
 
+.menu > .currentMenuItem {
+    background-color: #000;   
+    color: #BD6822;
+}
+
 .inline {
     display: inline;
 }
@@ -88,6 +93,8 @@ header h1 {
 
 .courtesyNavItem {
     padding: 0 10px;
+    margin: 0;
+    margin-top: -20px;
 }
 
 
