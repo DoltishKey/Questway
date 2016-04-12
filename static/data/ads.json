@@ -4,7 +4,8 @@
         "who_applied": [
             9, 
             6, 
-            1
+            1, 
+            5
         ], 
         "creator": 2, 
         "ad_text": "bygg mig ett program", 
@@ -13,12 +14,23 @@
         "date_of_adcreation": "07/04/2016"
     }, 
     {
-        "ad_title": "m\u00e5lare", 
         "status": "Ingen vald", 
-        "who_applied": [], 
+        "who_applied": [
+            5
+        ], 
         "creator": 2, 
         "ad_text": "n\u00e5gon som kan m\u00e5la fint!", 
         "uniq_adNr": 1, 
+        "ad_title": "m\u00e5lare", 
+        "date_of_adcreation": "12/04/2016"
+    }, 
+    {
+        "ad_title": "Testannons", 
+        "status": "Ingen vald", 
+        "who_applied": [], 
+        "creator": 2, 
+        "ad_text": "Text f\u00f6r att testa", 
+        "uniq_adNr": 3, 
         "date_of_adcreation": "12/04/2016"
     }
 ]

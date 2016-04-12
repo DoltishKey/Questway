@@ -2,6 +2,7 @@ $(document).ready(function() {
 	checkLogIn();
 	checkCreateEmployer();
 	checkCreateStudent();
+    showHide();
 });
 
 function checkLogIn(){
@@ -82,4 +83,11 @@ function checkCreateStudent(){
 		   	}
 		});
   	});
+}
+
+function showHide() {
+     $('.add').click(function(){
+         $(this).children('.showMore').toggle();
+
+     });
 }

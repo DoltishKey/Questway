@@ -179,7 +179,7 @@ div.tabContent.hide {
 
 /* Annonser: */
 
-#showMore {
+.showMore {
     display: none;
 }
 
@@ -298,14 +298,9 @@ transition: background-color 5000s ease-in-out 0s;
     position: absolute;
     left: 50px;
     bottom: 50px;
-<<<<<<< Updated upstream
     color: #191919;
 }
 
-=======
-    color: #999
-}
->>>>>>> Stashed changes
  /* Design för knappar */
 .myButton {
     -moz-box-shadow: 0px 10px 14px -7px #276873;

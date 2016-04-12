@@ -66,12 +66,12 @@ function getHash( url ) {
 
 
 // Show and hide adds
-function showHide() {
-    var div = document.getElementById("showMore");
-    if (div.style.display !== "none") {
-        div.style.display = "none";
-    }
-    else {
-        div.style.display = "block";
-    }
-     }
+//function showHide() {
+    //var div = document.getElementsByClassName("showMore");
+    //if (div.style.display !== "none") {
+        //div.style.display = "none";
+    //}
+    //else {
+        //div.style.display = "block";
+    //}
+     //}
