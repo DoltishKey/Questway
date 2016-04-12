@@ -144,6 +144,8 @@ def ad_done():
     	return 'Behörighet saknas!'
 
 
+'''*****Ta bort annons****'''
+
 @post('/del_ad/<annons>')
 def del_ad(annons):
 	log.validate_autho()
@@ -154,12 +156,15 @@ def del_ad(annons):
 			all_adds.remove(which_ad_to_delete)
 			with open('static//data/ads.json', 'w') as fil:
 				json.dump(all_adds, fil, indent=4)
-			redirect('/showadds')
+			redirect('/admin')
 		else:
 			return 'Behörighet saknas!'
 
 	else:
 		return 'Behörighet saknas!'
+
+
+'''****Studenten kan söka en annons****'''
 
 @post('/sok_annons/<annons>')
 def sok_annons(annons):
@@ -181,6 +186,24 @@ def sok_annons(annons):
         json.dump(all_adds, fil, indent=4)
 
     redirect('/admin')
+
+
+'''****Listar de studenter som sökt ett specifik uppdrag***'''
+
+@route('/allMissions')
+def list_applied_students():
+    log.validate_autho()
+    if log.get_user_level() == 2:
+        all_adds=addmod.load_adds('ads')
+        user=log.get_user_id_logged_in()
+        students=log.read_data('students')
+        relevant_adds=[]
+        for add in all_adds:
+            if user == add['creator']:
+                relevant_adds.append(add)
+
+        return template('adds.tpl', adds=relevant_adds, students=students)
+
 
 @route('/ad_done/<annons>', method="POST")
 def ad_done(annons):

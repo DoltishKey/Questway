@@ -60,7 +60,7 @@ header h1 {
     font-weight: bold;
     border-left: 1px solid black;
     float: left;
-    background-color: #BD6822;
+    background-color: #E87E04;
 }
 
 .menu > a:first-child {
@@ -293,7 +293,6 @@ transition: background-color 5000s ease-in-out 0s;
     line-height: 300px;
     color: white;
 }
-
 #back-button {
     position: absolute;
     left: 50px;
@@ -336,10 +335,33 @@ transition: background-color 5000s ease-in-out 0s;
     position: relative;
     top: 1px;
 }
-
 .myButton:focus {
     outline:0;
 }
+
+
+/* --- Adsform.tpl --- */
+#create_ad{
+    
+}
+.ad_title{
+    text-align: center;
+}
+#ad_title{
+    
+}
+.ad_text{
+    text-align: center;
+}
+#ad_text{
+    
+}
+#ad_done{
+    display: block;
+    margin: 25px auto;
+    transform: scale(1.2);
+}/*--- Adsform.tpl SLUT ---*/
+
 
 @media screen and (max-width:1300px){
     #logIn {
@@ -400,7 +422,7 @@ transition: background-color 5000s ease-in-out 0s;
 }
 /* ----- Välj Typ av användare ------ */
 #content{
-    text-align: center;
+    
 }
 .choicereg{
     text-align: center;
@@ -421,14 +443,18 @@ transition: background-color 5000s ease-in-out 0s;
 #studentreg{
     background: #E87E04;
 }
-/*STUDENTREGISTRERING*/
 
+/*STUDENTREGISTRERING*/
+.form_head{
+    text-align: center
+}
 #content{
     padding-bottom: 10%;
     background-color: #ddd;
 }
 #create_student{
     width: 100%;
+    text-align: center;
 }
 #studentform{
     padding: 5% 0%;
@@ -438,6 +464,31 @@ transition: background-color 5000s ease-in-out 0s;
 }
 label{
     display: inline-block;
+    left: 1%;
+}
+#create_student input, select{
+    background: #FFF9F6;
+    color: #000;
+    height: 30px;
+    width: 75%;
+    font-size: 15px;
+    background: white;
+    text-align: center;
+    border-radius: 8px;
+}
+.form_labels{
+    display: inline-block;
+    width: 49.3%;
+    text-align: center;
+}
+.form_inputs{
+    display: inline-block;
+    width: 49.3%;
+    text-align: center;
+}
+.form_inputs select,input{
+    margin: 17px auto;
+    max-width: 300px;
 }
 @media screen and (max-width:600px){
     #logIn{

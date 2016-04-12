@@ -6,6 +6,7 @@ import log
 import createUsers
 
 
+
 '''*********Skriv/läsa filer*********'''
 def read_data(file):
 	try:
@@ -28,6 +29,7 @@ def validatekDataFile(file):
 	dataFile = open('static/data/'+ file +'.json', 'w')
 	json.dump(resList, dataFile, indent=4)
 	dataFile.close()
+
 
 
 '''*********Load adds from DB. If there's not DB, one is created*********'''
@@ -70,7 +72,8 @@ def do_ad():
         content.append(mydict)
         with open('static/data/ads.json', "w") as fil:
             json.dump(content, fil, indent=4)
-        redirect('/showadds')
+
+        redirect('/admin')
 
     else:
         redirect('/showadds')
@@ -121,7 +124,7 @@ def choose_ad(annonsID, db, status):
     for each in db:
         if int(each['uniq_adNr']) == int(annonsID) and str(each['status'])==str(status):
             return each
-        elif int(each['uniq_adNr']) == int(annonsID):
+        elif int(each['uniq_adNr']) == int(annonsID) and status==None:
             return each
 
 
