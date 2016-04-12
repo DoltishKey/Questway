@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Profil {{student_id}}</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-		<link rel="stylesheet" type="text/css" href="../static/css/main.css">
-	</head>
+    
+    % include('head.tpl')
+    
 	<body>
 		<header>
 			<h1>Questway</h1>
