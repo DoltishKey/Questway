@@ -20,12 +20,14 @@
             <!--<img src="../static/img/qwback.jpg" alt="qwbackground">
                 <div id="slogan"><p>Lorem ipsum dolor sit amet, <br>consectetur adipiscing elit.</p></div>-->
 
-            <form name="create_student" id="create_student" method="post" action="/do_create_student" style="width:50%; margin: 0 auto;">
-               <h3>Skapa profil | Student</h3>
+            <form name="create_student" id="create_student" method="post" action="/do_create_student">
+               <h3 id="studentform">Skapa profil | Student</h3>
                <label for="first_name">Förnamn</label>
                <input placeholder="Förnamn" type="input" name="first_name" id="first_name" value="">
+                <br>
 			   	<label for="last_name">Efternamn</label>
                 <input placeholder="Efternamn" type="input" name="last_name" id="last_name" value="">
+                <br>
 
                 <label for="program">Utbildning</label>
                 <select name="program" id="program" value="">
@@ -33,14 +35,17 @@
 					<option value="2">Systemutvecklare</option>
 					<option value="3">App</option>
 				</select>
-
+                <br>
                 <label for="year">Årskurs</label>
                 <input placeholder="Årskurs" type="input" name="year" id="year" value="">
+                <br>
                 <label for="email">Mejl</label>
                 <input placeholder="Mejl" type="input" name="email" id="email" value="">
+                <br>
                 <label for="password">Lösenord</label>
                 <input placeholder="Lösenord" type="input" name="password" id="password" value="">
                 <input id="logInButton" type="submit" value="Skapa konto">
+                <br>
             </form>
             <p id="error"></p>
             </div>

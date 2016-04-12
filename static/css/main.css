@@ -298,9 +298,14 @@ transition: background-color 5000s ease-in-out 0s;
     position: absolute;
     left: 50px;
     bottom: 50px;
+<<<<<<< Updated upstream
     color: #191919;
 }
 
+=======
+    color: #999
+}
+>>>>>>> Stashed changes
  /* Design för knappar */
 .myButton {
     -moz-box-shadow: 0px 10px 14px -7px #276873;
@@ -398,7 +403,47 @@ transition: background-color 5000s ease-in-out 0s;
     }
     
 }
+/* ----- Välj Typ av användare ------ */
+#content{
+    text-align: center;
+}
+.choicereg{
+    text-align: center;
+    padding: 7%;
+    display: inline-block;
+    width: 80%;
+    margin: 10px auto;
+    color: #fff;
+    border-radius: 10px;
+    font-size: 120%;
+}
+.choicereg:hover{
+    box-shadow: 0px 0px 20px 2px #777;
+}
+#employreg{
+    background: #59ABE3;
+}
+#studentreg{
+    background: #E87E04;
+}
+/*STUDENTREGISTRERING*/
 
+#content{
+    padding-bottom: 10%;
+    background-color: #ddd;
+}
+#create_student{
+    width: 100%;
+}
+#studentform{
+    padding: 5% 0%;
+    background-color: #59e;
+    border-bottom-style: solid;
+    border-width: thick;
+}
+label{
+    display: inline-block;
+}
 @media screen and (max-width:600px){
     #logIn{
         width: 80%;
