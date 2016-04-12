@@ -70,7 +70,7 @@ def do_ad():
         content.append(mydict)
         with open('static/data/ads.json', "w") as fil:
             json.dump(content, fil, indent=4)
-        redirect('/showadds')
+        redirect('/admin')
 
     else:
         redirect('/showadds')

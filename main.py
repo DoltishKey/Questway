@@ -154,7 +154,7 @@ def del_ad(annons):
 			all_adds.remove(which_ad_to_delete)
 			with open('static//data/ads.json', 'w') as fil:
 				json.dump(all_adds, fil, indent=4)
-			redirect('/showadds')
+			redirect('/admin')
 		else:
 			return 'Behörighet saknas!'
 
