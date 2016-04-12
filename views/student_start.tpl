@@ -50,8 +50,10 @@
                         <div class="add">
                             <h2>{{i['ad_title']}}</h2>
                             <p>Publiceringsdatum ska laddas in här.</p>
-                            <p>{{i['ad_text']}}</p>
-                            <p>{{i['ad_corpName']}}</p>
+                            <div class="showMore">
+                                <p>{{i['ad_text']}}</p>
+                                <p>{{i['ad_corpName']}}</p>
+                            </div>
                         </div>
                         %end
                     %end
