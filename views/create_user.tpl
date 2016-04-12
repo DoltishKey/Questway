@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 
     % include('head.tpl')
@@ -12,17 +13,20 @@
 		<link rel="stylesheet" type="text/css" href="../static/css/main.css">
 	</head>
 >>>>>>> Stashed changes
+=======
+    % include('head.tpl')
+>>>>>>> origin/master
 	<body>
         <div class="wrapper">
             <header>
                 <h1>Questway</h1>
-<<<<<<< Updated upstream
                 <nav class="menu">
                     <a href="/login">Logga in</a>
                     <a href="/create" class="currentMenuItem">Registrera</a>
                     <a href="">Om oss</a>
                 </nav>
             </header>
+<<<<<<< HEAD
             <div id="content">
             <form name="create_employer" id="create_employer" method="post" action="/do_create_employer" style="width:50%; margin: 0 auto; float: left;">
                 <h3>Skapa profil | Uppdragsgivare</h3>
@@ -54,19 +58,36 @@
                     <a class="options" href="">Om oss</a>
                 </nav>
             </header>
+=======
+
+>>>>>>> origin/master
             <div id="content">
                 <h3>Skapa profil som:</h3>
             <!--<img src="../static/img/qwback.jpg" alt="qwbackground">
                 <div id="slogan"><p>Lorem ipsum dolor sit amet, <br>consectetur adipiscing elit.</p></div>-->
 
+<<<<<<< HEAD
                 <a class="choicereg" id="employreg" href="../views/create_employer.tpl"><h3>Uppdragsgivare</h3></a>
 >>>>>>> Stashed changes
 
                 <a class="choicereg" id="studentreg" href="../views/create_student.tpl"><h3>Student</h3></a>
 
             <p id="error"></p>
+=======
+                <a class="choicereg" id="employreg" href="../views/create_employer.tpl">
+                    <h3>Uppdragsgivare</h3>
+                </a>
+                
+                <a class="choicereg" id="studentreg" href="../views/create_student.tpl">      
+                    <h3>Student</h3>
+                </a>
+               
+            <p id="error">
+                </p>
+>>>>>>> origin/master
             </div>
-            <div class="push"></div> <!-- Är till för att footer ska hamna längst ner, ta ej bort --><!--Kolla på position:fixed istället-->
+            <div class="push">
+            </div> <!-- Är till för att footer ska hamna längst ner, ta ej bort --><!--Kolla på position:fixed istället-->
         </div>
         <footer>© Questway, 2016</footer>
 	</body>

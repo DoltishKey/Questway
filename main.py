@@ -48,17 +48,17 @@ def log_out():
 
 @route('/admin')
 def admin():
-	log.validate_autho() #and log.get_user_level() == 2 | kontrollerar om användaren är inloggad
-	username = log.get_user_name() #hämtar användarens namn från DB (returnerar en sträng)
-	user_level = log.get_user_level() #kollar om användaren är uppdragstagare eller student (returnerar 1 eller 2)
-	all_adds=addmod.load_adds('ads')
-	complete_adds = addmod.get_corp_name(all_adds)
-	if user_level == 1:
-		return template('student_start', user=username, level="student", annons=complete_adds)
-	else:
-		#här ska arbetsgivarnas annonser med
-		userid = log.get_user_id_logged_in()
-		return template('employer_start', user=username, user_id=userid,  level="arbetsgivare", annons=complete_adds)
+    log.validate_autho() #and log.get_user_level() == 2 | kontrollerar om användaren är inloggad
+    username = log.get_user_name() #hämtar användarens namn från DB (returnerar en sträng)
+    userid = log.get_user_id_logged_in() #hämtar användarens id
+    user_level = log.get_user_level() #kollar om användaren är uppdragstagare eller student (returnerar 1 eller 2)
+    all_adds=addmod.load_adds('ads')
+    complete_adds = addmod.get_corp_name(all_adds)
+    if user_level == 1:
+        return template('student_start', user=username, level="student", annons=complete_adds, user_id=userid)
+    else:
+        #här ska arbetsgivarnas annonser med
+        return template('employer_start', user=username, user_id=userid,  level="arbetsgivare", annons=complete_adds)
 
 
 
@@ -144,6 +144,8 @@ def ad_done():
     	return 'Behörighet saknas!'
 
 
+'''*****Ta bort annons****'''
+
 @post('/del_ad/<annons>')
 def del_ad(annons):
 	log.validate_autho()
@@ -160,6 +162,9 @@ def del_ad(annons):
 
 	else:
 		return 'Behörighet saknas!'
+
+
+'''****Studenten kan söka en annons****'''
 
 @post('/sok_annons/<annons>')
 def sok_annons(annons):
@@ -181,6 +186,27 @@ def sok_annons(annons):
         json.dump(all_adds, fil, indent=4)
 
     redirect('/admin')
+
+
+'''****Listar de studenter som sökt ett specifik uppdrag***'''
+
+@route('/allMissions')
+def list_applied_students():
+    log.validate_autho()
+    if log.get_user_level() == 2:
+        all_adds=addmod.load_adds('ads')
+        user=log.get_user_id_logged_in()
+        students=log.read_data('students')
+        relevant_adds=[]
+        for add in all_adds:
+            if user == add['creator']:
+                relevant_adds.append(add)
+
+
+		open_ad=addmod.choose_ad(1, relevant_adds, None)
+
+        return template('adds.tpl', adds=relevant_adds, students=students, open_ad=open_ad)
+
 
 @route('/ad_done/<annons>', method="POST")
 def ad_done(annons):

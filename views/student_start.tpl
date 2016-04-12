@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
-    
+
     %include('head.tpl')
-    
+
 	<body onload="init()">
         <header>
             <div class="courtesyNav">
@@ -15,7 +15,7 @@
                 <a href="/log_out">Logga ut</a>
             </nav>
         </header>
-        
+
         <!-- Länkar till tabbarna: -->
         <ul id="tabs">
             <li><a href="#lediga_uppdrag" onclick="showTab()">Lediga uppdrag</a></li>
@@ -23,69 +23,53 @@
             <li><a href="#pågående_uppdrag" onclick="showTab()">Pågående uppdrag</a></li>
             <li><a href="#avslutade_uppdrag" onclick="showTab()">Avslutade uppdrag</a></li>
         </ul>
-            
+
         <div class="tabContent" id="lediga_uppdrag">
             <h2 class="pageTitle">Lediga uppdrag</h2>
-                %for i in annons:
-                <div class="add" onclick="showHide()">
-                        <h2>{{i['ad_title']}}</h2>
-                    <p class="inline"><span class="bold">Publicererades:</span> {{i['date_of_adcreation']}}</p>
-                        <p class="inline"><span class="bold column2">Antal ansökningar:</span> Ladda in siffra här</p>
-                        <div id="showMore">
-                            <p>{{i['ad_text']}}</p>
-                            <p>{{i['ad_corpName']}}</p>
-                            <form  name="delete_ad" id="delete_ad" method="POST" action="/del_ad/{{i['uniq_adNr']}}">
-                                <input type="submit" value="Ta bort annons" class="myButton">
-                            </form>
+                     %for i in annons:
+                        %if user_id not in i['who_applied']:
+                        <div class="add">
+                                <h2>{{i['ad_title']}}</h2>
+                            <p class="inline"><span class="bold">Publicererades:</span> {{i['date_of_adcreation']}}</p>
+                                <div class="showMore">
+                                    <p>{{i['ad_text']}}</p>
+                                    <p>{{i['ad_corpName']}}</p>
+                                    <form  name="sok_annons" id="sok_annons" method="POST" action="/sok_annons/{{i['uniq_adNr']}}">
+                                        <input type="submit" value="Sök annons" class="myButton">
+                                    </form>
+                                </div>
                         </div>
-                </div>
+                        %end
                     %end
         </div>
+
         <div class="tabContent" id="sökta_uppdrag">
                 <h2 class="pageTitle">Uppdrag du sökt</h2>
-                <div class="add">
                     %for i in annons:
-                        <h2>{{i['ad_title']}}</h2>
-                        <p>Publiceringsdatum och antal ansökningar ska laddas in här.</p>
-                            <p>{{i['ad_text']}}</p>
-                        <form  name="delete_ad" id="delete_ad" method="POST" action="/del_ad/{{i['uniq_adNr']}}">
-                            <input type="submit" value="Ta bort annons" class="myButton">
-                        </form>
-                        <p>{{i['ad_corpName']}}</p>
+                        %if user_id in i['who_applied']:
+                        <div class="add">
+                            <h2>{{i['ad_title']}}</h2>
+                            <p>Publiceringsdatum ska laddas in här.</p>
+                            <div class="showMore">
+                                <p>{{i['ad_text']}}</p>
+                                <p>{{i['ad_corpName']}}</p>
+                            </div>
+                        </div>
+                        %end
                     %end
-                </div>
         </div>
-        
+
         <div class="tabContent" id="pågående_uppdrag">
             <h2 class="pageTitle">Dina pågående uppdrag</h2>
-            
-                    %for i in annons:
-                    <div class="add">
-                        <h2>{{i['ad_title']}}</h2>
-                        <p>Publiceringsdatum och antal ansökningar ska laddas in här.</p>
-                            <p>{{i['ad_text']}}</p>
-                        <form  name="delete_ad" id="delete_ad" method="POST" action="/del_ad/{{i['uniq_adNr']}}">
-                            <input type="submit" value="Ta bort annons" class="myButton">
-                        </form>
-                        <p>{{i['ad_corpName']}}</p>
-                    </div>
-                    %end
+            <p>Går ej att visa ännu.</p>
         </div>
 
         <div class="tabContent" id="avslutade_uppdrag">
             <h2 class="pageTitle">Avslutade uppdrag</h2>
-            <div class="add">
-                %for i in annons:
-                    <h2>{{i['ad_title']}}</h2>
-                    <p>Publiceringsdatum och antal ansökningar ska laddas in här.</p>
-                        <p>{{i['ad_text']}}</p>
-                    <form  name="delete_ad" id="delete_ad" method="POST" action="/del_ad/{{i['uniq_adNr']}}">
-                        <input type="submit" value="Ta bort annons" class="myButton">
-                    </form>
-                    <p>{{i['ad_corpName']}}</p>
-                %end
-            </div>
+               <p>Går ej att visa ännu.</p>
         </div>
+        
         <footer>Copyright Questway, 2016</footer>
+
 	</body>
 </html>
