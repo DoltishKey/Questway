@@ -11,13 +11,7 @@
                     <a href="">Om oss</a>
                 </nav>
             </header>
-            <div id="content">
-                <nav>
-                    <a class="options" href="/login">Logga in</a>
-                    <a class="options" href="/">Registrera</a>
-                    <a class="options" href="">Om oss</a>
-                </nav>
-            </header>
+
             <div id="content">
                 <h3>Skapa profil som:</h3>
             <!--<img src="../static/img/qwback.jpg" alt="qwbackground">
