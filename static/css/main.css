@@ -389,6 +389,10 @@ transition: background-color 5000s ease-in-out 0s;
     padding-bottom: 20px;
 }
 
+.emloyers_all_adds a{
+    color: black;
+}
+
 .emloyers_all_adds h2{
     color: #fff;
     width: 90%;
@@ -590,6 +594,7 @@ label{
         height: 100%;
         margin: 40px 0px;
         padding: 0px;
+        border-bottom: 2px solid #EEEAE8;
     }
 
     .employers_add_new_ad{
@@ -614,14 +619,10 @@ label{
     .emloyers_all_adds{
         margin-left: 5%;
         display: block;
-
-    }
-
-    .emloyers_all_adds > div{
-        display: block;
-        height: 100%;
         overflow: scroll;
+        border-bottom: 2px solid #3E4244;
     }
+
 
 
 

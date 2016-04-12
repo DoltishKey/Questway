@@ -35,18 +35,20 @@
                     <ul>
                         %for i in annons:
                 	       %if i['creator'] == user_id:
-        		                <li>
-                                    <div>
-                                        <h3>{{i['ad_title']}}</h3>
-                                        <p>{{len(i['who_applied'])}} ansöknignar</p>
-                                    </div>
-        		                    <!--<p>{{i['ad_text']}}</p>
-                    		        <form  name="delete_ad" id="delete_ad" method="POST" action="/del_ad/{{i['uniq_adNr']}}">
-                    		            <input type="submit" value="Ta bort annons">
-                    		        </form>
-                                    <a href="/give_feedback/{{i['uniq_adNr']}}">Ge feedback</a>-->
-                                    <div>></div>
-                                </li>
+        		                <a href="#" data-value="{{i['uniq_adNr']}}" class="go_to_ad">
+                                    <li>
+                                        <div>
+                                            <h3>{{i['ad_title']}}</h3>
+                                            <p>{{len(i['who_applied'])}} ansöknignar</p>
+                                        </div>
+            		                    <!--<p>{{i['ad_text']}}</p>
+                        		        <form  name="delete_ad" id="delete_ad" method="POST" action="/del_ad/{{i['uniq_adNr']}}">
+                        		            <input type="submit" value="Ta bort annons">
+                        		        </form>
+                                        <a href="/give_feedback/{{i['uniq_adNr']}}">Ge feedback</a>-->
+                                        <div>></div>
+                                    </li>
+                                </a>
         		            %end
         	            %end
                     </ul>
@@ -59,6 +61,11 @@
           $(document).ready(function() {
               $('#toggle_how_it_works').click(function(){
                   $('#employer_how_it_works').slideToggle('slow');
+              });
+
+              $('.go_to_ad').click(function functionName() {
+                  val = $(this).data( 'value' );
+                  localStorage.setItem("clicked_ad", val);
               });
           });
       </script>
