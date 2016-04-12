@@ -99,5 +99,5 @@ def choose_ad(annonsID, db, status):
     for each in db:
         if int(each['uniq_adNr']) == int(annonsID) and str(each['status'])==str(status):
             return each
-        elif int(each['uniq_adNr']) == int(annonsID):
+        elif int(each['uniq_adNr']) == int(annonsID) and status==None:
             return each
