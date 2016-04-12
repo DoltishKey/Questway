@@ -1,7 +1,9 @@
 [
     {
         "status": "Ingen vald", 
-        "who_applied": [], 
+        "who_applied": [
+            9
+        ], 
         "creator": 2, 
         "ad_text": "test", 
         "uniq_adNr": 1, 
@@ -17,6 +19,26 @@
         "ad_text": "dsfadfs", 
         "uniq_adNr": 2, 
         "ad_title": "erhdfhd", 
+        "date_of_adcreation": "12/04/2016"
+    }, 
+    {
+        "status": "Ingen vald", 
+        "who_applied": [
+            9
+        ], 
+        "creator": 10, 
+        "ad_text": "lalalbabala", 
+        "uniq_adNr": 3, 
+        "ad_title": "hejsvejs", 
+        "date_of_adcreation": "12/04/2016"
+    }, 
+    {
+        "ad_title": "oves gatuk\u00f6k", 
+        "status": "Ingen vald", 
+        "who_applied": [], 
+        "creator": 10, 
+        "ad_text": "korv med mos \u00e4r g\u00f6\u00f6\u00f6ragott! Nu \u00e4r jag hungrig ass\u00e5", 
+        "uniq_adNr": 4, 
         "date_of_adcreation": "12/04/2016"
     }
 ]

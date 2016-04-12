@@ -202,7 +202,10 @@ def list_applied_students():
             if user == add['creator']:
                 relevant_adds.append(add)
 
-        return template('adds.tpl', adds=relevant_adds, students=students)
+
+		open_ad=addmod.choose_ad(1, relevant_adds, None)
+
+        return template('adds.tpl', adds=relevant_adds, students=students, open_ad=open_ad)
 
 
 @route('/ad_done/<annons>', method="POST")
