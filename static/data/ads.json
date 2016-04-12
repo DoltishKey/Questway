@@ -1,36 +1,43 @@
 [
     {
-        "status": "Ingen vald", 
+        "status": "Ingen vald",
         "who_applied": [
-            9, 
-            6
-        ], 
-        "creator": 2, 
-        "ad_text": "bygg mig ett program", 
-        "uniq_adNr": 2, 
-        "ad_title": "backend", 
+            9,
+            6,
+            1
+        ],
+        "creator": 2,
+        "ad_text": "bygg mig ett program",
+        "uniq_adNr": 2,
+        "ad_title": "backend",
         "date_of_adcreation": "07/04/2016"
-    }, 
+    },
     {
-        "status": "Ingen vald", 
+        "ad_title": "m\u00e5lare",
+        "status": "Ingen vald",
         "who_applied": [
             9
-        ], 
-        "creator": 10, 
-        "ad_text": "Beh\u00f6ver hj\u00e4lp med monteringen av ikeam\u00f6bler", 
-        "uniq_adNr": 1, 
-        "ad_title": "Montering", 
+        ],
+        "creator": 10,
+        "ad_text": "Beh\u00f6ver hj\u00e4lp med monteringen av ikeam\u00f6bler",
+        "uniq_adNr": 1,
+        "ad_title": "Montering",
         "date_of_adcreation": "11/04/2016"
-    }, 
+    },
     {
-        "status": "Ingen vald", 
+        "status": "Ingen vald",
         "who_applied": [
             9
-        ], 
-        "creator": 10, 
-        "ad_text": "beh\u00f6ver hj\u00e4lp med att passa Jacob", 
-        "uniq_adNr": 3, 
-        "ad_title": "Passa Jacob", 
-        "date_of_adcreation": "11/04/2016"
+        ],
+        "creator": 10,
+        "ad_text": "beh\u00f6ver hj\u00e4lp med att passa Jacob",
+        "uniq_adNr": 3,
+        "ad_title": "Passa Jacob",
+        "date_of_adcreation": "11/04/2016",
+        "who_applied": [],
+        "creator": 2,
+        "ad_text": "n\u00e5gon som kan m\u00e5la fint!",
+        "uniq_adNr": 1,
+        "date_of_adcreation": "12/04/2016"
     }
 ]

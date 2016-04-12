@@ -4,7 +4,7 @@ html{
 
 body {
     height: 100%;
-    font-family: Tahoma, sans-serif;
+    font-family: 'Lato', 'Tahoma', sans-serif;
     margin: 0;
 }
 
@@ -28,7 +28,7 @@ header {
 }
 
 header h1 {
-    margin-left: 60px;
+    margin-left: 150px;
     padding: 0;
     display: inline-block;
     vertical-align: top;
@@ -43,7 +43,7 @@ header h1 {
     width: 452px;
     float: right;
     clear: both;
-    margin-right: 60px;
+    margin-right: 150px;
     margin-top: 26.8px;
 }
 
@@ -60,7 +60,7 @@ header h1 {
     font-weight: bold;
     border-left: 1px solid black;
     float: left;
-    background-color: #BD6822;
+    background-color: #E87E04;
 }
 
 .menu > a:first-child {
@@ -68,7 +68,7 @@ header h1 {
 }
 
 .menu > a:hover {
-    background-color: #55504C;
+    background-color: #5B514A;
     transition: background-color 0.7s ease;
     color: #BD6822;
 }
@@ -78,7 +78,7 @@ header h1 {
 }
 
 .menu > .currentMenuItem {
-    background-color: #000;   
+    background-color: #42403E;   
     color: #BD6822;
 }
 
@@ -88,11 +88,10 @@ header h1 {
 
 .courtesyNav {
     float: right;
-    margin-right: 60px;
+    margin-right: 150px;
 }
 
 .courtesyNavItem {
-    padding: 0 10px;
     margin: 0;
     margin-top: -20px;
 }
@@ -100,20 +99,38 @@ header h1 {
 
 .pageTitle {
     text-align: center;
-    margin: 0 0 50px 0;
+    margin: 40px 166px 50px 166px;
+    padding-bottom: 5px;
+    color: whitesmoke;
+    text-transform: uppercase;
+    font-size: 30px;
+    border-bottom: 2px solid #E9E9E9;
 }
 
 /*Tabbar: */
 
 .add {
-    padding: 20px;
+    padding: 25px 20px 25px 50px;
+    margin: 0 166px;
     background-color: white;
+    cursor: pointer;
+    border: 4px solid rgba(102, 185, 191, 1);
+}
+
+.add:hover {
+    border: 7px solid #66B9BF;
+    margin: 0 164px;
+}
+
+.add h2 {
+    margin-top: 0;
 }
 
 ul#tabs { 
     list-style-type: none; 
-    margin: 100px 100px 0 100px; 
+    margin: 60px auto; 
     padding: 0 0 0.6em 0; 
+    width: 660px;
 }
 
 ul#tabs li { 
@@ -122,13 +139,15 @@ ul#tabs li {
 
 ul#tabs li a { 
     color: #42454a; 
-    background-color: #dedbde; 
-    border: 1px solid #c9c3ba; 
-    border-bottom: none; 
-    padding: 0.6em; 
+    background-color: #E9E9E9; 
+    border: 2px solid rgba(102, 185, 191, 0.9); 
+    /*border-bottom: none; */
+    padding: 0.6em 1em; 
     text-decoration: none;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 10px;
+    border-radius: 20px;
+    -moz-box-shadow: 0px 5px 7px -3.5px #276873;
+	-webkit-box-shadow: 0px 5px 7px -3.5px #276873;
+	box-shadow: 0px 5px 7px -3.5px #000;
 }
 
 ul#tabs li a:hover { 
@@ -137,17 +156,19 @@ ul#tabs li a:hover {
 
 ul#tabs li a.selected { 
     color: #000; 
-    background-color: #898684; 
+    background-color: rgba(102, 185, 191, 0.9); 
     font-weight: bold; 
-    padding: 0.7em 0.3em 0.78em 0.3em; 
+    padding: 0.8em 1em 0.78em 1em; 
+    border: none;
 }
 
 div.tabContent { 
-    padding: 1em; 
-    background-color: #898684; 
-    margin-left: 100px;
-    margin-right: 100px;
-    min-height: 100%;
+    padding: 20px;
+    background-color: #3E4244; 
+    margin: 0;
+    min-height: 80%;
+    border-bottom: 5px solid #595E61;
+    border-top: 5px solid #595E61;
 }
 
 div.tabContent.hide { 
@@ -155,6 +176,31 @@ div.tabContent.hide {
 }
 
 /* ______________________ */
+
+/* Annonser: */
+
+#showMore {
+    display: none;
+}
+
+/* ______________________ */
+
+.bold {
+    font-weight: bold;
+}
+
+.column2 { /* En extra kolumn i uppdrag */
+    margin-left: 50px;
+}
+
+#error { /* Felmeddelande vid inloggning */
+    width: 400px;
+    /*background-color: rgba(163, 34, 34, 0.4);
+    padding: 25px;
+    border-radius: 6px;*/
+    margin: 20px auto;
+    text-align: center;
+}
 
 ::-webkit-input-placeholder {
    color: lightgray; text-align: center;
@@ -247,14 +293,18 @@ transition: background-color 5000s ease-in-out 0s;
     line-height: 300px;
     color: white;
 }
-
 #back-button {
     position: absolute;
     left: 50px;
     bottom: 50px;
+<<<<<<< Updated upstream
     color: #191919;
 }
 
+=======
+    color: #999
+}
+>>>>>>> Stashed changes
  /* Design för knappar */
 .myButton {
     -moz-box-shadow: 0px 10px 14px -7px #276873;
@@ -290,14 +340,46 @@ transition: background-color 5000s ease-in-out 0s;
     position: relative;
     top: 1px;
 }
-
 .myButton:focus {
     outline:0;
 }
+/* --- Adsform.tpl --- */
 
+#create_ad{
+    
+}
+.ad_title{
+    text-align: center;
+}
+#ad_title{
+    
+}
+.ad_text{
+    text-align: center;
+}
+#ad_text{
+    
+}
+#ad_done{
+    display: block;
+    margin: 25px auto;
+    transform: scale(1.2);
+}
 @media screen and (max-width:1300px){
     #logIn {
         width: 40%;
+    }
+    
+    header h1 {
+        margin-left: 80px;
+    }
+    
+    .menu {
+        margin-right: 80px;
+    }
+    
+    .add {
+        margin: 96px;
     }
 }
 
@@ -340,7 +422,47 @@ transition: background-color 5000s ease-in-out 0s;
     }
     
 }
+/* ----- Välj Typ av användare ------ */
+#content{
+    text-align: center;
+}
+.choicereg{
+    text-align: center;
+    padding: 7%;
+    display: inline-block;
+    width: 80%;
+    margin: 10px auto;
+    color: #fff;
+    border-radius: 10px;
+    font-size: 120%;
+}
+.choicereg:hover{
+    box-shadow: 0px 0px 20px 2px #777;
+}
+#employreg{
+    background: #59ABE3;
+}
+#studentreg{
+    background: #E87E04;
+}
+/*STUDENTREGISTRERING*/
 
+#content{
+    padding-bottom: 10%;
+    background-color: #ddd;
+}
+#create_student{
+    width: 100%;
+}
+#studentform{
+    padding: 5% 0%;
+    background-color: #59e;
+    border-bottom-style: solid;
+    border-width: thick;
+}
+label{
+    display: inline-block;
+}
 @media screen and (max-width:600px){
     #logIn{
         width: 80%;

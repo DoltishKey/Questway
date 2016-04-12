@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Uppdrag</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-        <link rel="stylesheet" type="text/css" href="/static/css/main.css">
-        <script src="/static/js/tabs.js" type="text/javascript"></script>
-    </head>
+
+    %include('head.tpl')
+
 	<body onload="init()">
         <header>
             <div class="courtesyNav">
@@ -63,18 +59,28 @@
 >>>>>>> Stashed changes
                 <div class="add">
                      %for i in annons:
+=======
+                %for i in annons:
+                <div class="add" onclick="showHide()">
+>>>>>>> origin/master
                         <h2>{{i['ad_title']}}</h2>
-                        <p>Publiceringsdatum och antal ansökningar ska laddas in här.</p>
+                    <p class="inline"><span class="bold">Publicererades:</span> {{i['date_of_adcreation']}}</p>
+                        <p class="inline"><span class="bold column2">Antal ansökningar:</span> Ladda in siffra här</p>
+                        <div id="showMore">
                             <p>{{i['ad_text']}}</p>
-                        <form  name="delete_ad" id="delete_ad" method="POST" action="/del_ad/{{i['uniq_adNr']}}">
-                            <input type="submit" value="Ta bort annons" class="myButton">
-                        </form>
-                        <p>{{i['ad_corpName']}}</p>
-                    %end
+                            <p>{{i['ad_corpName']}}</p>
+                            <form  name="delete_ad" id="delete_ad" method="POST" action="/del_ad/{{i['uniq_adNr']}}">
+                                <input type="submit" value="Ta bort annons" class="myButton">
+                            </form>
+                        </div>
                 </div>
+                    %end
         </div>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 
+=======
+>>>>>>> origin/master
         <div class="tabContent" id="sökta_uppdrag">
                 <h2 class="pageTitle">Uppdrag du sökt</h2>
                 <div class="add">
@@ -92,8 +98,9 @@
 
         <div class="tabContent" id="pågående_uppdrag">
             <h2 class="pageTitle">Dina pågående uppdrag</h2>
-            <div class="add">
+
                     %for i in annons:
+                    <div class="add">
                         <h2>{{i['ad_title']}}</h2>
                         <p>Publiceringsdatum och antal ansökningar ska laddas in här.</p>
                             <p>{{i['ad_text']}}</p>
@@ -101,8 +108,8 @@
                             <input type="submit" value="Ta bort annons" class="myButton">
                         </form>
                         <p>{{i['ad_corpName']}}</p>
+                    </div>
                     %end
-            </div>
         </div>
 
         <div class="tabContent" id="avslutade_uppdrag">

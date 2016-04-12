@@ -7,6 +7,30 @@ import createUsers
 
 
 
+'''*********Skriv/läsa filer*********'''
+def read_data(file):
+	try:
+		fileIn = open('static/data/'+ file +'.json', 'r')
+		dataRead = json.load(fileIn)
+		fileIn.close()
+	except (IOError, ValueError):
+		validatekDataFile(file)
+		dataRead = read_data(file)
+	return dataRead
+
+def write_to_db(users, db):
+	fileOut = open('static/data/'+ db +'.json', 'w')
+	json.dump(users, fileOut, indent=4)
+	fileOut.close()
+
+def validatekDataFile(file):
+	'''Om databasen inte finns eller är helt tom så skapas en json-fil innehållande en tom lista.'''
+	resList = []
+	dataFile = open('static/data/'+ file +'.json', 'w')
+	json.dump(resList, dataFile, indent=4)
+	dataFile.close()
+
+
 
 '''*********Load adds from DB. If there's not DB, one is created*********'''
 
@@ -48,6 +72,7 @@ def do_ad():
         content.append(mydict)
         with open('static/data/ads.json', "w") as fil:
             json.dump(content, fil, indent=4)
+
         redirect('/admin')
 
     else:
@@ -101,3 +126,29 @@ def choose_ad(annonsID, db, status):
             return each
         elif int(each['uniq_adNr']) == int(annonsID) and status==None:
             return each
+
+
+'''*********Moves AD to Done*********'''
+def move_ad_to_complete(annons):
+    feedback = request.forms.get('feedback')
+    grade = request.forms.get('grade')
+    if feedback == None or len(feedback) == 0:
+        return {'response':False, 'error':'Du måste skriva något!'}
+
+    else:
+        employer = log.get_user_id_logged_in()
+        all_ads = read_data('ads')
+        ad = choose_ad(annons, all_ads, 'Student vald')
+        if int(employer) == int(ad['creator']) and ad['status'] == 'Student vald':
+            ad.update({'feedback':feedback, 'grade':grade})
+            all_grades = read_data('grading')
+            all_grades.append(ad)
+            write_to_db(all_grades,'grading')
+            for ad_object in all_ads:
+                if int(ad_object['uniq_adNr']) == int(annons):
+                        all_ads.remove(ad_object)
+            write_to_db(all_ads, 'ads')
+            return {'response':True}
+
+        else:
+            return {'response':False, 'error':'Något har blivit fel!'}

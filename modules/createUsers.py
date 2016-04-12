@@ -113,7 +113,6 @@ def get_education_info(program, year):
 	educations = read_data("education")
 	for education in educations:
 		if int(education["id"]) == int(program) and int(education["year"]) == int(year):
-			print education
 			return education
 		else:
 			print "Något gick fel"
@@ -186,7 +185,6 @@ def show_student_profile(user):
 		if validate_if_student_exists(user) == True:
 			student_main_info = get_student_main_info(user)
 			education_info = get_education_info(student_main_info['program'],student_main_info['year'])
-			print education_info
 			return {'exists':True, 'student_info': student_main_info, 'education_info':education_info}
 
 		else:

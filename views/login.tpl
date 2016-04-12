@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html lang="sv">
-	<head>
-		<title>Logga in</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-		<link rel="stylesheet" type="text/css" href="../static/css/main.css">
-	</head>
+    
+    %include('head.tpl')
+    
 	<body>
         <header>
             <h1>Questway</h1>
             <!--<img src="../static/img/logga.jpg" alt="logotyp">-->
             <nav class="menu">
-                <a href="/login">Logga in</a>
+                <a href="/login" class="currentMenuItem">Logga in</a>
                 <a href="/create">Registrera</a>
                 <a href="">Om oss</a>
             </nav>

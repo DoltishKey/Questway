@@ -205,6 +205,25 @@ def list_applied_students():
         return template('adds.tpl', adds=relevant_adds, students=students)
 
 
+@route('/ad_done/<annons>', method="POST")
+def ad_done(annons):
+	log.validate_autho()
+	if log.get_user_level() == 2:
+		response = addmod.move_ad_to_complete(int(annons))
+		if response['response'] == False:
+			return response['error']
+		else:
+			redirect('/admin')
+	else:
+		return 'Behörighet saknas!'
+
+
+@route('/give_feedback/<ad_nr>')
+def give_feedback(ad_nr):
+	return template('feedback', adnr=ad_nr)
+
+
+
 '''********Övriga Routes********'''
 
 @error(404)
