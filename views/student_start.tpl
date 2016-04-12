@@ -19,31 +19,6 @@
                 <a href="/log_out">Logga ut</a>
             </nav>
         </header>
-		<content>
-            <h1>Admin, {{user}}</h1>
-            <h2>Du är inloggad som {{level}}</h2>
-
-            %for i in annons:
-
-	        <li><a href="/{{i['ad_corpName']}}"> {{i['ad_corpName']}}</a></li>
-
-	        <h1>{{i['ad_title']}}</h1>
-
-	        <p>{{i['ad_text']}}</p>
-
-            <form  name="sok_annons" id="sok_annons" method="POST" action="/sok_annons/{{i['uniq_adNr']}}">
-            <input type="submit" value="Sök annons">
-        </form>
-	    %end
-                <content>
-                    <h1>Admin, {{user}}</h1>
-                    <h2>Du är inloggad som {{level}}</h2>
-                    <a href="/log_out">Logga ut</a>
-                    <a href="/">Till start</a>
-                </content>
-        <!--<div class="content">
-            <section class="quests">
-                <h2>Lediga uppdrag</h2>
         
         <!-- Länkar till tabbarna: -->
         <ul id="tabs">
@@ -55,15 +30,18 @@
             
         <div class="tabContent" id="lediga_uppdrag">
             <h2 class="pageTitle">Lediga uppdrag</h2>
-                <div class="add">
-                     %for i in annons:
+                %for i in annons:
+                <div class="add" onclick="showHide()">
                         <h2>{{i['ad_title']}}</h2>
-                        <p>Publiceringsdatum och antal ansökningar ska laddas in här.</p>
+                        <p class="inline">Publicererades: {{i['date_of_adcreation']}}</p>
+                        <p class="inline">Antal ansökningar: Ladda in siffra här</p>
+                        <div id="showMore">
                             <p>{{i['ad_text']}}</p>
-                        <form  name="delete_ad" id="delete_ad" method="POST" action="/del_ad/{{i['uniq_adNr']}}">
-                            <input type="submit" value="Ta bort annons" class="myButton">
-                        </form>
-                        <p>{{i['ad_corpName']}}</p>
+                            <p>{{i['ad_corpName']}}</p>
+                            <form  name="delete_ad" id="delete_ad" method="POST" action="/del_ad/{{i['uniq_adNr']}}">
+                                <input type="submit" value="Ta bort annons" class="myButton">
+                            </form>
+                        </div>
                     %end
                 </div>
         </div>
