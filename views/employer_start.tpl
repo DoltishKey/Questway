@@ -7,7 +7,6 @@
         <title>Admin</title>
     </head>
 	<body>
-<<<<<<< HEAD
         % include('nav_employers.tpl')
 		<main id="admin_start_employer">
             <div id="employer_how_it_works" class="col">
@@ -63,18 +62,6 @@
               $('#toggle_how_it_works').click(function(){
                   $('#employer_how_it_works').slideToggle('slow');
               });
-=======
-        <header>
-            <nav class="menu">
-                <a class="menuButton" href="/allMissions">Uppdrag</a>
-                <a class="menuButton" href="">Profil</a>
-                <a class="menuButton" href="/log_out">Logga ut</a>
-            </nav>
-        </header>
-		<content>
-            <h1>Admin, {{user}}</h1>
-            <h2>Du är inloggad som {{level}}</h2>
->>>>>>> origin/master
 
               $('.go_to_ad').click(function functionName() {
                   val = $(this).data( 'value' );

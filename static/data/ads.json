@@ -19,7 +19,9 @@
     }, 
     {
         "status": "Ingen vald", 
-        "who_applied": [], 
+        "who_applied": [
+            5
+        ], 
         "creator": 2, 
         "ad_text": "n\u00e5gon som kan sjunga", 
         "uniq_adNr": 3, 
@@ -27,12 +29,12 @@
         "date_of_adcreation": "12/04/2016"
     }, 
     {
-        "ad_title": "Dansare", 
         "status": "Ingen vald", 
         "who_applied": [], 
         "creator": 2, 
         "ad_text": "n\u00e5gon som kan dansa", 
         "uniq_adNr": 4, 
+        "ad_title": "Dansare", 
         "date_of_adcreation": "12/04/2016"
     }
 ]

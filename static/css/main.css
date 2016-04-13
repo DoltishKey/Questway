@@ -293,6 +293,7 @@ transition: background-color 5000s ease-in-out 0s;
     line-height: 300px;
     color: white;
 }
+
 #back-button {
     position: absolute;
     left: 50px;
@@ -578,6 +579,68 @@ label{
     margin: 17px auto;
     max-width: 300px;
 }
+
+/* STUDENTENS PROFIL: */
+
+.contentProfile {
+    background-image: url(../img/pictureIAtest.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 500px;
+    overflow: auto;
+}
+
+#profileName {
+    border: 5px solid black;
+    line-height: 200px;
+    margin-left: 0;
+}
+
+.profileDescription {
+    background: #fff;
+    width: 380px;
+    height: 130px;
+    display: inline-block;
+    margin-left: 75px;
+    margin-top: 20px;
+    padding: 10px 10px;
+    border: 5px solid black;
+}
+
+.centerProfileInfo {
+    margin: 145px auto;
+    width: 700px;
+}
+
+.content2_Profile {
+    background-color: black;
+    border-top: 5px solid darkgray;
+    border-bottom: 5px solid darkgray;
+    height: 350px;
+}
+
+.roundBox_Profile {
+    background-color: white;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    display: inline-block;
+    line-height: 200px;
+    text-align: center;
+    margin-left: 75px;
+    vertical-align: top;
+}
+
+.center_roundBox_Profile {
+    width: 900px;
+    margin: 0 auto;
+    padding: 70px 20px 70px 20px;
+}
+
+.studentInformation {
+    background-color: rgba(102, 185, 191, 0.9);
+}
+
 @media screen and (max-width:600px){
     #logIn{
         width: 80%;

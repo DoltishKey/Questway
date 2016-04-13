@@ -11,7 +11,7 @@
             <h1>Questway</h1>
             <nav class="menu">
                 <a class="currentMenuItem" href="">Uppdrag</a>
-                <a href="">Profil</a>
+                <a href="/profiles/{{user_id}}">Profil</a>
                 <a href="/log_out">Logga ut</a>
             </nav>
         </header>
@@ -49,7 +49,7 @@
                         %if user_id in i['who_applied']:
                         <div class="add">
                             <h2>{{i['ad_title']}}</h2>
-                            <p>Publiceringsdatum ska laddas in här.</p>
+                            <p class="inline"><span class="bold">Publicererades:</span> {{i['date_of_adcreation']}}</p>
                             <div class="showMore">
                                 <p>{{i['ad_text']}}</p>
                                 <p>{{i['ad_corpName']}}</p>
