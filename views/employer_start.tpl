@@ -35,7 +35,7 @@
                     <ul>
                         %for i in annons:
                 	       %if i['creator'] == user_id:
-        		                <a href="#" data-value="{{i['uniq_adNr']}}" class="go_to_ad">
+        		                <a href="/allMissions" data-value="{{i['uniq_adNr']}}" class="go_to_ad">
                                     <li>
                                         <div>
                                             <h3>{{i['ad_title']}}</h3>

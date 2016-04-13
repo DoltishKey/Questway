@@ -20,8 +20,8 @@
                     %end
                 %end
                  </ul>
-                <form  name="delete_ad" id="delete_ad" method="POST" action="/del_ad/{{add['uniq_adNr']}}">
-                    <input type="submit" value="Ta bort annons">
-                </form>
             %end
+            <form  name="delete_ad" id="delete_ad" method="POST" action="/del_ad/{{add['uniq_adNr']}}">
+                <input type="submit" value="Ta bort annons">
+            </form>
 %end

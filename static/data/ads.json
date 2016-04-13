@@ -1,40 +1,58 @@
 [
     {
-        "status": "Ingen vald", 
-        "who_applied": [], 
-        "creator": 2, 
-        "ad_text": "Som kan bygga!", 
-        "uniq_adNr": 1, 
-        "ad_title": "Snickare", 
+        "status": "Ingen vald",
+        "who_applied": [],
+        "creator": 2,
+        "ad_text": "Som kan bygga!",
+        "uniq_adNr": 1,
+        "ad_title": "Snickare",
         "date_of_adcreation": "12/04/2016"
-    }, 
+    },
     {
-        "status": "Ingen vald", 
-        "who_applied": [], 
-        "creator": 2, 
-        "ad_text": "Som kan m\u00e5la", 
-        "uniq_adNr": 2, 
-        "ad_title": "M\u00e5lare", 
+        "status": "Ingen vald",
+        "who_applied": [],
+        "creator": 2,
+        "ad_text": "Som kan m\u00e5la",
+        "uniq_adNr": 2,
+        "ad_title": "M\u00e5lare",
         "date_of_adcreation": "12/04/2016"
-    }, 
+    },
     {
-        "status": "Ingen vald", 
+        "status": "Ingen vald",
+        "who_applied": [],
+        "creator": 2,
+        "ad_text": "n\u00e5gon som kan sjunga",
+        "uniq_adNr": 3,
+        "ad_title": "S\u00e5ngare",
+        "date_of_adcreation": "12/04/2016"
+    },
+    {
+        "status": "Ingen vald",
+        "who_applied": [],
+        "creator": 2,
+        "ad_text": "n\u00e5gon som kan dansa",
+        "uniq_adNr": 4,
+        "ad_title": "Dansare",
+        "date_of_adcreation": "12/04/2016"
+    },
+    {
+        "status": "Ingen vald",
         "who_applied": [
-            5
-        ], 
-        "creator": 2, 
-        "ad_text": "n\u00e5gon som kan sjunga", 
-        "uniq_adNr": 3, 
-        "ad_title": "S\u00e5ngare", 
-        "date_of_adcreation": "12/04/2016"
-    }, 
+            9
+        ],
+        "creator": 10,
+        "ad_text": "B\u00e4sta mosbrickan i g\u00f6teborg",
+        "uniq_adNr": 5,
+        "ad_title": "Oves gatuk\u00f6k",
+        "date_of_adcreation": "13/04/2016"
+    },
     {
-        "status": "Ingen vald", 
-        "who_applied": [], 
-        "creator": 2, 
-        "ad_text": "n\u00e5gon som kan dansa", 
-        "uniq_adNr": 4, 
-        "ad_title": "Dansare", 
-        "date_of_adcreation": "12/04/2016"
+        "status": "Ingen vald",
+        "who_applied": [],
+        "creator": 10,
+        "ad_text": "Testrapportering",
+        "uniq_adNr": 7,
+        "ad_title": "Tester",
+        "date_of_adcreation": "13/04/2016"
     }
 ]
