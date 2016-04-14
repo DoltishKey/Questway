@@ -61,6 +61,10 @@ header h1 {
     background-color: #E87E04;
 }
 
+#employerMenu > a {
+    width: 24%;
+}
+
 .menu > a:first-child {
     border-left: none;
 }
@@ -435,6 +439,13 @@ transition: background-color 5000s ease-in-out 0s;
 
 /* --- Student profile.tpl --- */
 
+#profiles ul{
+	padding-left: 0px;
+}
+#profiles li{
+	list-style-type: none;
+}
+
 #profiles .top{
     width: 100%;
     height: 350px;
@@ -445,7 +456,7 @@ transition: background-color 5000s ease-in-out 0s;
     text-align: center;
 }
 
-#profiles .circle{
+.circle{
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
@@ -470,7 +481,7 @@ transition: background-color 5000s ease-in-out 0s;
 }
 
 .main_education_info{
-    background-color: #E87E04;
+    background-color: #EEEAE8;
     text-align: center;
 }
 
@@ -483,23 +494,69 @@ transition: background-color 5000s ease-in-out 0s;
 
 #profiles .key_tags{
     clear: both;
-    margin-bottom: 140px;
+
     text-align: center;
 }
 
 #profiles .key_tags ul{
-    padding-left: 0px;
     margin: 10px;
 }
 
 #profiles .key_tags li{
-    list-style-type: none;
     background-color: #E87E04;
     color: #fff;
     display: inline-block;
     padding: 15px 30px;
     margin: 5px;
 }
+
+#profiles .contact{
+	background-color: #fff;
+}
+
+#profiles .contact .icon{
+	height: 50px;
+	width: 50px;
+	background-color: black;
+	border: 4px solid #E87E04;
+}
+
+.pre_missions li{
+	background-color: rgba(102, 185, 191, 1);
+    text-align: center;
+    color: #fff;
+    padding: 20px 0px;
+    margin: 10px;
+}
+.pre_missions h3, .pre_missions h4{
+    margin: 0px;
+    padding: 0px;
+}
+
+.pre_missions .img{
+    background-color: black;
+    border: 4px solid #fff;
+    height: 120px;
+    width: 120px;
+    margin: 0 auto;
+}
+
+.pre_missions a{
+    display: block;
+    width: 50%;
+    margin: 0 auto;
+    text-decoration: none;
+    color: #fff;
+    padding: 10px 0px;
+    border: 4px solid #fff;
+    margin-top: 15px;
+}
+
+.pre_missions a:hover{
+    background-color: #E87E04;
+    transition: background-color 0.7s ease;
+}
+
 
 
 

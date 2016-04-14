@@ -4,7 +4,7 @@
 				<p class="courtesyNavItem">Inloggad som <strong>{{user}}</strong></p>
 		</div>
 		<h1>Questway</h1>
-            <nav class="menu">
+            <nav class="menu" id="employerMenu">
                     %from bottle import request
 
                     %if request.path == '/admin':
@@ -21,9 +21,9 @@
 
 
                     %if request.path == '/edit':
-                        <a class="currentMenuItem" href="">Redigera</a>
+                        <a class="currentMenuItem" href="/edit">Redigera</a>
                     %else:
-                        <a href="">Redigera</a>
+                        <a href="/edit">Redigera</a>
                     %end
 
 
