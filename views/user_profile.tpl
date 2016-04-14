@@ -74,7 +74,7 @@
 
 
 		</main>
-		<footer style="position: fixed; bottom:0px; width: 100%;">© Questway, 2016</footer>
+		<footer style=" bottom:0px; width: 100%;">© Questway, 2016</footer>
 	</body>
 	<script src="/static/js/jquery.js"></script>
 	<script src="/static/js/main.js"></script>
