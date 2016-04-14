@@ -505,18 +505,30 @@ transition: background-color 5000s ease-in-out 0s;
 .main_education_info{
     background-color: #EEEAE8;
     text-align: center;
+    padding: 20px 0px;
+    clear: both;
+}
+
+.main_education_info .education_info{
+    margin: 30px 0px;
 }
 
 .main_education_info .icon{
     background-color: black;
     height: 80px;
     width: 80px;
-    margin: 0 auto;
+    margin: 0px auto;
+    border: 4px solid #E87E04;
+    margin-bottom: 5px;
+}
+
+.main_education_info p{
+    margin: 0px 15px;
+
 }
 
 #profiles .key_tags{
     clear: both;
-
     text-align: center;
 }
 
@@ -532,15 +544,41 @@ transition: background-color 5000s ease-in-out 0s;
     margin: 5px;
 }
 
-#profiles .contact{
+.contact{
 	background-color: #fff;
+    padding: 30px 0px;
 }
 
-#profiles .contact .icon{
+.contact > div{
+    display: -webkit-flex;
+    display: flex;
+}
+
+.contact_info{
+    width: 50%;
+    text-align: center;
+    color: #BFBFBF;
+}
+
+.contact_info .icon{
 	height: 50px;
 	width: 50px;
 	background-color: black;
-	border: 4px solid #E87E04;
+	border: 4px solid rgba(102, 185, 191, 0.9);
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+.line{
+    width: 2px;
+    background-color: #BFBFBF;
+    height: 100px;
+}
+
+
+.pre_missions{
+    background-color: #EEEAE8;
+    padding: 40px 0px;
 }
 
 .pre_missions li{
@@ -553,6 +591,11 @@ transition: background-color 5000s ease-in-out 0s;
 .pre_missions h3, .pre_missions h4{
     margin: 0px;
     padding: 0px;
+}
+
+.pre_missions h2{
+    margin-bottom: 30px;
+    text-align: center;
 }
 
 .pre_missions .img{
@@ -652,7 +695,7 @@ transition: background-color 5000s ease-in-out 0s;
     width: 667px;
     margin: auto;
     }
-    
+
     #logIn {
         width: 60%;
     }
@@ -727,7 +770,7 @@ transition: background-color 5000s ease-in-out 0s;
 }
 #employerform_Title{
     background: #59ABE3;
-    
+
 }
 #create_employer input, select{
     background: #FFF9F6;
@@ -741,7 +784,7 @@ transition: background-color 5000s ease-in-out 0s;
 }
 @media screen and (min-width:900px){
     #create_employer{
-        
+
     }
     #employerform_Title{
         padding: 2% 0%;
@@ -1039,10 +1082,54 @@ label{
         height: 320px;
         overflow: auto;;
     }
+    /* Studentprofil*/
+    #profiles .top{
+        height: 450px;
+    }
 
 
+    #profiles .top .name_tag{
+        top:80px;
+    }
 
+    #profiles .top h4{
+        padding-top: 80px;
+        margin-bottom: 10px;
+    }
+    #profiles .top h3{
+        margin-top: 10px;
+    }
 
+    .main_education_info .container{
+        display: -webkit-flex;
+        display: flex;
+        padding: 20px 0px;
+    }
+
+    .main_education_info .education_info{
+        width: 33%;
+        margin: 20px 30px;
+    }
+
+    .key_tags{
+        padding: 40px 0px 60px 0px;
+    }
+
+    .pre_missions ul{
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-wrap:wrap;
+        flex-wrap: wrap;
+        margin: 0 auto;
+        max-width: 1300px;
+    }
+
+    .pre_missions li{
+        width: 30%;
+        margin: 10px auto;
+    }
+
+    /* Studentprofi - slutl*/
 
 
 
