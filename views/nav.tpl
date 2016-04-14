@@ -3,7 +3,7 @@
 		<nav class="menu">
 				%from bottle import request
 
-				%if request.path == ""/login":
+				%if request.path == "/login":
 					<a class="currentMenuItem" href="/login">Start</a>
 				%else:
 					<a href="/login">Start</a>
