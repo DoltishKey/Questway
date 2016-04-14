@@ -139,7 +139,7 @@ def move_ad_to_complete(annons):
         all_ads = read_data('ads')
         ad = choose_ad(annons, all_ads, 'Student vald')
         if int(employer) == int(ad['creator']) and ad['status'] == 'Student vald':
-            ad.update({'feedback':feedback, 'grade':grade})
+            ad.update({'feedback':feedback, 'grade':grade,'display':False})
             all_grades = read_data('grading')
             all_grades.append(ad)
             write_to_db(all_grades,'grading')

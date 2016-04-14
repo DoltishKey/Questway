@@ -1,16 +1,9 @@
 [
     {
         "status": "Ingen vald", 
-        "who_applied": [], 
-        "creator": 2, 
-        "ad_text": "Som kan bygga!", 
-        "uniq_adNr": 1, 
-        "ad_title": "Snickare", 
-        "date_of_adcreation": "12/04/2016"
-    }, 
-    {
-        "status": "Ingen vald", 
-        "who_applied": [], 
+        "who_applied": [
+            1
+        ], 
         "creator": 2, 
         "ad_text": "Som kan m\u00e5la", 
         "uniq_adNr": 2, 
@@ -21,18 +14,9 @@
         "status": "Ingen vald", 
         "who_applied": [], 
         "creator": 2, 
-        "ad_text": "n\u00e5gon som kan sjunga", 
-        "uniq_adNr": 3, 
-        "ad_title": "S\u00e5ngare", 
-        "date_of_adcreation": "12/04/2016"
-    }, 
-    {
-        "ad_title": "Dansare", 
-        "status": "Ingen vald", 
-        "who_applied": [], 
-        "creator": 2, 
         "ad_text": "n\u00e5gon som kan dansa", 
         "uniq_adNr": 4, 
+        "ad_title": "Dansare", 
         "date_of_adcreation": "12/04/2016"
     }
 ]

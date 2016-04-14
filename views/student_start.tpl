@@ -66,9 +66,23 @@
 
         <div class="tabContent" id="avslutade_uppdrag">
             <h2 class="pageTitle">Avslutade uppdrag</h2>
-               <p>Går ej att visa ännu.</p>
+            %for grading in gradings:
+                %if user_id == grading['selected']:
+                <div class="add">
+                    <h2>{{grading['ad_title']}}</h2>
+                    %if grading['display'] == False:
+                        <p>Uppdraget visas inte på din profil</p>
+                    %end
+                    <div class="showMore">
+                        <p>{{i['ad_text']}}</p>
+                        <p>{{i['ad_corpName']}}</p>
+                    </div>
+                    <a href="#">Visa på din profil</a>
+                </div>
+                %end
+            %end
         </div>
-        
+
         <footer>Copyright Questway, 2016</footer>
 
 	</body>

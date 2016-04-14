@@ -1,13 +1,7 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-        <link rel="stylesheet" type="text/css" href="/static/css/main.css">
-        <title>Admin</title>
-    </head>
+        % include('head.tpl')
 	<body>
-<<<<<<< HEAD
         % include('nav_employers.tpl')
 		<main id="admin_start_employer">
             <div id="employer_how_it_works" class="col">
@@ -36,7 +30,7 @@
                     <ul>
                         %for i in annons:
                 	       %if i['creator'] == user_id:
-        		                <a href="#" data-value="{{i['uniq_adNr']}}" class="go_to_ad">
+        		                <a href="/allMissions" data-value="{{i['uniq_adNr']}}" class="go_to_ad">
                                     <li>
                                         <div>
                                             <h3>{{i['ad_title']}}</h3>
@@ -57,30 +51,5 @@
             </div>
       </main>
       <footer>Copyright Questway, 2016</footer>
-      <script src="/static/js/jquery.js"></script>
-      <script>
-          $(document).ready(function() {
-              $('#toggle_how_it_works').click(function(){
-                  $('#employer_how_it_works').slideToggle('slow');
-              });
-=======
-        <header>
-            <nav class="menu">
-                <a class="menuButton" href="/allMissions">Uppdrag</a>
-                <a class="menuButton" href="">Profil</a>
-                <a class="menuButton" href="/log_out">Logga ut</a>
-            </nav>
-        </header>
-		<content>
-            <h1>Admin, {{user}}</h1>
-            <h2>Du är inloggad som {{level}}</h2>
->>>>>>> origin/master
-
-              $('.go_to_ad').click(function functionName() {
-                  val = $(this).data( 'value' );
-                  localStorage.setItem("clicked_ad", val);
-              });
-          });
-      </script>
 	</body>
 </html>

@@ -3,6 +3,8 @@ $(document).ready(function() {
 	checkCreateEmployer();
 	checkCreateStudent();
     showHide();
+	give_emplyers_more_info();
+	set_localstorage_val_for_ad();
 });
 
 function checkLogIn(){
@@ -85,6 +87,23 @@ function checkCreateStudent(){
   	});
 }
 
+function give_emplyers_more_info(){
+	$('#toggle_how_it_works').click(function(){
+		$('#employer_how_it_works').slideToggle('slow');
+	});
+}
+
+function set_localstorage_val_for_ad(){
+	$('.go_to_ad').click(function functionName() {
+		val = $(this).data( 'value' );
+		localStorage.setItem("clicked_ad", val);
+	});
+}
+
+
+
+
+
 function showHide() {
      $('.add').click(function(){
          $(this).children('.showMore').toggle();
@@ -97,7 +116,7 @@ function set(){
     document.getElementById("header").style.height = "70px";
     document.getElementById("headerbottom").style.top = "70px";
     document.getElementById("downarrow").style.top = "70px";
-    
+
     document.getElementById("logo1").style.left = innerWidth/2 + "px";
     document.getElementById("headerbottom").style.borderLeft = innerWidth/2 + "px" + " solid transparent"; document.getElementById("headerbottom").style.borderRight = innerWidth/2 + "px" + " solid transparent";
 }
@@ -107,7 +126,7 @@ function showHideMeny() {
     var header = document.getElementById("header");
     var botheader = document.getElementById("headerbottom");
     var arrow = document.getElementById("downarrow");
-    
+
     if (meny.style.display == "none") {
         meny.style.display = "block";
         header.style.height = "230px";
