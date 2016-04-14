@@ -1,7 +1,9 @@
 [
     {
         "status": "Ingen vald", 
-        "who_applied": [], 
+        "who_applied": [
+            5
+        ], 
         "creator": 2, 
         "ad_text": "N\u00e5gon som kan sjunga bra", 
         "uniq_adNr": 1, 
@@ -18,12 +20,14 @@
         "date_of_adcreation": "14/04/2016"
     }, 
     {
-        "ad_title": "Tjoho", 
         "status": "Ingen vald", 
-        "who_applied": [], 
+        "who_applied": [
+            5
+        ], 
         "creator": 2, 
         "ad_text": "Hejhopp", 
         "uniq_adNr": 3, 
+        "ad_title": "Tjoho", 
         "date_of_adcreation": "14/04/2016"
     }
 ]

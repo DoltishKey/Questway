@@ -39,14 +39,14 @@ header h1 {
 .menu {
     text-align: center;
     padding: 0;
-    /*width: 452px;*/
+    width: 40%;
     float: right;
     clear: both;
     margin-top: 26.8px;
 }
 
 .menu > a {
-    width: 150px;
+    width: 33%;
     padding: 15px 0px;
     margin: 0px 0px;
     text-decoration: none;
@@ -105,7 +105,7 @@ header h1 {
 }
 
 .wrap {
-    width: 1200px;
+    width: 80%;
     margin: 0 auto;
 }
 
@@ -226,7 +226,7 @@ footer {
 }
 
 #logIn{
-    width: 30%;
+    width: 40%;
     color: #000;
     margin: 147.5px auto 0 auto;
     padding: 50px 20px;
@@ -528,38 +528,19 @@ transition: background-color 5000s ease-in-out 0s;
 }/*--- Adsform.tpl SLUT ---*/
 
 
-@media screen and (max-width:1300px){
-    #logIn {
-        width: 40%;
-    }
-
-    header h1 {
-        margin-left: 80px;
-    }
-
-    .menu {
-        margin-right: 80px;
-    }
-
-    .add {
-        margin: 96px;
-    }
-}
-
 @media screen and (max-width:960px){
 
-    .menu {
-        width: 302px;
-    }
-
     .menu a {
-        width: 100px;
         font-size: 80%;
     }
 
     #wrapContent {
     width: 667px;
     margin: auto;
+    }
+    
+    #logIn {
+        width: 60%;
     }
 
     .contentInContent {
