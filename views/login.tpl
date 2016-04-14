@@ -35,7 +35,7 @@
                     <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
                 </div>
                 <div class="contentInContent">
-                    <div class="roundBox"><h2>Arbetsgivare</h2></div>
+                    <div class="roundBox"><h2>Uppdragsgivare</h2></div>
                     <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
                 </div>
             </div>

@@ -181,19 +181,19 @@ div.tabContent.hide {
     display: none;
 }
 
-/* ______________________ */
 
-/* Annonser: */
+/* Annonser visa/dölja: */
 
 .showMore {
     display: none;
 }
 
-/* ______________________ */
+/* Allmänna klasser (för att centrera, göra fetstil text, osv) */
 
 .bold {
     font-weight: bold;
 }
+/* ______________________ */
 
 .column2 { /* En extra kolumn i uppdrag */
     margin-left: 50px;
@@ -272,9 +272,11 @@ transition: background-color 5000s ease-in-out 0s;
 /* _____________ */
 
 .content2 {
-    background-color: #C0B4AD;
+    background-color: #5C5E60 /*#3E4244/*#C0B4AD*/;
     width: 100%;
-    padding: 50px 0px;
+    padding: 10px 0px;
+    border-top: 5px solid #9B938E;
+    border-bottom: 5px solid #9B938E;
 }
 
 #wrapContent {
@@ -290,21 +292,22 @@ transition: background-color 5000s ease-in-out 0s;
 }
 
 .roundBox {
-    background: black;
+    background: #59ABE3;
     width: 300px;
     height: 300px;
     border-radius: 50%;
-    margin: auto;
+    margin: 0 auto 10px auto;
     text-align: center;
     line-height: 300px;
     color: white;
 }
 
-#back-button {
-    position: absolute;
-    left: 50px;
-    bottom: 50px;
-    color: #191919;
+.contentInContent:first-child > .roundBox {
+    background: #E87E04; /* Gör studentens roundBox orange*/
+}
+
+.contentInContent p {
+    color: #fff;
 }
 
  /* Design för knappar */
@@ -637,24 +640,22 @@ transition: background-color 5000s ease-in-out 0s;
 
     .contentInContent {
         width: 231px;
-        display: inline-block;
         padding: 50px;
-        text-align: center;
     }
 
     .roundBox {
-        background: black;
         width: 200px;
         height: 200px;
         border-radius: 50%;
-        margin: auto;
-        text-align: center;
         line-height: 200px;
-        color: white;
     }
 
     .roundBox h2 {
-        font-size: ;
+        margin: 0;
+    }
+    
+    .content2 {
+        padding: 0px;
     }
 
 }
@@ -861,9 +862,16 @@ label{
 }
 
 @media screen and (max-width:600px){
-    #logIn{
-        width: 80%;
+    
+    .wrapperLogin {
+        height: 500px;
     }
+    
+    #logIn {
+        width: 90%;
+        margin: 85px auto;
+    }
+    
     header nav{
         display: block;
         margin: 20px auto;
@@ -872,6 +880,7 @@ label{
         display: flex;
         display: none;
     }
+    
    header nav a{
         float: none;
         margin: 0px auto;
@@ -879,6 +888,7 @@ label{
         width: 20%;
         text-align: center;
     }
+    
     header h1{
         text-align: center;
         display: block;
@@ -886,12 +896,37 @@ label{
         margin: 20px auto;
         width: 100%;
     }
+    
     #logIn input{
         margin: 15px auto;
     }
-    /*footer{
-        margin-top: 69.1%;
-    }*/
+    
+    #wrapContent {
+        background: #9B938E;
+        width: 100%;
+        padding: 0;
+    }
+
+    .contentInContent {
+        width: 49.7%;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .contentInContent p {
+        padding: 5% 2%;
+        background: /*#C4BEBB*/#C0B4AD;
+        color: black;
+    }
+    
+    .roundBox {
+        width: 100%;
+        height: 100px;
+        border-radius: 0px;
+        line-height: 100px;
+        margin: 0;
+        padding: 0;
+    }
 
 }
 

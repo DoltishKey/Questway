@@ -1,1 +1,31 @@
-[]
+[
+    {
+        "status": "Ingen vald", 
+        "who_applied": [], 
+        "creator": 2, 
+        "ad_text": "N\u00e5gon som kan sjunga opera", 
+        "uniq_adNr": 1, 
+        "ad_title": "Operas\u00e5ngare", 
+        "date_of_adcreation": "14/04/2016"
+    }, 
+    {
+        "status": "Ingen vald", 
+        "who_applied": [
+            5
+        ], 
+        "creator": 2, 
+        "ad_text": "Tv\u00e4tta f\u00f6nster", 
+        "uniq_adNr": 2, 
+        "ad_title": "F\u00f6nstertv\u00e4ttare", 
+        "date_of_adcreation": "14/04/2016"
+    }, 
+    {
+        "status": "Ingen vald", 
+        "who_applied": [], 
+        "creator": 2, 
+        "ad_text": "Putsa lite skor", 
+        "uniq_adNr": 3, 
+        "ad_title": "Skoputsare", 
+        "date_of_adcreation": "14/04/2016"
+    }
+]
