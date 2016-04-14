@@ -1,4 +1,5 @@
 <header>
+    <div class="wrap">
 		<div class="courtesyNav">
 				<p class="courtesyNavItem">Inloggad som <strong>{{user}}</strong></p>
 		</div>
@@ -25,4 +26,5 @@
 					<a href="/log_out">Logga ut</a>
 				%end
 		</nav>
+    </div>
 </header>
