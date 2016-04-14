@@ -21,9 +21,9 @@
 
 
                     %if request.path == '/edit':
-                        <a class="currentMenuItem" href="">Redigera</a>
+                        <a class="currentMenuItem" href="/edit">Redigera</a>
                     %else:
-                        <a href="">Redigera</a>
+                        <a href="/edit">Redigera</a>
                     %end
 
 

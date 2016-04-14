@@ -127,6 +127,11 @@ def profiles(user):
 	else:
 		return 'Användaren finns inte!'
 
+'''********Change contact information********'''
+
+@route('/edit')
+def edit_contact_information():
+    return template('change_contact_info')
 
 
 '''********Ad-management********'''
