@@ -63,7 +63,6 @@
         "id": 10
     }, 
     {
-<<<<<<< HEAD
         "username": "philipdev@hotmail.com", 
         "autholevel": 1, 
         "password": "losenord", 
@@ -74,8 +73,6 @@
         
     }, 
     {
-=======
->>>>>>> origin/master
         "username": "solig@sol.se", 
         "autholevel": 2, 
         "password": "sol"
