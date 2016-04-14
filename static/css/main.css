@@ -505,27 +505,58 @@ transition: background-color 5000s ease-in-out 0s;
 
 /* --- Student profile.tpl || END --- */
 
+
 /* --- Adsform.tpl --- */
+/*#create_ad = formuläret*/
 #create_ad{
-
-}
-.ad_title{
+    background-color: #5B514A;
     text-align: center;
+    padding: 10px;
+    color: #fff;
 }
-#ad_title{
-
+/*ca = Create Ad*/
+#ca_Title{
+    color: #E87E04;
+    margin-bottom: -10px;
 }
-.ad_text{
+.ca_Formblock{
+    
+    width: 30%;
+    display: inline-block;
+    padding: 10px;
+}
+#ca_Labels{
+    text-align: right;
+    margin-left:;
+}
+#ca_Labels label{
+    display: block;
+    margin: 65px auto
+}
+#ca_Inputs{
+    width: 30%;
+}
+#ca_Inputs input{
+    background: #FFF9F6;
+    color: #000;
+    height: 30px;
+    width: 75%;
+    font-size: 15px;
+    background: white;
     text-align: center;
-}
-#ad_text{
-
+    border-radius: 8px;
 }
 #ad_done{
     display: block;
     margin: 25px auto;
     transform: scale(1.2);
-}/*--- Adsform.tpl SLUT ---*/
+}
+@media screen and (min-width:900px){
+    #ca_Labels{
+        margin-left: -25%;
+    }
+}
+/* --- Adsform.tpl || END --- */
 
 
 @media screen and (max-width:1300px){
