@@ -207,7 +207,7 @@ def list_applied_students():
                 relevant_adds.append(add)
 
 
-		open_ad=addmod.choose_ad(1, relevant_adds, None)
+		open_ad=addmod.choose_ad(5, relevant_adds, None)
 
         return template('adds.tpl', adds=relevant_adds, students=students, open_ad=open_ad, pageTitle = 'Alla uppdrag')
 

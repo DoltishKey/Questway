@@ -1,6 +1,5 @@
-<nav class="menu">
-        <a class="menuButton" href="">Uppdrag</a>
-        <a class="menuButton" href="">Profil</a>
-        <a class="menuButton" href="/log_out">Logga ut</a>
-</nav>
-
+    <nav class="menu">
+        <a class="currentMenuItem" href="">Uppdrag</a>
+        <a href="">Profil</a>
+        <a href="/log_out">Logga ut</a>
+    </nav>
