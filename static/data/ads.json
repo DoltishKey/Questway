@@ -1,116 +1,29 @@
 [
     {
-<<<<<<< HEAD
         "status": "Ingen vald", 
         "who_applied": [], 
         "creator": 2, 
-        "ad_text": "Som kan bygga!", 
+        "ad_text": "N\u00e5gon som kan sjunga bra", 
         "uniq_adNr": 1, 
-        "ad_title": "Snickare", 
-=======
-<<<<<<< HEAD
-        "status": "Ingen vald", 
-        "who_applied": [
-            1
-        ], 
-        "creator": 2, 
-        "ad_text": "Som kan m\u00e5la", 
-        "uniq_adNr": 2, 
-        "ad_title": "M\u00e5lare", 
-=======
-        "status": "Ingen vald",
-        "who_applied": [],
-        "creator": 2,
-        "ad_text": "Som kan bygga!",
-        "uniq_adNr": 1,
-        "ad_title": "Snickare",
->>>>>>> origin/master
-        "date_of_adcreation": "12/04/2016"
-    }, 
-    {
-<<<<<<< HEAD
-        "status": "Ingen vald", 
-        "who_applied": [], 
-        "creator": 2, 
-        "ad_text": "Som kan m\u00e5la", 
-        "uniq_adNr": 2, 
-        "ad_title": "M\u00e5lare", 
-=======
-        "status": "Ingen vald",
-        "who_applied": [],
-        "creator": 2,
-        "ad_text": "Som kan m\u00e5la",
-        "uniq_adNr": 2,
-        "ad_title": "M\u00e5lare",
->>>>>>> origin/master
->>>>>>> origin/master
-        "date_of_adcreation": "12/04/2016"
-    }, 
-    {
-<<<<<<< HEAD
-        "status": "Ingen vald", 
-        "who_applied": [
-            5
-        ], 
-        "creator": 2, 
-        "ad_text": "n\u00e5gon som kan sjunga", 
-        "uniq_adNr": 3, 
         "ad_title": "S\u00e5ngare", 
-=======
-<<<<<<< HEAD
+        "date_of_adcreation": "14/04/2016"
+    }, 
+    {
         "status": "Ingen vald", 
         "who_applied": [], 
         "creator": 2, 
-        "ad_text": "n\u00e5gon som kan dansa", 
-        "uniq_adNr": 4, 
-        "ad_title": "Dansare", 
-=======
-        "status": "Ingen vald",
-        "who_applied": [],
-        "creator": 2,
-        "ad_text": "n\u00e5gon som kan sjunga",
-        "uniq_adNr": 3,
-        "ad_title": "S\u00e5ngare",
->>>>>>> origin/master
-        "date_of_adcreation": "12/04/2016"
+        "ad_text": "N\u00e5gon som kan bygga ett hus", 
+        "uniq_adNr": 2, 
+        "ad_title": "Snickare", 
+        "date_of_adcreation": "14/04/2016"
     }, 
     {
-<<<<<<< HEAD
+        "ad_title": "Tjoho", 
         "status": "Ingen vald", 
         "who_applied": [], 
         "creator": 2, 
-        "ad_text": "n\u00e5gon som kan dansa", 
-        "uniq_adNr": 4, 
-        "ad_title": "Dansare", 
-=======
-        "status": "Ingen vald",
-        "who_applied": [],
-        "creator": 2,
-        "ad_text": "n\u00e5gon som kan dansa",
-        "uniq_adNr": 4,
-        "ad_title": "Dansare",
->>>>>>> origin/master
->>>>>>> origin/master
-        "date_of_adcreation": "12/04/2016"
-    }, 
-    {
-        "status": "Ingen vald", 
-        "who_applied": [
-            9
-        ], 
-        "creator": 10, 
-        "ad_text": "B\u00e4sta mosbrickan i g\u00f6teborg", 
-        "uniq_adNr": 5, 
-        "ad_title": "Oves gatuk\u00f6k", 
-        "date_of_adcreation": "13/04/2016"
-    }, 
-    {
-        "status": "Ingen vald", 
-        "who_applied": [], 
-        "creator": 10, 
-        "ad_text": "Testrapportering", 
-        "uniq_adNr": 7, 
-        "ad_title": "Tester", 
-        "date_of_adcreation": "13/04/2016"
+        "ad_text": "Hejhopp", 
+        "uniq_adNr": 3, 
+        "date_of_adcreation": "14/04/2016"
     }
 ]
