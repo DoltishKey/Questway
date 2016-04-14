@@ -1,28 +1,17 @@
 [
     {
-        "status": "Student vald", 
+        "status": "Student vald",
         "who_applied": [
-            9, 
-            6, 
             1
-        ], 
-        "creator": 2, 
-        "ad_text": "bygg en hemsida till mig", 
-        "uniq_adNr": 1, 
-        "ad_title": "webbutveckling", 
-        "grade": "5", 
-        "feedback": "Mycket duktig!", 
-        "date_of_adcreation": "07/04/2016"
-    }, 
-    {
-        "status": "Student vald", 
-        "who_applied": [], 
-        "creator": 2, 
-        "ad_text": "Den m\u00e5ste vara snygg!", 
-        "uniq_adNr": 1, 
-        "ad_title": "hemsida", 
-        "grade": "4", 
-        "feedback": "Riktigt snygg blev den! S\u00e5\u00e5\u00e5 n\u00f6jd!", 
-        "date_of_adcreation": "08/04/2016"
+        ],
+        "creator": 2,
+        "ad_text": "n\u00e5gon som kan sjunga",
+        "uniq_adNr": 3,
+        "selected": 1, 
+        "display": false,
+        "ad_title": "S\u00e5ngare",
+        "grade": "5",
+        "feedback": "Sjunger mycket fint!",
+        "date_of_adcreation": "12/04/2016"
     }
 ]

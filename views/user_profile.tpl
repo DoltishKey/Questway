@@ -1,55 +1,79 @@
 <!DOCTYPE html>
 <html>
-    
-    % include('head.tpl')
-    
-	<body>
-		<header>
-			<h1>Questway</h1>
-            <nav class="menu">
-                <a href="/admin">Uppdrag</a>
-                <a class="currentMenuItem" href="">Profil</a>
-                <a href="/log_out">Logga ut</a>
-            </nav>
-		</header>
-        
-        <div class="contentProfile">
-            <div class="centerProfileInfo">
-                <div id="profileName" class="roundBox_Profile">{{student['first_name']}} {{student['last_name']}}</div>
-                <div class="profileDescription"><p>Jag pluggar <span class="bold">{{education['title']}}</span>. {{education['tag_line']}}</p></div>
-            </div>
-        </div>
-        
-        <div class="content2_Profile">
-            <div class="center_roundBox_Profile">
-                <div class="roundBox_Profile"><p>{{education['subject_one']}}</p></div>
-                <div class="roundBox_Profile"><p>Ämne</p></div>
-                <div class="roundBox_Profile"><p>Ämne</p></div>
-            </div>
-        </div>
-        
-        <div class="studentInformation">
-            <h3>Malmö Högskola</h3>
-            <p><span class="bold">Kunskaper: </span> <span class="comptences">HTML5</span><span class="comptences">CSS3</span></p>
-            <p><span class="bold">Kompetenser utöver utbildningen: </span> <span>PHP</span></p>
-        </div>
-        
-		<!--<main>
-			<h1>Hello World!</h1>
-			<h2>Mitt namn är {{student['first_name']}} {{student['last_name']}}</h2>
-			<h3>Jag pluggar {{education['title']}}</h3>
-			<h4>{{education['tag_line']}}</h4>
-			<p>{{education['subject_one']}}</p>
-			<p>{{education['subject_two']}}</p>
-			<p>{{education['subject_three']}}</p>
-			<ul>
-			%for tag in education['tags']:
-				<li>{{tag}}</li>
-			%end
-		</ul>
-		<a href="{{education['url']}}">Länk till utbildningen</a>
 
-		</main>-->
+    % include('head.tpl')
+
+	<body>
+			%if user_autho == 1:
+				% include('nav_students.tpl')
+
+			%elif user_autho == 2:
+				% include('nav_employers.tpl')
+			%else:
+				% include('nav.tpl')
+
+			%end
+		<main id="profiles">
+            <div class="top">
+                <div>
+                    <div class="circle name_tag">
+                        <h2>{{student['first_name']}}</h2>
+                    </div>
+                    <div>
+                        <h4>{{education['title']}}</h4>
+                        <h3>{{education['tag_line']}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="main_education_info">
+                <div class="container">
+                    <div class="col">
+                        <div class="icon circle"></div>
+                        <div>
+                            <p>{{education['subject_one']}}</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="icon circle"></div>
+                        <div>
+                            <p>{{education['subject_two']}}</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="icon circle"></div>
+                        <div>
+                            <p>{{education['subject_three']}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="key_tags">
+                <div>
+                    <h3>Nyckelkompetenser</h3>
+                    <ul>
+            			%for tag in education['tags']:
+            				<li>{{tag}}</li>
+            			%end
+        		    </ul>
+                </div>
+            </div>
+            <div class="pre_missions">
+                <div>
+                    <h3>Genomförda uppdrag</h3>
+                    <ul>
+            			<li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+        		    </ul>
+                </div>
+            </div>
+
+            <a href="{{education['url']}}">Länk till utbildningen</a>
+
+
+		</main>
 		<footer style="position: fixed; bottom:0px; width: 100%;">© Questway, 2016</footer>
 	</body>
 	<script src="/static/js/jquery.js"></script>

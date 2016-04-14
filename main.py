@@ -12,7 +12,7 @@ import json
 
 @route('/')
 def startPage():
-	return template('login')
+	return template('login', pageTitle='Logga in')
 
 
 
@@ -21,7 +21,7 @@ def startPage():
 
 @route('/login')
 def login():
-	return template('login')
+	return template('login', pageTitle='Logga in')
 
 @route('/ajax', method="POST")
 def ajax_validation():
@@ -54,26 +54,28 @@ def admin():
     user_level = log.get_user_level() #kollar om användaren är uppdragstagare eller student (returnerar 1 eller 2)
     all_adds=addmod.load_adds('ads')
     complete_adds = addmod.get_corp_name(all_adds)
+    grading_ads = addmod.read_data('grading')
+
     if user_level == 1:
-        return template('student_start', user=username, level="student", annons=complete_adds, user_id=userid)
+        return template('student_start', user=username, level="student", gradings = grading_ads,  annons=complete_adds, user_id=userid, pageTitle = 'Start')
     else:
         #här ska arbetsgivarnas annonser med
-        return template('employer_start', user=username, user_id=userid,  level="arbetsgivare", annons=complete_adds)
+        return template('employer_start', user=username, user_id=userid,  level="arbetsgivare", annons=complete_adds, pageTitle = 'Start')
 
 
 
 '''********Create-user********'''
 @route('/create')
 def create_employer():
-	return template('create_user')
+	return template('create_user', pageTitle='Student | Uppdragsgivare')
 
 @route('/create_student')
 def create_student():
-	return template('create_student')
+	return template('create_student', pageTitle='Skapa profil')
 
 @route('/create_employer')
 def create_employer():
-	return template('create_employer')
+	return template('create_employer', pageTitle='Skapa profil')
 
 
 @route('/ajax_create_user', method="POST")
@@ -109,16 +111,18 @@ def do_create_employer():
 def profiles(user):
 	user_profile_data = createUsers.show_student_profile(user)
 	is_user_logged_in = log.is_user_logged_in()
+	username = ""
 	if is_user_logged_in == True:
 		user_levle = log.get_user_level()
-
+		username = log.get_user_name()
 	else:
 		user_levle = 0
 
 	if user_profile_data['exists'] == True:
 		education_info = user_profile_data['education_info']
 		student_info = user_profile_data['student_info']
-		return template('user_profile', user_autho = user_levle, student_id = user, student= student_info, education = education_info)
+		student_name = student_info['first_name'] + ' ' + student_info['last_name']
+		return template('user_profile', user = username, user_autho = user_levle, student_id = user, student= student_info, education = education_info, pageTitle = student_name )
 
 	else:
 		return 'Användaren finns inte!'
@@ -132,7 +136,7 @@ def show_adds():
     log.validate_autho()
     all_adds=addmod.load_adds('ads')
     complete_adds = addmod.get_corp_name(all_adds)
-    return template('adsform.tpl', annons=complete_adds)
+    return template('adsform.tpl', annons=complete_adds, pageTitle = 'Annonser' )
 
 @post('/make_ad')
 def ad_done():
@@ -205,7 +209,7 @@ def list_applied_students():
 
 		open_ad=addmod.choose_ad(5, relevant_adds, None)
 
-        return template('adds.tpl', adds=relevant_adds, students=students, open_ad=open_ad)
+        return template('adds.tpl', adds=relevant_adds, students=students, open_ad=open_ad, pageTitle = 'Alla uppdrag')
 
 
 @route('/ad_done/<annons>', method="POST")
@@ -223,7 +227,8 @@ def ad_done(annons):
 
 @route('/give_feedback/<ad_nr>')
 def give_feedback(ad_nr):
-	return template('feedback', adnr=ad_nr)
+	username = log.get_user_name()
+	return template('feedback', adnr=ad_nr, pageTitle = 'Ge feedback', user=username )
 
 
 
@@ -231,7 +236,7 @@ def give_feedback(ad_nr):
 
 @error(404)
 def error404(error):
-    return template('pagenotfound')
+    return template('pagenotfound', pageTitle = 'Fel!' )
 
 @route('/static/<filename:path>')
 def server_static(filename):

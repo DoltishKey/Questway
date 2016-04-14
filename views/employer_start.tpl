@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-        <link rel="stylesheet" type="text/css" href="/static/css/main.css">
-        <title>Admin</title>
-    </head>
+        % include('head.tpl')
 	<body>
         % include('nav_employers.tpl')
 		<main id="admin_start_employer">
@@ -56,18 +51,5 @@
             </div>
       </main>
       <footer>Copyright Questway, 2016</footer>
-      <script src="/static/js/jquery.js"></script>
-      <script>
-          $(document).ready(function() {
-              $('#toggle_how_it_works').click(function(){
-                  $('#employer_how_it_works').slideToggle('slow');
-              });
-
-              $('.go_to_ad').click(function functionName() {
-                  val = $(this).data( 'value' );
-                  localStorage.setItem("clicked_ad", val);
-              });
-          });
-      </script>
 	</body>
 </html>

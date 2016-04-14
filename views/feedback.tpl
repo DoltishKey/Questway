@@ -2,14 +2,7 @@
 <html>
     % include('head.tpl')
 	<body>
-        <header>
-            <h1>Questway</h1>
-            <nav class="menu">
-                <a class="menuButton" href="">Uppdrag</a>
-                <a class="menuButton" href="">Profil</a>
-                <a class="menuButton" href="/log_out">Logga ut</a>
-            </nav>
-        </header>
+        % include('nav_employers.tpl')
 		<content>
             <h1>Ge feedback!</h1>
             <form action="/ad_done/{{adnr}}" method="post">
