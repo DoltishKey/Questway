@@ -25,6 +25,18 @@
                     </div>
                 </div>
             </div>
+            <div class="contact">
+	            <dvi>
+	            	<div>
+		            	<div class="icon circle"></div>
+		            	<p>070-6645406</p>
+	            	</div>
+	            	<div>
+		            	<div class="icon circle"></div>
+		            	<p>jcbpettersson@gmail.com</p>
+	            	</div>
+	            </dvi>
+            </div>
             <div class="main_education_info">
                 <div class="container">
                     <div class="col">
@@ -57,15 +69,59 @@
         		    </ul>
                 </div>
             </div>
+
             <div class="pre_missions">
                 <div>
                     <h3>Genomförda uppdrag</h3>
                     <ul>
-            			<li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
+            			<li>
+            				<div class="img circle"></div>
+            				<div>
+                                <h4>Calles AB</h4>
+	            				<h3>Hemsida</h3>
+                                <a href="#">Kolla in!</a>
+            				</div>
+            			</li>
+            				<li>
+            				<div class="img circle"></div>
+            				<div>
+	            				<h4>Calles AB</h4>
+	            				<h3>Hemsida</h3>
+                                <a href="#">Kolla in!</a>
+            				</div>
+            			</li>
+            				<li>
+            				<div class="img circle"></div>
+            				<div>
+                                <h4>Calles AB</h4>
+	            				<h3>Hemsida</h3>
+                                <a href="#">Kolla in!</a>
+            				</div>
+            			</li>
+            				<li>
+            				<div class="img circle"></div>
+            				<div>
+                                <h4>Calles AB</h4>
+	            				<h3>Hemsida</h3>
+                                <a href="#">Kolla in!</a>
+            				</div>
+            			</li>
+            				<li>
+            				<div class="img circle"></div>
+            				<div>
+                                <h4>Calles AB</h4>
+	            				<h3>Hemsida</h3>
+                                <a href="#">Kolla in!</a>
+            				</div>
+            			</li>
+            				<li>
+            				<div class="img circle"></div>
+            				<div>
+                                <h4>Calles AB</h4>
+	            				<h3>Hemsida</h3>
+                                <a href="#">Kolla in!</a>
+            				</div>
+            			</li>
         		    </ul>
                 </div>
             </div>
