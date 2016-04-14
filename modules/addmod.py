@@ -75,7 +75,7 @@ def do_ad():
         redirect('/admin')
 
     else:
-        redirect('/showadds')
+        return "Ett fel uppstod - Kontrollera att du gav annonsen en titel"
 
 
 '''*********Check that a Title for the ad is given*********'''
