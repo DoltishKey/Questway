@@ -55,7 +55,7 @@
                 <input placeholder="Mejl" type="input" name="email" id="email" value="">
                 <label for="password">Lösenord</label>
                 <input placeholder="Lösenord" type="input" name="password" id="password" value="">-->
-                <input id="logInButton" type="submit" value="Skapa konto">
+                <input class="myButton" id="logInButton" type="submit" value="Skapa konto">
             </form>
 
             <p id="error"></p>

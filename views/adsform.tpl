@@ -3,7 +3,7 @@
     % include('head.tpl')
     <body>
         <form  name="create_ad" id="create_ad" method="POST" action="/make_ad">
-            <h3 id="ca_Title">Skapa en annons som studenter kan söka till</h3>
+            <h3 id="ca_Title">Lägg till annons för nytt uppdrag</h3>
             
             <div class="ca_Formblock" id="ca_Labels">
                 <label for="ad_title">Titel:</label>

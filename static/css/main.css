@@ -509,38 +509,39 @@ transition: background-color 5000s ease-in-out 0s;
 /* --- Adsform.tpl --- */
 /*#create_ad = formuläret*/
 #create_ad{
-    background-color: #5B514A;
+    background-color: #ddd;
     text-align: center;
-    padding: 10px;
-    color: #fff;
+    padding-bottom: 10px;
+    color: #E87E04;
 }
 /*ca = Create Ad*/
 #ca_Title{
-    color: #E87E04;
     margin-bottom: -10px;
+    background-color: #999;
+    padding: 2%;
+    color: #000;
 }
 .ca_Formblock{
-    
     width: 30%;
     display: inline-block;
     padding: 10px;
 }
 #ca_Labels{
     text-align: right;
-    margin-left:;
+    margin-left:-10%;
 }
 #ca_Labels label{
     display: block;
     margin: 65px auto
 }
 #ca_Inputs{
-    width: 30%;
+    width: 40%;
 }
 #ca_Inputs input{
     background: #FFF9F6;
     color: #000;
     height: 30px;
-    width: 75%;
+    width: 100%;
     font-size: 15px;
     background: white;
     text-align: center;
@@ -553,7 +554,10 @@ transition: background-color 5000s ease-in-out 0s;
 }
 @media screen and (min-width:900px){
     #ca_Labels{
-        margin-left: -25%;
+        margin-left: -20%;
+    }
+    #ca_Labels label{
+        margin: 50px auto;
     }
 }
 /* --- Adsform.tpl || END --- */
@@ -733,7 +737,7 @@ label{
         width: 40%;
         text-align: center;
     }
-    #logInButton{
+    .create_account{
         width: 50%;
         display: block;
     }
