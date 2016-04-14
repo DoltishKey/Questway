@@ -13,9 +13,9 @@
 				%end
 
 				%if request.path == '/allMissions':
-					<a class="currentMenuItem" href="">Uppdrag</a>
+					<a class="currentMenuItem" href="/allMissions">Uppdrag</a>
 				%else:
-					<a href="">Uppdrag</a>
+					<a href="/allMissions">Uppdrag</a>
 				%end
 
 

@@ -73,10 +73,6 @@
                     %if grading['display'] == False:
                         <p>Uppdraget visas inte på din profil</p>
                     %end
-                    <div class="showMore">
-                        <p>{{i['ad_text']}}</p>
-                        <p>{{i['ad_corpName']}}</p>
-                    </div>
                     <a href="#">Visa på din profil</a>
                 </div>
                 %end

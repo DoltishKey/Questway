@@ -4,9 +4,9 @@
 				%from bottle import request
 
 				%if request.path == "/login":
-					<a class="currentMenuItem" href="/login">Start</a>
+					<a class="currentMenuItem" href="/login">Logga in</a>
 				%else:
-					<a href="/login">Start</a>
+					<a href="/login">Logga in</a>
 				%end
 
 				%if request.path == "/create":
