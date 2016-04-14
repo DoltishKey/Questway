@@ -1,1 +1,33 @@
+<<<<<<< HEAD
 []
+=======
+[
+    {
+        "status": "Ingen vald", 
+        "who_applied": [], 
+        "creator": 2, 
+        "ad_text": "N\u00e5gon som kan sjunga bra", 
+        "uniq_adNr": 1, 
+        "ad_title": "S\u00e5ngare", 
+        "date_of_adcreation": "14/04/2016"
+    }, 
+    {
+        "status": "Ingen vald", 
+        "who_applied": [], 
+        "creator": 2, 
+        "ad_text": "N\u00e5gon som kan bygga ett hus", 
+        "uniq_adNr": 2, 
+        "ad_title": "Snickare", 
+        "date_of_adcreation": "14/04/2016"
+    }, 
+    {
+        "ad_title": "Tjoho", 
+        "status": "Ingen vald", 
+        "who_applied": [], 
+        "creator": 2, 
+        "ad_text": "Hejhopp", 
+        "uniq_adNr": 3, 
+        "date_of_adcreation": "14/04/2016"
+    }
+]
+>>>>>>> origin/master
