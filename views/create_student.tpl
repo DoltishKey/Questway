@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Skapa konto</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-		<link rel="stylesheet" type="text/css" href="../static/css/main.css">
-	</head>
+	% include('head.tpl')
 	<body>
         <div class="wrapper">
             <header>
                 <h1>Questway</h1>
-                <nav>
-                    <a class="options" href="/login">Logga in</a>
-                    <a class="options" href="">Registrera</a>
-                    <a class="options" href="">Om oss</a>
+                <nav class="menu">
+                    <a href="/login">Logga in</a>
+                    <a href="/create" class="currentMenuItem">Registrera</a>
+                    <a href="">Om oss</a>
                 </nav>
             </header>
             <div id="content">
@@ -21,7 +16,7 @@
                 <div id="slogan"><p>Lorem ipsum dolor sit amet, <br>consectetur adipiscing elit.</p></div>-->
 
             <form name="create_student" id="create_student" method="post" action="/do_create_student">
-               <h3 class="form_head" id="studentform">Skapa profil | Student</h3>
+               <h3 class="form_head" id="studentform_Title">Skapa profil | Student</h3>
                 
                 <div class="form_labels">
                     <label for="first_name">Förnamn</label>

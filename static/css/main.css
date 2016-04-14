@@ -587,7 +587,7 @@ transition: background-color 5000s ease-in-out 0s;
 }
 /* ----- Välj Typ av användare ------ */
 #content{
-
+    text-align: center;
 }
 .choicereg{
     text-align: center;
@@ -609,9 +609,58 @@ transition: background-color 5000s ease-in-out 0s;
     background: #E87E04;
 }
 
-/*STUDENTREGISTRERING*/
+@media screen and (min-width:900px){
+    #content{
+        margin-top: 0px;
+        padding-top: 70px;
+    }
+    .choicereg{
+        text-align: center;
+        padding: 3%;
+        display: inline-block;
+        width: 20%;
+        margin: 10px;
+        color: #fff;
+        border-radius: 10px;
+        font-size: 130%;
+    }
+}
+/* --- ARBETSGIVARREGISTRERING --- */
+
+#create_employer{
+    width: 100%;
+    text-align: center;
+    margin-top: -80px;
+}
+#employerform_Title{
+    background: #59ABE3;
+    
+}
+#create_employer input, select{
+    background: #FFF9F6;
+    color: #000;
+    height: 30px;
+    width: 75%;
+    font-size: 15px;
+    background: white;
+    text-align: center;
+    border-radius: 8px;
+}
+@media screen and (min-width:900px){
+    #create_employer{
+        
+    }
+    #employerform_Title{
+        padding: 2% 0%;
+        border-bottom-style: solid;
+        border-color: #000;
+        border-width: thick;
+    }
+}
+/* --- STUDENTREGISTRERING --- */
 .form_head{
-    text-align: center
+    text-align: center;
+    padding: 5% 0%;
 }
 #content{
     padding-bottom: 10%;
@@ -621,9 +670,8 @@ transition: background-color 5000s ease-in-out 0s;
     width: 100%;
     text-align: center;
 }
-#studentform{
-    padding: 5% 0%;
-    background-color: #59e;
+#studentform_Title{
+    Background-color: #E87E04;
     border-bottom-style: solid;
     border-width: thick;
 }
@@ -655,7 +703,29 @@ label{
     margin: 17px auto;
     max-width: 300px;
 }
-
+@media screen and (min-width: 900px){
+    #create_student{
+        margin-top: -80px;
+        text-align: center;
+    }
+    #studentform_Title{
+        padding: 2% 0%;
+    }
+    .form_labels{
+        display: inline-block;
+        width: 10%;
+        text-align: right;
+    }
+    .form_inputs{
+        display: inline-block;
+        width: 40%;
+        text-align: center;
+    }
+    #logInButton{
+        width: 50%;
+        display: block;
+    }
+}
 /* STUDENTENS PROFIL: */
 
 .contentProfile {
