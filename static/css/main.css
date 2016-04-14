@@ -84,10 +84,6 @@ header h1 {
     color: #BD6822;
 }
 
-.inline {
-    display: inline;
-}
-
 .courtesyNav {
     float: right;
 }
@@ -117,7 +113,7 @@ header h1 {
 
 .add {
     padding: 25px 20px 25px 50px;
-    margin: 0 auto;
+    margin: 20px auto 0 auto;
     background-color: white;
     cursor: pointer;
     border: 3px solid rgba(102, 185, 191, 1);
@@ -130,6 +126,20 @@ header h1 {
 
 .add h2 {
     margin-top: 0;
+}
+
+.add h4 {
+    margin-top: 2px;
+    margin-bottom: 5px;
+}
+
+.add p {
+    margin-top: 2px;
+    margin-bottom: 10px;
+}
+
+.add form {
+    margin-top: 15px;
 }
 
 ul#tabs {
@@ -193,6 +203,15 @@ div.tabContent.hide {
 .bold {
     font-weight: bold;
 }
+
+.inline {
+    display: inline;
+}
+
+.inline_block {
+    display: inline-block;
+}
+
 /* ______________________ */
 
 .column2 { /* En extra kolumn i uppdrag */
@@ -863,6 +882,7 @@ label{
 
 @media screen and (max-width:600px){
     
+   /* För inloggningssidan: */
     .wrapperLogin {
         height: 500px;
     }
@@ -927,7 +947,40 @@ label{
         margin: 0;
         padding: 0;
     }
-
+    
+     /* För startsidan för studenter: */
+    
+    .wrap {
+        width: 100%;
+    }
+    
+    .tabContent {
+        padding: 5px 0;
+    }
+    
+    .courtesyNav {
+        display: none;
+    }
+    
+    ul#tabs {
+        list-style-type: none;
+        margin: 5px auto;
+        padding: 0 0 0.6em 0;
+        width: 100%;
+    }
+    
+    ul#tabs li a {
+        padding: 0.3em 0.7em;
+        border-radius: 0;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        margin: 0;
+    }
+    
+    ul#tabs li a.selected {
+        padding: 0.5em 0.9em;
+    }   
 }
 
 @media screen and (min-width:960px){

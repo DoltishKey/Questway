@@ -29,21 +29,22 @@
             <div class="tabContent" id="lediga_uppdrag">
                 <div class="wrap">
                     <h2 class="pageTitle">Lediga uppdrag</h2>
-                             %for i in annons:
-                                %if user_id not in i['who_applied']:
-                                <div class="add">
-                                        <h2>{{i['ad_title']}}</h2>
-                                    <p class="inline"><span class="bold">Publicererades:</span> {{i['date_of_adcreation']}}</p>
-                                        <div class="showMore">
-                                            <p>{{i['ad_text']}}</p>
-                                            <p>{{i['ad_corpName']}}</p>
-                                            <form  name="sok_annons" id="sok_annons" method="POST" action="/sok_annons/{{i['uniq_adNr']}}">
-                                                <input type="submit" value="Sök annons" class="myButton">
-                                            </form>
-                                        </div>
-                                </div>
-                                %end
+                         %for i in annons:
+                            %if user_id not in i['who_applied']:
+                            <div class="add">
+                                    <h2>{{i['ad_title']}}</h2>
+                                    <h4 class="inline">Publicererades: </h4> <p class="inline_block">{{i['date_of_adcreation']}}</p>
+                                    <div class="showMore">
+                                        <h4>Beskrivning:</h4>
+                                        <p>{{i['ad_text']}}</p>
+                                        <h4 class="inline_block">Företag: </h4><p class="inline_block"> {{i['ad_corpName']}}</p>
+                                        <form  name="sok_annons" id="sok_annons" method="POST" action="/sok_annons/{{i['uniq_adNr']}}">
+                                            <input type="submit" value="Sök annons" class="myButton">
+                                        </form>
+                                    </div>
+                            </div>
                             %end
+                        %end
                 </div>
             </div>
 
@@ -54,10 +55,11 @@
                             %if user_id in i['who_applied']:
                             <div class="add">
                                 <h2>{{i['ad_title']}}</h2>
-                                <p class="inline"><span class="bold">Publicererades:</span> {{i['date_of_adcreation']}}</p>
+                                <h4 class="inline">Publicererades: </h4> <p class="inline_block">{{i['date_of_adcreation']}}</p>
                                 <div class="showMore">
+                                    <h4>Beskrivning:</h4>
                                     <p>{{i['ad_text']}}</p>
-                                    <p>{{i['ad_corpName']}}</p>
+                                    <h4 class="inline_block">Företag: </h4><p class="inline_block"> {{i['ad_corpName']}}</p>
                                 </div>
                             </div>
                             %end
