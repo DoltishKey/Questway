@@ -18,12 +18,21 @@
         "date_of_adcreation": "14/04/2016"
     }, 
     {
-        "ad_title": "Tjoho", 
         "status": "Ingen vald", 
         "who_applied": [], 
         "creator": 2, 
         "ad_text": "Hejhopp", 
         "uniq_adNr": 3, 
+        "ad_title": "Tjoho", 
+        "date_of_adcreation": "14/04/2016"
+    }, 
+    {
+        "ad_title": "oves gatuk\u00f6k", 
+        "status": "Ingen vald", 
+        "who_applied": [], 
+        "creator": 10, 
+        "ad_text": "moooosbrickor", 
+        "uniq_adNr": 4, 
         "date_of_adcreation": "14/04/2016"
     }
 ]
