@@ -63,15 +63,3 @@ function getHash( url ) {
     var hashPos = url.lastIndexOf ( '#' );
     return url.substring( hashPos + 1 );
 }
-
-
-// Show and hide adds
-//function showHide() {
-    //var div = document.getElementsByClassName("showMore");
-    //if (div.style.display !== "none") {
-        //div.style.display = "none";
-    //}
-    //else {
-        //div.style.display = "block";
-    //}
-     //}

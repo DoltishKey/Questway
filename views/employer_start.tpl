@@ -34,7 +34,7 @@
                                     <li>
                                         <div>
                                             <h3>{{i['ad_title']}}</h3>
-                                            <p>{{len(i['who_applied'])}} ansöknignar</p>
+                                            <p>{{len(i['who_applied'])}} ansökningar</p>
                                         </div>
             		                    <!--<p>{{i['ad_text']}}</p>
                         		        <form  name="delete_ad" id="delete_ad" method="POST" action="/del_ad/{{i['uniq_adNr']}}">

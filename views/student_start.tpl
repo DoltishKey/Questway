@@ -42,6 +42,7 @@
                                             <input type="submit" value="Sök annons" class="myButton">
                                         </form>
                                     </div>
+                                <div class="arrow">></div>
                             </div>
                             %end
                         %end
