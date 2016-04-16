@@ -1,7 +1,9 @@
 [
     {
         "status": "Ingen vald", 
-        "who_applied": [], 
+        "who_applied": [
+            11
+        ], 
         "creator": 2, 
         "ad_text": "N\u00e5gon som kan sjunga opera", 
         "uniq_adNr": 1, 
@@ -11,7 +13,8 @@
     {
         "status": "Ingen vald", 
         "who_applied": [
-            5
+            5, 
+            11
         ], 
         "creator": 2, 
         "ad_text": "Tv\u00e4tta f\u00f6nster", 
@@ -21,11 +24,46 @@
     }, 
     {
         "status": "Ingen vald", 
-        "who_applied": [], 
+        "who_applied": [
+            11
+        ], 
         "creator": 2, 
         "ad_text": "Putsa lite skor", 
         "uniq_adNr": 3, 
         "ad_title": "Skoputsare", 
         "date_of_adcreation": "14/04/2016"
+    }, 
+    {
+        "status": "Ingen vald", 
+        "who_applied": [
+            11
+        ], 
+        "creator": 10, 
+        "ad_text": "testar test f\u00f6r test testare", 
+        "uniq_adNr": 4, 
+        "ad_title": "testare", 
+        "date_of_adcreation": "15/04/2016"
+    }, 
+    {
+        "status": "Ingen vald", 
+        "who_applied": [
+            11
+        ], 
+        "creator": 10, 
+        "ad_text": "dokumentering av css och html", 
+        "uniq_adNr": 5, 
+        "ad_title": "HTML CSS", 
+        "date_of_adcreation": "15/04/2016"
+    }, 
+    {
+        "status": "Ingen vald", 
+        "who_applied": [
+            13
+        ], 
+        "creator": 12, 
+        "ad_text": "jag beh\u00f6ver n\u00e5gon som kan \u00e5ka och k\u00f6pa en ov's mosbricka till mig", 
+        "uniq_adNr": 6, 
+        "ad_title": "Ove's mosbricka", 
+        "date_of_adcreation": "16/04/2016"
     }
 ]

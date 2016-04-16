@@ -125,6 +125,7 @@ def choose_ad(annonsID, db, status):
             return each
         elif int(each['uniq_adNr']) == int(annonsID) and status==None:
             return each
+	
 
 
 '''*********Moves AD to Done*********'''
