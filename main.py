@@ -160,12 +160,12 @@ def del_ad(annons):
 	log.validate_autho()
 	if log.get_user_level() == 2:
 		all_adds=addmod.load_adds('ads')
-		which_ad_to_delete=addmod.choose_ad(annons, all_adds, 'Ingen vald')
+		which_ad_to_delete=addmod.choose_ad(annons, all_adds, '')
 		if which_ad_to_delete['creator'] == log.get_user_id_logged_in():
 			all_adds.remove(which_ad_to_delete)
 			with open('static//data/ads.json', 'w') as fil:
 				json.dump(all_adds, fil, indent=4)
-			redirect('/admin')
+			redirect('/allMissions')
 		else:
 			return 'Behörighet saknas!'
 

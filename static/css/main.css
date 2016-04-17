@@ -390,6 +390,30 @@ transition: background-color 5000s ease-in-out 0s;
 }
 
 
+/* Ta-bort knappen för varje annons */
+.delete_ad{
+    display:inline-block;
+    float:right;
+}
+
+.delete_ad:active{
+    display:inline-block;
+    float:right;
+}
+
+.no_ads{
+    font-size:2.5vw;
+    margin: 5% auto;
+    text-align: center;
+    padding-bottom:30px;
+    border: dotted 2px;
+    width:40%;
+    padding:5px;
+    color:whitesmoke;
+}
+
+
+
 /* --- Employers start.tpl --- */
 #employer_how_it_works{
     display: none;
