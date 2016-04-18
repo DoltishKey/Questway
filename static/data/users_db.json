@@ -1,82 +1,68 @@
 [
     {
         "username": "calle@calle.nu", 
-        "password": "calle", 
         "autholevel": 2, 
+        "password": "calle", 
         "id": 2
     }, 
     {
         "username": "nisse@nisse.nu", 
-        "autholevel": 1, 
         "password": "nisse", 
+        "autholevel": 1, 
         "id": 3
     }, 
     {
         "username": "jacob@ab.nu", 
-        "password": "jacob", 
         "autholevel": 2, 
+        "password": "jacob", 
         "id": 4
     }, 
     {
         "username": "sofialundkvist@outlook.com", 
-        "autholevel": 1, 
         "password": "hejhej", 
+        "autholevel": 1, 
         "id": 5
     }, 
     {
         "username": "jenny@jenny.nu", 
-        "password": "jenny", 
         "autholevel": 1, 
+        "password": "jenny", 
         "id": 6
     }, 
     {
         "username": "ville@ville.nu", 
-        "autholevel": 1, 
         "password": "ville", 
+        "autholevel": 1, 
         "id": 7
     }, 
     {
         "username": "anna@panna.se", 
-        "password": "kej", 
         "autholevel": 1, 
+        "password": "kej", 
         "id": 8
     }, 
     {
         "username": "ad@ad.se", 
-        "password": "12345", 
         "autholevel": 1, 
+        "password": "12345", 
         "id": 9
     }, 
     {
         "username": "jari@ro.se", 
-        "autholevel": 2, 
         "password": "jari", 
+        "autholevel": 2, 
         "id": 10
     }, 
     {
-<<<<<<< HEAD
-        "username": "philipdev@hotmail.com", 
-=======
-        "username": "test@test.se", 
->>>>>>> origin/master
-        "autholevel": 1, 
-        "password": "test", 
-        "id": 11
-    }, 
-    {
-<<<<<<< HEAD
-        "username": "solig@sol.se", 
-=======
-        "username": "fred@kuylen.se", 
-        "password": "12345", 
->>>>>>> origin/master
-        "autholevel": 2, 
-        "id": 12
-    }, 
-    {
         "username": "anna@panna.org", 
-        "autholevel": 1, 
         "password": "abcd", 
+        "autholevel": 1, 
         "id": 13
+    }, 
+    {
+        "username": "fred@kuylen.se", 
+        "autholevel": 2, 
+        "password": "abcd", 
+        "id": 14
     }
 ]

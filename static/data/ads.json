@@ -18,5 +18,27 @@
         "ad_title": "kdlsak", 
         "the_chosen_one": "", 
         "date_of_adcreation": "17/04/2016"
+    }, 
+    {
+        "status": "Ingen vald", 
+        "who_applied": [
+            13
+        ], 
+        "creator": 12, 
+        "ad_text": "dsadas", 
+        "uniq_adNr": 3, 
+        "ad_title": "test", 
+        "the_chosen_one": "", 
+        "date_of_adcreation": "18/04/2016"
+    }, 
+    {
+        "status": "Ingen vald", 
+        "who_applied": [], 
+        "creator": 14, 
+        "ad_text": "rsdsa", 
+        "uniq_adNr": 4, 
+        "ad_title": "er", 
+        "the_chosen_one": "", 
+        "date_of_adcreation": "18/04/2016"
     }
 ]
