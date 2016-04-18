@@ -203,14 +203,10 @@ def sok_annons(annons):
 def list_applied_students():
 	log.validate_autho()
 	if log.get_user_level() == 2:
-		all_adds=addmod.load_adds('ads')
 		user=log.get_user_id_logged_in()
-		students=log.read_data('students')
-		relevant_adds=[]
 		username=log.get_user_name()
-		for add in all_adds:
-			if user == add['creator']:
-				relevant_adds.append(add)
+		students=log.read_data('students')
+		relevant_adds=addmod.my_ads(user)
 
 		if len(relevant_adds)>0:
 			open_ad=addmod.choose_ad(5, relevant_adds, None)
@@ -220,6 +216,10 @@ def list_applied_students():
 			return template('adds.tpl', user=username, adds=relevant_adds, students=students, open_ad=open_ad, pageTitle='Alla uppdrag')
 	else:
 		return "Du har ej behörighet"
+
+@route('/testing')
+def accepted_ones():
+	addmod.who_got_accepted()
 
 @route('/ad_done/<annons>', method="POST")
 def ad_done(annons):

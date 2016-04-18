@@ -127,6 +127,33 @@ def choose_ad(annonsID, db, status):
             return each
 
 
+'''*********Choose a Student********'''
+def who_got_accepted():
+	adID= 4 #request.forms.get(ad_id) - stubbe för annons ID
+	chosen_one= 15 #request.forms.get(studentID) - stubbe för student ID
+
+	all_ads=load_adds('ads')
+	user=log.get_user_id_logged_in()
+
+	list_of_ads=my_ads(user)
+	what_ad=choose_ad(adID, list_of_ads, None)
+
+	for who in what_ad['who_applied']:
+		if who==chosen_one:
+			what_ad.update({'the_chosen_one':chosen_one})
+			what_ad['who_applied'].remove(chosen_one)
+
+	print what_ad
+
+'''********My list of ads*********'''
+def my_ads(userID):
+	all_adds=load_adds('ads')
+	relevant_adds=[]
+	for add in all_adds:
+		if userID == add['creator'] or userID==add['the_chosen_one']:
+			relevant_adds.append(add)
+	return relevant_adds
+
 
 '''*********Moves AD to Done*********'''
 def move_ad_to_complete(annons):

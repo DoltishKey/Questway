@@ -37,11 +37,14 @@
     }, 
     {
         "status": "Ingen vald", 
-        "who_applied": [], 
+        "who_applied": [
+            13, 
+            15
+        ], 
         "creator": 14, 
-        "ad_text": "rsdsa", 
+        "ad_text": "kjkdgsasa", 
         "uniq_adNr": 4, 
-        "ad_title": "er", 
+        "ad_title": "testettest", 
         "the_chosen_one": "", 
         "date_of_adcreation": "18/04/2016"
     }
