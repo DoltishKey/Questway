@@ -108,7 +108,7 @@ function showHide() {
      $('.add').click(function(){
          $(this).children('.showMore').toggle();
          
-         if ($(this).children('.arrow').html() == ">") {
+         if ($(this).children('.showMore').is(':visible')) {
              $(this).children('.arrow').html("<");
              console.log('FUNKAR') //Test
          }
