@@ -4,9 +4,13 @@
             "Python",
             "UX",
             "HTML",
-            "CSS"
+            "CSS",
+            "Php",
+            "Wireframe",
+            "Interaktionsdesign",
+            "MySQL"
         ],
-        "subject_two": "Bacon ipsum dolor amet cow kevin sirloin tail meatloaf pancetta. Jowl kevin tongue short loin bresaola venison bacon swine tail hamburger shank pastrami. Kielbasa meatloaf pancetta sirloin, fatback tri-tip pork frankfurter shoulder sausage brisket spare ribs leberkas.", 
+        "subject_two": "Bacon ipsum dolor amet cow kevin sirloin tail meatloaf pancetta. Jowl kevin tongue short loin bresaola venison bacon swine tail hamburger shank pastrami. Kielbasa meatloaf pancetta sirloin, fatback tri-tip pork frankfurter shoulder sausage brisket spare ribs leberkas.",
         "year": 1,
         "img3": "/static/img/#",
         "img2": "/static/img/#",

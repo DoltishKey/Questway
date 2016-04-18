@@ -26,32 +26,33 @@
                 </div>
             </div>
             <div class="contact">
-	            <dvi>
-	            	<div>
+	            <div>
+	            	<div class="contact_info">
 		            	<div class="icon circle"></div>
 		            	<p>070-6645406</p>
 	            	</div>
-	            	<div>
+                    <div class="line"></div>
+	            	<div class="contact_info">
 		            	<div class="icon circle"></div>
 		            	<p>jcbpettersson@gmail.com</p>
 	            	</div>
-	            </dvi>
+	            </div>
             </div>
             <div class="main_education_info">
                 <div class="container">
-                    <div class="col">
+                    <div class="education_info">
                         <div class="icon circle"></div>
                         <div>
                             <p>{{education['subject_one']}}</p>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="education_info">
                         <div class="icon circle"></div>
                         <div>
                             <p>{{education['subject_two']}}</p>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="education_info">
                         <div class="icon circle"></div>
                         <div>
                             <p>{{education['subject_three']}}</p>
@@ -61,7 +62,7 @@
             </div>
             <div class="key_tags">
                 <div>
-                    <h3>Nyckelkompetenser</h3>
+                    <h2>Nyckelkompetenser</h2>
                     <ul>
             			%for tag in education['tags']:
             				<li>{{tag}}</li>
@@ -72,7 +73,7 @@
 
             <div class="pre_missions">
                 <div>
-                    <h3>Genomförda uppdrag</h3>
+                    <h2>Genomförda uppdrag</h2>
                     <ul>
             			<li>
             				<div class="img circle"></div>
@@ -125,10 +126,6 @@
         		    </ul>
                 </div>
             </div>
-
-            <a href="{{education['url']}}">Länk till utbildningen</a>
-
-
 		</main>
 		<footer style=" bottom:0px; width: 100%;">© Questway, 2016</footer>
 	</body>

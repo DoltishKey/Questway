@@ -1,7 +1,7 @@
 <header>
     <div class="wrap">
 		<div class="courtesyNav">
-				<p class="courtesyNavItem">Inloggad som <strong>{{user}}</strong></p>
+				<p class="courtesyNavItem">Inloggad som <strong> {{user}}</strong></p>
 		</div>
 		<h1>Questway</h1>
 		<nav class="menu">
@@ -12,7 +12,7 @@
 				%else:
 					<a href="/admin">Start</a>
 				%end
-				
+
 				%if request.path == '/profiles/' + str(student['id']):
 					<a class="currentMenuItem" href="/profiles/{{student['id']}}">Profil</a>
 				%else:

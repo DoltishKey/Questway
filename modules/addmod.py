@@ -66,7 +66,7 @@ def do_ad():
         uniq_number=1
         ad_ID=check_adID(uniq_number)
         creator = log.get_user_id_logged_in()
-        mydict.update({'uniq_adNr':ad_ID, 'status':'Ingen vald', 'who_applied':[], 'creator':creator, 'date_of_adcreation':date_ad_created})
+        mydict.update({'uniq_adNr':ad_ID, 'status':'Ingen vald', 'who_applied':[], 'creator':creator, 'date_of_adcreation':date_ad_created, 'the_chosen_one':''})
 
         content=load_adds('ads')
         content.append(mydict)
@@ -121,10 +121,11 @@ def get_corp_name(all_adds):
 
 def choose_ad(annonsID, db, status):
     for each in db:
-        if int(each['uniq_adNr']) == int(annonsID) and str(each['status'])==str(status):
+        if int(each['uniq_adNr']) == int(annonsID) and str(each['the_chosen_one'])==str(status):
             return each
         elif int(each['uniq_adNr']) == int(annonsID) and status==None:
             return each
+
 
 
 '''*********Moves AD to Done*********'''

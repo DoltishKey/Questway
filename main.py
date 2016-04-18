@@ -160,12 +160,12 @@ def del_ad(annons):
 	log.validate_autho()
 	if log.get_user_level() == 2:
 		all_adds=addmod.load_adds('ads')
-		which_ad_to_delete=addmod.choose_ad(annons, all_adds, 'Ingen vald')
+		which_ad_to_delete=addmod.choose_ad(annons, all_adds, '')
 		if which_ad_to_delete['creator'] == log.get_user_id_logged_in():
 			all_adds.remove(which_ad_to_delete)
 			with open('static//data/ads.json', 'w') as fil:
 				json.dump(all_adds, fil, indent=4)
-			redirect('/admin')
+			redirect('/allMissions')
 		else:
 			return 'Behörighet saknas!'
 
@@ -201,21 +201,25 @@ def sok_annons(annons):
 
 @route('/allMissions')
 def list_applied_students():
-    log.validate_autho()
-    if log.get_user_level() == 2:
-        all_adds=addmod.load_adds('ads')
-        user=log.get_user_id_logged_in()
-        students=log.read_data('students')
-        relevant_adds=[]
-        for add in all_adds:
-            if user == add['creator']:
-                relevant_adds.append(add)
+	log.validate_autho()
+	if log.get_user_level() == 2:
+		all_adds=addmod.load_adds('ads')
+		user=log.get_user_id_logged_in()
+		students=log.read_data('students')
+		relevant_adds=[]
+		username=log.get_user_name()
+		for add in all_adds:
+			if user == add['creator']:
+				relevant_adds.append(add)
 
-
-		open_ad=addmod.choose_ad(5, relevant_adds, None)
-
-        return template('adds.tpl', adds=relevant_adds, students=students, open_ad=open_ad, pageTitle = 'Alla uppdrag')
-
+		if len(relevant_adds)>0:
+			open_ad=addmod.choose_ad(5, relevant_adds, None)
+			return template('adds.tpl', user=username, adds=relevant_adds, students=students, open_ad=open_ad, pageTitle='Alla uppdrag')
+		else:
+			open_ad=0
+			return template('adds.tpl', user=username, adds=relevant_adds, students=students, open_ad=open_ad, pageTitle='Alla uppdrag')
+	else:
+		return "Du har ej behörighet"
 
 @route('/ad_done/<annons>', method="POST")
 def ad_done(annons):

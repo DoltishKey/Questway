@@ -103,11 +103,19 @@ function set_localstorage_val_for_ad(){
 
 
 
-
+//För att dölja/visa annonser för studenter
 function showHide() {
      $('.add').click(function(){
          $(this).children('.showMore').toggle();
-
+         
+         if ($(this).children('.showMore').is(':visible')) {
+             $(this).children('.arrow').html("<");
+             console.log('FUNKAR') //Test
+         }
+         else {
+            $(this).children('.arrow').html(">");
+             console.log('FUNKER EJ, NU ÄR VI PÅ ELSE-SATSEN') //Test
+         }   
      });
 }
 
@@ -120,6 +128,7 @@ function set(){
     document.getElementById("logo1").style.left = innerWidth/2 + "px";
     document.getElementById("headerbottom").style.borderLeft = innerWidth/2 + "px" + " solid transparent"; document.getElementById("headerbottom").style.borderRight = innerWidth/2 + "px" + " solid transparent";
 }
+
 function showHideMeny() {
     var button = document.getElementById("downarrow");
     var meny = document.getElementById("meny");
