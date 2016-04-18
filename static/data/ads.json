@@ -1,7 +1,9 @@
 [
     {
         "status": "Ingen vald", 
-        "who_applied": [], 
+        "who_applied": [
+            11
+        ], 
         "creator": 10, 
         "ad_text": "1234", 
         "uniq_adNr": 1, 
@@ -11,7 +13,9 @@
     }, 
     {
         "status": "Ingen vald", 
-        "who_applied": [], 
+        "who_applied": [
+            11
+        ], 
         "creator": 10, 
         "ad_text": "ujikolp", 
         "uniq_adNr": 2, 
