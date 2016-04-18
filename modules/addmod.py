@@ -80,7 +80,7 @@ def do_ad():
 
 '''*********Check that a Title for the ad is given*********'''
 
-def check_ad_info(ad_info):
+def check_ad_info(ad_info): #Byt namn på variabeln till validate_ad_input
     former_ad_info=load_adds('ads')
     s=list(ad_info)
 

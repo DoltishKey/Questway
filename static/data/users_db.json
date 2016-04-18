@@ -1,74 +1,71 @@
 [
     {
         "username": "calle@calle.nu", 
-        "password": "calle", 
         "autholevel": 2, 
+        "password": "calle", 
         "id": 2
     }, 
     {
         "username": "nisse@nisse.nu", 
-        "autholevel": 1, 
         "password": "nisse", 
+        "autholevel": 1, 
         "id": 3
     }, 
     {
         "username": "jacob@ab.nu", 
-        "password": "jacob", 
         "autholevel": 2, 
+        "password": "jacob", 
         "id": 4
     }, 
     {
         "username": "sofialundkvist@outlook.com", 
-        "autholevel": 1, 
         "password": "hejhej", 
+        "autholevel": 1, 
         "id": 5
     }, 
     {
         "username": "jenny@jenny.nu", 
-        "password": "jenny", 
         "autholevel": 1, 
+        "password": "jenny", 
         "id": 6
     }, 
     {
         "username": "ville@ville.nu", 
-        "autholevel": 1, 
         "password": "ville", 
+        "autholevel": 1, 
         "id": 7
     }, 
     {
         "username": "anna@panna.se", 
-        "password": "kej", 
         "autholevel": 1, 
+        "password": "kej", 
         "id": 8
     }, 
     {
         "username": "ad@ad.se", 
-        "password": "12345", 
         "autholevel": 1, 
+        "password": "12345", 
         "id": 9
     }, 
     {
         "username": "jari@ro.se", 
-        "autholevel": 2, 
         "password": "jari", 
+        "autholevel": 2, 
         "id": 10
     }, 
     {
         "username": "philipdev@hotmail.com", 
+        "username": "anna@panna.org", 
+        "password": "abcd",
         "autholevel": 1, 
-        "password": "test", 
-        "id": 11
+        "id": 13
     }, 
     {
         "username": "solig@sol.se", 
         "password": "12345",
+        "username": "fred@kuylen.se", 
         "autholevel": 2, 
-        "id": 12
-    }, 
-    {
-        "username": "anna@panna.org", 
-        "autholevel": 1, 
         "password": "abcd", 
-        "id": 13
+        "id": 14
     }
 ]
