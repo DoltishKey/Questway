@@ -1,80 +1,51 @@
 [
     {
         "username": "jacob@jacob.nu", 
-        "username": "emma@emma.se", 
-        "password": "emma", 
-        "autholevel": 1, 
-        "password": "jacob", 
+        "autholevel": 1,
+        "password": "jacob",
         "id": 1
-    }, 
+    },
     {
-        "username": "calle@calle.nu", 
-        "password": "calle", 
-        "autholevel": 2, 
+        "username": "calle@calle.nu",
+        "password": "calle",
+        "autholevel": 2,
         "id": 2
-    }, 
+    },
     {
-        "username": "nisse@nisse.nu", 
-        "autholevel": 1, 
-        "password": "nisse", 
+        "username": "nisse@nisse.nu",
+        "autholevel": 1,
+        "password": "nisse",
         "id": 3
-    }, 
+    },
     {
-        "username": "jacob@ab.nu", 
-        "password": "jacob", 
-        "autholevel": 2, 
+        "username": "jacob@ab.nu",
+        "password": "jacob",
+        "autholevel": 2,
         "id": 4
-    }, 
+    },
     {
-        "username": "sofialundkvist@outlook.com", 
-        "autholevel": 1, 
-        "password": "hejhej", 
+        "username": "sofialundkvist@outlook.com",
+        "autholevel": 1,
+        "password": "hejhej",
         "id": 5
-    }, 
+    },
     {
-        "username": "jenny@jenny.nu", 
-        "password": "jenny", 
-        "autholevel": 1, 
+        "username": "jenny@jenny.nu",
+        "password": "jenny",
+        "autholevel": 1,
         "id": 6
-    }, 
+    },
     {
-        "username": "ville@ville.nu", 
-        "autholevel": 1, 
-        "password": "ville", 
+        "username": "ville@ville.nu",
+        "autholevel": 1,
+        "password": "ville",
         "id": 7
-    }, 
+    },
     {
-        "username": "anna@panna.se", 
-        "password": "kej", 
-        "autholevel": 1, 
+        "username": "anna@panna.se",
+        "password": "kej",
+        "autholevel": 1,
         "id": 8
-    }, 
-    {
-        "username": "jari@rosen.nu", 
-        "username": "philip@philip.com", 
-        "autholevel": 1, 
-        "password": "tjo", 
-        "id": 9
-    }, 
-    {
-        "username": "jari@ro.se", 
-        "password": "jari", 
-        "autholevel": 2, 
-        "id": 10
-    }, 
-    {
-        "username": "philipdev@hotmail.com", 
-        "autholevel": 1, 
-        "password": "losenord", 
-        "username": "solig@sol.se", 
-        "autholevel": 2, 
-        "password": "sol", 
-        "id": 11 
-    }, 
-    {
-        "username": "solig@sol.se", 
-        "autholevel": 2, 
-        "password": "sol"
     }
 
-] 
+]

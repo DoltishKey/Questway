@@ -17,7 +17,7 @@
                 </nav>
             </div>
         </header>
-        
+
         <!-- Länkar till tabbarna: -->
         <ul id="tabs">
             <li><a href="#lediga_uppdrag" onclick="showTab()">Lediga uppdrag</a></li>
@@ -25,7 +25,7 @@
             <li><a href="#pågående_uppdrag" onclick="showTab()">Pågående uppdrag</a></li>
             <li><a href="#avslutade_uppdrag" onclick="showTab()">Avslutade uppdrag</a></li>
         </ul>
-        
+
             <div class="tabContent" id="lediga_uppdrag">
                 <div class="wrap">
                     <h2 class="pageTitle">Lediga uppdrag</h2>
@@ -83,8 +83,8 @@
                     <h2>{{grading['ad_title']}}</h2>
                     %if grading['display'] == False:
                         <p>Uppdraget visas inte på din profil</p>
+                        <a href="/profiles/{{user_id}}#mission{{grading['uniq_adNr']}}">Visa på din profil</a>
                     %end
-                    <a href="#">Visa på din profil</a>
                 </div>
                 %end
             %end

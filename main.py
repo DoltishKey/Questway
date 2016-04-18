@@ -111,6 +111,7 @@ def do_create_employer():
 def profiles(user):
 	user_profile_data = createUsers.show_student_profile(user)
 	is_user_logged_in = log.is_user_logged_in()
+	grading_ads = sorted( (addmod.read_data('grading')), key=lambda x: x['display'])
 	username = ""
 	if is_user_logged_in == True:
 		user_levle = log.get_user_level()
@@ -122,7 +123,7 @@ def profiles(user):
 		education_info = user_profile_data['education_info']
 		student_info = user_profile_data['student_info']
 		student_name = student_info['first_name'] + ' ' + student_info['last_name']
-		return template('user_profile', user = username, user_autho = user_levle, student_id = user, student= student_info, education = education_info, pageTitle = student_name )
+		return template('user_profile', user = username, user_autho = user_levle, student_id = user, student= student_info, education = education_info, pageTitle = student_name, grading=grading_ads )
 
 	else:
 		return 'Användaren finns inte!'

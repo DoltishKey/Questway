@@ -7,10 +7,40 @@
         "creator": 2,
         "ad_text": "n\u00e5gon som kan sjunga",
         "uniq_adNr": 3,
-        "selected": 1, 
-        "display": false,
+        "selected": 1,
+        "display": "false",
         "ad_title": "S\u00e5ngare",
-        "grade": "5",
+        "grade": "3",
+        "feedback": "Sjunger mycket fint!",
+        "date_of_adcreation": "12/04/2016"
+    },
+    {
+        "status": "Student vald",
+        "who_applied": [
+            1
+        ],
+        "creator": 2,
+        "ad_text": "n\u00e5gon som kan sjunga",
+        "uniq_adNr": 3,
+        "selected": 1,
+        "display": "True",
+        "ad_title": "S\u00e5ngare",
+        "grade": "3",
+        "feedback": "Sjunger mycket fint!",
+        "date_of_adcreation": "12/04/2016"
+    },
+    {
+        "status": "Student vald",
+        "who_applied": [
+            1
+        ],
+        "creator": 2,
+        "ad_text": "n\u00e5gon som kan sjunga",
+        "uniq_adNr": 3,
+        "selected": 1,
+        "display": "True",
+        "ad_title": "S\u00e5ngare",
+        "grade": "3",
         "feedback": "Sjunger mycket fint!",
         "date_of_adcreation": "12/04/2016"
     }
