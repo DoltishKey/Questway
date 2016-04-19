@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     %include('head.tpl')
-    <body>
+    <body onload="init()">
         %include('nav_employers.tpl')
         <div class="tabContent" id="dina_uppdrag">
             <div class="wrap">
