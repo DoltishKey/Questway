@@ -78,6 +78,7 @@
                         %for grade in grading:
                     		<li class="item">
                                 <form class="update_info">
+                                    <input style="dispaly:none" name="grading_id" value="{{grade['uniq_adNr']}}">
                                     %if grade['display'] == 'false':
                                         <div class="edit_mission_info">
                                             <div>
@@ -126,34 +127,34 @@
                                                     <li>HTML</li>
                                                     <div class="edit_key">
                                                         <div class="remove_key">X</div>
-                                                        <input type="text" value="HTML" class="add_key" maxlength="20">
+                                                        <input type="text" name="add_key" value="HTML" class="add_key" maxlength="20">
                                                     </div>
                                                     <li>CSS</li>
                                                     <div class="edit_key">
                                                         <div class="remove_key">X</div>
-                                                        <input type="text" value="CSS" class="add_key" maxlength="20">
+                                                        <input type="text" name="add_key" value="CSS" class="add_key" maxlength="20">
                                                     </div>
                                                     <li>Pythn</li>
                                                     <div class="edit_key">
                                                         <div class="remove_key">X</div>
-                                                        <input type="text" value="Python" class="add_key" maxlength="20">
+                                                        <input type="text" name="add_key" value="Python" class="add_key" maxlength="20">
                                                     </div>
                                                     <li>UX</li>
                                                     <div class="edit_key">
                                                         <div class="remove_key">X</div>
-                                                        <input type="text" value="UX" class="add_key" maxlength="20">
+                                                        <input type="text" name="add_key" value="UX" class="add_key" maxlength="20">
                                                     </div>
 
                                                 </ul>
                                                 <p class="add_one_key">Lägg till +</p>
                                                 <div class="display_or_not">
-                                                    <input type="checkbox" name="display" value="False">Visa uppdraget på din profil
+                                                    <input type="checkbox" name="display" value="True">Visa uppdraget på din profil
                                                 </div>
                                             </div>
                                             <div class="mission_link">
                                                 <h4>Länk till resultatet:</h4>
                                                 <a href="#">www.questway.se</a>
-                                                <input type="text" name="display" value="www.questway.se">
+                                                <input type="text" name="url" value="www.questway.se">
                                             </div>
                                         </form>
                                     </div>

@@ -16,9 +16,13 @@ session_opts = {
 
 '''*********Läs & skriv till fil*********'''
 def read_data(file):
-	fileIn = open('static/data/'+ file +'.json', 'r')
-	dataRead = json.load(fileIn)
-	fileIn.close()				
+	try:
+		fileIn = open('static/data/'+ file +'.json', 'r')
+		dataRead = json.load(fileIn)
+		fileIn.close()
+	except (IOError, ValueError):
+		validatekDataFile(file)
+		dataRead = read_data(file)
 	return dataRead
 
 
@@ -29,7 +33,14 @@ def validate_user(username, password):
 		if username.lower() == user['username'].lower() and password == user['password']:
 			return True
 	return False
-	
+
+def validatekDataFile(file):
+	'''Om databasen inte finns eller är helt tom så skapas en json-fil innehållande en tom lista.'''
+	resList = []
+	dataFile = open('static/data/'+ file +'.json', 'w')
+	json.dump(resList, dataFile, indent=4)
+	dataFile.close()    
+
 def validate_autho():
 	session = request.environ.get('beaker.session')
 	try:
@@ -38,15 +49,15 @@ def validate_autho():
 
 	except:
 		redirect('/login')
-		
+
 def is_user_logged_in():
 	session = request.environ.get('beaker.session')
 	try:
 		session['userId']
 		return True
 	except:
-		return False	
-			
+		return False
+
 def get_user_id(username):
 	users = read_data('users_db')
 	for user in users:
@@ -63,7 +74,7 @@ def get_user_name():
 		users = read_data('students')
 	else:
 		users = read_data('employers')
-	
+
 	for user in users:
 		if session['userId'] == user['id']:
 			return user['first_name']
@@ -74,9 +85,9 @@ def get_user_level():
 	for user in users:
 		if session['userId'] == user['id']:
 			return user['autholevel']
-	
-		
-'''*********Funktioner*********'''	
+
+
+'''*********Funktioner*********'''
 def login():
 	username = request.forms.get('email')
 	password = request.forms.get('password')
@@ -86,7 +97,7 @@ def login():
 		session['userId'] = userID
 		session.save()
 		return True
-	
+
 	else:
 		return False
 
@@ -96,7 +107,7 @@ def log_in_new_user(email, password):
 		session = request.environ.get('beaker.session')
 		session['userId'] = userID
 		session.save()
-	
+
 
 
 def log_out():
@@ -109,6 +120,6 @@ def ajax_validation():
 	password = request.forms.get('password')
 	if validate_user(username, password) == True:
 		return True
-	
+
 	else:
 		return False

@@ -66,7 +66,7 @@ def do_ad():
         uniq_number=1
         ad_ID=check_adID(uniq_number)
         creator = log.get_user_id_logged_in()
-        mydict.update({'uniq_adNr':ad_ID, 'status':'Ingen vald', 'who_applied':[], 'creator':creator, 'date_of_adcreation':date_ad_created})
+        mydict.update({'uniq_adNr':ad_ID, 'status':'Ingen vald', 'who_applied':[], 'creator':creator, 'date_of_adcreation':date_ad_created, 'the_chosen_one':''})
 
         content=load_adds('ads')
         content.append(mydict)
@@ -80,7 +80,7 @@ def do_ad():
 
 '''*********Check that a Title for the ad is given*********'''
 
-def check_ad_info(ad_info):
+def check_ad_info(ad_info): #Byt namn på variabeln till validate_ad_input
     former_ad_info=load_adds('ads')
     s=list(ad_info)
 
@@ -121,10 +121,11 @@ def get_corp_name(all_adds):
 
 def choose_ad(annonsID, db, status):
     for each in db:
-        if int(each['uniq_adNr']) == int(annonsID) and str(each['status'])==str(status):
+        if int(each['uniq_adNr']) == int(annonsID) and str(each['the_chosen_one'])==str(status):
             return each
         elif int(each['uniq_adNr']) == int(annonsID) and status==None:
             return each
+
 
 
 '''*********Moves AD to Done*********'''
@@ -151,3 +152,21 @@ def move_ad_to_complete(annons):
 
         else:
             return {'response':False, 'error':'Något har blivit fel!'}
+
+def ajax_edit_mission():
+		type_of = request.forms.get('mission_type')
+		keys = request.POST.getall("add_key")
+		display = request.forms.get('display')
+		url = request.forms.get('url')
+		grading_id = request.forms.get('grading_id')
+		all_grades = read_data('grading')
+
+		for grade in all_grades:
+			if int(grade['uniq_adNr']) == int(grading_id):
+				for key in keys:
+					grade['keys'].append(key)
+				grade['url'] = url
+				grade['display'] = display
+				grade['type'] = type_of
+
+		write_to_db(all_grades,'grading')

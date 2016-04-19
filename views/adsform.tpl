@@ -13,7 +13,7 @@
             <div class="ca_Formblock"  id="ca_Inputs">
                 <input type="input" name="ad_title" id="ad_title" value="">
                 <br>
-                <input type="input" name="ad_text" id="ad_text" value="">
+                <textarea rows="4" cols="50" type="input" name="ca_text" id="ca_text" value=""></textarea>
             </div>
 
             <input type="submit" value="Skapa annons" name='uniq_adNr' id="ad_done" class="myButton">

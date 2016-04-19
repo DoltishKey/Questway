@@ -82,5 +82,33 @@
         "last_name": "Karlsson", 
         "id": 2, 
         "year": "1"
+    }, 
+    {
+        "last_name": "damson", 
+        "first_name": "adam", 
+        "program": "1", 
+        "id": 9, 
+        "year": "2"
+    }, 
+    {
+        "program": "1", 
+        "first_name": "Test", 
+        "last_name": "testare", 
+        "id": 11, 
+        "year": "2"
+    }, 
+    {
+        "last_name": "kuylen", 
+        "first_name": "anna", 
+        "program": "1", 
+        "id": 13, 
+        "year": "2"
+    }, 
+    {
+        "program": "1", 
+        "first_name": "Nicke", 
+        "last_name": "Nyfiken", 
+        "id": 3, 
+        "year": "1"
     }
 ]

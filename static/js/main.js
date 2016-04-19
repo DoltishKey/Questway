@@ -105,11 +105,19 @@ function set_localstorage_val_for_ad(){
 
 
 
-
+//För att dölja/visa annonser för studenter
 function showHide() {
      $('.add').click(function(){
          $(this).children('.showMore').toggle();
 
+         if ($(this).children('.showMore').is(':visible')) {
+             $(this).children('.arrow').html("<");
+             console.log('FUNKAR') //Test
+         }
+         else {
+            $(this).children('.arrow').html(">");
+             console.log('FUNKER EJ, NU ÄR VI PÅ ELSE-SATSEN') //Test
+         }
      });
 }
 
@@ -218,6 +226,7 @@ function enter_edit_mode(clicked_parent) {
 		clicked_parent.find('.mission_link').find('a').hide();
 		remove_key();
 		handle_input();
+		update_mission()
 	}
 	else{
 		$('.edit_mission_btn').html('Redigera');
@@ -227,7 +236,7 @@ function enter_edit_mode(clicked_parent) {
 
 function handle_input(){
 	$('.add_one_key').click(function() {
-		var inputNode = '<div class="edit_key" style="display:inline-block"><div class="remove_key">X</div><input type="text" value="" class="add_key" style="display:inline-block" maxlength="20" autofocus><div>';
+		var inputNode = '<div class="edit_key" style="display:inline-block"><div class="remove_key">X</div><input type="text" value="" name="add_key" class="add_key" style="display:inline-block" maxlength="20" autofocus><div>';
 		var add_here = $(this).siblings('.keys');
 		$(inputNode).appendTo(add_here);
 		$('.keys').find('input:last').focus();
@@ -235,7 +244,7 @@ function handle_input(){
 
 	$('.keys').on('keypress', '.add_key', function(key){
 		if(key.which == 13) {
-			var inputNode = '<div class="edit_key" style="display:inline-block"><div class="remove_key">X</div><input type="text" value="" class="add_key" style="display:inline-block" maxlength="20" autofocus><div>';
+			var inputNode = '<div class="edit_key" style="display:inline-block"><div class="remove_key">X</div><input type="text" value="" name="add_key" class="add_key" style="display:inline-block" maxlength="20" autofocus><div>';
 			var add_here = $(this).parents('.keys');
 			$(inputNode).appendTo(add_here);
 			$('.keys').find('input:last').focus();
@@ -252,4 +261,23 @@ function remove_key() {
 		if($(this).val().length == 0)
 			$(this).parents('.edit_key').remove();
 	});
+}
+
+
+function update_mission(){
+	$('.edit_mission_btn').click(function(){
+		if ( $(this).html() == 'Spara' ){
+			$.ajax({
+				type: 'POST',
+				url: '/ajax_edit_mission',
+				data: $(this).parents('.update_info').serialize(),
+				success: function(response) {
+					alert('Funkar!')
+				}
+			});
+		}
+		else{
+			console.log('Något har gått fel!');
+		}
+  	});
 }
