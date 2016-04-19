@@ -128,22 +128,24 @@ def choose_ad(annonsID, db, status):
 
 
 '''*********Choose a Student********'''
-def who_got_accepted():
-	adID= 4 #request.forms.get(ad_id) - stubbe för annons ID
-	chosen_one= 15 #request.forms.get(studentID) - stubbe för student ID
-
+def who_got_accepted(annons, sokandeID):
 	all_ads=load_adds('ads')
 	user=log.get_user_id_logged_in()
 
-	list_of_ads=my_ads(user)
-	what_ad=choose_ad(adID, list_of_ads, None)
-
-	for who in what_ad['who_applied']:
-		if who==chosen_one:
-			what_ad.update({'the_chosen_one':chosen_one})
-			what_ad['who_applied'].remove(chosen_one)
-
+	what_ad=choose_ad(annons, all_ads, None)
 	print what_ad
+	for who in what_ad['who_applied']:
+		for ad in all_ads:
+			if int(who)==int(sokandeID) and what_ad['uniq_adNr']==ad['uniq_adNr']:
+				print "hey"
+				ad.update({'the_chosen_one':int(sokandeID)})
+				ad['who_applied'].remove(int(sokandeID))
+				print ad
+				print all_ads
+	with open('static/data/ads.json', 'w') as fil:
+		json.dump(all_ads, fil, indent=4)
+	redirect ('/allMissions')
+
 
 '''********My list of ads*********'''
 def my_ads(userID):

@@ -32,6 +32,9 @@
                                     %for student in students:
                                         %if student['id']==who:
                                             <li><a href="/profiles/{{student['id']}}">{{student['first_name'] + " "+student['last_name']}}</a></li>
+                                            <form name="chosen_one" method="POST" action="/testing/{{add['uniq_adNr']}}/{{student['id']}}">
+                                                <input type="submit" value="Välj denna student" class="chosen_one_button">
+                                            </form>
                                         %end
                                     %end
                                 %end
