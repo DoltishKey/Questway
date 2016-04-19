@@ -127,6 +127,35 @@ def choose_ad(annonsID, db, status):
             return each
 
 
+'''*********Choose a Student********'''
+def who_got_accepted(annons, sokandeID):
+	all_ads=load_adds('ads')
+	user=log.get_user_id_logged_in()
+
+	what_ad=choose_ad(annons, all_ads, None)
+	print what_ad
+	for who in what_ad['who_applied']:
+		for ad in all_ads:
+			if int(who)==int(sokandeID) and what_ad['uniq_adNr']==ad['uniq_adNr']:
+				print "hey"
+				ad.update({'the_chosen_one':int(sokandeID)})
+				ad['who_applied'].remove(int(sokandeID))
+				print ad
+				print all_ads
+	with open('static/data/ads.json', 'w') as fil:
+		json.dump(all_ads, fil, indent=4)
+	redirect ('/allMissions')
+
+
+'''********My list of ads*********'''
+def my_ads(userID):
+	all_adds=load_adds('ads')
+	relevant_adds=[]
+	for add in all_adds:
+		if userID == add['creator'] or userID==add['the_chosen_one']:
+			relevant_adds.append(add)
+	return relevant_adds
+
 
 '''*********Moves AD to Done*********'''
 def move_ad_to_complete(annons):
