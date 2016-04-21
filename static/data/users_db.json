@@ -1,5 +1,6 @@
 [
     {
+<<<<<<< HEAD
         "username": "calle@calle.nu", 
         "autholevel": 2, 
         "password": "calle", 
@@ -34,5 +35,17 @@
         "autholevel": 2, 
         "password": "hannes", 
         "id": 6
+=======
+        "username": "jarirosenstrom@gmail.com", 
+        "password": "abcd", 
+        "autholevel": 2, 
+        "id": 1
+    }, 
+    {
+        "username": "stewie@dent.com", 
+        "autholevel": 1, 
+        "password": "abcd", 
+        "id": 2
+>>>>>>> origin/master
     }
 ]

@@ -1,6 +1,7 @@
 [
     {
         "program": "1", 
+<<<<<<< HEAD
         "first_name": "Jacob", 
         "last_name": "Jacob", 
         "id": 1, 
@@ -19,5 +20,11 @@
         "last_name": "Nilsson", 
         "id": 4, 
         "year": "1"
+=======
+        "first_name": "stewie", 
+        "last_name": "Dent", 
+        "id": 2, 
+        "year": "2"
+>>>>>>> origin/master
     }
 ]

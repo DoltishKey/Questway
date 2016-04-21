@@ -1,5 +1,6 @@
 [
     {
+<<<<<<< HEAD
         "org_nr": "1234", 
         "first_name": "Calle", 
         "last_name": "Hansson", 
@@ -79,5 +80,12 @@
         "org_nr": "1234", 
         "company_name": "sofiaAB", 
         "id": 21
+=======
+        "last_name": "Rosenstr\u00f6m", 
+        "first_name": "Jari", 
+        "org_nr": "1337", 
+        "company_name": "Questway", 
+        "id": 1
+>>>>>>> origin/master
     }
 ]
