@@ -53,7 +53,7 @@ def log_out():
 
 @route('/admin')
 def admin():
-    log.validate_autho() #and log.get_user_level() == 2 | kontrollerar om användaren är inloggad
+    log.validate_autho() #kontrollerar om användaren är inloggad
     username = log.get_user_name() #hämtar användarens namn från DB (returnerar en sträng)
     userid = log.get_user_id_logged_in() #hämtar användarens id
     user_level = log.get_user_level() #kollar om användaren är uppdragstagare eller student (returnerar 1 eller 2)
@@ -92,7 +92,7 @@ def ajax_validation():
 		return 'User exists'
 	else:
 		return 'ok'
-		
+
 
 @route('/do_create_employer', method = 'POST')
 def do_create_employer():

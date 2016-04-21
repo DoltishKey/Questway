@@ -33,7 +33,7 @@ def read_data(file):
 def validate_user(username, password):
     sql = "SELECT id FROM users WHERE mail = '%s' and password = '%s' " %(username, password)
     cursor.execute(sql)
-    if cursor.rowcount ==1:
+    if cursor.rowcount == 1:
         user_id = cursor.fetchall()[0][0]
         return {'id':user_id, 'result':True}
 
@@ -65,34 +65,28 @@ def is_user_logged_in():
 	except:
 		return False
 
-def get_user_id(username):
-	users = read_data('users_db')
-	for user in users:
-		if username == user['username']:
-			return user['id']
-
 def get_user_id_logged_in():
 	session = request.environ.get('beaker.session')
 	return session['userId']
 
 def get_user_name():
-	session = request.environ.get('beaker.session')
-	if get_user_level() == 1:
-		users = read_data('students')
-	else:
-		users = read_data('employers')
+    session = request.environ.get('beaker.session')
+    if get_user_level() == 1:
+        sql = "SELECT first_name FROM students WHERE id = '%d'"%(session['userId'])
 
-	for user in users:
-		if session['userId'] == user['id']:
-			return user['first_name']
+    else:
+        sql = "SELECT first_name FROM employers WHERE id = '%d'"%(session['userId'])
+
+    cursor.execute(sql)
+    first_name = cursor.fetchall()[0][0]
+    return first_name
 
 def get_user_level():
-	session = request.environ.get('beaker.session')
-	users = read_data('users_db')
-	for user in users:
-		if session['userId'] == user['id']:
-			return user['autholevel']
-
+    session = request.environ.get('beaker.session')
+    sql = "SELECT autho_level FROM users WHERE id = '%d'"%(session['userId'])
+    cursor.execute(sql)
+    autho_level = cursor.fetchall()[0][0]
+    return autho_level
 
 '''*********Funktioner*********'''
 def login():
@@ -110,11 +104,12 @@ def login():
         return False
 
 def log_in_new_user(email, password):
-	if validate_user(email, password) == True:
-		userID = get_user_id(email)
-		session = request.environ.get('beaker.session')
-		session['userId'] = userID
-		session.save()
+    user_status = validate_user(email, password)
+    if user_status['result'] == True:
+        userID = user_status['id']
+        session = request.environ.get('beaker.session')
+        session['userId'] = userID
+        session.save()
 
 
 
@@ -131,4 +126,4 @@ def ajax_validation():
         return True
 
     else:
-        areturn False
+        return False
