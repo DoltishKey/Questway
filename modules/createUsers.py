@@ -3,8 +3,9 @@ import bottle
 from bottle import route, get, post, run, template, error, static_file, request, redirect, abort, response, app
 import json
 from validate_email import validate_email
-
-
+import MySQLdb
+db = MySQLdb.connect(host="195.178.232.7", port=4040, user="AC8240", passwd="hejhej123", db="AC8240");
+cursor = db.cursor()
 
 '''*********Skriv/läsa filer*********'''
 def read_data(file):
@@ -25,16 +26,13 @@ def write_to_db(users, db):
 
 '''*********Validering*********'''
 def validate_Username(email):
-	users = read_data('users_db')
-	for user in users:
-		if user['username'].lower() == email.lower():
-			return True
-
-def validate_org_nr(org_nr):
-	organisations = read_data('employers')
-	for organisation in organisations:
-		if int(organisation['org_nr']) == int(org_nr):
-			return True
+	sql = "SELECT * FROM users WHERE mail = '%s'" %(email)
+	#data = call_database(sql, 'fetchall()');
+	cursor.execute(sql)
+	data = cursor.fetchall()
+	print type(data)
+	if len(data) != 0:
+		return True
 
 def validatekDataFile(file):
 	'''Om databasen inte finns eller är helt tom så skapas en json-fil innehållande en tom lista.'''
@@ -51,56 +49,41 @@ def validate_if_student_exists(userID):
 
 '''*********funktioner*********'''
 def add_new_user(email, password, user_level):
-	users = read_data('users_db')
-	userIds = []
-	for user in users:
-		userIds.append(int(user['id']))
+	sql = "INSERT INTO users(password, \
+       autho_level, mail) \
+       VALUES ('%s', '%d', '%s' )" % \
+       (password, user_level, email)
 
-	if len(userIds) == 0:
-		new_user_id = 1
-	else:
-		maximum_ID_value = max(userIds)
-		new_user_id	= maximum_ID_value + 1
+	#new_user_id = call_database(sql,'lastrowid');
+	cursor.execute(sql)
+	new_user_id = cursor.lastrowid
+	db.commit()
 
-	new_user = {
-		"username": email,
-        "password": password,
-        "id":new_user_id,
-        "autholevel":user_level
-		}
-	users.append(new_user)
-	db = 'users_db'
-	write_to_db(users, db)
+	print new_user_id
 	return new_user_id
 
 
 def add_new_employer(company_name, org_nr, first_name, last_name, new_user_id):
-	employers = read_data('employers')
-	new_employer ={
-		"company_name": company_name,
-        "org_nr": org_nr,
-        "first_name": first_name,
-        "last_name": last_name,
-        "id": new_user_id,
-		}
+	org_nr = int(org_nr)
+	sql = "INSERT INTO employers(first_name, \
+       last_name, company_name, org_nr, id) \
+       VALUES ('%s', '%s', '%s', '%d', (select id from users where id = '%d') )" %(first_name, last_name, company_name, org_nr, new_user_id)
 
-	employers.append(new_employer)
-	db = 'employers'
-	write_to_db(employers, db)
+	cursor.execute(sql)
+	db.commit()
+
+	#call_database(sql, False);
 
 def add_new_student(first_name, last_name, program, year, new_user_id):
-	students = read_data('students')
-	new_student ={
-        "first_name": first_name,
-        "last_name": last_name,
-        "program": program,
-        "year": year,
-        "id": new_user_id,
-		}
+	program = int(program)
+	year = int(year)
+	sql = "INSERT INTO students(first_name, \
+       last_name, education_id, education_year, id) \
+       VALUES ('%s', '%s', '%d', '%d', (select id from users where id = '%d') )" %(first_name, last_name, program, year, new_user_id)
 
-	students.append(new_student)
-	db = 'students'
-	write_to_db(students, db)
+	#call_database(sql, False);
+	cursor.execute(sql)
+	db.commit()
 
 def get_student_main_info(user):
 	user = int(user)
@@ -130,8 +113,7 @@ def create_employer():
 	for user_input in user_inputs:
 		if user_input == None or len(user_input) == 0:
 			return {'result':False, 'error': 'Inget fält får vara tomt!'}
-	#org_nr = request.forms.get('org_nr')
-	#if validate_Username(email) == True or validate_org_nr(org_nr) == True:
+
 	if validate_Username(email) == True:
 		return {'result':False, 'error':'Tyvärr - en användare med samma email finns redan!'}
 

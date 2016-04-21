@@ -3,6 +3,9 @@ import bottle
 from bottle import route, get, post, run, template, error, static_file, request, redirect, abort, response, app
 from beaker.middleware import SessionMiddleware
 import json
+import MySQLdb
+db = MySQLdb.connect(host="195.178.232.7", port=4040, user="AC8240", passwd="hejhej123", db="AC8240");
+cursor = db.cursor()
 
 '''*********Sessions Data*********'''
 session_opts = {
@@ -28,18 +31,22 @@ def read_data(file):
 
 '''*********Authorisering*********'''
 def validate_user(username, password):
-	users = read_data('users_db')
-	for user in users:
-		if username.lower() == user['username'].lower() and password == user['password']:
-			return True
-	return False
+    sql = "SELECT id FROM users WHERE mail = '%s' and password = '%s' " %(username, password)
+    cursor.execute(sql)
+    if cursor.rowcount ==1:
+        user_id = cursor.fetchall()[0][0]
+        return {'id':user_id, 'result':True}
+
+    else:
+        return {'result':False}
+
 
 def validatekDataFile(file):
 	'''Om databasen inte finns eller är helt tom så skapas en json-fil innehållande en tom lista.'''
 	resList = []
 	dataFile = open('static/data/'+ file +'.json', 'w')
 	json.dump(resList, dataFile, indent=4)
-	dataFile.close()    
+	dataFile.close()
 
 def validate_autho():
 	session = request.environ.get('beaker.session')
@@ -89,17 +96,18 @@ def get_user_level():
 
 '''*********Funktioner*********'''
 def login():
-	username = request.forms.get('email')
-	password = request.forms.get('password')
-	if validate_user(username, password) == True:
-		userID = get_user_id(username)
-		session = request.environ.get('beaker.session')
-		session['userId'] = userID
-		session.save()
-		return True
+    username = request.forms.get('email')
+    password = request.forms.get('password')
+    user_status = validate_user(username, password)
+    if user_status['result'] == True:
+        userID = user_status['id']
+        session = request.environ.get('beaker.session')
+        session['userId'] = userID
+        session.save()
+        return True
 
-	else:
-		return False
+    else:
+        return False
 
 def log_in_new_user(email, password):
 	if validate_user(email, password) == True:
@@ -116,10 +124,11 @@ def log_out():
 	session.save()
 
 def ajax_validation():
-	username = request.forms.get('email')
-	password = request.forms.get('password')
-	if validate_user(username, password) == True:
-		return True
+    username = request.forms.get('email')
+    password = request.forms.get('password')
+    user_status = validate_user(username, password)
+    if user_status['result'] == True:
+        return True
 
-	else:
-		return False
+    else:
+        areturn False

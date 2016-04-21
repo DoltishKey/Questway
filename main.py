@@ -91,7 +91,7 @@ def ajax_validation():
 		return 'User exists'
 	else:
 		return 'ok'
-
+		
 
 @route('/do_create_employer', method = 'POST')
 def do_create_employer():
