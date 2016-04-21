@@ -4,7 +4,9 @@ from bottle import request, redirect
 import time
 import log
 import createUsers
-
+import MySQLdb
+db = MySQLdb.connect(host="195.178.232.7", port=4040, user="AC8240", passwd="hejhej123", db="AC8240");
+cursor = db.cursor()
 
 
 '''*********Skriv/läsa filer*********'''
@@ -53,29 +55,45 @@ def create_ad_DB():
 
 '''*********Create the AD*********'''
 def do_ad():
-    mydict={}
-    mylist=['ad_title', 'ad_text']
-    for i in mylist:
-        j=request.forms.get(i)
-        mydict.update({i:j})
+	#mydict={}
+	#mylist=['ad_title', 'ad_text']
+	ad_title=request.forms.get('ad_title')
+	ad_text=request.forms.get('ad_text')
 
-    checkAdinfo=check_ad_info(mydict['ad_title'])
+	'''
+	for i in mylist:
+		j=request.forms.get(i)
+		mydict.update({i:j})
+	'''
 
-    if checkAdinfo == True:
-        date_ad_created=time.strftime('%d/%m/%Y')
-        uniq_number=1
-        ad_ID=check_adID(uniq_number)
-        creator = log.get_user_id_logged_in()
-        mydict.update({'uniq_adNr':ad_ID, 'status':'Ingen vald', 'who_applied':[], 'creator':creator, 'date_of_adcreation':date_ad_created, 'the_chosen_one':''})
+	ad_title_checked=check_ad_info(ad_title)
 
-        content=load_adds('ads')
-        content.append(mydict)
-        with open('static/data/ads.json', "w") as fil:
-            json.dump(content, fil, indent=4)
-        redirect('/admin')
+	if  ad_title_checked == True:
+		print "hej"
+		#date_ad_created=time.strftime('%d/%m/%Y')
+		#uniq_number=1
+		#ad_ID=check_adID(uniq_number)
+		creator = log.get_user_id_logged_in()
+		#mydict.update({'uniq_adNr':ad_ID, 'status':'Ingen vald', 'who_applied':[], 'creator':creator, 'date_of_adcreation':date_ad_created, 'the_chosen_one':''})
 
-    else:
-        return "Ett fel uppstod - Kontrollera att du gav annonsen en titel"
+		#content=load_adds('ads')
+		#content.append(mydict)
+
+		sql_query="INSERT INTO ads(titel, main_info, creator_id, creation_date)\
+			VALUES ('%s', '%s', '%d', CURDATE())" % (ad_title, ad_text, creator)
+
+		cursor.execute(sql_query)
+		db.commit()
+
+		'''
+		with open('static/data/ads.json', "w") as fil:
+			json.dump(content, fil, indent=4)
+		'''
+		redirect('/admin')
+
+	else:
+		print "nej"
+		return "Ett fel uppstod - Kontrollera att du gav annonsen en titel"
 
 
 '''*********Check that a Title for the ad is given*********'''

@@ -7,6 +7,7 @@ import MySQLdb
 db = MySQLdb.connect(host="195.178.232.7", port=4040, user="AC8240", passwd="hejhej123", db="AC8240");
 cursor = db.cursor()
 
+
 '''*********Skriv/läsa filer*********'''
 def read_data(file):
 	try:
@@ -59,7 +60,6 @@ def add_new_user(email, password, user_level):
 	new_user_id = cursor.lastrowid
 	db.commit()
 
-	print new_user_id
 	return new_user_id
 
 

@@ -131,4 +131,4 @@ def ajax_validation():
         return True
 
     else:
-        areturn False
+        return False

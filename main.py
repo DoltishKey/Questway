@@ -92,7 +92,7 @@ def ajax_validation():
 		return 'User exists'
 	else:
 		return 'ok'
-		
+
 
 @route('/do_create_employer', method = 'POST')
 def do_create_employer():
@@ -159,12 +159,13 @@ def show_adds():
 
 @post('/make_ad')
 def ad_done():
-    log.validate_autho()
-    if log.get_user_level() == 2:
-    	addmod.do_ad()
+    #log.validate_autho()
+	addmod.do_ad()
+    #if log.get_user_level() == 2:
+    	#addmod.do_ad()
 
-    else:
-    	return 'Behörighet saknas!'
+    #else:
+    	#return 'Behörighet saknas!'
 
 
 '''*****Ta bort annons****'''
