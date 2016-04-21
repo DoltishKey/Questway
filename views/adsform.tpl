@@ -2,6 +2,7 @@
 <html>
     % include('head.tpl')
     <body>
+        %include('nav_employers.tpl')
         <form  name="create_ad" id="create_ad" method="POST" action="/make_ad">
             <h3 id="ca_Title">Lägg till annons för nytt uppdrag</h3>
 

@@ -30,7 +30,7 @@
                 <div class="wrap">
                     <h2 class="pageTitle">Lediga uppdrag</h2>
                          %for i in annons:
-                            %if user_id not in i['who_applied']:
+                            %if user_id not in i['who_applied'] and user_id!=i['the_chosen_one']:
                             <div class="add">
                                     <h2>{{i['ad_title']}}</h2>
                                     <h4 class="inline">Publicererades: </h4> <p class="inline_block">{{i['date_of_adcreation']}}</p>
@@ -71,7 +71,19 @@
             <div class="tabContent" id="pågående_uppdrag">
                 <div class="wrap">
                     <h2 class="pageTitle">Dina pågående uppdrag</h2>
-                    <p>Går ej att visa ännu.</p>
+                        %for i in annons:
+                            %if user_id == i['the_chosen_one']:
+                            <div class="add">
+                                <h2>{{i['ad_title']}}</h2>
+                                <h4 class="inline">Publicererades: </h4> <p class="inline_block">{{i['date_of_adcreation']}}</p>
+                                <div class="showMore">
+                                    <h4>Beskrivning:</h4>
+                                    <p>{{i['ad_text']}}</p>
+                                    <h4 class="inline_block">Företag: </h4><p class="inline_block"> {{i['ad_corpName']}}</p>
+                                </div>
+                            </div>
+                            %end
+                        %end
                 </div>
             </div>
 

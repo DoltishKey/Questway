@@ -1,26 +1,24 @@
 [
     {
-        "status": "Ingen vald",
-        "who_applied": [
-            11
-        ],
-        "creator": 10,
-        "ad_text": "1234",
-        "uniq_adNr": 1,
-        "ad_title": "abcd",
-        "the_chosen_one": "",
-        "date_of_adcreation": "17/04/2016"
-    },
+        "status": "Ingen vald", 
+        "who_applied": [], 
+        "creator": 1, 
+        "ad_text": "jdksajdka", 
+        "uniq_adNr": 1, 
+        "ad_title": "testing test", 
+        "the_chosen_one": 2, 
+        "date_of_adcreation": "20/04/2016"
+    }, 
     {
-        "status": "Ingen vald",
+        "status": "Ingen vald", 
         "who_applied": [
-            1
-        ],
-        "creator": 2, 
-        "ad_text": null,
-        "uniq_adNr": 2,
-        "ad_title": "Boxare",
-        "the_chosen_one": "",
-        "date_of_adcreation": "18/04/2016"
+            2
+        ], 
+        "creator": 1, 
+        "ad_text": "dsde", 
+        "uniq_adNr": 2, 
+        "ad_title": "kdi12nkds", 
+        "the_chosen_one": "", 
+        "date_of_adcreation": "20/04/2016"
     }
 ]
