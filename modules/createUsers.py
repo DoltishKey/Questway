@@ -40,10 +40,10 @@ def validate_Username(email):
 		return True
 
 def validate_if_student_exists(userID):
-	users = read_data('users_db')
-	for user in users:
-		if int(user['id']) == int(userID) and user['autholevel'] == 1:
-			return True
+	sql = "SELECT autho_level FROM users WHERE id = '%d'"%(userID)
+	cursor.execute(sql)
+	if cursor.rowcount == 1:
+		return True
 
 '''*********funktioner*********'''
 def add_new_user(email, password, user_level):
@@ -85,19 +85,22 @@ def add_new_student(first_name, last_name, program, year, new_user_id):
 	db.commit()
 
 def get_student_main_info(user):
-	user = int(user)
-	students = read_data('students')
-	for student in students:
-		if student['id'] == user:
-			return student
+	sql = "SELECT * FROM students WHERE id = '%d'"%(user)
+	cursor.execute(sql)
+	user_info = cursor.fetchall()[0]
+	return user_info
 
 def get_education_info(program, year):
-	educations = read_data("education")
-	for education in educations:
-		if int(education["id"]) == int(program) and int(education["year"]) == int(year):
-			return education
-		else:
-			print "Något gick fel"
+	sql = "SELECT titel, tagline, main_info_one, main_info_two, main_info_three, img_url \
+	FROM education WHERE education_id = '%d' AND year = '%d'"%(program, year)
+	cursor.execute(sql)
+	education_info = cursor.fetchall()[0]
+
+	sql = sql = "SELECT skill FROM education_skills\
+	WHERE education_id = '%d' AND education_year = '%d'"%(program, year)
+	cursor.execute(sql)
+	education_skills = cursor.fetchall()
+	return {'education_info':education_info, 'education_skills':education_skills}
 
 
 '''*********Main - Funktioner*********'''
@@ -165,7 +168,7 @@ def show_student_profile(user):
 	try:
 		if validate_if_student_exists(user) == True:
 			student_main_info = get_student_main_info(user)
-			education_info = get_education_info(student_main_info['program'],student_main_info['year'])
+			education_info = get_education_info(student_main_info[2],student_main_info[3])
 			return {'exists':True, 'student_info': student_main_info, 'education_info':education_info}
 
 		else:

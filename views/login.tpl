@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="sv">
-    
+
     %include('head.tpl')
-    
+
 	<body>
         <header>
             <div class="wrap">
@@ -22,7 +22,7 @@
                     <input placeholder="Email" type="input" name="email" id="email" value="">
                     <!--<label for="password">Lösenord</label>-->
                     <input placeholder="Lösenord" type="password" name="password" id="password" value="">
-                    <input class="myButton" type="submit" value="Logga in">		
+                    <input class="myButton" type="submit" value="Logga in">
                 </form>
                 <p id="error"></p>
                 <!--<div class="push"></div> <!-- Är till för att footer ska hamna längst ner, ta ej bort -->
@@ -40,13 +40,11 @@
                 </div>
             </div>
         </div>
-        
+
         <footer>
             <div class="wrap">
             © Questway, 2016
             </div>
         </footer>
 	</body>
-	<script src="/static/js/jquery.js"></script>
-	<script src="/static/js/main.js"></script>
 </html>
