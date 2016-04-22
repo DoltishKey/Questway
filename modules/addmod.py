@@ -8,7 +8,6 @@ import MySQLdb
 db = MySQLdb.connect(host="195.178.232.7", port=4040, user="AC8240", passwd="hejhej123", db="AC8240");
 cursor = db.cursor()
 
-
 '''*********Skriv/läsa filer*********'''
 def read_data(file):
 	try:
@@ -69,7 +68,6 @@ def do_ad():
 	ad_title_checked=check_ad_info(ad_title)
 
 	if  ad_title_checked == True:
-		print "hej"
 		#date_ad_created=time.strftime('%d/%m/%Y')
 		#uniq_number=1
 		#ad_ID=check_adID(uniq_number)
@@ -92,8 +90,7 @@ def do_ad():
 		redirect('/admin')
 
 	else:
-		print "nej"
-		return "Ett fel uppstod - Kontrollera att du gav annonsen en titel"
+		return {'result':False, 'error': "Ett fel uppstod - Kontrollera att du gav annonsen en titel"}
 
 
 '''*********Check that a Title for the ad is given*********'''
@@ -124,7 +121,21 @@ def check_adID(number):
             return check_adID(number)
     return number
 
-def get_corp_name(all_adds):
+def get_my_ads():
+
+	sql_query="SELECT employers.company_name, ads.titel, ads.main_info, employers.id, ads.creation_date \
+	FROM ads \
+	INNER JOIN employers \
+	ON employers.id=ads.creator_id"
+
+	cursor.execute(sql_query)
+	joined_employers_ads=cursor.fetchall()
+
+	print joined_employers_ads
+
+	return joined_employers_ads
+
+	'''
 	corps = createUsers.read_data('employers')
 	for add in all_adds:
 		for corp in corps:
@@ -132,17 +143,24 @@ def get_corp_name(all_adds):
 				add.update({'ad_corpName':corp['company_name']})
 
 	return all_adds
-
+	'''
 
 
 '''*********Choose a specific AD*********'''
 
-def choose_ad(annonsID, db, status):
+def choose_ad(annonsID):
+	query= "SELECT * FROM ads WHERE id='%d'" %(annonsID)
+
+	cur.execute(query)
+	return cur.fetchall()
+
+	'''
     for each in db:
         if int(each['uniq_adNr']) == int(annonsID) and str(each['the_chosen_one'])==str(status):
             return each
         elif int(each['uniq_adNr']) == int(annonsID) and status==None:
             return each
+	'''
 
 
 '''*********Choose a Student********'''

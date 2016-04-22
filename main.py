@@ -9,9 +9,8 @@ from beaker.middleware import SessionMiddleware
 import json
 import MySQLdb
 
-def connect_to_database():
-	db = MySQLdb.connect(host="195.178.232.7", port=4040, user="AC8240", passwd="hejhej123", db="AC8240");
-	db.close()
+db = MySQLdb.connect(host="195.178.232.7", port=4040, user="AC8240", passwd="hejhej123", db="AC8240");
+cursor = db.cursor()
 
 '''*********Routes*********'''
 
@@ -53,19 +52,20 @@ def log_out():
 
 @route('/admin')
 def admin():
-    log.validate_autho() #and log.get_user_level() == 2 | kontrollerar om användaren är inloggad
-    username = log.get_user_name() #hämtar användarens namn från DB (returnerar en sträng)
-    userid = log.get_user_id_logged_in() #hämtar användarens id
-    user_level = log.get_user_level() #kollar om användaren är uppdragstagare eller student (returnerar 1 eller 2)
-    all_adds=addmod.load_adds('ads')
-    complete_adds = addmod.get_corp_name(all_adds)
-    grading_ads = addmod.read_data('grading')
+	log.validate_autho() #kontrollerar om användaren är inloggad
+	username = log.get_user_name() #hämtar användarens namn från DB (returnerar en sträng)
+	userid = log.get_user_id_logged_in() #hämtar användarens id
+	user_level = log.get_user_level() #kollar om användaren är uppdragstagare eller student (returnerar 1 eller 2)
+	#all_adds=addmod.load_adds('ads')
+	complete_adds = addmod.get_my_ads()
+	grading_ads = addmod.read_data('grading')
 
-    if user_level == 1:
-        return template('student_start', user=username, level="student", gradings = grading_ads,  annons=complete_adds, user_id=userid, pageTitle = 'Start')
-    else:
-        #här ska arbetsgivarnas annonser med
-        return template('employer_start', user=username, user_id=userid,  level="arbetsgivare", annons=complete_adds, pageTitle = 'Start')
+	if user_level == 1:
+
+		return template('student_start', user=username, level="student", gradings = grading_ads,  annons=complete_adds, user_id=userid, pageTitle = 'Start')
+	else:
+
+		return template('employer_start', user=username, user_id=userid,  level="arbetsgivare", annons=complete_adds, pageTitle = 'Start')
 
 
 
@@ -151,16 +151,22 @@ def edit_contact_information():
 
 @route('/showadds')
 def show_adds():
-    log.validate_autho()
-    username=log.get_user_name()
-    all_adds=addmod.load_adds('ads')
-    complete_adds = addmod.get_corp_name(all_adds)
-    return template('adsform.tpl',user=username, annons=complete_adds, pageTitle = 'Annonser' )
+	log.validate_autho()
+	username=log.get_user_name()
+	all_adds=addmod.load_adds('ads')
+	complete_adds = addmod.get_my_ads()
+	print complete_adds
+	return template('adsform.tpl',user=username, annons=complete_adds, pageTitle = 'Annonser' )
 
 @post('/make_ad')
 def ad_done():
     #log.validate_autho()
-	addmod.do_ad()
+	response=addmod.do_ad()
+	if response['result']==True:
+		redirect('/admin')
+	else:
+		return response['error']
+
     #if log.get_user_level() == 2:
     	#addmod.do_ad()
 
@@ -174,15 +180,11 @@ def ad_done():
 def del_ad(annons):
 	log.validate_autho()
 	if log.get_user_level() == 2:
-		all_adds=addmod.load_adds('ads')
-		which_ad_to_delete=addmod.choose_ad(annons, all_adds, '')
-		if which_ad_to_delete['creator'] == log.get_user_id_logged_in():
-			all_adds.remove(which_ad_to_delete)
-			with open('static//data/ads.json', 'w') as fil:
-				json.dump(all_adds, fil, indent=4)
-			redirect('/allMissions')
-		else:
-			return 'Behörighet saknas!'
+		user_logged_in=log.get_user_id_logged_in()
+
+		query= "DELETE FROM ads WHERE id = '%d' and creator_id='%d'" %(annons, user_logged_in)
+		cur.execute(query)
+		db.commit()
 
 	else:
 		return 'Behörighet saknas!'

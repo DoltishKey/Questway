@@ -4,11 +4,13 @@ from bottle import route, get, post, run, template, error, static_file, request,
 import json
 from validate_email import validate_email
 import MySQLdb
+
+'''*********DB info*********'''
 db = MySQLdb.connect(host="195.178.232.7", port=4040, user="AC8240", passwd="hejhej123", db="AC8240");
 cursor = db.cursor()
 
 
-'''*********Skriv/läsa filer*********'''
+'''*********Läs & skriv till fil*********'''
 def read_data(file):
 	try:
 		fileIn = open('static/data/'+ file +'.json', 'r')
@@ -19,10 +21,12 @@ def read_data(file):
 		dataRead = read_data(file)
 	return dataRead
 
-def write_to_db(users, db):
-	fileOut = open('static/data/'+ db +'.json', 'w')
-	json.dump(users, fileOut, indent=4)
-	fileOut.close()
+def validatekDataFile(file):
+	'''Om databasen inte finns eller är helt tom så skapas en json-fil innehållande en tom lista.'''
+	resList = []
+	dataFile = open('static/data/'+ file +'.json', 'w')
+	json.dump(resList, dataFile, indent=4)
+	dataFile.close()
 
 
 '''*********Validering*********'''
@@ -34,13 +38,6 @@ def validate_Username(email):
 	print type(data)
 	if len(data) != 0:
 		return True
-
-def validatekDataFile(file):
-	'''Om databasen inte finns eller är helt tom så skapas en json-fil innehållande en tom lista.'''
-	resList = []
-	dataFile = open('static/data/'+ file +'.json', 'w')
-	json.dump(resList, dataFile, indent=4)
-	dataFile.close()
 
 def validate_if_student_exists(userID):
 	users = read_data('users_db')
@@ -67,7 +64,8 @@ def add_new_employer(company_name, org_nr, first_name, last_name, new_user_id):
 	org_nr = int(org_nr)
 	sql = "INSERT INTO employers(first_name, \
        last_name, company_name, org_nr, id) \
-       VALUES ('%s', '%s', '%s', '%d', (select id from users where id = '%d') )" %(first_name, last_name, company_name, org_nr, new_user_id)
+       VALUES ('%s', '%s', '%s', '%d', (select id from users where id = '%d') )" \
+	   %(first_name, last_name, company_name, org_nr, new_user_id)
 
 	cursor.execute(sql)
 	db.commit()
@@ -77,9 +75,10 @@ def add_new_employer(company_name, org_nr, first_name, last_name, new_user_id):
 def add_new_student(first_name, last_name, program, year, new_user_id):
 	program = int(program)
 	year = int(year)
-	sql = "INSERT INTO students(first_name, \
-       last_name, education_id, education_year, id) \
-       VALUES ('%s', '%s', '%d', '%d', (select id from users where id = '%d') )" %(first_name, last_name, program, year, new_user_id)
+	sql = "INSERT INTO students(first_name, last_name, education_id, education_year, id) \
+       VALUES ('%s', '%s', (select education_id from education where education_id = '%d' and year = '%d'), \
+	    (select year from education where year = '%d' and education_id = '%d'), (select id from users where id = '%d') )" \
+		%(first_name, last_name, program, year, year, program, new_user_id)
 
 	#call_database(sql, False);
 	cursor.execute(sql)
