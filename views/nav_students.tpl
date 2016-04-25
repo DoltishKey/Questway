@@ -13,10 +13,10 @@
 					<a href="/admin">Start</a>
 				%end
 
-				%if request.path == '/profiles/' + str(student[4]):
+				%if request.path == '/profiles/' + str(user_id):
 					<a class="currentMenuItem" href="/profiles/{{student[4]}}">Profil</a>
 				%else:
-					<a href="/profiles/{{student[4]}}">Profil</a>
+					<a href="/profiles/{{user_id}}">Profil</a>
 				%end
 
 
