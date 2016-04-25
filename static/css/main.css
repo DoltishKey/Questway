@@ -1,10 +1,11 @@
 html{
-    height: 100%;
+   min-height: 100%;
 }
 
 body {
     height: 100%;
     font-family: 'Lato', 'Tahoma', sans-serif;
+    font-size: 16px;
     margin: 0;
 }
 
@@ -22,9 +23,10 @@ body {
 }
 
 header {
-    padding: 40px;
-    /*height: 120px;*/
-    background-color: #EEEAE8;
+    padding: 25px 0;
+    background-color: #2D3030;/*#EEEAE8*/;
+    color: #FFF;
+    border-bottom: 20px solid #F89406;
 }
 
 header h1 {
@@ -50,38 +52,38 @@ header h1 {
     padding: 15px 0px;
     margin: 0px 0px;
     text-decoration: none;
-    color: #FBFBFB;
+    color: #FFF/*#FBFBFB*/;
     display: inline-block;
     vertical-align: top;
     text-align: center;
     text-transform: uppercase;
+    font-size: 1vw;
     font-weight: bold;
-    border-left: 1px solid black;
+    border-left: 1px solid #FFF;
     float: left;
-    background-color: #E87E04;
+    /*background-color: #E87E04;*/
 }
 
 #employerMenu > a {
-    width: 24%;
+    width: 24.7%;
 }
 
-.menu > a:first-child {
+/*.menu > a:first-child {
     border-left: none;
+}*/
+
+.menu > a:last-child {
+    border-right: 1px solid #FFF;
 }
 
 .menu > a:hover {
-    background-color: #5B514A;
-    transition: background-color 0.7s ease;
-    color: #BD6822;
-}
-
-.menu > a:active {
-    background-color: #2F2D2C;
+    transition: color 0.7s ease;
+    color: #EB9532;
 }
 
 .menu > .currentMenuItem {
-    background-color: #42403E;
-    color: #BD6822;
+    /*background-color: #42403E;*/
+    color: #F89406;
 }
 
 .courtesyNav {
@@ -90,15 +92,15 @@ header h1 {
 
 .courtesyNavItem {
     margin: 0;
-    margin-top: -20px;
+    margin-top: -15px;
 }
 
 
 .pageTitle {
     text-align: center;
-    margin: 50px auto;
+    margin: 30px auto;
     padding-bottom: 5px;
-    color: whitesmoke;
+    color: #000/*#605F5F*/;
     text-transform: uppercase;
     font-size: 30px;
     border-bottom: 2px solid #E9E9E9;
@@ -113,10 +115,10 @@ header h1 {
 
 .add {
     padding: 25px 20px 25px 50px;
-    margin: 20px auto 0 auto;
+    margin: 5px auto 0 auto;
     background-color: white;
     cursor: pointer;
-    border: 3px solid rgba(102, 185, 191, 1);
+    border: 3px solid #00c4cc;
     position: relative;
 }
 
@@ -135,6 +137,7 @@ header h1 {
 .add h4 {
     margin-top: 2px;
     margin-bottom: 5px;
+    margin-right: 4px;
 }
 
 .add p {
@@ -150,8 +153,8 @@ header h1 {
     position: absolute;
     right: 0px;
     top: 0px;
-    height: 130px;
-    background-color: rgba(102, 185, 191, 1);
+    height: 100%;
+    background-color: #00c4cc;
     line-height: 130px;
     width: 60px;
     text-align: center;
@@ -159,57 +162,109 @@ header h1 {
     font-size: 40px;
 }
 
-/*.add > div:last-child:hover {
-    background-color: #48797D;
-}*/
-
 ul#tabs {
     list-style-type: none;
-    margin: 60px auto;
-    padding: 0 0 0.6em 0;
-    width: 660px;
+    margin: 70px auto 50px auto;
+    width: 100%;
+    padding: 0;
+    font-size: 0;
 }
 
 ul#tabs li {
-    display: inline;
+    display: inline-block;
+    width: 24.94%;
+    text-align: center;
+    font-size: 18px;
+    border-right: 1px solid #BBBBBB;
 }
 
 ul#tabs li a {
     color: #42454a;
-    background-color: #E9E9E9;
-    border: 2px solid rgba(102, 185, 191, 0.9);
-    /*border-bottom: none; */
-    padding: 0.6em 1em;
+    background-color: #F3F3F3;
+    /*border-bottom: 2px solid #F89406;*/
+    position: relative;
+    display: block;
+    padding: 6% 6%;
+    margin: 0;
     text-decoration: none;
-    border-radius: 20px;
-    -moz-box-shadow: 0px 5px 7px -3.5px #276873;
-	-webkit-box-shadow: 0px 5px 7px -3.5px #276873;
-	box-shadow: 0px 5px 7px -3.5px #000;
+    z-index: 1;
+}
+
+ul#tabs li:last-child {
+    border-right: none;
+    border-top-right-radius: 7px;
+}
+
+ul#tabs li:first-child {
+    border-top-left-radius: 7px;
 }
 
 ul#tabs li a:hover {
-    background-color: #f1f0ee;
+    background-color: #E9E9E9;
 }
 
 ul#tabs li a.selected {
+    z-index: 2;
     color: #000;
-    background-color: rgba(102, 185, 191, 0.9);
+    background-color: #00c4cc;
     font-weight: bold;
-    padding: 0.8em 1em 0.78em 1em;
-    border: none;
+    /* -webkit-box-shadow: 10px 0 5px -2px #888;
+    box-shadow: 5px 5px 5px -2px #888;*/
+    /*border-bottom: 2px solid #F3F3F3;*/
 }
 
 div.tabContent {
-    padding: 20px;
-    background-color: #3E4244;
-    margin: 0;
-    min-height: 80%;
-    border-bottom: 5px solid #595E61;
-    border-top: 5px solid #595E61;
+    background-color: #FFF/*#F3F3F3*/;
+    margin: 0 0 60px 0;
+    min-height: 400px;
 }
 
 div.tabContent.hide {
     display: none;
+}
+
+div.wrap_around_tab_content {
+    width: 100%;
+    min-height: 500px;
+    background-color: #FFF;
+    overflow: hidden;
+    border-bottom: 2px solid #8A8C8C; 
+    border-top: 2px solid #8A8C8C; 
+}
+
+div.container_student_start {
+    background: url(../img/student_start_background.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    background-color: #E1E1E1;
+    overflow: hidden;
+}
+
+div.container_student_start h2 {
+    background-color: rgba(255, 255, 255, 0.4);
+    width: 300px;
+    padding: 15px;
+    text-align: center;
+    margin: auto;
+    font-size: 280%;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 2px #000;
+    position: relative;
+    top: 158px;
+    color: #FFF;
+}
+
+.tabContent .showMore form input {
+    position: relative; 
+    left: 40%;
+    display: inline;
+}
+
+@media screen and (max-width:743px) {
+    ul#tabs li {
+        font-size: 14px;
+    }
 }
 
 
@@ -248,57 +303,77 @@ div.tabContent.hide {
     text-align: center;
 }
 
-::-webkit-input-placeholder {
-   color: lightgray; text-align: center;
-}
-:-moz-placeholder { /* Firefox 18- */
-   color: lightgray; text-align: center;
-}
-::-moz-placeholder {  /* Firefox 19+ */
-   color: lightgray; text-align: center;
-}
-:-ms-input-placeholder {
-   color: lightgray; text-align: center;
-}
-
 footer {
-    color: #000;
+    color: #FFF;
     height: 100px;
     text-align: center;
     line-height: 5;
-    background: #EEEAE8;
+    background: #2D3030;
 }
 
+/* För inloggningsformulär: */
 #logIn{
     width: 40%;
     color: #000;
     margin: 147.5px auto 0 auto;
     padding: 50px 20px;
-    background-color: rgba(137, 134, 132, 0.5);
+    background-color: rgba(45, 48, 48, 0.7);
     box-shadow: 0px 10px 14px -7px #000;
     border-radius: 10px;
 }
 
-form h2{
-    color: #fff;
+#logIn h2{
+    color: #FFF;
     text-align: center;
-    margin-top: 10px;
+    margin-top: 15px;
+    margin-bottom: 35px;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 2px #000;
 }
 
 #email, #password{
     background: #FFF9F6;
     color: #000;
-    height: 30px;
+    height: 40px;
     width: 75%;
     font-size: 15px;
-    background: white;
+    background: #FFF;
     text-align: center;
-    border-radius: 8px;
+    border-bottom: 2px double #00c4cc;
+    border-top: none;
+    border-right: none;
+    border-left: none;
 }
 
 #logIn input, label {
     display: block;
     margin: 25px auto;
+}
+
+#logIn input:last-child {
+    margin-top: 40px;
+}
+
+::-webkit-input-placeholder {
+   color: #949494; text-align: center;
+}
+:-moz-placeholder { /* Firefox 18- */
+   color: #949494; text-align: center;
+}
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #949494; text-align: center;
+}
+:-ms-input-placeholder {
+   color: #949494; text-align: center;
+}
+
+#log_in_button {
+    width: 75%;
+    background: #00c4cc;
+}
+
+#logIn input:focus {
+    outline:0;
 }
 
 /* För att input-fält med autofill-uppgifter ska vara vitt och inte gult i Chrome*/
@@ -309,7 +384,6 @@ input:-webkit-autofill:active {
 transition: background-color 5000s ease-in-out 0s;
 }
 
-/* _____________ */
 
 .content2 {
     background-color: #5C5E60 /*#3E4244/*#C0B4AD*/;
@@ -352,39 +426,42 @@ transition: background-color 5000s ease-in-out 0s;
 
  /* Design för knappar */
 .myButton {
-    -moz-box-shadow: 0px 10px 14px -7px #276873;
-	-webkit-box-shadow: 0px 10px 14px -7px #276873;
-	box-shadow: 0px 10px 14px -7px #000;
+    -moz-box-shadow: 0px 10px 14px -5px #276873;
+	-webkit-box-shadow: 0px 10px 14px -5px #276873;
+	box-shadow: 5px 7px 10px -7px #000;
     padding:13px 32px;
 	text-decoration:none;
     font-size:16px;
-	font-weight:bold;
-    background: linear-gradient(to bottom, #2F4D59 5%, #326072 100%);
+	font-weight: 200;
+    text-transform: uppercase;
+    /*background: linear-gradient(to bottom, #2F4D59 5%, #326072 100%);
 	background:-moz-linear-gradient(top, #2F4D59 5%, #326072 100%);
 	background:-webkit-linear-gradient(top, #2F4D59 5%, #326072 100%);
 	background:-o-linear-gradient(top, #2F4D59 5%, #326072 100%);
-	background:-ms-linear-gradient(top, #2F4D59 5%, #326072 100%);
-	background-color:#599bb3;
-    -moz-border-radius:17px;
+	background:-ms-linear-gradient(top, #2F4D59 5%, #326072 100%);*/
+	background-color:#E87E04;
+    /*-moz-border-radius:17px;
 	-webkit-border-radius:17px;
-	border-radius:17px;
-    color: #C0C0C0;
+	border-radius:10px;*/
+    color: #FFF;
     border: 0px;
     text-shadow:0px 1px 0px #3d768a;
 }
 
 .myButton:hover {
-    background:linear-gradient(to bottom, #2B3D44 5%, #537785 100%);
+    background-color: #EB9532;
+    /*background:linear-gradient(to bottom, #2B3D44 5%, #537785 100%);
 	background:-moz-linear-gradient(top, #2B3D44 5%, #537785 100%);
 	background:-webkit-linear-gradient(top, #2B3D44 5%, #537785 100%);
 	background:-o-linear-gradient(top, #2B3D44 5%, #537785 100%);
-	background:-ms-linear-gradient(top, #2B3D44 5%, #537785 100%);
+	background:-ms-linear-gradient(top, #2B3D44 5%, #537785 100%);*/
 }
 
 .myButton:active {
     position: relative;
     top: 1px;
 }
+
 .myButton:focus {
     outline:0;
 }
@@ -971,11 +1048,11 @@ transition: background-color 5000s ease-in-out 0s;
 
 
 @media screen and (max-width:960px){
-
-    .menu a {
-        font-size: 80%;
+    
+    .menu > a {
+        font-size: 1.5vw;
     }
-
+    
     #wrapContent {
     width: 667px;
     margin: auto;
@@ -1004,6 +1081,23 @@ transition: background-color 5000s ease-in-out 0s;
     .content2 {
         padding: 0px;
     }
+    
+    .wrap {
+        width: 90%;
+    }
+
+    /*ul#tabs li a {
+        padding: 0.3em 0.7em;
+        border-radius: 0;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        margin: 0;
+    }
+
+    ul#tabs li a.selected {
+        padding: 0.5em 0.9em;
+    }*/
 
 }
 /* ----- Välj Typ av användare ------ */
@@ -1315,25 +1409,21 @@ label{
     .courtesyNav {
         display: none;
     }
-
-    ul#tabs {
-        list-style-type: none;
-        margin: 5px auto;
-        padding: 0 0 0.6em 0;
-        width: 100%;
+    
+    .pageTitle {
+        font-size: 22px;
     }
-
+    
+    ul#tabs li {
+        font-size: 2.7vw;
+    }
+    
     ul#tabs li a {
-        padding: 0.3em 0.7em;
-        border-radius: 0;
-        -moz-box-shadow: none;
-        -webkit-box-shadow: none;
-        box-shadow: none;
-        margin: 0;
+        padding: 8% 3%;
     }
-
-    ul#tabs li a.selected {
-        padding: 0.5em 0.9em;
+    
+    .add > .arrow {
+        width: 40px;
     }
 }
 

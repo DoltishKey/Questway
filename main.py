@@ -65,7 +65,7 @@ def admin():
 	else:
 		return template('employer_start', user=username, user_id=userid,  level="arbetsgivare", annons=complete_adds, pageTitle = 'Start')
 
-
+    
 
 '''********Create-user********'''
 @route('/create')

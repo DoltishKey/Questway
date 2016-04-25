@@ -3,32 +3,27 @@
 
     %include('head.tpl')
 
-    <body onload="init()">
-        <header>
+	<body onload="init()">
+        
+        %include('nav_students.tpl')
+
+        <div class="container_student_start">
+            <h2>Uppdrag</h2>
+        </div>
+                
+        <div class="wrap_around_tab_content">
             <div class="wrap">
-                <div class="courtesyNav">
-                    <p class="courtesyNavItem">Inloggad som <strong>{{user}}</strong></p>
-                </div>
-                <h1>Questway</h1>
-                <nav class="menu">
-                    <a class="currentMenuItem" href="">Uppdrag</a>
-                    <a href="/profiles/{{user_id}}">Profil</a>
-                    <a href="/log_out">Logga ut</a>
-                </nav>
+                <!-- Länkar till tabbarna: -->
+                <ul id="tabs">
+                    <li><a href="#lediga_uppdrag" onclick="showTab()">Lediga uppdrag</a></li>
+                    <li><a href="#sökta_uppdrag" onclick="showTab()">Sökta uppdrag</a></li>
+                    <li><a href="#pågående_uppdrag" onclick="showTab()">Pågående uppdrag</a></li>
+                    <li><a href="#avslutade_uppdrag" onclick="showTab()">Avslutade uppdrag</a></li>
+                </ul>
             </div>
-        </header>
 
-        <!-- Länkar till tabbarna: -->
-        <ul id="tabs">
-            <li><a href="#lediga_uppdrag" onclick="showTab()">Lediga uppdrag</a></li>
-            <li><a href="#sökta_uppdrag" onclick="showTab()">Sökta uppdrag</a></li>
-            <li><a href="#pågående_uppdrag" onclick="showTab()">Pågående uppdrag</a></li>
-            <li><a href="#avslutade_uppdrag" onclick="showTab()">Avslutade uppdrag</a></li>
-        </ul>
-
-            <div class="tabContent" id="lediga_uppdrag">
-                <div class="wrap">
-                    <h2 class="pageTitle">Lediga uppdrag</h2>
+                <div class="tabContent" id="lediga_uppdrag">
+                    <div class="wrap">
                          %for i in annons:
                             <div class="add">
                                     <h2>{{i[1]}}</h2>
@@ -44,12 +39,11 @@
                                 <div class="arrow">></div>
                             </div>
                         %end
+                    </div>
                 </div>
-            </div>
 
             <div class="tabContent" id="sökta_uppdrag">
                 <div class="wrap">
-                    <h2 class="pageTitle">Uppdrag du sökt</h2>
                         %for i in annons:
                             <div class="add">
                                 <h2>{{i[1]}}</h2>
@@ -66,7 +60,6 @@
 
             <div class="tabContent" id="pågående_uppdrag">
                 <div class="wrap">
-                    <h2 class="pageTitle">Dina pågående uppdrag</h2>
                     %for i in annons:
                         <div class="add">
                             <h2>{{i[1]}}</h2>
@@ -81,9 +74,9 @@
                 </div>
             </div>
 
+
         <div class="tabContent" id="avslutade_uppdrag">
             <div class="wrap">
-            <h2 class="pageTitle">Avslutade uppdrag</h2>
             %for grading in gradings:
                 %if user_id == grading['selected']:
                 <div class="add">
@@ -94,7 +87,8 @@
                     %end
                 </div>
                 %end
-            %end
+            </div>
+
             </div>
         </div>
 
