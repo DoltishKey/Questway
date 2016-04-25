@@ -15,7 +15,8 @@
                     <input placeholder="Email" type="input" name="email" id="email" value="">
                     <!--<label for="password">Lösenord</label>-->
                     <input placeholder="Lösenord" type="password" name="password" id="password" value="">
-                    <input class="myButton" type="submit" id="log_in_button" value="Logga in" onclick="emailValidation()">
+                    <input class="myButton" type="submit" id="log_in_button" value="Logga in" onclick="emailValidation()">	
+
                 </form>
                 <p id="error"></p>
             </div>
