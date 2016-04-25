@@ -84,9 +84,10 @@
                     %if grading['display'] == False:
                         <p>Uppdraget visas inte på din profil</p>
                         <a href="/profiles/{{user_id}}#mission{{grading['uniq_adNr']}}">Visa på din profil</a>
-                    %end
-                </div>
+                    %end    
                 %end
+                </div>
+            %end
             </div>
 
             </div>
