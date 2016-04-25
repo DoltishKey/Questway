@@ -50,7 +50,7 @@ header h1 {
 }
 
 .menu > a {
-    width: 33%;
+    width: 32.5%;
     padding: 15px 0px;
     margin: 0px 0px;
     text-decoration: none;
@@ -175,10 +175,14 @@ ul#tabs {
 
 ul#tabs li {
     display: inline-block;
-    width: 24.94%;
+    white-space: nowrap;
+    width: 24.92%;
     text-align: center;
-    font-size: 18px;
     border-right: 1px solid #BBBBBB;
+    font-size: 0px;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit  */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko         */
+    box-sizing: border-box; 
 }
 
 ul#tabs li a {
@@ -186,6 +190,7 @@ ul#tabs li a {
     background-color: #F3F3F3;
     /*border-bottom: 2px solid #F89406;*/
     position: relative;
+    font-size: 18px;
     display: block;
     padding: 6% 6%;
     margin: 0;
@@ -236,7 +241,7 @@ div.wrap_around_tab_content {
 }
 
 div.container_student_start {
-    background: url(../img/student_start_background.jpg);
+    background: url(../img/test.jpg);
     background-size: cover;
     background-position: center;
     height: 400px;
@@ -265,7 +270,7 @@ div.container_student_start h2 {
 }
 
 @media screen and (max-width:743px) {
-    ul#tabs li {
+    ul#tabs li a {
         font-size: 14px;
     }
 }
@@ -1345,7 +1350,7 @@ label{
 
     #logIn {
         width: 90%;
-        margin: 85px auto;
+        margin: 50px auto;
     }
 
     header nav{
@@ -1428,6 +1433,11 @@ label{
     
     .add > .arrow {
         width: 40px;
+    }
+    
+    div.container_student_start h2 {
+    position: relative;
+    top: 220px;
     }
 }
 
