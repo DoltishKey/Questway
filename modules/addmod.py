@@ -82,7 +82,7 @@ def do_ad():
 
 		cursor.execute(sql_query)
 		db.commit()
-		return {'result':True, 'error':'None'}
+		return {'result':True, 'error':None}
 
 		'''
 		with open('static/data/ads.json', "w") as fil:
@@ -139,15 +139,6 @@ def join_ads_employers():
 
 	return joined_employers_ads
 
-	'''
-	corps = createUsers.read_data('employers')
-	for add in all_adds:
-		for corp in corps:
-			if add['creator'] == corp ['id']:
-				add.update({'ad_corpName':corp['company_name']})
-
-	return all_adds
-	'''
 
 '''******* Delete a specifik ad *******'''
 def erase_ad(ad_id, user_ID):
@@ -156,10 +147,36 @@ def erase_ad(ad_id, user_ID):
 	db.commit()
 	redirect('/allMissions')
 
-'''*********Choose a specific AD*********'''
 
-def choose_ad(annonsID):
-	query= "SELECT * FROM ads WHERE id='%d'" %(annonsID)
+'''*****Which ads student applied on****'''
+def applied_on(who, status):
+	query="SELECT * FROM application WHERE '%d'=application.student_id \
+	AND application.status='%s'" %(who, status)
+
+	cursor.execute(query)
+	return cursor.fetchall()
+
+
+'''****** Student Applying on ad *****'''
+def applying_for_mission(which_ad):
+	log.validate_autho()
+	which_ad=int(which_ad)
+	user=log.get_user_id_logged_in()
+	ads_user_applied_on=applied_on(user, 'Obehandlad')
+
+	if len(ads_user_applied_on) > 0:
+		return {'result':False, 'error':'Du har redan ansökt på denna annons!'}
+	else:
+		query="INSERT INTO application(ad_id, student_id, status)\
+			VALUES ('%d', '%d', '%s')" % (which_ad, user, 'Obehandlad')
+		cursor.execute(query)
+		db.commit()
+		return {'result':True, 'error':None}
+
+
+'''*********Choose a specific AD*********'''
+def choose_ad(ad_id):
+	query= "SELECT * FROM ads WHERE id='%d'" %(ad_id)
 
 	cursor.execute(query)
 	return cursor.fetchall()
