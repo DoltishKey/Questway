@@ -1,7 +1,7 @@
 <header>
     <div class="wrap">
 		<div class="courtesyNav">
-				<p class="courtesyNavItem">Inloggad som <strong> {{username}}</strong></p>
+				<p class="courtesyNavItem">Inloggad som <strong> {{user}}</strong></p>
 		</div>
 		<h1>Questway</h1>
 		<nav class="menu">
