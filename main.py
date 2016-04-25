@@ -150,20 +150,13 @@ def edit_contact_information():
 
 @route('/showadds')
 def show_adds():
-<<<<<<< HEAD
-    log.validate_autho()
-    username=log.get_user_name()
-    all_adds=addmod.load_adds('ads')
-    complete_adds = addmod.get_corp_name(all_adds)
-    return template('adsform.tpl', user=username, annons=complete_adds, pageTitle = 'Annonser' )
-=======
 	log.validate_autho()
 	username=log.get_user_name()
 	all_adds=addmod.load_adds('ads')
 	complete_adds = addmod.join_ads_employers()
 	print complete_adds
 	return template('adsform.tpl',user=username, annons=complete_adds, pageTitle = 'Annonser' )
->>>>>>> origin/master
+
 
 @post('/make_ad')
 def ad_done():

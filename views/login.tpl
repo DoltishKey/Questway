@@ -23,7 +23,7 @@
                     <input placeholder="Email" type="input" name="email" id="email" value="">
                     <!--<label for="password">Lösenord</label>-->
                     <input placeholder="Lösenord" type="password" name="password" id="password" value="">
-                    <input class="myButton" type="submit" value="Logga in">
+                    <input class="myButton" type="submit" value="Logga in" onclick="emailValidation()">
                 </form>
                 <p id="error"></p>
                 <!--<div class="push"></div> <!-- Är till för att footer ska hamna längst ner, ta ej bort -->
