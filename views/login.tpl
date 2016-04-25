@@ -11,10 +11,15 @@
                 <form name="logIn" id="logIn" method="post" action="/do_login">
                     <h2>Logga in</h2>
                     <!--<label for="email">Användarnamn</label>-->
+                    <p id="alert" style="display: none"></p>
                     <input placeholder="Email" type="input" name="email" id="email" value="">
                     <!--<label for="password">Lösenord</label>-->
                     <input placeholder="Lösenord" type="password" name="password" id="password" value="">
+<<<<<<< HEAD
+                    <input class="myButton" type="submit" value="Logga in" onclick="emailValidation()">
+=======
                     <input class="myButton" type="submit" id="log_in_button" value="Logga in">		
+>>>>>>> origin/master
                 </form>
                 <p id="error"></p>
             </div>

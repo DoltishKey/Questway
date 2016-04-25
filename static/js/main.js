@@ -121,39 +121,6 @@ function showHide() {
      });
 }
 
-function set(){
-    document.getElementById("meny").style.display = "none";
-    document.getElementById("header").style.height = "70px";
-    document.getElementById("headerbottom").style.top = "70px";
-    document.getElementById("downarrow").style.top = "70px";
-
-    document.getElementById("logo1").style.left = innerWidth/2 + "px";
-    document.getElementById("headerbottom").style.borderLeft = innerWidth/2 + "px" + " solid transparent"; document.getElementById("headerbottom").style.borderRight = innerWidth/2 + "px" + " solid transparent";
-}
-function showHideMeny() {
-    var button = document.getElementById("downarrow");
-    var meny = document.getElementById("meny");
-    var header = document.getElementById("header");
-    var botheader = document.getElementById("headerbottom");
-    var arrow = document.getElementById("downarrow");
-
-    if (meny.style.display == "none") {
-        meny.style.display = "block";
-        header.style.height = "230px";
-        botheader.style.top = "230px";
-        arrow.style.top = "230px";
-        arrow.style.textTransform = "rotate(360deg)";
-    } else if (meny.style.display == "block") {
-        meny.style.display = "none";
-        header.style.height = "70px";
-        botheader.style.top = "70px";
-        arrow.style.top = "70px";
-    } else {
-        alert("Något gick fel!");
-    }
-
-}
-
 function mission_control(){
 	$('.misson_info_control').click(function() {
 		clicked_parent = $(this).parents('li');
@@ -187,7 +154,6 @@ function open_close_mission(clicked_parent){
 	clicked_parent.addClass('big');
 	clicked_parent.find('.mission_info').slideToggle();
 }
-
 
 function edit_mission(){
 	$('.edit_mission_info').find('.btn').click(function() {
@@ -263,7 +229,6 @@ function remove_key() {
 	});
 }
 
-
 function update_mission(){
 	$('.edit_mission_btn').click(function(){
 		if ( $(this).html() == 'Spara' ){
@@ -280,4 +245,28 @@ function update_mission(){
 			console.log('Något har gått fel!');
 		}
   	});
+}
+
+/* KONTROLLERA INPUT*/
+//LogIN
+function emailValidation(){
+    var emailtest = document.getElementById("email");
+    var error = document.getElementById("error");
+    if(emailtest.indexOf('@') == -1){
+        error.innerHTML("Du måste ange hela din mailadress. Med @ och allt.");
+        alert("Du måste ange hela din mailadress. Med @ och allt.");
+    }
+}
+//Skapa annons
+function createAdValid(){
+    var error = document.getElementById("error");
+    var ad_title = document.getElementById("ad_title");
+    var ad_text = document.getElementById("ad_text");
+    if(ad_title == null){
+        alert("Var vänlig ange en annonstitel.");
+        error.innerHTML("Var vänlig ange en annonstitel.");
+    }else if(ad_text == null){
+        alert("Var vänlig ange en kort beskrivande text till din annons.")
+        error.innerHTML("Var vänlig ange en kort beskrivande text till din annons.");
+    }
 }

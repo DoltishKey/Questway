@@ -65,7 +65,7 @@ def admin():
 	else:
 		return template('employer_start', user=username, user_id=userid,  level="arbetsgivare", annons=complete_adds, pageTitle = 'Start')
 
-    
+
 
 '''********Create-user********'''
 @route('/create')
@@ -127,7 +127,7 @@ def profiles(user):
 		education_info = user_profile_data['education_info']
 		student_info = user_profile_data['student_info']
 		student_name = student_info[0] + ' ' + student_info[1]
-		return template('user_profile', user = username, user_autho = user_levle, student_id = user, student= student_info, education = education_info, pageTitle = student_name )
+		return template('user_profile', user = username, user_autho = user_levle, user_id = user, student= student_info, education = education_info, pageTitle = student_name )
 
 	else:
 		return 'Användaren finns inte!'
@@ -156,6 +156,7 @@ def show_adds():
 	complete_adds = addmod.join_ads_employers()
 	print complete_adds
 	return template('adsform.tpl',user=username, annons=complete_adds, pageTitle = 'Annonser' )
+
 
 @post('/make_ad')
 def ad_done():
