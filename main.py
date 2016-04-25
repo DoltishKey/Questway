@@ -152,9 +152,10 @@ def edit_contact_information():
 @route('/showadds')
 def show_adds():
     log.validate_autho()
+    username=log.get_user_name()
     all_adds=addmod.load_adds('ads')
     complete_adds = addmod.get_corp_name(all_adds)
-    return template('adsform.tpl', annons=complete_adds, pageTitle = 'Annonser' )
+    return template('adsform.tpl', user=username, annons=complete_adds, pageTitle = 'Annonser' )
 
 @post('/make_ad')
 def ad_done():
