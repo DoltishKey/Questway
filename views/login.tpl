@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="sv">
-    
+
     %include('head.tpl')
-    
+
 	<body>
         %include('nav.tpl')
         
@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-        
+
         <footer>
             <div class="wrap">
             © Questway, 2016
@@ -40,6 +40,4 @@
         </footer>
         
 	</body>
-	<script src="/static/js/jquery.js"></script>
-	<script src="/static/js/main.js"></script>
 </html>

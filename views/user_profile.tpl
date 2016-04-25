@@ -17,45 +17,45 @@
             <div class="top">
                 <div>
                     <div class="circle name_tag">
-                        <h2>{{student['first_name']}}</h2>
+                        <h2>{{student[0]}}</h2>
                     </div>
                     <div>
-                        <h4>{{education['title']}}</h4>
-                        <h3>{{education['tag_line']}}</h3>
+                        <h4>{{education['education_info'][0]}}</h4>
+                        <h3>{{education['education_info'][1]}}</h3>
                     </div>
                 </div>
             </div>
             <div class="contact">
-	            <div>
-	            	<div class="contact_info">
-		            	<div class="icon circle"></div>
-		            	<p>070-6645406</p>
+    	        <div>
+    	        	<div class="contact_info">
+    		        	<div class="icon circle"></div>
+    		            <p>070-6645406</p>
 	            	</div>
                     <div class="line"></div>
-	            	<div class="contact_info">
-		            	<div class="icon circle"></div>
-		            	<p>jcbpettersson@gmail.com</p>
-	            	</div>
-	            </div>
+    	        	<div class="contact_info">
+    		        	<div class="icon circle"></div>
+    		        	<p>jcbpettersson@gmail.com</p>
+    	            </div>
+                </div>
             </div>
             <div class="main_education_info">
                 <div class="container">
                     <div class="education_info">
                         <div class="icon circle"></div>
                         <div>
-                            <p>{{education['subject_one']}}</p>
+                            <p>{{education['education_info'][2]}}</p>
                         </div>
                     </div>
                     <div class="education_info">
                         <div class="icon circle"></div>
                         <div>
-                            <p>{{education['subject_two']}}</p>
+                            <p>{{education['education_info'][3]}}</p>
                         </div>
                     </div>
                     <div class="education_info">
                         <div class="icon circle"></div>
                         <div>
-                            <p>{{education['subject_three']}}</p>
+                            <p>{{education['education_info'][4]}}</p>
                         </div>
                     </div>
                 </div>
@@ -64,71 +64,17 @@
                 <div>
                     <h2>Nyckelkompetenser</h2>
                     <ul>
-            			%for tag in education['tags']:
-            				<li>{{tag}}</li>
+                		%for tag in education['education_skills']:
+                            %for skill in tag:
+                                <li>{{skill}}</li>
+                            %end
             			%end
         		    </ul>
                 </div>
             </div>
 
-            <div class="pre_missions">
-                <div>
-                    <h2>Genomförda uppdrag</h2>
-                    <ul>
-            			<li>
-            				<div class="img circle"></div>
-            				<div>
-                                <h4>Calles AB</h4>
-	            				<h3>Hemsida</h3>
-                                <a href="#">Kolla in!</a>
-            				</div>
-            			</li>
-            				<li>
-            				<div class="img circle"></div>
-            				<div>
-	            				<h4>Calles AB</h4>
-	            				<h3>Hemsida</h3>
-                                <a href="#">Kolla in!</a>
-            				</div>
-            			</li>
-            				<li>
-            				<div class="img circle"></div>
-            				<div>
-                                <h4>Calles AB</h4>
-	            				<h3>Hemsida</h3>
-                                <a href="#">Kolla in!</a>
-            				</div>
-            			</li>
-            				<li>
-            				<div class="img circle"></div>
-            				<div>
-                                <h4>Calles AB</h4>
-	            				<h3>Hemsida</h3>
-                                <a href="#">Kolla in!</a>
-            				</div>
-            			</li>
-            				<li>
-            				<div class="img circle"></div>
-            				<div>
-                                <h4>Calles AB</h4>
-	            				<h3>Hemsida</h3>
-                                <a href="#">Kolla in!</a>
-            				</div>
-            			</li>
-            				<li>
-            				<div class="img circle"></div>
-            				<div>
-                                <h4>Calles AB</h4>
-	            				<h3>Hemsida</h3>
-                                <a href="#">Kolla in!</a>
-            				</div>
-            			</li>
-        		    </ul>
-                </div>
-            </div>
+
 		</main>
 		<footer style=" bottom:0px; width: 100%;">© Questway, 2016</footer>
 	</body>
-	<script src="/static/js/jquery.js"></script>
-	<script src="/static/js/main.js"></script>
 </html>

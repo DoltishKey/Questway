@@ -29,22 +29,22 @@
                 <div>
                     <ul>
                         %for i in annons:
-                	       %if i['creator'] == user_id:
-        		                <a href="/allMissions" data-value="{{i['uniq_adNr']}}" class="go_to_ad">
+                            %if user_id in i:
+        		                <a href="/allMissions" data-value="{{i[0][0]}}" class="go_to_ad">
                                     <li>
                                         <div>
-                                            <h3>{{i['ad_title']}}</h3>
-                                            <p>{{len(i['who_applied'])}} ansökningar</p>
+                                            <h3>{{i[1]}}</h3>
+                                            <p>antalet ansökningar</p>
                                         </div>
-            		                    <!--<p>{{i['ad_text']}}</p>
-                        		        <form  name="delete_ad" id="delete_ad" method="POST" action="/del_ad/{{i['uniq_adNr']}}">
+            		                    <!--<p>{{i[0][0]}}</p>
+                        		        <form  name="delete_ad" id="delete_ad" method="POST" action="/del_ad/{{i[0][0]}}">
                         		            <input type="submit" value="Ta bort annons">
                         		        </form>
-                                        <a href="/give_feedback/{{i['uniq_adNr']}}">Ge feedback</a>-->
+                                        <a href="/give_feedback/{{i[0][0]}}">Ge feedback</a>-->
                                         <div>></div>
                                     </li>
                                 </a>
-        		            %end
+                            %end
         	            %end
                     </ul>
                 </div>

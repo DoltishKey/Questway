@@ -4,8 +4,9 @@ from bottle import request, redirect
 import time
 import log
 import createUsers
-
-
+import MySQLdb
+db = MySQLdb.connect(host="195.178.232.7", port=4040, user="AC8240", passwd="hejhej123", db="AC8240");
+cursor = db.cursor()
 
 '''*********Skriv/läsa filer*********'''
 def read_data(file):
@@ -53,34 +54,48 @@ def create_ad_DB():
 
 '''*********Create the AD*********'''
 def do_ad():
-    mydict={}
-    mylist=['ad_title', 'ad_text']
-    for i in mylist:
-        j=request.forms.get(i)
-        mydict.update({i:j})
+	#mydict={}
+	#mylist=['ad_title', 'ad_text']
+	ad_title=request.forms.get('ad_title')
+	ad_text=request.forms.get('ad_text')
 
-    checkAdinfo=check_ad_info(mydict['ad_title'])
+	'''
+	for i in mylist:
+		j=request.forms.get(i)
+		mydict.update({i:j})
+	'''
 
-    if checkAdinfo == True:
-        date_ad_created=time.strftime('%d/%m/%Y')
-        uniq_number=1
-        ad_ID=check_adID(uniq_number)
-        creator = log.get_user_id_logged_in()
-        mydict.update({'uniq_adNr':ad_ID, 'status':'Ingen vald', 'who_applied':[], 'creator':creator, 'date_of_adcreation':date_ad_created, 'the_chosen_one':''})
+	ad_title_checked=check_ad_info(ad_title)
 
-        content=load_adds('ads')
-        content.append(mydict)
-        with open('static/data/ads.json', "w") as fil:
-            json.dump(content, fil, indent=4)
-        redirect('/admin')
+	if  ad_title_checked == True:
+		#date_ad_created=time.strftime('%d/%m/%Y')
+		#uniq_number=1
+		#ad_ID=check_adID(uniq_number)
+		creator = log.get_user_id_logged_in()
+		#mydict.update({'uniq_adNr':ad_ID, 'status':'Ingen vald', 'who_applied':[], 'creator':creator, 'date_of_adcreation':date_ad_created, 'the_chosen_one':''})
 
-    else:
-        return "Ett fel uppstod - Kontrollera att du gav annonsen en titel"
+		#content=load_adds('ads')
+		#content.append(mydict)
+
+		sql_query="INSERT INTO ads(titel, main_info, creator_id, creation_date)\
+			VALUES ('%s', '%s', '%d', CURDATE())" % (ad_title, ad_text, creator)
+
+		cursor.execute(sql_query)
+		db.commit()
+		return {'result':True, 'error':'None'}
+
+		'''
+		with open('static/data/ads.json', "w") as fil:
+			json.dump(content, fil, indent=4)
+		'''
+
+	else:
+		return {'result':False, 'error': "Ett fel uppstod - Kontrollera att du gav annonsen en titel"}
 
 
 '''*********Check that a Title for the ad is given*********'''
 
-def check_ad_info(ad_info):
+def check_ad_info(ad_info): #Byt namn på variabeln till validate_ad_input
     former_ad_info=load_adds('ads')
     s=list(ad_info)
 
@@ -106,7 +121,25 @@ def check_adID(number):
             return check_adID(number)
     return number
 
-def get_corp_name(all_adds):
+def get_my_ads(employers_id):
+	query= "SELECT id, titel, main_info, creator_id, DATE(creation_date) FROM ads WHERE '%d'=ads.creator_id" %(employers_id)
+
+	cursor.execute(query)
+	return cursor.fetchall()
+
+'''**********Pair employers to their ads************'''
+def join_ads_employers():
+	sql_query="SELECT employers.company_name, ads.titel, ads.main_info, employers.id, DATE(ads.creation_date), ads.id \
+	FROM ads \
+	INNER JOIN employers \
+	ON employers.id=ads.creator_id"
+
+	cursor.execute(sql_query)
+	joined_employers_ads=cursor.fetchall()
+
+	return joined_employers_ads
+
+	'''
 	corps = createUsers.read_data('employers')
 	for add in all_adds:
 		for corp in corps:
@@ -114,18 +147,60 @@ def get_corp_name(all_adds):
 				add.update({'ad_corpName':corp['company_name']})
 
 	return all_adds
+	'''
 
-
+'''******* Delete a specifik ad *******'''
+def erase_ad(ad_id, user_ID):
+	query= "DELETE FROM ads WHERE id = '%d' and creator_id='%d'" %(int(ad_id), int(user_ID))
+	cursor.execute(query)
+	db.commit()
+	redirect('/allMissions')
 
 '''*********Choose a specific AD*********'''
 
-def choose_ad(annonsID, db, status):
+def choose_ad(annonsID):
+	query= "SELECT * FROM ads WHERE id='%d'" %(annonsID)
+
+	cursor.execute(query)
+	return cursor.fetchall()
+
+	'''
     for each in db:
         if int(each['uniq_adNr']) == int(annonsID) and str(each['the_chosen_one'])==str(status):
             return each
         elif int(each['uniq_adNr']) == int(annonsID) and status==None:
             return each
+	'''
 
+
+'''*********Choose a Student********'''
+def who_got_accepted(annons, sokandeID):
+	all_ads=load_adds('ads')
+	user=log.get_user_id_logged_in()
+
+	what_ad=choose_ad(annons, all_ads, None)
+	print what_ad
+	for who in what_ad['who_applied']:
+		for ad in all_ads:
+			if int(who)==int(sokandeID) and what_ad['uniq_adNr']==ad['uniq_adNr']:
+				print "hey"
+				ad.update({'the_chosen_one':int(sokandeID)})
+				ad['who_applied'].remove(int(sokandeID))
+				print ad
+				print all_ads
+	with open('static/data/ads.json', 'w') as fil:
+		json.dump(all_ads, fil, indent=4)
+	redirect ('/allMissions')
+
+
+'''********My list of ads*********'''
+def my_ads(userID):
+	all_adds=load_adds('ads')
+	relevant_adds=[]
+	for add in all_adds:
+		if userID == add['creator'] or userID==add['the_chosen_one']:
+			relevant_adds.append(add)
+	return relevant_adds
 
 
 '''*********Moves AD to Done*********'''
@@ -152,3 +227,21 @@ def move_ad_to_complete(annons):
 
         else:
             return {'response':False, 'error':'Något har blivit fel!'}
+
+def ajax_edit_mission():
+		type_of = request.forms.get('mission_type')
+		keys = request.POST.getall("add_key")
+		display = request.forms.get('display')
+		url = request.forms.get('url')
+		grading_id = request.forms.get('grading_id')
+		all_grades = read_data('grading')
+
+		for grade in all_grades:
+			if int(grade['uniq_adNr']) == int(grading_id):
+				for key in keys:
+					grade['keys'].append(key)
+				grade['url'] = url
+				grade['display'] = display
+				grade['type'] = type_of
+
+		write_to_db(all_grades,'grading')

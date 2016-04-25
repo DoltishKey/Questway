@@ -620,6 +620,7 @@ transition: background-color 5000s ease-in-out 0s;
 }
 #profiles .name_tag h2{
     margin: 0px;
+    color: black;
 }
 
 #profiles .top h4{
@@ -711,6 +712,7 @@ transition: background-color 5000s ease-in-out 0s;
     color: #fff;
     padding: 20px 0px;
     margin: 10px;
+    position: relative;
 }
 .pre_missions h3, .pre_missions h4{
     margin: 0px;
@@ -730,7 +732,7 @@ transition: background-color 5000s ease-in-out 0s;
     margin: 0 auto;
 }
 
-.pre_missions a{
+.pre_missions .btn{
     display: block;
     width: 50%;
     margin: 0 auto;
@@ -741,11 +743,244 @@ transition: background-color 5000s ease-in-out 0s;
     margin-top: 15px;
 }
 
-.pre_missions a:hover{
+.mission_info{
+    display: none;
+}
+.mission_info h4{
+    margin: 0px;
+    color: #fff;
+}
+.pre_missions .btn:hover{
     background-color: #E87E04;
-    transition: background-color 0.7s ease;
+    transition: background-color 0.8s ease;
+    cursor: pointer;
 }
 
+.edit_mission_info{
+    position: absolute;
+    z-index: 10;
+    background-color: rgba(44,62,80,0.9);
+    width: 100%;
+    height: 100%;
+    top: 0px;
+}
+
+.edit_mission_info .status{
+    color: #EF4836;
+    font-size: 1.2em;
+}
+
+.edit_mission_info .btn{
+    background-color: #2ECC71;
+}
+
+.edit_mission_info > div{
+    position: relative;
+    top: 40%;
+    transform: translateY(-40%);
+}
+
+.pre_missions li.big .misson_info_control{
+    display: none;
+}
+
+.pre_missions .img{
+    background-image: url('/static/img/bild1.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.pre_missions ul{
+    margin: 0 auto;
+    width: 90%;
+    max-width: 1300px;
+}
+
+.pre_missions li.item{
+    -webkit-transition: all 1s; /* Safari */
+    transition: all 1s;
+}
+.keys{
+    padding-top: 15px;
+}
+
+.add_one_key:hover{
+    cursor: pointer;
+    color:#2C3E50;
+}
+
+.edit_mission_btn{
+    background-color: #2ECC71;
+    padding: 5px 10px;
+    border: 2px solid #fff;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+
+.edit_key{
+    clear: both;
+}
+
+.add_key{
+    padding: 10px 0px;
+    text-align: center;
+    color: #fff;
+    background-color: #E87E04;
+    font-size: 1em;
+    border: none;
+    -webkit-appearance: none;
+    outline-color: transparent;
+    outline-style: none;
+    width: 120px;
+    margin: 0px 10px 10px 2px;
+}
+
+.add_key:hover{
+    background-color: #F9690E;
+    cursor: pointer;
+}
+
+.add_key:focus{
+    background-color: #fff;
+    color:black;
+}
+
+.pre_missions li .edit_mission_btn{
+    display: none;
+}
+
+.pre_missions li.big .edit_mission_btn{
+    display: inline;
+}
+
+.edit_mission_btn:hover{
+    cursor: pointer;
+    background-color: #1E824C;
+}
+
+.edit_mission_btn_save{
+    display: none;
+}
+
+.pre_missions li.big .edit_mission_btn_save{
+    display: inline-block;
+}
+
+.pre_missions input{
+    display: none;
+}
+
+.pre_missions .edit_key{
+    display: none;
+}
+
+.add_one_key{
+    width: 40%;
+    margin: 0 auto;
+    display: none;
+}
+
+.display_or_not{
+    display: none;
+}
+.remove_key{
+    display: inline-block;
+    background-color: #F9690E;
+    color: #fff;
+    padding: 10px;
+    margin-right: 0px;
+    float: left;
+}
+
+.remove_key:hover{
+    background-color: #D35400;
+    cursor: pointer;
+}
+
+.fileToUpload{
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.fileToUploadLabel{
+    display: none;
+}
+
+.fileToUploadLabel{
+    background-color: rgba(57, 73, 94, 0.4);
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    line-height: 150px;
+}
+
+.fileToUploadLabel:hover{
+    background-color: rgba(57, 73, 94, 0.7);
+    cursor: pointer;
+}
+
+.mission_general select{
+    display: none;
+}
+
+
+.key_continer{
+    padding: 15px 0px;
+    clear: both;
+}
+
+.mission_link{
+    background-color: #46A4AB;
+    padding: 15px 0px;
+}
+
+.mission_link a{
+    color: #fff;
+    text-decoration: none;
+}
+
+.grade_bar_container >div{
+    width: 70%;
+    margin: 0 auto;
+}
+
+.grade_bar_container p:nth-child(3){
+    float: left;
+}
+.grade_bar_container p:last-child{
+    float: right;
+}
+
+.grade_bar_container h4{
+    margin: 15px 0px;
+}
+
+.grade_bar{
+    background-color: #ECF0F1;
+    height: 40px;
+    position: relative;
+}
+
+
+.grade_mission{
+    background-color: #2ECC71;
+    height: 40px;
+    display: inline-block;
+    float: left;
+    position: relative;
+}
+
+.grade_mission p{
+    position: absolute;
+    right:5px;
+    line-height: 40px;
+}
 
 
 
@@ -783,7 +1018,10 @@ transition: background-color 5000s ease-in-out 0s;
 #ca_Inputs{
     width: 40%;
 }
-#ca_Inputs input{
+#ca_text{
+    height: 50px;
+}
+#ca_Inputs input, textarea{
     background: #FFF9F6;
     color: #000;
     height: 30px;
@@ -938,6 +1176,7 @@ transition: background-color 5000s ease-in-out 0s;
 .form_head{
     text-align: center;
     padding: 5% 0%;
+    margin-top: -80px;
 }
 #content{
     padding-bottom: 10%;
@@ -1071,6 +1310,35 @@ label{
         height: 500px;
     }
 
+    /*Philips mobilhead:*/
+    header {
+        width: 100%;
+        height: 50px;
+        position: fixed;
+        padding: 30px 0px;
+        text-align: center;
+        /*
+        background: #E87E04;*/
+    }
+    .menu{
+        margin-top: -10px;
+        width: 103.5%;
+        margin-left: 0%;
+        float: left;
+    }
+
+    #content{
+        padding-top: 200px;
+    }
+    #profiles{
+        padding-top: 120px;
+    }
+    .wrapperLogin{
+        padding-top: 130px;
+    }
+    /*
+    */
+
     #logIn {
         width: 90%;
         margin: 85px auto;
@@ -1078,27 +1346,23 @@ label{
 
     header nav{
         display: block;
-        margin: 20px auto;
-        float: none;
+        float: left;
         width: 100%;
         display: flex;
-        display: none;
     }
 
    header nav a{
         float: none;
         margin: 0px auto;
         display: inline-flex;
-        width: 20%;
+        width: 100%;
         text-align: center;
     }
-
     header h1{
-        text-align: center;
         display: block;
         float: none;
-        margin: 20px auto;
         width: 100%;
+        margin-top: -20px;
     }
 
     #logIn input{
@@ -1165,10 +1429,11 @@ label{
 
 @media screen and (min-width:960px){
     #admin_start_employer{
-        display: block;
-        height: 400px;
+        min-height: 80%;
         max-width: 1200px;
         margin: 0 auto;
+        display: -webkit-flex;
+        display: flex;
     }
 
     #employer_how_it_works{
@@ -1183,16 +1448,15 @@ label{
     }
 
     .col{
-        width: 30%;
-        float: left;
-        height: 100%;
-        margin: 40px 0px;
+        width: 33%;
+        height: 400px;
+        margin: 40px 10px;
         padding: 0px;
         border-bottom: 2px solid #EEEAE8;
     }
 
     .employers_add_new_ad{
-        float: right;
+
     }
     #btn_id{
         max-width:100%;
@@ -1202,6 +1466,7 @@ label{
         margin:auto;
         border-bottom:0;
         max-width:100%;
+        height: auto;
 
     }
 
@@ -1213,6 +1478,11 @@ label{
     .employers_add_new_ad{
         background-color: #EEEAE8;
         display: table;
+        -webkit-box-ordinal-group: 3;
+        -moz-box-ordinal-group: 3;
+        -ms-flex-order: 3;
+        -webkit-order: 3;
+        order: 3;
     }
 
     .employers_add_new_ad > div{
@@ -1222,13 +1492,13 @@ label{
     }
 
     .emloyers_all_adds{
-        margin-left: 5%;
+
         display: block;
         border-bottom: 2px solid #3E4244;
     }
     .emloyers_all_adds > div{
         height: 320px;
-        overflow: auto;;
+        overflow: auto;
     }
     /* Studentprofil*/
     #profiles .top{
@@ -1263,18 +1533,71 @@ label{
         padding: 40px 0px 60px 0px;
     }
 
+
+
     .pre_missions ul{
+        -ms-box-orient: horizontal;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -moz-flex;
         display: -webkit-flex;
         display: flex;
         -webkit-flex-wrap:wrap;
         flex-wrap: wrap;
-        margin: 0 auto;
-        max-width: 1300px;
+        -webkit-justify-content: space-around; /* Safari */
+        justify-content:         space-around;
     }
 
-    .pre_missions li{
-        width: 30%;
-        margin: 10px auto;
+    .pre_missions li.item{
+        flex-grow: 1;
+        flex-basis: 30%;
+    }
+
+
+    .pre_missions li.small{
+        flex-basis: 18%;
+    }
+
+    .pre_missions li.small .general{
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .pre_missions li.small .img{
+        -webkit-transition: margin-top 1s; /* Safari */
+        transition: margin-top 1s;
+
+    }
+
+    .pre_missions li.big .img{
+        margin-top: 0%;
+    }
+
+    .pre_missions li.big{
+        padding-top: 0px;
+        flex-basis: 54%;
+    }
+
+    .pre_missions .big .img{
+        background-color: transparent;
+        border-radius: 0px;
+        -webkit-transition: border-radius 0.5s, width 1s !important; /* Safari */
+        transition: border-radius 0.5s, width 1s !important;
+        width: 100%;
+        border: 0px;
+        height: 150px;
+    }
+
+    .mission_info .keys li{
+        background-color: #E87E04 !important;
+        color: #fff;
+    }
+
+    .mission_info .keys > li{
+        display: inline-block;
+        padding: 10px 30px !important;
+        margin: 5px;
     }
 
     /* Studentprofi - slutl*/

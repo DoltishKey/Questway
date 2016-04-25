@@ -3,10 +3,14 @@ import bottle
 from bottle import route, get, post, run, template, error, static_file, request, redirect, abort, response, app
 import json
 from validate_email import validate_email
+import MySQLdb
+
+'''*********DB info*********'''
+db = MySQLdb.connect(host="195.178.232.7", port=4040, user="AC8240", passwd="hejhej123", db="AC8240");
+cursor = db.cursor()
 
 
-
-'''*********Skriv/läsa filer*********'''
+'''*********Läs & skriv till fil*********'''
 def read_data(file):
 	try:
 		fileIn = open('static/data/'+ file +'.json', 'r')
@@ -17,25 +21,6 @@ def read_data(file):
 		dataRead = read_data(file)
 	return dataRead
 
-def write_to_db(users, db):
-	fileOut = open('static/data/'+ db +'.json', 'w')
-	json.dump(users, fileOut, indent=4)
-	fileOut.close()
-
-
-'''*********Validering*********'''
-def validate_Username(email):
-	users = read_data('users_db')
-	for user in users:
-		if user['username'].lower() == email.lower():
-			return True
-
-def validate_org_nr(org_nr):
-	organisations = read_data('employers')
-	for organisation in organisations:
-		if int(organisation['org_nr']) == int(org_nr):
-			return True
-
 def validatekDataFile(file):
 	'''Om databasen inte finns eller är helt tom så skapas en json-fil innehållande en tom lista.'''
 	resList = []
@@ -43,79 +28,79 @@ def validatekDataFile(file):
 	json.dump(resList, dataFile, indent=4)
 	dataFile.close()
 
+
+'''*********Validering*********'''
+def validate_Username(email):
+	sql = "SELECT * FROM users WHERE mail = '%s'" %(email)
+	#data = call_database(sql, 'fetchall()');
+	cursor.execute(sql)
+	data = cursor.fetchall()
+	print type(data)
+	if len(data) != 0:
+		return True
+
 def validate_if_student_exists(userID):
-	users = read_data('users_db')
-	for user in users:
-		if int(user['id']) == int(userID) and user['autholevel'] == 1:
-			return True
+	sql = "SELECT autho_level FROM users WHERE id = '%d'"%(userID)
+	cursor.execute(sql)
+	if cursor.rowcount == 1:
+		return True
 
 '''*********funktioner*********'''
 def add_new_user(email, password, user_level):
-	users = read_data('users_db')
-	userIds = []
-	for user in users:
-		userIds.append(int(user['id']))
+	sql = "INSERT INTO users(password, \
+       autho_level, mail) \
+       VALUES ('%s', '%d', '%s' )" % \
+       (password, user_level, email)
 
-	if len(userIds) == 0:
-		new_user_id = 1
-	else:
-		maximum_ID_value = max(userIds)
-		new_user_id	= maximum_ID_value + 1
+	#new_user_id = call_database(sql,'lastrowid');
+	cursor.execute(sql)
+	new_user_id = cursor.lastrowid
+	db.commit()
 
-	new_user = {
-		"username": email,
-        "password": password,
-        "id":new_user_id,
-        "autholevel":user_level
-		}
-	users.append(new_user)
-	db = 'users_db'
-	write_to_db(users, db)
 	return new_user_id
 
 
 def add_new_employer(company_name, org_nr, first_name, last_name, new_user_id):
-	employers = read_data('employers')
-	new_employer ={
-		"company_name": company_name,
-        "org_nr": org_nr,
-        "first_name": first_name,
-        "last_name": last_name,
-        "id": new_user_id,
-		}
+	org_nr = int(org_nr)
+	sql = "INSERT INTO employers(first_name, \
+       last_name, company_name, org_nr, id) \
+       VALUES ('%s', '%s', '%s', '%d', (select id from users where id = '%d') )" \
+	   %(first_name, last_name, company_name, org_nr, new_user_id)
 
-	employers.append(new_employer)
-	db = 'employers'
-	write_to_db(employers, db)
+	cursor.execute(sql)
+	db.commit()
+
+	#call_database(sql, False);
 
 def add_new_student(first_name, last_name, program, year, new_user_id):
-	students = read_data('students')
-	new_student ={
-        "first_name": first_name,
-        "last_name": last_name,
-        "program": program,
-        "year": year,
-        "id": new_user_id,
-		}
+	program = int(program)
+	year = int(year)
+	sql = "INSERT INTO students(first_name, last_name, education_id, education_year, id) \
+       VALUES ('%s', '%s', (select education_id from education where education_id = '%d' and year = '%d'), \
+	    (select year from education where year = '%d' and education_id = '%d'), (select id from users where id = '%d') )" \
+		%(first_name, last_name, program, year, year, program, new_user_id)
 
-	students.append(new_student)
-	db = 'students'
-	write_to_db(students, db)
+	#call_database(sql, False);
+	cursor.execute(sql)
+	db.commit()
 
 def get_student_main_info(user):
-	user = int(user)
-	students = read_data('students')
-	for student in students:
-		if student['id'] == user:
-			return student
+	sql = "SELECT * FROM students WHERE id = '%d'"%(user)
+	cursor.execute(sql)
+	user_info = cursor.fetchall()[0]
+	return user_info
 
 def get_education_info(program, year):
-	educations = read_data("education")
-	for education in educations:
-		if int(education["id"]) == int(program) and int(education["year"]) == int(year):
-			return education
-		else:
-			print "Något gick fel"
+	sql = "SELECT titel, tagline, main_info_one, main_info_two, main_info_three, img_url \
+	FROM education WHERE education_id = '%d' AND year = '%d'"%(program, year)
+	cursor.execute(sql)
+	education_info = cursor.fetchall()[0]
+
+	sql = sql = "SELECT skill FROM education_skills\
+	WHERE education_id = '%d' AND education_year = '%d'"%(program, year)
+	cursor.execute(sql)
+	education_skills = cursor.fetchall()
+	return {'education_info':education_info, 'education_skills':education_skills}
 
 
 '''*********Main - Funktioner*********'''
@@ -130,8 +115,7 @@ def create_employer():
 	for user_input in user_inputs:
 		if user_input == None or len(user_input) == 0:
 			return {'result':False, 'error': 'Inget fält får vara tomt!'}
-	#org_nr = request.forms.get('org_nr')
-	#if validate_Username(email) == True or validate_org_nr(org_nr) == True:
+
 	if validate_Username(email) == True:
 		return {'result':False, 'error':'Tyvärr - en användare med samma email finns redan!'}
 
@@ -184,7 +168,7 @@ def show_student_profile(user):
 	try:
 		if validate_if_student_exists(user) == True:
 			student_main_info = get_student_main_info(user)
-			education_info = get_education_info(student_main_info['program'],student_main_info['year'])
+			education_info = get_education_info(student_main_info[2],student_main_info[3])
 			return {'exists':True, 'student_info': student_main_info, 'education_info':education_info}
 
 		else:

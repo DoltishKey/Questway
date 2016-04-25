@@ -57,6 +57,4 @@
         </div>
         <footer>© Questway, 2016</footer>
 	</body>
-	<script src="/static/js/jquery.js"></script>
-	<script src="/static/js/main.js"></script>
 </html>

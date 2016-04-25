@@ -17,10 +17,10 @@
         "img1": "/static/img/#",
         "id": 1,
         "subject_one": "Bacon ipsum dolor amet cow kevin sirloin tail meatloaf pancetta. Jowl kevin tongue short loin bresaola venison bacon swine tail hamburger shank pastrami. Kielbasa meatloaf pancetta sirloin, fatback tri-tip pork frankfurter shoulder sausage brisket spare ribs leberkas.",
-        "title": "Informations arkitekt",
+        "title": "Informationsarkitekt",
         "url": "http://edu.mah.se/sv/Program/TGIAA",
         "subject_three": "Bacon ipsum dolor amet cow kevin sirloin tail meatloaf pancetta. Jowl kevin tongue short loin bresaola venison bacon swine tail hamburger shank pastrami. Kielbasa meatloaf pancetta sirloin, fatback tri-tip pork frankfurter shoulder sausage brisket spare ribs leberkas.",
-        "tag_line": "Den b\u00e4sta utbildninen p\u00e5 Mah"
+        "tag_line": "Den b\u00e4sta utbildningen p\u00e5 Mah"
     },
     {
         "tags": [
@@ -36,10 +36,10 @@
         "img1": "/static/img/#",
         "id": 1,
         "subject_one": "Vi brinner f\u00f6r UX!",
-        "title": "Informations arkitekt",
+        "title": "Informationsarkitekt",
         "url": "http://edu.mah.se/sv/Program/TGIAA",
         "subject_three": "Vi brinner f\u00f6r datavetenskap!",
-        "tag_line": "Den b\u00e4sta utbildninen p\u00e5 Mah"
+        "tag_line": "Den b\u00e4sta utbildningen p\u00e5 Mah"
     },
     {
         "tags": [
@@ -55,9 +55,9 @@
         "img1": "/static/img/#",
         "id": 1,
         "subject_one": "Vi brinner f\u00f6r UX!",
-        "title": "Informations arkitekt",
+        "title": "Informationsarkitekt",
         "url": "http://edu.mah.se/sv/Program/TGIAA",
         "subject_three": "Vi brinner f\u00f6r datavetenskap!",
-        "tag_line": "Den b\u00e4sta utbildninen p\u00e5 Mah"
+        "tag_line": "Den b\u00e4sta utbildningen p\u00e5 Mah"
     }
 ]
