@@ -22,6 +22,8 @@ function checkLogIn(){
            		}
            		else if(response=='error'){
 	           		$('#error').html('Fel användarnamn eller lösenord!');
+                    var errordisplay = document.getElementById("error");
+                    errordisplay.style.display = "block";
            		}
            		else{
 	           		$('#error').html('Något har blivit fel!');
@@ -250,11 +252,18 @@ function update_mission(){
 /* KONTROLLERA INPUT*/
 //LogIN
 function emailValidation(){
-    var emailtest = document.getElementById("email");
+    
+    var email = document.getElementById("email");
     var error = document.getElementById("error");
-    if(emailtest.indexOf('@') == -1){
+    
+    var atpos = email.indexOf("@");
+    var punktpos = email.lastIndexOf(".");
+    if(atpos < 1 || dotpos < atpos + 2 || dotpos + 2 > email.length){
         error.innerHTML("Du måste ange hela din mailadress. Med @ och allt.");
+        email.
         alert("Du måste ange hela din mailadress. Med @ och allt.");
+        return false;
+        email.style.borderColor = "red";
     }
 }
 //Skapa annons
@@ -264,9 +273,15 @@ function createAdValid(){
     var ad_text = document.getElementById("ad_text");
     if(ad_title.value == ""){
         alert("Var vänlig ange en annonstitel.");
+        ad_title.style.borderColor = "red";
         error.innerHTML("Var vänlig ange en annonstitel.");
+        return false;
     }else if(ad_text.value == ""){
-        alert("Var vänlig ange en kort beskrivande text till din annons.")
+        alert("Var vänlig ange en kort beskrivande text till din annons.");
+        ad_text.style.borderColor = "red";
         error.innerHTML("Var vänlig ange en kort beskrivande text till din annons.");
+        return false;
+    }else{
+        return true;
     }
 }

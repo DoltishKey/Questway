@@ -27,6 +27,7 @@ header {
     background-color: #2D3030;/*#EEEAE8*/;
     color: #FFF;
     border-bottom: 20px solid #F89406;
+    z-index: 2;
 }
 
 header h1 {
@@ -45,6 +46,7 @@ header h1 {
     float: right;
     clear: both;
     margin-top: 26.8px;
+    z-index: 3;
 }
 
 .menu > a {
@@ -109,6 +111,7 @@ header h1 {
 .wrap {
     width: 80%;
     margin: 0 auto;
+    z-index: 0;
 }
 
 /*Tabbar: */
@@ -293,16 +296,17 @@ div.container_student_start h2 {
 .column2 { /* En extra kolumn i uppdrag */
     margin-left: 50px;
 }
-
-#error { /* Felmeddelande vid inloggning */
-    width: 400px;
-    /*background-color: rgba(163, 34, 34, 0.4);
-    padding: 25px;
-    border-radius: 6px;*/
-    margin: 20px auto;
+#logIn #error{
     text-align: center;
+    color: red;
+    padding: 10px;
+    border-radius: 5px;
+    background: rgba(200,0,0,0.3);
+    width: 75%;
+    margin: auto;
+    /*blir synlig när den behövs. Via js-funktionen: checkLogIn*/
+    display: none;
 }
-
 footer {
     color: #FFF;
     height: 100px;
@@ -1600,7 +1604,7 @@ label{
         margin: 5px;
     }
 
-    /* Studentprofi - slutl*/
+    /* Studentprofil - slut*/
 
 
 
