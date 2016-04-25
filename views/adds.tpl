@@ -19,28 +19,20 @@
                         </div>
                     </div>
                     %for add in adds:
-                        <div class="add">
-                            <form  name="ta_bort_annons" id="del_annons" method="POST" action="/del_ad/{{add['uniq_adNr']}}">
-                                <input type="submit" value="Ta bort annons" class="myButton delete_ad">
-                            </form>
-                            <h2>{{add['ad_title']}}</h2>
-                            <h4 class="inline">Publicererades: </h4> <p class="inline_block">{{add['date_of_adcreation']}}</p>
-                            <div class="showMore">
-                                <h4>Beskrivning:</h4>
-                                <p>{{add['ad_text']}}</p>
-                                %for who in add['who_applied']:
-                                    %for student in students:
-                                        %if student['id']==who:
-                                            <li><a href="/profiles/{{student['id']}}">{{student['first_name'] + " "+student['last_name']}}</a></li>
-                                            <form name="chosen_one" method="POST" action="/testing/{{add['uniq_adNr']}}/{{student['id']}}">
-                                                <input type="submit" value="Välj denna student" class="chosen_one_button">
-                                            </form>
-                                        %end
-                                    %end
-                                %end
+                        %if user_id in add:
+                            <div class="add">
+                                <form  name="ta_bort_annons" id="del_annons" method="POST" action="/del_ad/{{add[0]}}">
+                                    <input type="submit" value="Ta bort annons" class="myButton delete_ad">
+                                </form>
+                                <h2>{{add[1]}}</h2>
+                                <h4 class="inline">Publicererades: </h4> <p class="inline_block">{{add[4]}}</p>
+                                <div class="showMore">
+                                    <h4>Beskrivning:</h4>
+                                    <p>{{add[2]}}</p>
+                                </div>
+                                <ul>
                             </div>
-                            <ul>
-                        </div>
+                        %end
                     %end
                 %else:
                     <h1 class="no_ads"> Listan av annonser är tom </h1>

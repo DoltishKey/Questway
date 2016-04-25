@@ -2,8 +2,13 @@
 <html>
     % include('head.tpl')
     <body>
+<<<<<<< HEAD
         % include('nav_employers.tpl')
         <form  name="create_ad" id="create_ad" method="POST" action="/make_ad" onsubmit="return validateForm()">
+=======
+        %include('nav_employers.tpl')
+        <form  name="create_ad" id="create_ad" method="POST" action="/make_ad">
+>>>>>>> origin/master
             <h3 id="ca_Title">Lägg till annons för nytt uppdrag</h3>
 
             <div class="ca_Formblock" id="ca_Labels">

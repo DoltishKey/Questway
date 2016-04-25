@@ -9,9 +9,8 @@ from beaker.middleware import SessionMiddleware
 import json
 import MySQLdb
 
-def connect_to_database():
-	db = MySQLdb.connect(host="195.178.232.7", port=4040, user="AC8240", passwd="hejhej123", db="AC8240");
-	db.close()
+db = MySQLdb.connect(host="195.178.232.7", port=4040, user="AC8240", passwd="hejhej123", db="AC8240");
+cursor = db.cursor()
 
 '''*********Routes*********'''
 
@@ -53,19 +52,18 @@ def log_out():
 
 @route('/admin')
 def admin():
-    log.validate_autho() #and log.get_user_level() == 2 | kontrollerar om användaren är inloggad
-    username = log.get_user_name() #hämtar användarens namn från DB (returnerar en sträng)
-    userid = log.get_user_id_logged_in() #hämtar användarens id
-    user_level = log.get_user_level() #kollar om användaren är uppdragstagare eller student (returnerar 1 eller 2)
-    all_adds=addmod.load_adds('ads')
-    complete_adds = addmod.get_corp_name(all_adds)
-    grading_ads = addmod.read_data('grading')
+	log.validate_autho() #kontrollerar om användaren är inloggad
+	username = log.get_user_name() #hämtar användarens namn från DB (returnerar en sträng)
+	userid = log.get_user_id_logged_in() #hämtar användarens id
+	user_level = log.get_user_level() #kollar om användaren är uppdragstagare eller student (returnerar 1 eller 2)
+	#all_adds=addmod.load_adds('ads')
+	complete_adds = addmod.join_ads_employers()
+	grading_ads = addmod.read_data('grading')
 
-    if user_level == 1:
-        return template('student_start', user=username, level="student", gradings = grading_ads,  annons=complete_adds, user_id=userid, pageTitle = 'Start')
-    else:
-        #här ska arbetsgivarnas annonser med
-        return template('employer_start', user=username, user_id=userid,  level="arbetsgivare", annons=complete_adds, pageTitle = 'Start')
+	if user_level == 1:
+		return template('student_start', user=username, level="student", gradings = grading_ads,  annons=complete_adds, user_id=userid, pageTitle = 'Start')
+	else:
+		return template('employer_start', user=username, user_id=userid,  level="arbetsgivare", annons=complete_adds, pageTitle = 'Start')
 
 
 
@@ -114,9 +112,10 @@ def do_create_employer():
 
 @route('/profiles/<user>')
 def profiles(user):
+	user = int(user)
 	user_profile_data = createUsers.show_student_profile(user)
 	is_user_logged_in = log.is_user_logged_in()
-	grading_ads = sorted( (addmod.read_data('grading')), key=lambda x: x['display'])
+	#grading_ads = sorted( (addmod.read_data('grading')), key=lambda x: x['display'])
 	username = ""
 	if is_user_logged_in == True:
 		user_levle = log.get_user_level()
@@ -127,8 +126,8 @@ def profiles(user):
 	if user_profile_data['exists'] == True:
 		education_info = user_profile_data['education_info']
 		student_info = user_profile_data['student_info']
-		student_name = student_info['first_name'] + ' ' + student_info['last_name']
-		return template('user_profile', user = username, user_autho = user_levle, student_id = user, student= student_info, education = education_info, pageTitle = student_name, grading=grading_ads )
+		student_name = student_info[0] + ' ' + student_info[1]
+		return template('user_profile', user = username, user_autho = user_levle, student_id = user, student= student_info, education = education_info, pageTitle = student_name )
 
 	else:
 		return 'Användaren finns inte!'
@@ -151,38 +150,45 @@ def edit_contact_information():
 
 @route('/showadds')
 def show_adds():
+<<<<<<< HEAD
     log.validate_autho()
     username=log.get_user_name()
     all_adds=addmod.load_adds('ads')
     complete_adds = addmod.get_corp_name(all_adds)
     return template('adsform.tpl', user=username, annons=complete_adds, pageTitle = 'Annonser' )
+=======
+	log.validate_autho()
+	username=log.get_user_name()
+	all_adds=addmod.load_adds('ads')
+	complete_adds = addmod.join_ads_employers()
+	print complete_adds
+	return template('adsform.tpl',user=username, annons=complete_adds, pageTitle = 'Annonser' )
+>>>>>>> origin/master
 
 @post('/make_ad')
 def ad_done():
-    log.validate_autho()
-    if log.get_user_level() == 2:
-    	addmod.do_ad()
+    #log.validate_autho()
+	response=addmod.do_ad()
+	if response['result']==True:
+		redirect('/admin')
+	else:
+		return response['error']
 
-    else:
-    	return 'Behörighet saknas!'
+    #if log.get_user_level() == 2:
+    	#addmod.do_ad()
+
+    #else:
+    	#return 'Behörighet saknas!'
 
 
 '''*****Ta bort annons****'''
 
-@post('/del_ad/<annons>')
-def del_ad(annons):
+@post('/del_ad/<which_ad>')
+def del_ad(which_ad):
 	log.validate_autho()
 	if log.get_user_level() == 2:
-		all_adds=addmod.load_adds('ads')
-		which_ad_to_delete=addmod.choose_ad(annons, all_adds, '')
-		if which_ad_to_delete['creator'] == log.get_user_id_logged_in():
-			all_adds.remove(which_ad_to_delete)
-			with open('static//data/ads.json', 'w') as fil:
-				json.dump(all_adds, fil, indent=4)
-			redirect('/allMissions')
-		else:
-			return 'Behörighet saknas!'
-
+		user_logged_in=log.get_user_id_logged_in()
+		addmod.erase_ad(which_ad, user_logged_in)
 	else:
 		return 'Behörighet saknas!'
 
@@ -217,17 +223,18 @@ def sok_annons(annons):
 def list_applied_students():
 	log.validate_autho()
 	if log.get_user_level() == 2:
-		user=log.get_user_id_logged_in()
+		user_id=log.get_user_id_logged_in()
 		username=log.get_user_name()
 		students=log.read_data('students')
-		relevant_adds=addmod.my_ads(user)
+		relevant_adds=addmod.get_my_ads(user_id)
+		print relevant_adds
 
 		if len(relevant_adds)>0:
-			open_ad=addmod.choose_ad(5, relevant_adds, None)
-			return template('adds.tpl', user=username, adds=relevant_adds, students=students, open_ad=open_ad, pageTitle='Alla uppdrag')
+			open_ad=addmod.choose_ad(5)
+			return template('adds.tpl',user_id=user_id, user=username, adds=relevant_adds, students=students, open_ad=open_ad, pageTitle='Alla uppdrag')
 		else:
 			open_ad=0
-			return template('adds.tpl', user=username, adds=relevant_adds, students=students, open_ad=open_ad, pageTitle='Alla uppdrag')
+			return template('adds.tpl',user_id=user_id, user=username, adds=relevant_adds, students=students, open_ad=open_ad, pageTitle='Alla uppdrag')
 	else:
 		return "Du har ej behörighet"
 
