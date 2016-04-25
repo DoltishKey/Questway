@@ -19,7 +19,6 @@
 					<a href="/profiles/{{student[4]}}">Profil</a>
 				%end
 
-
 				%if request.path == '/log_out':
 					<a class="currentMenuItem" href="/log_out">Logga</a>
 				%else:
