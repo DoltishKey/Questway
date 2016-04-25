@@ -57,14 +57,12 @@ def admin():
 	userid = log.get_user_id_logged_in() #hämtar användarens id
 	user_level = log.get_user_level() #kollar om användaren är uppdragstagare eller student (returnerar 1 eller 2)
 	#all_adds=addmod.load_adds('ads')
-	complete_adds = addmod.get_my_ads()
+	complete_adds = addmod.join_ads_employers()
 	grading_ads = addmod.read_data('grading')
 
 	if user_level == 1:
-
 		return template('student_start', user=username, level="student", gradings = grading_ads,  annons=complete_adds, user_id=userid, pageTitle = 'Start')
 	else:
-
 		return template('employer_start', user=username, user_id=userid,  level="arbetsgivare", annons=complete_adds, pageTitle = 'Start')
 
 
@@ -155,7 +153,7 @@ def show_adds():
 	log.validate_autho()
 	username=log.get_user_name()
 	all_adds=addmod.load_adds('ads')
-	complete_adds = addmod.get_my_ads()
+	complete_adds = addmod.join_ads_employers()
 	print complete_adds
 	return template('adsform.tpl',user=username, annons=complete_adds, pageTitle = 'Annonser' )
 
@@ -177,16 +175,12 @@ def ad_done():
 
 '''*****Ta bort annons****'''
 
-@post('/del_ad/<annons>')
-def del_ad(annons):
+@post('/del_ad/<which_ad>')
+def del_ad(which_ad):
 	log.validate_autho()
 	if log.get_user_level() == 2:
 		user_logged_in=log.get_user_id_logged_in()
-
-		query= "DELETE FROM ads WHERE id = '%d' and creator_id='%d'" %(annons, user_logged_in)
-		cur.execute(query)
-		db.commit()
-
+		addmod.erase_ad(which_ad, user_logged_in)
 	else:
 		return 'Behörighet saknas!'
 
@@ -221,17 +215,18 @@ def sok_annons(annons):
 def list_applied_students():
 	log.validate_autho()
 	if log.get_user_level() == 2:
-		user=log.get_user_id_logged_in()
+		user_id=log.get_user_id_logged_in()
 		username=log.get_user_name()
 		students=log.read_data('students')
-		relevant_adds=addmod.my_ads(user)
+		relevant_adds=addmod.get_my_ads(user_id)
+		print relevant_adds
 
 		if len(relevant_adds)>0:
-			open_ad=addmod.choose_ad(5, relevant_adds, None)
-			return template('adds.tpl', user=username, adds=relevant_adds, students=students, open_ad=open_ad, pageTitle='Alla uppdrag')
+			open_ad=addmod.choose_ad(5)
+			return template('adds.tpl',user_id=user_id, user=username, adds=relevant_adds, students=students, open_ad=open_ad, pageTitle='Alla uppdrag')
 		else:
 			open_ad=0
-			return template('adds.tpl', user=username, adds=relevant_adds, students=students, open_ad=open_ad, pageTitle='Alla uppdrag')
+			return template('adds.tpl',user_id=user_id, user=username, adds=relevant_adds, students=students, open_ad=open_ad, pageTitle='Alla uppdrag')
 	else:
 		return "Du har ej behörighet"
 

@@ -82,12 +82,12 @@ def do_ad():
 
 		cursor.execute(sql_query)
 		db.commit()
+		return {'result':True, 'error':'None'}
 
 		'''
 		with open('static/data/ads.json', "w") as fil:
 			json.dump(content, fil, indent=4)
 		'''
-		redirect('/admin')
 
 	else:
 		return {'result':False, 'error': "Ett fel uppstod - Kontrollera att du gav annonsen en titel"}
@@ -121,17 +121,21 @@ def check_adID(number):
             return check_adID(number)
     return number
 
-def get_my_ads():
+def get_my_ads(employers_id):
+	query= "SELECT id, titel, main_info, creator_id, DATE(creation_date) FROM ads WHERE '%d'=ads.creator_id" %(employers_id)
 
-	sql_query="SELECT employers.company_name, ads.titel, ads.main_info, employers.id, ads.creation_date \
+	cursor.execute(query)
+	return cursor.fetchall()
+
+'''**********Pair employers to their ads************'''
+def join_ads_employers():
+	sql_query="SELECT employers.company_name, ads.titel, ads.main_info, employers.id, DATE(ads.creation_date), ads.id \
 	FROM ads \
 	INNER JOIN employers \
 	ON employers.id=ads.creator_id"
 
 	cursor.execute(sql_query)
 	joined_employers_ads=cursor.fetchall()
-
-	print joined_employers_ads
 
 	return joined_employers_ads
 
@@ -145,14 +149,20 @@ def get_my_ads():
 	return all_adds
 	'''
 
+'''******* Delete a specifik ad *******'''
+def erase_ad(ad_id, user_ID):
+	query= "DELETE FROM ads WHERE id = '%d' and creator_id='%d'" %(int(ad_id), int(user_ID))
+	cursor.execute(query)
+	db.commit()
+	redirect('/allMissions')
 
 '''*********Choose a specific AD*********'''
 
 def choose_ad(annonsID):
 	query= "SELECT * FROM ads WHERE id='%d'" %(annonsID)
 
-	cur.execute(query)
-	return cur.fetchall()
+	cursor.execute(query)
+	return cursor.fetchall()
 
 	'''
     for each in db:

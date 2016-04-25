@@ -3,7 +3,7 @@
 
     %include('head.tpl')
 
-	<body onload="init()">
+    <body onload="init()">
         <header>
             <div class="wrap">
                 <div class="courtesyNav">
@@ -30,21 +30,19 @@
                 <div class="wrap">
                     <h2 class="pageTitle">Lediga uppdrag</h2>
                          %for i in annons:
-                            %#if user_id not in i['who_applied'] and user_id!=i['the_chosen_one']:
                             <div class="add">
-                                    <h2>{{i[0]}}</h2>
+                                    <h2>{{i[1]}}</h2>
                                     <h4 class="inline">Publicererades: </h4> <p class="inline_block">{{i[4]}}</p>
                                     <div class="showMore">
                                         <h4>Beskrivning:</h4>
                                         <p>{{i[2]}}</p>
                                         <h4 class="inline_block">Företag: </h4><p class="inline_block"> {{i[0]}}</p>
-                                        <form  name="sok_annons" id="sok_annons" method="POST" action="/sok_annons/{{i['uniq_adNr']}}">
+                                        <form  name="sok_annons" id="sok_annons" method="POST" action="/sok_annons/{{i[0]}}">
                                             <input type="submit" value="Sök annons" class="myButton">
                                         </form>
                                     </div>
                                 <div class="arrow">></div>
                             </div>
-                            %#end
                         %end
                 </div>
             </div>
@@ -53,7 +51,6 @@
                 <div class="wrap">
                     <h2 class="pageTitle">Uppdrag du sökt</h2>
                         %for i in annons:
-                            %#if user_id in i['who_applied']:
                             <div class="add">
                                 <h2>{{i[1]}}</h2>
                                 <h4 class="inline">Publicererades: </h4> <p class="inline_block">{{i[4]}}</p>
@@ -63,7 +60,6 @@
                                     <h4 class="inline_block">Företag: </h4><p class="inline_block"> {{i[0]}}</p>
                                 </div>
                             </div>
-                            %end
                         %end
                 </div>
             </div>
@@ -71,19 +67,17 @@
             <div class="tabContent" id="pågående_uppdrag">
                 <div class="wrap">
                     <h2 class="pageTitle">Dina pågående uppdrag</h2>
-                        %for i in annons:
-                            %#if user_id == i['the_chosen_one']:
-                            <div class="add">
-                                <h2>{{i[1]}}</h2>
-                                <h4 class="inline">Publicererades: </h4> <p class="inline_block">{{i[4]}}</p>
-                                <div class="showMore">
-                                    <h4>Beskrivning:</h4>
-                                    <p>{{i[2]}}</p>
-                                    <h4 class="inline_block">Företag: </h4><p class="inline_block"> {{i[0]}}</p>
-                                </div>
+                    %for i in annons:
+                        <div class="add">
+                            <h2>{{i[1]}}</h2>
+                            <h4 class="inline">Publicererades: </h4> <p class="inline_block">{{i[4]}}</p>
+                            <div class="showMore">
+                            <h4>Beskrivning:</h4>
+                            <p>{{i[2]}}</p>
+                            <h4 class="inline_block">Företag: </h4><p class="inline_block"> {{i[0]}}</p>
                             </div>
-                            %end
-                        %end
+                        </div>
+                    %end
                 </div>
             </div>
 
@@ -109,6 +103,5 @@
                 <p>Copyright Questway, 2016</p>
             </div>
         </footer>
-
-	</body>
+    </body>
 </html>
