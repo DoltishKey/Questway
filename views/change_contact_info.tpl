@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html>
     %include('head.tpl')
-    
-    %include('nav_employers.tpl')
-    
     <body>
-        
+        %include('nav_employers.tpl')
     </body>
 </html>

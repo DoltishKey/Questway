@@ -262,10 +262,10 @@ function createAdValid(){
     var error = document.getElementById("error");
     var ad_title = document.getElementById("ad_title");
     var ad_text = document.getElementById("ad_text");
-    if(ad_title == null){
+    if(ad_title.value == ""){
         alert("Var vänlig ange en annonstitel.");
         error.innerHTML("Var vänlig ange en annonstitel.");
-    }else if(ad_text == null){
+    }else if(ad_text.value == ""){
         alert("Var vänlig ange en kort beskrivande text till din annons.")
         error.innerHTML("Var vänlig ange en kort beskrivande text till din annons.");
     }
