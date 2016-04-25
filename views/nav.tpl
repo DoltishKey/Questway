@@ -1,4 +1,5 @@
 <header>
+    <div class="wrap">
 		<h1>Questway</h1>
 		<nav class="menu">
 				%from bottle import request
@@ -22,4 +23,5 @@
 					<a href="">Om oss</a>
 				%end
 		</nav>
+    </div>
 </header>

@@ -4,16 +4,8 @@
     %include('head.tpl')
     
 	<body>
-        <header>
-            <div class="wrap">
-                <h1>Questway</h1>
-                <nav class="menu">
-                    <a href="/login" class="currentMenuItem">Logga in</a>
-                    <a href="/create">Registrera</a>
-                    <a href="">Om oss</a>
-                </nav>
-            </div>
-        </header>
+        %include('nav.tpl')
+        
         <div class="wrapperLogin">
             <div class="wrap">
                 <form name="logIn" id="logIn" method="post" action="/do_login">
@@ -22,12 +14,12 @@
                     <input placeholder="Email" type="input" name="email" id="email" value="">
                     <!--<label for="password">Lösenord</label>-->
                     <input placeholder="Lösenord" type="password" name="password" id="password" value="">
-                    <input class="myButton" type="submit" value="Logga in">		
+                    <input class="myButton" type="submit" id="log_in_button" value="Logga in">		
                 </form>
                 <p id="error"></p>
-                <!--<div class="push"></div> <!-- Är till för att footer ska hamna längst ner, ta ej bort -->
             </div>
         </div>
+        
         <div class="content2">
             <div id="wrapContent">
                 <div class="contentInContent">
@@ -46,6 +38,7 @@
             © Questway, 2016
             </div>
         </footer>
+        
 	</body>
 	<script src="/static/js/jquery.js"></script>
 	<script src="/static/js/main.js"></script>

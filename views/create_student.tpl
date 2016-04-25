@@ -3,17 +3,9 @@
 	% include('head.tpl')
 	<body>
         <div class="wrapper">
-            <header>
-                <h1>Questway</h1>
-                <nav class="menu">
-                    <a href="/login">Logga in</a>
-                    <a href="/create" class="currentMenuItem">Registrera</a>
-                    <a href="">Om oss</a>
-                </nav>
-            </header>
+            %include('nav.tpl')
+            
             <div id="content">
-            <!--<img src="../static/img/qwback.jpg" alt="qwbackground">
-                <div id="slogan"><p>Lorem ipsum dolor sit amet, <br>consectetur adipiscing elit.</p></div>-->
 
             <form name="create_student" id="create_student" method="post" action="/do_create_student">
                <h3 class="form_head" id="studentform_Title">Skapa profil | Student</h3>

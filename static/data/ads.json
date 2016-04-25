@@ -1,7 +1,9 @@
 [
     {
         "status": "Ingen vald", 
-        "who_applied": [], 
+        "who_applied": [
+            5
+        ], 
         "creator": 10, 
         "ad_text": "1234", 
         "uniq_adNr": 1, 
@@ -11,12 +13,68 @@
     }, 
     {
         "status": "Ingen vald", 
-        "who_applied": [], 
+        "who_applied": [
+            5
+        ], 
         "creator": 10, 
         "ad_text": "ujikolp", 
         "uniq_adNr": 2, 
         "ad_title": "kdlsak", 
         "the_chosen_one": "", 
         "date_of_adcreation": "17/04/2016"
+    }, 
+    {
+        "status": "Ingen vald", 
+        "who_applied": [
+            5
+        ], 
+        "creator": 2, 
+        "ad_text": "Du ska kunna skriva", 
+        "uniq_adNr": 3, 
+        "ad_title": "Sekreterare", 
+        "the_chosen_one": "", 
+        "date_of_adcreation": "20/04/2016"
+    }, 
+    {
+        "status": "Ingen vald", 
+        "who_applied": [
+            5
+        ], 
+        "creator": 2, 
+        "ad_text": "Hejhej", 
+        "uniq_adNr": 4, 
+        "ad_title": "Tjoho", 
+        "the_chosen_one": "", 
+        "date_of_adcreation": "20/04/2016"
+    }, 
+    {
+        "status": "Ingen vald", 
+        "who_applied": [], 
+        "creator": 2, 
+        "ad_text": "Du ska kunna jobba", 
+        "uniq_adNr": 5, 
+        "ad_title": "Jobb", 
+        "the_chosen_one": "", 
+        "date_of_adcreation": "20/04/2016"
+    }, 
+    {
+        "status": "Ingen vald", 
+        "who_applied": [], 
+        "creator": 2, 
+        "ad_text": "installera en tv", 
+        "uniq_adNr": 6, 
+        "ad_title": "Tvinstallat\u00f6r", 
+        "the_chosen_one": "", 
+        "date_of_adcreation": "20/04/2016"
+    }, 
+    {
+        "status": "Ingen vald", 
+        "who_applied": [], 
+        "creator": 2, 
+        "ad_text": "Laga mat", 
+        "uniq_adNr": 7, 
+        "ad_title": "Kock", 
+        "the_chosen_one": "", 
+        "date_of_adcreation": "20/04/2016"
     }
 ]

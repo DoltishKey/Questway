@@ -57,7 +57,9 @@ def admin():
     grading_ads = addmod.read_data('grading')
 
     if user_level == 1:
-        return template('student_start', user=username, level="student", gradings = grading_ads,  annons=complete_adds, user_id=userid, pageTitle = 'Start')
+        user_profile_data = createUsers.show_student_profile(userid)
+        student_info = user_profile_data['student_info']
+        return template('student_start', user=username, level="student", gradings = grading_ads,  annons=complete_adds, user_id=userid, pageTitle = 'Start', student = student_info)
     else:
         #här ska arbetsgivarnas annonser med
         return template('employer_start', user=username, user_id=userid,  level="arbetsgivare", annons=complete_adds, pageTitle = 'Start')
