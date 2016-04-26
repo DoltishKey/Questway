@@ -14,7 +14,7 @@
         <div class="wrap_around_tab_content">
             <div class="wrap">
                 <!-- Länkar till tabbarna: -->
-                <ul id="tabs">
+                <ul id="tabs" class="tabs_class width_of_tabs_2">
                     <li><a href="#lediga_uppdrag" onclick="showTab()">Lediga uppdrag</a></li>
                     <li><a href="#sökta_uppdrag" onclick="showTab()">Sökta uppdrag</a></li>
                     <li><a href="#pågående_uppdrag" onclick="showTab()">Pågående uppdrag</a></li>

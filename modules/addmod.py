@@ -177,23 +177,28 @@ def choose_ad(annonsID):
 	return mighty_db_says[0]
 
 '''*****Which ads student applied on****'''
-def applied_on(who, status):
-	sql="SELECT * FROM application WHERE '%d'=application.student_id \
-	AND application.status='%s'" %(who, status)
+def applied_on(who, status, which_ad_id):
+	if which_ad_id==None:
+		print "nej"
+		sql="SELECT * FROM application WHERE '%d'=application.student_id \
+		AND application.status='%s'" %(who, status)
+	else:
+		print "ja"
+		sql="SELECT * FROM application WHERE '%d'=application.student_id \
+		AND application.status='%s' AND application.ad_id='%d'" %(who, status, which_ad_id)
 
 	ask_it_to = ['fetchall()']
 	mighty_db_says = call_database(sql, ask_it_to)
 	return mighty_db_says[0]
-
 
 '''****** Student Applying on ad *****'''
 def applying_for_mission(which_ad):
 	log.validate_autho()
 	which_ad=int(which_ad)
 	user=log.get_user_id_logged_in()
-	ads_user_applied_on=applied_on(user, 'Obehandlad')
+	ads_user_applied_on=applied_on(user, 'Obehandlad', which_ad)
 
-	if len(ads_user_applied_on) > 0:
+	if len(ads_user_applied_on)>0:
 		return {'result':False, 'error':'Du har redan ansökt på denna annons!'}
 	else:
 		sql="INSERT INTO application(ad_id, student_id, status)\

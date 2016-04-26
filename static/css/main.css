@@ -165,7 +165,7 @@ header h1 {
     font-size: 40px;
 }
 
-ul#tabs {
+.tabs_class {
     list-style-type: none;
     margin: 70px auto 50px auto;
     width: 100%;
@@ -173,10 +173,9 @@ ul#tabs {
     font-size: 0;
 }
 
-ul#tabs li {
+.tabs_class li {
     display: inline-block;
     white-space: nowrap;
-    width: 24.92%;
     text-align: center;
     border-right: 1px solid #BBBBBB;
     font-size: 0px;
@@ -185,7 +184,15 @@ ul#tabs li {
     box-sizing: border-box; 
 }
 
-ul#tabs li a {
+.width_of_tabs_1 li {
+    width: 33.33%;
+}
+
+.width_of_tabs_2 li {
+    width: 25%;
+}
+
+.tabs_class li a {
     color: #42454a;
     background-color: #F3F3F3;
     /*border-bottom: 2px solid #F89406;*/
@@ -198,21 +205,21 @@ ul#tabs li a {
     z-index: 1;
 }
 
-ul#tabs li:last-child {
+.tabs_class li:last-child {
     border-right: none;
     border-top-right-radius: 7px;
 }
 
-ul#tabs li:first-child {
+.tabs_class li:first-child {
     border-top-left-radius: 7px;
 }
 
-ul#tabs li a:hover {
+.tabs_class li a:hover {
     background-color: #E9E9E9;
 }
 
-ul#tabs li a.selected {
-    z-index: 2;
+.tabs_class li a.selected {
+    z-index: 1;
     color: #000;
     background-color: #00c4cc;
     font-weight: bold;
@@ -222,7 +229,7 @@ ul#tabs li a.selected {
 }
 
 div.tabContent {
-    background-color: #FFF/*#F3F3F3*/;
+    background-color: #FFF;
     margin: 0 0 60px 0;
     min-height: 400px;
 }
@@ -270,7 +277,7 @@ div.container_student_start h2 {
 }
 
 @media screen and (max-width:743px) {
-    ul#tabs li a {
+    .tabs_class li a {
         font-size: 14px;
     }
 }
@@ -477,7 +484,7 @@ transition: background-color 5000s ease-in-out 0s;
 
 
 /* Ta-bort knappen för varje annons */
-.delete_ad{
+/*.delete_ad{
     display:inline-block;
     float:right;
 }
@@ -486,6 +493,7 @@ transition: background-color 5000s ease-in-out 0s;
     display:inline-block;
     float:right;
 }
+*/
 
 .no_ads{
     font-size:2.5vw;
@@ -495,7 +503,7 @@ transition: background-color 5000s ease-in-out 0s;
     border: dotted 2px;
     width:40%;
     padding:5px;
-    color:whitesmoke;
+    color: #666;
 }
 
 
@@ -521,9 +529,7 @@ transition: background-color 5000s ease-in-out 0s;
     cursor: pointer;
 }
 
-
-
-.employers_add_new_ad .btn{
+.btn{
     background-color: #E87E04;
     color: #fff;
     margin: 0 auto;
@@ -534,7 +540,7 @@ transition: background-color 5000s ease-in-out 0s;
     padding: 20px 0px;
 }
 
-.employers_add_new_ad .btn:hover{
+.btn:hover{
     background-color: #5B514A;
     transition: background-color 0.7s ease;
     color: #BD6822;
@@ -1095,19 +1101,6 @@ transition: background-color 5000s ease-in-out 0s;
         width: 90%;
     }
 
-    /*ul#tabs li a {
-        padding: 0.3em 0.7em;
-        border-radius: 0;
-        -moz-box-shadow: none;
-        -webkit-box-shadow: none;
-        box-shadow: none;
-        margin: 0;
-    }
-
-    ul#tabs li a.selected {
-        padding: 0.5em 0.9em;
-    }*/
-
 }
 /* ----- Välj Typ av användare ------ */
 #content{
@@ -1423,11 +1416,11 @@ label{
         font-size: 22px;
     }
     
-    ul#tabs li {
+    .tabs_class li {
         font-size: 2.7vw;
     }
     
-    ul#tabs li a {
+    .tabs_class li a {
         padding: 8% 3%;
     }
     
@@ -1444,8 +1437,8 @@ label{
 @media screen and (min-width:960px){
     #admin_start_employer{
         min-height: 80%;
-        max-width: 1200px;
-        margin: 0 auto;
+        /*max-width: 1500px;*/
+        margin: 70px auto;
         display: -webkit-flex;
         display: flex;
     }
@@ -1475,13 +1468,19 @@ label{
     #btn_id{
         max-width:100%;
     }
+    
     .btnbox{
         float:none;
         margin:auto;
         border-bottom:0;
         max-width:100%;
         height: auto;
-
+    }
+    
+    #btn_id_ads {
+        max-width: 30%;
+        margin-bottom: 30px;
+        margin-top: -10px;
     }
 
 
