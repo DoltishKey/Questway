@@ -29,12 +29,18 @@
                 <div>
                     <ul>
                         %for i in annons:
-                            %if user_id in i:
         		                <a href="/allMissions" data-value="{{i[0][0]}}" class="go_to_ad">
                                     <li>
                                         <div>
                                             <h3>{{i[1]}}</h3>
-                                            <p>antalet ansökningar</p>
+                                            %num_applications = sum(x.count(i[0]) for x in students_application)
+                                            % if num_applications > 1:
+                                                <p><span>{{num_applications}}</span> ansökningar</p>
+                                            %elif num_applications == 1:
+                                                <p><span>{{num_applications}}</span> ansökning</p>
+                                            %else:
+                                                <p>Inga ansökningar</p>
+                                            %end
                                         </div>
             		                    <!--<p>{{i[0][0]}}</p>
                         		        <form  name="delete_ad" id="delete_ad" method="POST" action="/del_ad/{{i[0][0]}}">
@@ -44,7 +50,7 @@
                                         <div>></div>
                                     </li>
                                 </a>
-                            %end
+
         	            %end
                     </ul>
                 </div>

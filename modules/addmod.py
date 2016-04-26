@@ -226,12 +226,11 @@ def who_got_accepted(annons, sokandeID):
 
 '''********My list of ads*********'''
 def my_ads(userID):
-	all_adds=load_adds('ads')
-	relevant_adds=[]
-	for add in all_adds:
-		if userID == add['creator'] or userID==add['the_chosen_one']:
-			relevant_adds.append(add)
-	return relevant_adds
+	userID = int(userID)
+	sql = "SELECT * FROM ads WHERE creator_id = '%d'"%(userID)
+	ask_it_to = ['fetchall()']
+	mighty_db_says = call_database(sql, ask_it_to)
+	return mighty_db_says[0]
 
 
 '''*********Moves AD to Done*********'''
@@ -282,6 +281,21 @@ def grading_ads():
 	ads.id =  (SELECT ad_id FROM application WHERE student_id=39 AND status = 'avslutad') \
 	AND feedback.ad_id =  (SELECT ad_id FROM application WHERE student_id=39 AND status = 'avslutad') \
 	AND employers.id = (SELECT creator_id FROM ads WHERE id =  (SELECT ad_id FROM application WHERE student_id=39 AND status = 'avslutad'))"
+	ask_it_to = ['fetchall()']
+	mighty_db_says = call_database(sql, ask_it_to)
+	return mighty_db_says[0]
+
+def students_that_applied(user_id):
+	user_id = int(user_id)
+	sql = "SELECT students.id, students.first_name, students.last_name, J1.ad_id, J1.status\
+	FROM (SELECT student_id, ad_id, status \
+			FROM ads \
+			INNER JOIN application \
+			ON application.ad_id=ads.id \
+			WHERE creator_id = '%d') as J1 \
+	INNER JOIN students \
+	ON J1.student_id = students.id"%(user_id)
+
 	ask_it_to = ['fetchall()']
 	mighty_db_says = call_database(sql, ask_it_to)
 	return mighty_db_says[0]

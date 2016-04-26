@@ -56,13 +56,15 @@ def admin():
 	userid = log.get_user_id_logged_in() #hämtar användarens id
 	user_level = log.get_user_level() #kollar om användaren är uppdragstagare eller student (returnerar 1 eller 2)
 	#all_adds=addmod.load_adds('ads')
-	complete_adds = addmod.join_ads_employers()
-	grading_ads = addmod.read_data('grading')
+
 
 	if user_level == 1:
-		return template('student_start', user=username, level="student", gradings = grading_ads,  annons=complete_adds, user_id=userid, pageTitle = 'Start')
+		complete_adds = addmod.join_ads_employers()
+		return template('student_start', user=username, level="student",  annons=complete_adds, user_id=userid, pageTitle = 'Start')
 	else:
-		return template('employer_start', user=username, user_id=userid,  level="arbetsgivare", annons=complete_adds, pageTitle = 'Start')
+		employer_ads = addmod.get_my_ads(userid)
+		students = addmod.students_that_applied(userid)
+		return template('employer_start', user=username, user_id=userid,  level="arbetsgivare", annons=employer_ads, pageTitle = 'Start', students_application = students)
 
 
 
@@ -222,16 +224,18 @@ def list_applied_students():
 	if log.get_user_level() == 2:
 		user_id=log.get_user_id_logged_in()
 		username=log.get_user_name()
-		students=log.read_data('students')
 		relevant_adds=addmod.get_my_ads(user_id)
-		print relevant_adds
+		students_application = addmod.students_that_applied(user_id)
 
-		if len(relevant_adds)>0:
+		return template('adds.tpl',user_id=user_id, user=username, adds=relevant_adds, students=students_application, pageTitle='Alla uppdrag')
+
+
+		'''if len(relevant_adds)>0:
 			open_ad=addmod.choose_ad(5)
 			return template('adds.tpl',user_id=user_id, user=username, adds=relevant_adds, students=students, open_ad=open_ad, pageTitle='Alla uppdrag')
 		else:
 			open_ad=0
-			return template('adds.tpl',user_id=user_id, user=username, adds=relevant_adds, students=students, open_ad=open_ad, pageTitle='Alla uppdrag')
+			return template('adds.tpl',user_id=user_id, user=username, adds=relevant_adds, students=students, open_ad=open_ad, pageTitle='Alla uppdrag')'''
 	else:
 		return "Du har ej behörighet"
 
