@@ -32,7 +32,7 @@
         		                <a href="/allMissions" data-value="{{i[0]}}" class="go_to_ad">
                                     <li>
                                         <div>
-                                            <h3>{{i[0]}}</h3>
+                                            <h3>{{i[1]}}</h3>
                                             %num_applications = sum(x.count(i[0]) for x in students_application)
                                             % if num_applications > 1:
                                                 <p><span>{{num_applications}}</span> ansökningar</p>
