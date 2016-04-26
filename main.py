@@ -155,7 +155,6 @@ def edit_contact_information():
 def show_adds():
 	log.validate_autho()
 	username=log.get_user_name()
-	all_adds=addmod.load_adds('ads')
 	complete_adds = addmod.join_ads_employers()
 	print complete_adds
 	return template('adsform.tpl',user=username, annons=complete_adds, pageTitle = 'Annonser' )
