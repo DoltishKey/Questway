@@ -76,21 +76,21 @@
 
 
         <div class="tabContent" id="avslutade_uppdrag">
-            <div class="wrap">
-            %for grading in gradings:
-                %if user_id == grading['selected']:
+            <!--<div class="wrap">
+            for grading in gradings:
+                if user_id == grading['selected']:
                 <div class="add">
-                    <h2>{{grading['ad_title']}}</h2>
-                    %if grading['display'] == False:
+                    <h2>((grading['ad_title']))</h2>
+                    if grading['display'] == False:
                         <p>Uppdraget visas inte på din profil</p>
-                        <a href="/profiles/{{user_id}}#mission{{grading['uniq_adNr']}}">Visa på din profil</a>
-                    %end    
-                %end
+                        <a href="/profiles/((user_id))#mission((grading['uniq_adNr']))">Visa på din profil</a>
+                    end
+                end
                 </div>
-            %end
+            end
             </div>
 
-            </div>
+        </div>-->
         </div>
 
         <footer>
