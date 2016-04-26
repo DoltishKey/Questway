@@ -5,7 +5,7 @@
 
 	<body>
         %include('nav.tpl')
-        
+
         <div class="wrapperLogin">
             <div class="wrap">
                 <form name="logIn" id="logIn" method="post" action="/do_login">
@@ -20,7 +20,7 @@
                 </form>
             </div>
         </div>
-        
+
         <div class="content2">
             <div id="wrapContent">
                 <div class="contentInContent">
@@ -39,6 +39,6 @@
             © Questway, 2016
             </div>
         </footer>
-        
+
 	</body>
 </html>

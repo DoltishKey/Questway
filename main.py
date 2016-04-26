@@ -9,8 +9,7 @@ from beaker.middleware import SessionMiddleware
 import json
 import MySQLdb
 
-db = MySQLdb.connect(host="195.178.232.7", port=4040, user="AC8240", passwd="hejhej123", db="AC8240");
-cursor = db.cursor()
+
 
 '''*********Routes*********'''
 
@@ -116,6 +115,8 @@ def profiles(user):
 	user_profile_data = createUsers.show_student_profile(user)
 	is_user_logged_in = log.is_user_logged_in()
 	#grading_ads = sorted( (addmod.read_data('grading')), key=lambda x: x['display'])
+	grading_ads = addmod.grading_ads()
+	print grading_ads
 	username = ""
 	if is_user_logged_in == True:
 		user_levle = log.get_user_level()
@@ -127,7 +128,7 @@ def profiles(user):
 		education_info = user_profile_data['education_info']
 		student_info = user_profile_data['student_info']
 		student_name = student_info[0] + ' ' + student_info[1]
-		return template('user_profile', user = username, user_autho = user_levle, user_id = user, student= student_info, education = education_info, pageTitle = student_name )
+		return template('user_profile', user = username, user_autho = user_levle, user_id = user, student= student_info, education = education_info, pageTitle = student_name, grading = grading_ads )
 
 	else:
 		return 'Användaren finns inte!'
@@ -157,10 +158,9 @@ def show_adds():
 	print complete_adds
 	return template('adsform.tpl',user=username, annons=complete_adds, pageTitle = 'Annonser' )
 
-
 @post('/make_ad')
 def ad_done():
-    #log.validate_autho()
+	log.validate_autho()
 	response=addmod.do_ad()
 	if response['result']==True:
 		redirect('/admin')
@@ -188,14 +188,17 @@ def del_ad(which_ad):
 
 '''****Studenten kan söka en annons****'''
 
-@post('/sok_annons/<annons>')
-def sok_annons(annons):
-    log.validate_autho()
-    all_adds=addmod.load_adds('ads')
-    user=log.get_user_id_logged_in()
+@post('/sok_annons/<which_ad>')
+def apply_for_mission(which_ad):
+	log.validate_autho()
+	response=addmod.applying_for_mission(which_ad)
+	if response['result']==True:
+		redirect('/admin')
+	else:
+		return response['error']
 
-    what_add=addmod.choose_ad(annons, all_adds, None)
 
+'''
     for add in all_adds:
         if int(add['uniq_adNr'])==int(annons):
             if user in add['who_applied']:
@@ -208,6 +211,7 @@ def sok_annons(annons):
         json.dump(all_adds, fil, indent=4)
 
     redirect('/admin')
+'''
 
 
 '''****Listar de studenter som sökt ett specifik uppdrag***'''
