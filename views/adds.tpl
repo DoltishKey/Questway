@@ -77,8 +77,8 @@
                                 <form  name="ta_bort_annons" id="del_annons" method="POST" action="/del_ad/{{add[0]}}">
                                 <input type="submit" value="Ta bort annons" class="myButton delete_ad">
                                 </form>
-                                <div class="arrow">></div>
                             </div>
+                            <div class="arrow">></div>
                     </div>
                     %end
                 </div>
