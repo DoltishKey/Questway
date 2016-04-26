@@ -28,68 +28,53 @@
                 </div>
             %end
 
-                %for add in adds:
-                        <div class="add">
-                            <h2>{{add[1]}}</h2>
-                            <h4 class="inline_block">Publicererades: </h4> 
-                            <p class="inline_block">{{add[4]}}</p>
-                            <h4 class="inline_block col2">Antal ansökningar: </h4>
-                            <p class="inline_block">5 <!-- Ladda in antal här --></p>
-                            <div class="showMore">
-                                <h4>Beskrivning:</h4>
-                                <p>{{add[2]}}</p>
-                                <h3>Ansökningar:</h3>
-                                <!-- Om antal ansökningar > 0, visa detta (en li): -->
-                                <div id="applications">
-                                    <ul>
-                                        <li>
-                                            <h4 class="col1"><a href="">Student 1</a></h4>
-                                            <p class="col1 inline_block">Namn på program, år</p>
-                                            <p class="col2 inline_block">Malmö Högskola</p>
-                                            <p class="col3 inline_block">Övriga kunskaper: PHP, Java, Bootstrap</p>
-                                            <form name="choose_student" action="" id="choose_student" method="get">
-                                            <input type="submit" name="choose" id="choose" class="myButton" value="Välj student">
-                                            </form>
-                                            
-                                        </li>
-                                        <li>
-                                            <h4 class="col1"><a href="">Student 2</a></h4>
-                                            <p class="col1 inline_block">Namn på program, år</p>
-                                            <p class="col2 inline_block">Malmö Högskola</p>
-                                            <p class="col3 inline_block">Övriga kunskaper: PHP, Bootstrap</p>
-                                            <form name="choose_student" action="" id="choose_student" method="get">
-                                            <input type="submit" name="choose" id="choose" class="myButton" value="Välj student">
-                                            </form>
-                                        </li>
-                                        <li>
-                                            <h4 class="col1"><a href="">Student 3</a></h4>
-                                            <p class="col1 inline_block">Namn på program, år</p>
-                                            <p class="col2 inline_block">Malmö Högskola</p>
-                                            <p class="col3 inline_block">Övriga kunskaper: Java, Bootstrap</p>
-                                            <form name="choose_student" action="" id="choose_student" method="get">
-                                            <input type="submit" name="choose" id="choose" class="myButton" value="Välj student">
-                                            </form>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <!-- Om antal ansökningar = 0, visa detta: -->
-                                <!--<p>Än så länge finnas det inga ansökningar till detta uppdrag.</p>-->
-                                <form  name="ta_bort_annons" id="del_annons" method="POST" action="/del_ad/{{add[0]}}">
-                                <input type="submit" value="Ta bort annons" class="myButton delete_ad">
-                                </form>
+            %for add in adds:
+                    <div class="add">
+                        <h2>{{add[1]}}</h2>
+                        <h4 class="inline_block">Publicererades: </h4> 
+                        <p class="inline_block">{{add[4]}}</p>
+                        <h4 class="inline_block col2">Antal ansökningar: </h4>
+                        <p class="inline_block">5 <!-- Ladda in antal här --></p>
+                        <div class="showMore">
+                            <h4>Beskrivning:</h4>
+                            <p>{{add[2]}}</p>
+                            <h3>Ansökningar:</h3>
+                            <!-- Om antal ansökningar > 0, gör detta: -->
+                            <div id="applications">
+                                <ul>
+                                    %for student in students:
+                                        %if int(student[3]) == int(add[0]):
+                                            <li>
+                                                <h4 class="col1"><a href="/profiles/{{student[0]}}">{{student[1]}} {{student[2]}}</a></h4>
+                                                <p class="col1 inline_block">Namn på program, år</p>
+                                                <p class="col2 inline_block">Malmö Högskola</p>
+                                                <p class="col3 inline_block">Övriga kunskaper: PHP, Java, Bootstrap</p>
+                                                <form name="choose_student" action="" id="choose_student" method="get">
+                                                <input type="submit" name="choose" id="choose" class="myButton" value="Välj student">
+                                                </form>
+                                            </li> 
+                                        %end
+                                    %end
+                                </ul>
                             </div>
-                            <div class="arrow">></div>
-                    </div>
-                    %end
+                            <!-- Om antal ansökningar = 0, visa detta: -->
+                            <!--<p>Än så länge finnas det inga ansökningar till detta uppdrag.</p>-->
+                            <form  name="ta_bort_annons" id="del_annons" method="POST" action="/del_ad/{{add[0]}}">
+                            <input type="submit" value="Ta bort annons" class="myButton delete_ad">
+                            </form>
+                        </div>
+                        <div class="arrow">></div>
+                </div>
+                %end
                 </div>
             </div>
-                                    <ul>
+                                    <!--<ul>
                                         %for student in students:
                                             %if int(student[3]) == int(add[0]):
                                                 <li><a href="/profiles/{{student[0]}}">{{student[1]}} {{student[2]}} Satus: {{student[4]}}</a></li>
                                             %end
                                         %end
-                                    </ul>
+                                    </ul>-->
                                 
 
 
