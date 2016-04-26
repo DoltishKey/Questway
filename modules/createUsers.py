@@ -5,9 +5,24 @@ import json
 from validate_email import validate_email
 import MySQLdb
 
+
 '''*********DB info*********'''
-db = MySQLdb.connect(host="195.178.232.7", port=4040, user="AC8240", passwd="hejhej123", db="AC8240");
-cursor = db.cursor()
+def call_database(sql, asked_from_cursor):
+    db = MySQLdb.connect(host="195.178.232.7", port=4040, user="AC8240", passwd="hejhej123", db="AC8240");
+    cursor = db.cursor()
+    cursor_answer = []
+    try:
+        cursor.execute(sql)
+        for query in asked_from_cursor:
+            cursor_answer.append(eval('cursor.'+query))
+
+        db.commit()
+
+    except:
+        db.rollback()
+
+    db.close()
+    return cursor_answer
 
 
 '''*********Läs & skriv till fil*********'''
@@ -32,17 +47,17 @@ def validatekDataFile(file):
 '''*********Validering*********'''
 def validate_Username(email):
 	sql = "SELECT * FROM users WHERE mail = '%s'" %(email)
-	#data = call_database(sql, 'fetchall()');
-	cursor.execute(sql)
-	data = cursor.fetchall()
-	print type(data)
-	if len(data) != 0:
+	ask_it_to = ['rowcount']
+	mighty_db_says = call_database(sql, ask_it_to)
+
+	if mighty_db_says[0] != 0:
 		return True
 
 def validate_if_student_exists(userID):
 	sql = "SELECT autho_level FROM users WHERE id = '%d'"%(userID)
-	cursor.execute(sql)
-	if cursor.rowcount == 1:
+	ask_it_to = ['rowcount']
+	mighty_db_says = call_database(sql, ask_it_to)
+	if mighty_db_says[0] == 1:
 		return True
 
 '''*********funktioner*********'''
@@ -52,10 +67,9 @@ def add_new_user(email, password, user_level):
        VALUES ('%s', '%d', '%s' )" % \
        (password, user_level, email)
 
-	#new_user_id = call_database(sql,'lastrowid');
-	cursor.execute(sql)
-	new_user_id = cursor.lastrowid
-	db.commit()
+	ask_it_to = ['lastrowid']
+	mighty_db_says = call_database(sql, ask_it_to)
+	new_user_id = mighty_db_says[0]
 
 	return new_user_id
 
@@ -67,8 +81,8 @@ def add_new_employer(company_name, org_nr, first_name, last_name, new_user_id):
        VALUES ('%s', '%s', '%s', '%d', (select id from users where id = '%d') )" \
 	   %(first_name, last_name, company_name, org_nr, new_user_id)
 
-	cursor.execute(sql)
-	db.commit()
+	ask_it_to = []
+	mighty_db_says = call_database(sql, ask_it_to)
 
 	#call_database(sql, False);
 
@@ -80,26 +94,28 @@ def add_new_student(first_name, last_name, program, year, new_user_id):
 	    (select year from education where year = '%d' and education_id = '%d'), (select id from users where id = '%d') )" \
 		%(first_name, last_name, program, year, year, program, new_user_id)
 
-	#call_database(sql, False);
-	cursor.execute(sql)
-	db.commit()
+	ask_it_to = []
+	mighty_db_says = call_database(sql, ask_it_to)
 
 def get_student_main_info(user):
 	sql = "SELECT * FROM students WHERE id = '%d'"%(user)
-	cursor.execute(sql)
-	user_info = cursor.fetchall()[0]
+	ask_it_to = ['fetchall()']
+	mighty_db_says = call_database(sql, ask_it_to)
+	user_info = mighty_db_says[0][0]
 	return user_info
 
 def get_education_info(program, year):
 	sql = "SELECT titel, tagline, main_info_one, main_info_two, main_info_three, img_url \
 	FROM education WHERE education_id = '%d' AND year = '%d'"%(program, year)
-	cursor.execute(sql)
-	education_info = cursor.fetchall()[0]
+	ask_it_to = ['fetchall()']
+	mighty_db_says = call_database(sql, ask_it_to)
+	education_info = mighty_db_says[0][0]
 
 	sql = sql = "SELECT skill FROM education_skills\
 	WHERE education_id = '%d' AND education_year = '%d'"%(program, year)
-	cursor.execute(sql)
-	education_skills = cursor.fetchall()
+	ask_it_to = ['fetchall()']
+	mighty_db_says = call_database(sql, ask_it_to)
+	education_skills = mighty_db_says[0]
 	return {'education_info':education_info, 'education_skills':education_skills}
 
 

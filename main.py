@@ -9,8 +9,7 @@ from beaker.middleware import SessionMiddleware
 import json
 import MySQLdb
 
-db = MySQLdb.connect(host="195.178.232.7", port=4040, user="AC8240", passwd="hejhej123", db="AC8240");
-cursor = db.cursor()
+
 
 '''*********Routes*********'''
 
@@ -116,6 +115,8 @@ def profiles(user):
 	user_profile_data = createUsers.show_student_profile(user)
 	is_user_logged_in = log.is_user_logged_in()
 	#grading_ads = sorted( (addmod.read_data('grading')), key=lambda x: x['display'])
+	grading_ads = addmod.grading_ads()
+	print grading_ads
 	username = ""
 	if is_user_logged_in == True:
 		user_levle = log.get_user_level()
@@ -127,7 +128,7 @@ def profiles(user):
 		education_info = user_profile_data['education_info']
 		student_info = user_profile_data['student_info']
 		student_name = student_info[0] + ' ' + student_info[1]
-		return template('user_profile', user = username, user_autho = user_levle, student_id = user, student= student_info, education = education_info, pageTitle = student_name )
+		return template('user_profile', user = username, user_autho = user_levle, user_id = user, student= student_info, education = education_info, pageTitle = student_name, grading = grading_ads )
 
 	else:
 		return 'Användaren finns inte!'
