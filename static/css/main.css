@@ -27,6 +27,7 @@ header {
     background-color: #2D3030;/*#EEEAE8*/;
     color: #FFF;
     border-bottom: 20px solid #F89406;
+    z-index: 2;
 }
 
 header h1 {
@@ -45,10 +46,11 @@ header h1 {
     float: right;
     clear: both;
     margin-top: 26.8px;
+    z-index: 3;
 }
 
 .menu > a {
-    width: 33%;
+    width: 32.5%;
     padding: 15px 0px;
     margin: 0px 0px;
     text-decoration: none;
@@ -109,6 +111,7 @@ header h1 {
 .wrap {
     width: 80%;
     margin: 0 auto;
+    z-index: 0;
 }
 
 /*Tabbar: */
@@ -172,10 +175,14 @@ ul#tabs {
 
 ul#tabs li {
     display: inline-block;
-    width: 24.94%;
+    white-space: nowrap;
+    width: 24.92%;
     text-align: center;
-    font-size: 18px;
     border-right: 1px solid #BBBBBB;
+    font-size: 0px;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit  */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko         */
+    box-sizing: border-box; 
 }
 
 ul#tabs li a {
@@ -183,6 +190,7 @@ ul#tabs li a {
     background-color: #F3F3F3;
     /*border-bottom: 2px solid #F89406;*/
     position: relative;
+    font-size: 18px;
     display: block;
     padding: 6% 6%;
     margin: 0;
@@ -233,7 +241,7 @@ div.wrap_around_tab_content {
 }
 
 div.container_student_start {
-    background: url(../img/student_start_background.jpg);
+    background: url(../img/test.jpg);
     background-size: cover;
     background-position: center;
     height: 400px;
@@ -262,7 +270,7 @@ div.container_student_start h2 {
 }
 
 @media screen and (max-width:743px) {
-    ul#tabs li {
+    ul#tabs li a {
         font-size: 14px;
     }
 }
@@ -293,16 +301,17 @@ div.container_student_start h2 {
 .column2 { /* En extra kolumn i uppdrag */
     margin-left: 50px;
 }
-
-#error { /* Felmeddelande vid inloggning */
-    width: 400px;
-    /*background-color: rgba(163, 34, 34, 0.4);
-    padding: 25px;
-    border-radius: 6px;*/
-    margin: 20px auto;
+#logIn #error{
     text-align: center;
+    color: red;
+    padding: 10px;
+    border-radius: 5px;
+    background: rgba(200,0,0,0.3);
+    width: 75%;
+    margin: auto;
+    /*blir synlig när den behövs. Via js-funktionen: checkLogIn*/
+    display: none;
 }
-
 footer {
     color: #FFF;
     height: 100px;
@@ -1341,7 +1350,7 @@ label{
 
     #logIn {
         width: 90%;
-        margin: 85px auto;
+        margin: 50px auto;
     }
 
     header nav{
@@ -1424,6 +1433,11 @@ label{
     
     .add > .arrow {
         width: 40px;
+    }
+    
+    div.container_student_start h2 {
+    position: relative;
+    top: 220px;
     }
 }
 
@@ -1600,7 +1614,7 @@ label{
         margin: 5px;
     }
 
-    /* Studentprofi - slutl*/
+    /* Studentprofil - slut*/
 
 
 

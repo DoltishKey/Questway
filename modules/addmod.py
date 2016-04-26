@@ -160,15 +160,6 @@ def join_ads_employers():
 
 	return joined_employers_ads
 
-	'''
-	corps = createUsers.read_data('employers')
-	for add in all_adds:
-		for corp in corps:
-			if add['creator'] == corp ['id']:
-				add.update({'ad_corpName':corp['company_name']})
-
-	return all_adds
-	'''
 
 '''******* Delete a specifik ad *******'''
 def erase_ad(ad_id, user_ID):
@@ -178,22 +169,39 @@ def erase_ad(ad_id, user_ID):
 
 	redirect('/allMissions')
 
-'''*********Choose a specific AD*********'''
 
 def choose_ad(annonsID):
 	sql= "SELECT * FROM ads WHERE id='%d'" %(annonsID)
+	ask_it_to = ['fetchall()']
+	mighty_db_says = call_database(sql, ask_it_to)
+	return mighty_db_says[0]
+
+'''*****Which ads student applied on****'''
+def applied_on(who, status):
+	sql="SELECT * FROM application WHERE '%d'=application.student_id \
+	AND application.status='%s'" %(who, status)
 
 	ask_it_to = ['fetchall()']
 	mighty_db_says = call_database(sql, ask_it_to)
 	return mighty_db_says[0]
 
-	'''
-    for each in db:
-        if int(each['uniq_adNr']) == int(annonsID) and str(each['the_chosen_one'])==str(status):
-            return each
-        elif int(each['uniq_adNr']) == int(annonsID) and status==None:
-            return each
-	'''
+
+'''****** Student Applying on ad *****'''
+def applying_for_mission(which_ad):
+	log.validate_autho()
+	which_ad=int(which_ad)
+	user=log.get_user_id_logged_in()
+	ads_user_applied_on=applied_on(user, 'Obehandlad')
+
+	if len(ads_user_applied_on) > 0:
+		return {'result':False, 'error':'Du har redan ansökt på denna annons!'}
+	else:
+		sql="INSERT INTO application(ad_id, student_id, status)\
+			VALUES ('%d', '%d', '%s')" % (which_ad, user, 'Obehandlad')
+		ask_it_to = []
+		mighty_db_says = call_database(sql, ask_it_to)
+		return {'result':True, 'error':None}
+
 
 
 '''*********Choose a Student********'''

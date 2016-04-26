@@ -18,6 +18,7 @@
                     <input class="myButton" type="submit" value="Logga in" onclick="emailValidation()">
                 </form>
                 <p id="error"></p>
+                </form>
             </div>
         </div>
 

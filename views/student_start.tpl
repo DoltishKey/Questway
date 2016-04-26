@@ -4,13 +4,13 @@
     %include('head.tpl')
 
 	<body onload="init()">
-        
+
         %include('nav_students.tpl')
 
         <div class="container_student_start">
             <h2>Uppdrag</h2>
         </div>
-                
+
         <div class="wrap_around_tab_content">
             <div class="wrap">
                 <!-- Länkar till tabbarna: -->
@@ -32,7 +32,7 @@
                                         <h4>Beskrivning:</h4>
                                         <p>{{i[2]}}</p>
                                         <h4 class="inline_block">Företag: </h4><p class="inline_block"> {{i[0]}}</p>
-                                        <form  name="sok_annons" id="sok_annons" method="POST" action="/sok_annons/{{i[0]}}">
+                                        <form  name="sok_annons" id="sok_annons" method="POST" action="/sok_annons/{{i[5]}}">
                                             <input type="submit" value="Sök annons" class="myButton">
                                         </form>
                                     </div>
@@ -84,9 +84,10 @@
                     %if grading['display'] == False:
                         <p>Uppdraget visas inte på din profil</p>
                         <a href="/profiles/{{user_id}}#mission{{grading['uniq_adNr']}}">Visa på din profil</a>
-                    %end
-                </div>
+                    %end    
                 %end
+                </div>
+            %end
             </div>
 
             </div>
