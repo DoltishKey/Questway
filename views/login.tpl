@@ -5,7 +5,7 @@
 
 	<body>
         %include('nav.tpl')
-        
+
         <div class="wrapperLogin">
             <div class="wrap">
                 <form name="logIn" id="logIn" method="post" action="/do_login">
@@ -15,16 +15,12 @@
                     <input placeholder="Email" type="input" name="email" id="email" value="">
                     <!--<label for="password">Lösenord</label>-->
                     <input placeholder="Lösenord" type="password" name="password" id="password" value="">
-<<<<<<< HEAD
                     <input class="myButton" type="submit" value="Logga in" onclick="emailValidation()">
-=======
-                    <input class="myButton" type="submit" id="log_in_button" value="Logga in">		
->>>>>>> origin/master
                 </form>
                 <p id="error"></p>
             </div>
         </div>
-        
+
         <div class="content2">
             <div id="wrapContent">
                 <div class="contentInContent">
@@ -43,6 +39,6 @@
             © Questway, 2016
             </div>
         </footer>
-        
+
 	</body>
 </html>

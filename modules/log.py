@@ -4,8 +4,7 @@ from bottle import route, get, post, run, template, error, static_file, request,
 from beaker.middleware import SessionMiddleware
 import json
 import MySQLdb
-db = MySQLdb.connect(host="195.178.232.7", port=4040, user="AC8240", passwd="hejhej123", db="AC8240");
-cursor = db.cursor()
+
 
 '''*********Sessions Data*********'''
 session_opts = {
@@ -15,6 +14,24 @@ session_opts = {
     'session.timeout': 3600,
 }
 
+
+'''*********DB info*********'''
+def call_database(sql, asked_from_cursor):
+    db = MySQLdb.connect(host="195.178.232.7", port=4040, user="AC8240", passwd="hejhej123", db="AC8240");
+    cursor = db.cursor()
+    cursor_answer = []
+    try:
+        cursor.execute(sql)
+        for query in asked_from_cursor:
+            cursor_answer.append(eval('cursor.'+query))
+
+        db.commit()
+
+    except:
+        db.rollback()
+
+    db.close()
+    return cursor_answer
 
 
 '''*********Läs & skriv till fil*********'''
@@ -32,9 +49,12 @@ def read_data(file):
 '''*********Authorisering*********'''
 def validate_user(username, password):
     sql = "SELECT id FROM users WHERE mail = '%s' and password = '%s' " %(username, password)
-    cursor.execute(sql)
-    if cursor.rowcount == 1:
-        user_id = cursor.fetchall()[0][0]
+
+    ask_it_to = ['fetchall()', 'rowcount']
+    mighty_db_says = call_database(sql, ask_it_to)
+
+    if mighty_db_says[1] == 1:
+        user_id = mighty_db_says[0][0][0]
         return {'id':user_id, 'result':True}
 
     else:
@@ -77,15 +97,18 @@ def get_user_name():
     else:
         sql = "SELECT first_name FROM employers WHERE id = '%d'"%(session['userId'])
 
-    cursor.execute(sql)
-    first_name = cursor.fetchall()[0][0]
+    ask_it_to = ['fetchall()']
+    mighty_db_says = call_database(sql, ask_it_to)
+    first_name = mighty_db_says[0][0][0]
     return first_name
 
 def get_user_level():
     session = request.environ.get('beaker.session')
     sql = "SELECT autho_level FROM users WHERE id = '%d'"%(session['userId'])
-    cursor.execute(sql)
-    autho_level = cursor.fetchall()[0][0]
+
+    ask_it_to = ['fetchall()']
+    mighty_db_says = call_database(sql, ask_it_to)
+    autho_level = mighty_db_says[0][0][0]
     return autho_level
 
 '''*********Funktioner*********'''

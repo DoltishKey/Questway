@@ -5,8 +5,27 @@ import time
 import log
 import createUsers
 import MySQLdb
-db = MySQLdb.connect(host="195.178.232.7", port=4040, user="AC8240", passwd="hejhej123", db="AC8240");
-cursor = db.cursor()
+
+
+'''*********DB info*********'''
+def call_database(sql, asked_from_cursor):
+    db = MySQLdb.connect(host="195.178.232.7", port=4040, user="AC8240", passwd="hejhej123", db="AC8240");
+    cursor = db.cursor()
+    cursor_answer = []
+    try:
+        cursor.execute(sql)
+        for query in asked_from_cursor:
+            cursor_answer.append(eval('cursor.'+query))
+
+        db.commit()
+
+    except:
+        db.rollback()
+
+    db.close()
+    return cursor_answer
+
+
 
 '''*********Skriv/läsa filer*********'''
 def read_data(file):
@@ -77,11 +96,11 @@ def do_ad():
 		#content=load_adds('ads')
 		#content.append(mydict)
 
-		sql_query="INSERT INTO ads(titel, main_info, creator_id, creation_date)\
+		sql="INSERT INTO ads(titel, main_info, creator_id, creation_date)\
 			VALUES ('%s', '%s', '%d', CURDATE())" % (ad_title, ad_text, creator)
 
-		cursor.execute(sql_query)
-		db.commit()
+		ask_it_to = []
+		mighty_db_says = call_database(sql, ask_it_to)
 		return {'result':True, 'error':'None'}
 
 		'''
@@ -122,20 +141,22 @@ def check_adID(number):
     return number
 
 def get_my_ads(employers_id):
-	query= "SELECT id, titel, main_info, creator_id, DATE(creation_date) FROM ads WHERE '%d'=ads.creator_id" %(employers_id)
+	sql= "SELECT id, titel, main_info, creator_id, DATE(creation_date) FROM ads WHERE '%d'=ads.creator_id" %(employers_id)
 
-	cursor.execute(query)
-	return cursor.fetchall()
+	ask_it_to = ['fetchall()']
+	mighty_db_says = call_database(sql, ask_it_to)
+	return mighty_db_says[0]
 
 '''**********Pair employers to their ads************'''
 def join_ads_employers():
-	sql_query="SELECT employers.company_name, ads.titel, ads.main_info, employers.id, DATE(ads.creation_date), ads.id \
+	sql="SELECT employers.company_name, ads.titel, ads.main_info, employers.id, DATE(ads.creation_date), ads.id \
 	FROM ads \
 	INNER JOIN employers \
 	ON employers.id=ads.creator_id"
 
-	cursor.execute(sql_query)
-	joined_employers_ads=cursor.fetchall()
+	ask_it_to = ['fetchall()']
+	mighty_db_says = call_database(sql, ask_it_to)
+	joined_employers_ads=mighty_db_says[0]
 
 	return joined_employers_ads
 
@@ -151,18 +172,20 @@ def join_ads_employers():
 
 '''******* Delete a specifik ad *******'''
 def erase_ad(ad_id, user_ID):
-	query= "DELETE FROM ads WHERE id = '%d' and creator_id='%d'" %(int(ad_id), int(user_ID))
-	cursor.execute(query)
-	db.commit()
+	sql= "DELETE FROM ads WHERE id = '%d' and creator_id='%d'" %(int(ad_id), int(user_ID))
+	ask_it_to = []
+	mighty_db_says = call_database(sql, ask_it_to)
+
 	redirect('/allMissions')
 
 '''*********Choose a specific AD*********'''
 
 def choose_ad(annonsID):
-	query= "SELECT * FROM ads WHERE id='%d'" %(annonsID)
+	sql= "SELECT * FROM ads WHERE id='%d'" %(annonsID)
 
-	cursor.execute(query)
-	return cursor.fetchall()
+	ask_it_to = ['fetchall()']
+	mighty_db_says = call_database(sql, ask_it_to)
+	return mighty_db_says[0]
 
 	'''
     for each in db:
@@ -245,3 +268,12 @@ def ajax_edit_mission():
 				grade['type'] = type_of
 
 		write_to_db(all_grades,'grading')
+
+def grading_ads():
+	sql= "SELECT ads.titel, feedback.*, employers.company_name  FROM ads, feedback, employers WHERE \
+	ads.id =  (SELECT ad_id FROM application WHERE student_id=39 AND status = 'avslutad') \
+	AND feedback.ad_id =  (SELECT ad_id FROM application WHERE student_id=39 AND status = 'avslutad') \
+	AND employers.id = (SELECT creator_id FROM ads WHERE id =  (SELECT ad_id FROM application WHERE student_id=39 AND status = 'avslutad'))"
+	ask_it_to = ['fetchall()']
+	mighty_db_says = call_database(sql, ask_it_to)
+	return mighty_db_says[0]
