@@ -126,11 +126,11 @@ header h1 {
 }
 
 .add:hover {
-    border: 3px solid #48797D;
+    border: 3px solid #03a7ad;
 }
 
 .add:hover > .arrow {
-    background-color: #48797D;
+    background-color: #03a7ad;
 }
 
 .add h2 {
@@ -140,12 +140,10 @@ header h1 {
 .add h4 {
     margin-top: 2px;
     margin-bottom: 5px;
-    margin-right: 4px;
 }
 
 .add p {
     margin-top: 2px;
-    margin-bottom: 10px;
 }
 
 .add form {
@@ -270,7 +268,7 @@ div.container_student_start h2 {
     color: #FFF;
 }
 
-.tabContent .showMore form input {
+.tabContent .showMore form .delete_ad { 
     position: relative; 
     left: 40%;
     display: inline;
@@ -301,6 +299,7 @@ div.container_student_start h2 {
 
 .inline_block {
     display: inline-block;
+    vertical-align: top;
 }
 
 /* ______________________ */
@@ -308,6 +307,7 @@ div.container_student_start h2 {
 .column2 { /* En extra kolumn i uppdrag */
     margin-left: 50px;
 }
+
 #logIn #error{
     text-align: center;
     color: red;
@@ -597,6 +597,85 @@ transition: background-color 5000s ease-in-out 0s;
     color: #fff;
 }
 /* --- Employers start.tpl || END --- */
+
+/* --- Listing of applications for ads (employer) ---*/
+
+#applications {
+    width: 90%;
+    padding: 0;
+    color: #000;
+    position: relative;n
+}
+
+#applications ul {
+    list-style-type: none;
+    padding: 0;
+    font-size: 0; /* För att ta bort automatisk margin för inline-block element */
+}
+
+#applications ul li {
+    border-bottom: 0.5px solid #a5a5a5;
+    border-top: 0.5px solid #a5a5a5;
+    font-size: 15px;
+    padding: 10px 0;
+    margin: 4px 0;
+    border-left: 5px solid #000;
+    border-right: 0.5px solid #a5a5a5;
+}
+
+#applications ul li:hover {
+    background-color: #dddddd;
+    cursor: pointer;
+    color: #000;
+}
+
+#applications ul li:hover > #applications a {
+    color: #000;
+}
+
+#applications a {
+    color: #666;
+}
+
+.col1 {
+    margin-left: 2%;
+}
+
+.col2 {
+    position: absolute;
+    left: 25%;
+    /*margin-left: 10%;*/
+}
+
+.col3 {
+    position: absolute;
+    left: 50%;
+}
+
+#applications ul li h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+#choose_student {
+    display: inline-block;
+    margin: -20px 0 0 0;
+    position: absolute;
+    left: 90%;
+}
+
+#choose_student #choose {
+    display: inline-block;
+    margin: 0;
+    padding: 10px;
+    text-transform: none;
+    font-size: 90%;
+    background-color: #078f91;
+    box-shadow: none;
+}
+
+/* --- Listing of applications for ads (employer) || END ---*/
 
 /* --- Student profile.tpl --- */
 
@@ -1243,66 +1322,6 @@ label{
         width: 50%;
         display: block;
     }
-}
-/* STUDENTENS PROFIL: */
-
-.contentProfile {
-    background-image: url(../img/pictureIAtest.jpg);
-    background-size: cover;
-    background-position: center;
-    height: 500px;
-    overflow: auto;
-}
-
-#profileName {
-    border: 5px solid black;
-    line-height: 200px;
-    margin-left: 0;
-}
-
-.profileDescription {
-    background: #fff;
-    width: 380px;
-    height: 130px;
-    display: inline-block;
-    margin-left: 75px;
-    margin-top: 20px;
-    padding: 10px 10px;
-    border: 5px solid black;
-}
-
-.centerProfileInfo {
-    margin: 145px auto;
-    width: 700px;
-}
-
-.content2_Profile {
-    background-color: black;
-    border-top: 5px solid darkgray;
-    border-bottom: 5px solid darkgray;
-    height: 350px;
-}
-
-.roundBox_Profile {
-    background-color: white;
-    border-radius: 50%;
-    width: 200px;
-    height: 200px;
-    display: inline-block;
-    line-height: 200px;
-    text-align: center;
-    margin-left: 75px;
-    vertical-align: top;
-}
-
-.center_roundBox_Profile {
-    width: 900px;
-    margin: 0 auto;
-    padding: 70px 20px 70px 20px;
-}
-
-.studentInformation {
-    background-color: rgba(102, 185, 191, 0.9);
 }
 
 @media screen and (max-width:600px){
