@@ -18,7 +18,6 @@ def startPage():
 	return template('login', pageTitle='Logga in')
 
 
-
 '''*********Login*********'''
 
 
@@ -55,14 +54,17 @@ def admin():
 	username = log.get_user_name() #hämtar användarens namn från DB (returnerar en sträng)
 	userid = log.get_user_id_logged_in() #hämtar användarens id
 	user_level = log.get_user_level() #kollar om användaren är uppdragstagare eller student (returnerar 1 eller 2)
-	#all_adds=addmod.load_adds('ads')
-	complete_adds = addmod.join_ads_employers()
+
+	not_applied_on = addmod.available_ads(userid)
+	ads_untreated = addmod.sort_by_status(userid,'Obehandlad')
+	ads_ongoing = addmod.sort_by_status(userid,'vald')
+
 	grading_ads = addmod.read_data('grading')
 
 	if user_level == 1:
-		return template('student_start', user=username, level="student", gradings = grading_ads,  annons=complete_adds, user_id=userid, pageTitle = 'Start')
+		return template('student_start', avail_ads=not_applied_on, accepted_on=ads_ongoing, pending_ad=ads_untreated, user=username, level="student", gradings = grading_ads, user_id=userid, pageTitle = 'Start')
 	else:
-		return template('employer_start', user=username, user_id=userid,  level="arbetsgivare", annons=complete_adds, pageTitle = 'Start')
+		return template('employer_start', user=username, user_id=userid,  level="arbetsgivare", annons=employers_ads, pageTitle = 'Start')
 
 
 
