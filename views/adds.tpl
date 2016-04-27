@@ -71,7 +71,7 @@
                                     <p>{{add[2]}}</p>
                                     <ul>
                                         %for student in students:
-                                            %if int(student[3]) == int(add[0] and student[4] == 'Vald'):
+                                            %if int(student[3]) == int(add[0]) and student[4] == 'Vald':
                                                 <li><a href="/profiles/{{student[0]}}">{{student[1]}} {{student[2]}} Satus: {{student[4]}}</a></li>
                                             %end
                                         %end

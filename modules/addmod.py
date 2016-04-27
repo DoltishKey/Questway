@@ -282,13 +282,23 @@ def ajax_edit_mission():
 
 		write_to_db(all_grades,'grading')
 
-def grading_ads():
-	sql= "SELECT ads.titel, feedback.*, employers.company_name  FROM ads, feedback, employers WHERE \
-	ads.id =  (SELECT ad_id FROM application WHERE student_id=39 AND status = 'avslutad') \
-	AND feedback.ad_id =  (SELECT ad_id FROM application WHERE student_id=39 AND status = 'avslutad') \
-	AND employers.id = (SELECT creator_id FROM ads WHERE id =  (SELECT ad_id FROM application WHERE student_id=39 AND status = 'avslutad'))"
+def grading_ads(user):
+	sql= "SELECT employers.company_name, J2.*\
+	    FROM \
+	        (SELECT creator_id, feedback.* \
+	        	FROM (SELECT ads.titel, creator_id, ad_id \
+	        			FROM ads \
+	        			INNER JOIN application \
+	        			ON application.ad_id=ads.id \
+	        			WHERE student_id = '%d' and status = 'Avslutad') as J1 \
+	        	INNER JOIN feedback \
+	        	ON J1.ad_id = feedback.ad_id) as J2 \
+	    INNER JOIN employers \
+	    ON J2.creator_id = employers.id"%(user)
+
 	ask_it_to = ['fetchall()']
 	mighty_db_says = call_database(sql, ask_it_to)
+	print mighty_db_says[0]
 	return mighty_db_says[0]
 
 def students_that_applied(user_id):
