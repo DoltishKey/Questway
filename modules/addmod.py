@@ -211,22 +211,17 @@ def applying_for_mission(which_ad):
 
 '''*********Choose a Student********'''
 def who_got_accepted(annons, sokandeID):
-	all_ads=load_adds('ads')
+	log.validate_autho()
 	user=log.get_user_id_logged_in()
+	annons = int(annons)
+	sokandeID = int(sokandeID)
+	sql = "UPDATE application SET status = 'Bortvald' where ad_id='%d'"%(annons)
+	ask_it_to = []
+	mighty_db_says = call_database(sql, ask_it_to)
 
-	what_ad=choose_ad(annons, all_ads, None)
-	print what_ad
-	for who in what_ad['who_applied']:
-		for ad in all_ads:
-			if int(who)==int(sokandeID) and what_ad['uniq_adNr']==ad['uniq_adNr']:
-				print "hey"
-				ad.update({'the_chosen_one':int(sokandeID)})
-				ad['who_applied'].remove(int(sokandeID))
-				print ad
-				print all_ads
-	with open('static/data/ads.json', 'w') as fil:
-		json.dump(all_ads, fil, indent=4)
-	redirect ('/allMissions')
+	sql = "UPDATE application SET status = 'Vald' where ad_id='%d' and student_id = '%d'"%(annons, sokandeID)
+	ask_it_to = []
+	mighty_db_says = call_database(sql, ask_it_to)
 
 
 '''********My list of ads*********'''

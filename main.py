@@ -239,9 +239,10 @@ def list_applied_students():
 		return "Du har ej behörighet"
 
 
-@post('/testing/<annons>/<sokandeID>')
+@route('/select_student/<annons>/<sokandeID>')
 def accepted_ones(annons, sokandeID):
 	addmod.who_got_accepted(annons, sokandeID)
+	redirect ('/allMissions')
 
 
 @route('/ad_done/<annons>', method="POST")

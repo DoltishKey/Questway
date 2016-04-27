@@ -43,8 +43,7 @@
                                 <ul>
                                     %for student in students:
                                         %if int(student[3]) == int(add[0]):
-                                            %print student[4]
-                                            <li><a href="/profiles/{{student[0]}}">{{student[1]}} {{student[2]}} Satus: {{student[4]}}</a></li>
+                                            <li><a href="/profiles/{{student[0]}}">{{student[1]}} {{student[2]}} Satus: {{student[4]}}</a><a href="/select_student/{{add[0]}}/{{student[0]}}"> Välj för uppdraget</a></li>
                                         %end
                                     %end
                                 </ul>
@@ -70,9 +69,13 @@
                                 <div class="showMore">
                                     <h4>Beskrivning:</h4>
                                     <p>{{add[2]}}</p>
-                                    <form  name="ta_bort_annons" id="del_annons" method="POST" action="/del_ad/{{add[0]}}">
-                                    <input type="submit" value="Ta bort annons" class="myButton delete_ad">
-                                    </form>
+                                    <ul>
+                                        %for student in students:
+                                            %if int(student[3]) == int(add[0] and student[4] == 'Vald'):
+                                                <li><a href="/profiles/{{student[0]}}">{{student[1]}} {{student[2]}} Satus: {{student[4]}}</a></li>
+                                            %end
+                                        %end
+                                    </ul>
                                 </div>
                                 <div class="arrow">></div>
                             </div>
@@ -96,9 +99,13 @@
                                 <div class="showMore">
                                     <h4>Beskrivning:</h4>
                                     <p>{{add[2]}}</p>
-                                    <form  name="ta_bort_annons" id="del_annons" method="POST" action="/del_ad/{{add[0]}}">
-                                    <input type="submit" value="Ta bort annons" class="myButton delete_ad">
-                                    </form>
+                                    <ul>
+                                        %for student in students:
+                                            %if int(student[3]) == int(add[0]) and student[4] == 'Avslutad':
+                                                <li><a href="/profiles/{{student[0]}}">{{student[1]}} {{student[2]}} Satus: {{student[4]}}</a></li>
+                                            %end
+                                        %end
+                                    </ul>
                                 </div>
                                 <div class="arrow">></div>
                             </div>
