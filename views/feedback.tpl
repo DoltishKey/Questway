@@ -16,9 +16,6 @@
               </select>
               <input type="submit" value="Sicka">
             </form>
-
-            <a href="/log_out">Logga ut</a>
-            <a href="/">Till start</a>
       </content>
 	</body>
 </html>

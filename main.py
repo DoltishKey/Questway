@@ -253,7 +253,7 @@ def ad_done(annons):
 		if response['response'] == False:
 			return response['error']
 		else:
-			redirect('/admin')
+			redirect('/allMissions')
 	else:
 		return 'Behörighet saknas!'
 

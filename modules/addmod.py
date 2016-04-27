@@ -235,28 +235,34 @@ def my_ads(userID):
 
 '''*********Moves AD to Done*********'''
 def move_ad_to_complete(annons):
-    feedback = request.forms.get('feedback')
-    grade = request.forms.get('grade')
-    if feedback == None or len(feedback) == 0:
-        return {'response':False, 'error':'Du måste skriva något!'}
+	feedback = request.forms.get('feedback')
+	grade = int(request.forms.get('grade'))
+	if feedback == None or len(feedback) == 0:
+		return {'response':False, 'error':'Du måste skriva något!'}
 
-    else:
-        employer = log.get_user_id_logged_in()
-        all_ads = read_data('ads')
-        ad = choose_ad(annons, all_ads, 'Student vald')
-        if int(employer) == int(ad['creator']) and ad['status'] == 'Student vald':
-            ad.update({'feedback':feedback, 'grade':grade,'display':False})
-            all_grades = read_data('grading')
-            all_grades.append(ad)
-            write_to_db(all_grades,'grading')
-            for ad_object in all_ads:
-                if int(ad_object['uniq_adNr']) == int(annons):
-                        all_ads.remove(ad_object)
-            write_to_db(all_ads, 'ads')
-            return {'response':True}
+	else:
 
-        else:
-            return {'response':False, 'error':'Något har blivit fel!'}
+		annons = int(annons)
+		employer = log.get_user_id_logged_in()
+		sql="SELECT creator_id FROM ads WHERE id = '%d'"%(annons)
+		ask_it_to = ['fetchall()']
+		mighty_db_says = call_database(sql, ask_it_to)
+
+		mighty_db_says[0][0][0]
+
+		if mighty_db_says[0][0][0] == int(employer):
+			sql="INSERT INTO feedback(ad_id, display, feedback_text, grade) \
+			VALUES('%d', '%d', '%s', '%d')"%(annons, 1, feedback, grade)
+			ask_it_to = []
+			call_database(sql, ask_it_to)
+
+			sql = "UPDATE application SET status = 'Avslutad' WHERE ad_id='%d' AND status='Vald'"%(annons)
+			ask_it_to = []
+			call_database(sql, ask_it_to)
+			return {'response':True}
+
+		else:
+			return {'response':False, 'error':'Något har blivit fel!'}
 
 def ajax_edit_mission():
 		type_of = request.forms.get('mission_type')

@@ -76,6 +76,7 @@
                                             %end
                                         %end
                                     </ul>
+                                    <a href="/give_feedback/{{add[0]}}">Uppdraget är klart</a>
                                 </div>
                                 <div class="arrow">></div>
                             </div>
