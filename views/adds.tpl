@@ -28,7 +28,6 @@
                     </div>
                 %end
 
-
                 %for add in adds:
                     %if (any( int(student[3]) == int(add[0]) and (str(student[4]) != 'Obehandlad') for student in students)) == False:
                         <div class="add">
@@ -55,7 +54,6 @@
                 %end
             </div>
         </div>
-
 
 
         <div class="tabContent" id="pågående_uppdrag">
