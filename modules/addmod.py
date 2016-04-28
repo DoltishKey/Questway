@@ -340,7 +340,7 @@ def students_that_applied(user_id):
 	return mighty_db_says[0]
 
 def get_given_feedback_for_employers(user):
-	sql = "SELECT J1.id feedback.feedback_text, feedback.grade \
+	sql = "SELECT J1.id, feedback.feedback_text, feedback.grade \
 			FROM (SELECT ads.titel, ads.id \
 					FROM ads \
 						INNER JOIN employers \

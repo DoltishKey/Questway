@@ -120,16 +120,22 @@
                                 <div class="showMore">
                                     <h4>Beskrivning:</h4>
                                     <p>{{add[2]}}</p>
-                                    <ul>
+                                    <ul class="chosen_student">
                                         %for student in students:
                                             %if int(student[3]) == int(add[0]) and student[4] == 'Avslutad':
-                                                <li><a href="/profiles/{{student[0]}}">{{student[1]}} {{student[2]}} Satus: {{student[4]}}</a></li>
+                                                <li>Student som utfört uppdraget:
+                                                    <a href="/profiles/{{student[0]}}">{{student[1]}} {{student[2]}}</a>
+                                                </li>
                                             %end
                                         %end
                                     </ul>
                                     <h4>Feedback</h4>
-                                    
-                                    <!-- ID:0, Text: 1, Grade:2 -->
+                                    %for f in feedback: 
+                                        % if f[0] == add[0]:
+                                        <p>{{f[1]}}</p>
+                                        <p>Betyg: {{f[2]}}</p>
+                                        %end
+                                    %end
                                 </div>
                                 <div class="arrow">></div>
                             </div>

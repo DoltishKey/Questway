@@ -145,6 +145,7 @@ header h1 {
 
 .add p {
     margin-top: 2px;
+    width: 90%;
 }
 
 .add form {
@@ -695,38 +696,79 @@ transition: background-color 5000s ease-in-out 0s;
 /* --- Feedback form ---*/
 
 .form_color {
-    background-color: #00c4cc;
-    background: linear-gradient(to right, #00c4cc, #81cfd1);
+    background-color: #e2e2e2;
+    background: linear-gradient(to right, #f4f7f7, #e2e2e2);
     overflow: hidden;
 }
 
 #feedback_form {
-    width: 40%;
+    width: 45%;
     margin: 0 auto;
-    padding: 5%;
+    padding: 5% 2%;
 }
 
-#feedback_form input, #feedback_form label {
+#feedback_form label {
     display: block;
+    background: linear-gradient(to right, #00c4cc, #00acb2);
+    background-color: #00c4cc;
+    color: #FFF;
+    text-align: center;
+    width: 100%;
+    padding: 3%;
+    margin: 0;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit  */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko         */
+    box-sizing: border-box; 
+}
+
+#feedback_form label:nth-of-type(2) {
+    margin: 20px 0 0 0;
 }
 
 #feedback_form #feedback {
-    height: 150px;
+    height: 200px;
     width: 100%;
     border: none;
     border-radius: none;
     padding: 3%;
     font-size: 15px;
     font-family: 'Roboto', sans-serif; 
-    font-weight: 100;
-    color: #666
+    font-weight: 300;
+    color: #666;
+    outline: none;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit  */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko         */
+    box-sizing: border-box; 
+    resize: none;
+}
+
+#feedback_form select {
+    width: 100%;
+    border: none;
+    padding: 3%;
+    outline: none;
+    border-radius: none;
+    display: block;
+    margin: 0 auto;
+    text-indent: 50%;
+}
+
+#feedback_form select option {
+    text-indent: 40%;
+}
+
+#submit_feedback {
+    display: block;
+    width: 30%;
+    margin-top: 30px;
+    border-radius: 4px;
 }
 
 .center {
     text-align: center;
     text-transform: uppercase;
     margin: 40px 0;
-    color: #00c4cc;
+    color: #00acb2;
 }
 
 /* --- Feedback form || END ---*/
@@ -1233,6 +1275,10 @@ transition: background-color 5000s ease-in-out 0s;
     .wrap {
         width: 90%;
     }
+    
+    #feedback_form {
+        width: 65%;
+    }
 
 }
 /* ----- Välj Typ av användare ------ */
@@ -1504,6 +1550,12 @@ label{
     div.container_student_start h2 {
     position: relative;
     top: 220px;
+    }
+    /* Startsida för studenter SLUT */
+    
+    #feedback_form {
+        width: 100%;
+        padding: 0;
     }
 }
 

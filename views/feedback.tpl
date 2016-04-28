@@ -16,7 +16,7 @@
                     <option value="4">4</option>
                     <option value="5">5</option>
                 </select>
-                <input class="myButton" type="submit" value="Skicka">
+                <input class="myButton" id="submit_feedback" type="submit" value="Skicka">
             </form>
         </div>
         
