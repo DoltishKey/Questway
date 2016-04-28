@@ -53,7 +53,7 @@ def admin():
 	log.validate_autho() #kontrollerar om användaren är inloggad
 	username = log.get_user_name() #hämtar användarens namn från DB (returnerar en sträng)
 	userid = log.get_user_id_logged_in() #hämtar användarens id
-	userid=int(userid)
+	userid=userid
 	user_level = log.get_user_level() #kollar om användaren är uppdragstagare eller student (returnerar 1 eller 2)
 
 
@@ -69,7 +69,7 @@ def admin():
 		ads_untreated = addmod.sort_by_status(userid,'Obehandlad')
 		ads_ongoing = addmod.sort_by_status(userid,'vald')
 		ads_finished = addmod.sort_by_status(userid,'Avslutad')
-		return template('student_start',finished_ads=ads_finished, avail_ads=ads_to_apply_on, accepted_on=ads_ongoing, pending_ad=ads_untreated, user=username, level="student", gradings = grading_ads, user_id=userid, pageTitle = 'Start')
+		return template('student_start',finished_ads=ads_finished, avail_ads=ads_to_apply_on, accepted_on=ads_ongoing, pending_ad=ads_untreated, user_id=userid, user=username, level="student", gradings = grading_ads, pageTitle = 'Start')
 	else:
 		employer_ads = addmod.get_my_ads(userid)
 		students = addmod.students_that_applied(userid)
