@@ -149,7 +149,6 @@ def sort_by_status(user, status):
 	ask_it_to = ['fetchall()']
 	mighty_db_says = call_database(sql, ask_it_to)
 	sorted_ads=mighty_db_says[0]
-	print sorted_ads
 	return sorted_ads
 
 
@@ -339,15 +338,15 @@ def students_that_applied(user_id):
 	return mighty_db_says[0]
 
 def get_given_feedback_for_employers(user):
-    sql = "SELECT J1.id feedback.feedback_text, feedback.grade \
-	           FROM (SELECT ads.titel, ads.id \
-	              FROM ads \
-	                 INNER JOIN employers \
-	                    ON employers.id=ads.creator_id \
-	                       WHERE employers.id = '%d') as J1 \
-	            INNER JOIN feedback \
-	        ON J1.id = feedback.ad_id"%(user)
+	sql = "SELECT J1.id feedback.feedback_text, feedback.grade \
+			FROM (SELECT ads.titel, ads.id \
+					FROM ads \
+						INNER JOIN employers \
+					 		ON employers.id=ads.creator_id \
+					WHERE employers.id = '%d') as J1 \
+				INNER JOIN feedback \
+					ON J1.id = feedback.ad_id"%(user)
 
-        ask_it_to = ['fetchall()']
-        mighty_db_says = call_database(sql, ask_it_to)
-    	return mighty_db_says[0]
+	ask_it_to = ['fetchall()']
+	mighty_db_says = call_database(sql, ask_it_to)
+	return mighty_db_says[0]
