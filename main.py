@@ -60,11 +60,16 @@ def admin():
 	grading_ads = addmod.read_data('grading')
 
 	if user_level == 1:
+		ads_to_apply_on=[]
 		not_applied_on = addmod.available_ads(userid)
+		for each in not_applied_on:
+			if each[7]!='Obehandlad' and each[6]==userid or each[7]==None:
+				print "hej"
+				ads_to_apply_on.append(each)
 		ads_untreated = addmod.sort_by_status(userid,'Obehandlad')
 		ads_ongoing = addmod.sort_by_status(userid,'vald')
-		ads_finished= addmod.sort_by_status=(userid,'Avslutad')
-		return template('student_start',finished_ads=ads_finished, avail_ads=not_applied_on, accepted_on=ads_ongoing, pending_ad=ads_untreated, user=username, level="student", gradings = grading_ads, user_id=userid, pageTitle = 'Start')
+		ads_finished = addmod.sort_by_status(userid,'Avslutad')
+		return template('student_start',finished_ads=ads_finished, avail_ads=ads_to_apply_on, accepted_on=ads_ongoing, pending_ad=ads_untreated, user=username, level="student", gradings = grading_ads, user_id=userid, pageTitle = 'Start')
 	else:
 		employer_ads = addmod.get_my_ads(userid)
 		students = addmod.students_that_applied(userid)

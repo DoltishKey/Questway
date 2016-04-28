@@ -129,53 +129,36 @@ def get_my_ads(employers_id):
 
 def sort_by_status(user, status):
 	sql="SELECT * FROM\
-	(SELECT\
-		a.id,\
-		a.titel,\
-		a.main_info,\
-		DATE(a.creation_date),\
-		b.company_name,\
-		b.id as emp_id,\
-		c.student_id,\
-		c.status\
-		FROM ads a\
-			JOIN employers b\
-				ON a.creator_id=b.id\
-			LEFT OUTER JOIN application c\
-				ON a.id=c.ad_id)\
-		as H1\
+			(SELECT a.id, a.titel, a.main_info, DATE(a.creation_date), b.company_name, b.id as emp_id, c.student_id, c.status\
+				FROM ads a\
+					JOIN employers b\
+						ON a.creator_id=b.id\
+					LEFT OUTER JOIN application c\
+						ON a.id=c.ad_id)\
+					as H1\
 		WHERE H1.student_id='%d' AND H1.status='%s'" % (user, status)
 
 	ask_it_to = ['fetchall()']
 	mighty_db_says = call_database(sql, ask_it_to)
-	sorted_ads=mighty_db_says[0]
-	return sorted_ads
+	the_ads=mighty_db_says[0]
+	return the_ads
 
 
 def available_ads(user):
 	sql="SELECT * FROM\
-	(SELECT\
-		a.id,\
-		a.titel,\
-		a.main_info,\
-		DATE(a.creation_date),\
-		b.company_name,\
-		b.id as emp_id,\
-		c.student_id,\
-		c.status\
-		FROM ads a\
-			JOIN employers b\
-				ON a.creator_id=b.id\
-			LEFT OUTER JOIN application c\
-				ON a.id=c.ad_id)\
-		as H1\
-		WHERE H1.student_id!='%d' OR H1.student_id is null" % (user)
+			(SELECT a.id, a.titel, a.main_info, DATE(a.creation_date), b.company_name, b.id as emp_id, c.student_id, c.status\
+				FROM ads a\
+					JOIN employers b\
+						ON a.creator_id=b.id\
+					LEFT OUTER JOIN application c\
+						ON a.id=c.ad_id)\
+					as H1\
+			WHERE H1.student_id!='%d' OR H1.student_id is null" % (user)
 
 	ask_it_to = ['fetchall()']
 	mighty_db_says = call_database(sql, ask_it_to)
-	print_me=mighty_db_says[0]
-
-	return print_me
+	the_ads=mighty_db_says[0]
+	return the_ads
 
 
 '''******* Delete a specifik ad *******'''
@@ -196,7 +179,6 @@ def choose_ad(annonsID):
 
 '''*****Which ads student applied on****'''
 def applied_on(who, status, which_ad_id):
-	sql="SELECT"
 
 	if which_ad_id==None:
 		print "nej"

@@ -24,11 +24,10 @@
 
                 <div class="tabContent" id="lediga_uppdrag">
                     <div class="wrap">
-                    %if not avail_ads:
+                    %if len(avail_ads)<=0:
                         <h1 class="no_ads"> Listan av annonser är tom </h1>
                     %else:
                         %for each in avail_ads:
-                            %if each[7]!='Obehandlad' and each[6]==user_id or each[7]==None:
                                 <div class="add">
                                         <h2>{{each[1]}}</h2>
                                         <h4 class="inline">Publicererades: </h4> <p class="inline_block">{{each[3]}}</p>
@@ -42,7 +41,6 @@
                                         </div>
                                     <div class="arrow">></div>
                                 </div>
-                            %end
                         %end
                     %end
                     </div>
