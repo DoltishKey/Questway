@@ -14,7 +14,7 @@
         <div class="wrap_around_tab_content">
             <div class="wrap">
                 <!-- Länkar till tabbarna: -->
-                <ul id="tabs">
+                <ul id="tabs" class="tabs_class width_of_tabs_2">
                     <li><a href="#lediga_uppdrag" onclick="showTab()">Lediga uppdrag</a></li>
                     <li><a href="#sökta_uppdrag" onclick="showTab()">Sökta uppdrag</a></li>
                     <li><a href="#pågående_uppdrag" onclick="showTab()">Pågående uppdrag</a></li>
@@ -28,19 +28,21 @@
                         <h1 class="no_ads"> Listan av annonser är tom </h1>
                     %else:
                         %for each in avail_ads:
-                            <div class="add">
-                                    <h2>{{each[1]}}</h2>
-                                    <h4 class="inline">Publicererades: </h4> <p class="inline_block">{{each[3]}}</p>
-                                    <div class="showMore">
-                                        <h4>Beskrivning:</h4>
-                                        <p>{{each[2]}}</p>
-                                        <h4 class="inline_block">Företag: </h4><p class="inline_block"> {{each[4]}}</p>
-                                        <form  name="sok_annons" id="sok_annons" method="POST" action="/sok_annons/{{each[0]}}">
-                                            <input type="submit" value="Sök annons" class="myButton">
-                                        </form>
-                                    </div>
-                                <div class="arrow">></div>
-                            </div>
+                            %if each[7]!='Obehandlad' and each[6]==user_id or each[7]==None:
+                                <div class="add">
+                                        <h2>{{each[1]}}</h2>
+                                        <h4 class="inline">Publicererades: </h4> <p class="inline_block">{{each[3]}}</p>
+                                        <div class="showMore">
+                                            <h4>Beskrivning:</h4>
+                                            <p>{{each[2]}}</p>
+                                            <h4 class="inline_block">Företag: </h4><p class="inline_block"> {{each[4]}}</p>
+                                            <form  name="sok_annons" id="sok_annons" method="POST" action="/sok_annons/{{each[0]}}">
+                                                <input type="submit" value="Sök annons" class="myButton">
+                                            </form>
+                                        </div>
+                                    <div class="arrow">></div>
+                                </div>
+                            %end
                         %end
                     %end
                     </div>
@@ -89,19 +91,21 @@
 
         <div class="tabContent" id="avslutade_uppdrag">
             <div class="wrap">
-            %for grading in gradings:
-                %if user_id == grading['selected']:
-                <div class="add">
-                    <h2>{{grading['ad_title']}}</h2>
-                    %if grading['display'] == False:
-                        <p>Uppdraget visas inte på din profil</p>
-                        <a href="/profiles/{{user_id}}#mission{{grading['uniq_adNr']}}">Visa på din profil</a>
+                %if not finished_ads or finished_ads[0]==user_id and finished_ads[1]=='Avslutad':
+                    <h1 class="no_ads"> Listan av annonser är tom </h1>
+                %else:
+                    %for one in finished_ads:
+                        <div class="add">
+                            <h2>{{one[1]}}</h2>
+                            <h4 class="inline">Publicererades: </h4> <p class="inline_block">{{one[3]}}</p>
+                            <div class="showMore">
+                                <h4>Beskrivning:</h4>
+                                <p>{{one[2]}}</p>
+                                <h4 class="inline_block">Företag: </h4><p class="inline_block"> {{one[4]}}</p>
+                            </div>
+                        </div>
                     %end
                 %end
-                </div>
-            %end
-            </div>
-
             </div>
         </div>
 

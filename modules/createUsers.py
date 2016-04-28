@@ -15,7 +15,6 @@ def call_database(sql, asked_from_cursor):
         cursor.execute(sql)
         for query in asked_from_cursor:
             cursor_answer.append(eval('cursor.'+query))
-
         db.commit()
 
     except:

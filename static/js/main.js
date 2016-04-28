@@ -105,9 +105,7 @@ function set_localstorage_val_for_ad(){
 }
 
 
-
-
-//För att dölja/visa annonser för studenter
+// För att dölja/visa annonser:
 function showHide() {
      $('.add').click(function(){
          $(this).children('.showMore').toggle();

@@ -29,21 +29,10 @@ def call_database(sql, asked_from_cursor):
 
     except:
         db.rollback()
+        
 
     db.close()
     return cursor_answer
-
-
-'''*********Läs & skriv till fil*********'''
-def read_data(file):
-	try:
-		fileIn = open('static/data/'+ file +'.json', 'r')
-		dataRead = json.load(fileIn)
-		fileIn.close()
-	except (IOError, ValueError):
-		validatekDataFile(file)
-		dataRead = read_data(file)
-	return dataRead
 
 
 '''*********Authorisering*********'''
@@ -54,19 +43,12 @@ def validate_user(username, password):
     mighty_db_says = call_database(sql, ask_it_to)
 
     if mighty_db_says[1] == 1:
-        user_id = mighty_db_says[0][0][0]
+        user_id = mighty_db_says[0][0][0] #
         return {'id':user_id, 'result':True}
 
     else:
         return {'result':False}
 
-
-def validatekDataFile(file):
-	'''Om databasen inte finns eller är helt tom så skapas en json-fil innehållande en tom lista.'''
-	resList = []
-	dataFile = open('static/data/'+ file +'.json', 'w')
-	json.dump(resList, dataFile, indent=4)
-	dataFile.close()
 
 def validate_autho():
 	session = request.environ.get('beaker.session')
