@@ -24,75 +24,91 @@
 
                 <div class="tabContent" id="lediga_uppdrag">
                     <div class="wrap">
-                         %for i in annons:
-                            <div class="add">
-                                    <h2>{{i[1]}}</h2>
-                                    <h4 class="inline">Publicererades: </h4> <p class="inline_block">{{i[4]}}</p>
-                                    <div class="showMore">
-                                        <h4>Beskrivning:</h4>
-                                        <p>{{i[2]}}</p>
-                                        <h4 class="inline_block">Företag: </h4><p class="inline_block"> {{i[0]}}</p>
-                                        <form  name="sok_annons" id="sok_annons" method="POST" action="/sok_annons/{{i[5]}}">
-                                            <input type="submit" value="Sök annons" class="myButton">
-                                        </form>
-                                    </div>
-                                <div class="arrow">></div>
-                            </div>
+                    %if not avail_ads:
+                        <h1 class="no_ads"> Listan av annonser är tom </h1>
+                    %else:
+                        %for each in avail_ads:
+                            %if each[7]!='Obehandlad' and each[6]==user_id or each[7]==None:
+                                <div class="add">
+                                        <h2>{{each[1]}}</h2>
+                                        <h4 class="inline">Publicererades: </h4> <p class="inline_block">{{each[3]}}</p>
+                                        <div class="showMore">
+                                            <h4>Beskrivning:</h4>
+                                            <p>{{each[2]}}</p>
+                                            <h4 class="inline_block">Företag: </h4><p class="inline_block"> {{each[4]}}</p>
+                                            <form  name="sok_annons" id="sok_annons" method="POST" action="/sok_annons/{{each[0]}}">
+                                                <input type="submit" value="Sök annons" class="myButton">
+                                            </form>
+                                        </div>
+                                    <div class="arrow">></div>
+                                </div>
+                            %end
                         %end
+                    %end
                     </div>
                 </div>
 
             <div class="tabContent" id="sökta_uppdrag">
                 <div class="wrap">
-                        %for i in annons:
+                    %if not pending_ad:
+                        <h1 class="no_ads"> Listan av annonser är tom </h1>
+                    %else:
+                        %for every in pending_ad:
                             <div class="add">
-                                <h2>{{i[1]}}</h2>
-                                <h4 class="inline">Publicererades: </h4> <p class="inline_block">{{i[4]}}</p>
+                                <h2>{{every[1]}}</h2>
+                                <h4 class="inline">Publicererades: </h4> <p class="inline_block">{{every[3]}}</p>
                                 <div class="showMore">
                                     <h4>Beskrivning:</h4>
-                                    <p>{{i[2]}}</p>
-                                    <h4 class="inline_block">Företag: </h4><p class="inline_block"> {{i[0]}}</p>
+                                    <p>{{every[2]}}</p>
+                                    <h4 class="inline_block">Företag: </h4><p class="inline_block"> {{every[4]}}</p>
                                 </div>
                                 <div class="arrow">></div>
                             </div>
                         %end
+                    %end
                 </div>
             </div>
 
             <div class="tabContent" id="pågående_uppdrag">
                 <div class="wrap">
-                    %for i in annons:
-                        <div class="add">
-                            <h2>{{i[1]}}</h2>
-                            <h4 class="inline">Publicererades: </h4> <p class="inline_block">{{i[4]}}</p>
-                            <div class="showMore">
-                            <h4>Beskrivning:</h4>
-                            <p>{{i[2]}}</p>
-                            <h4 class="inline_block">Företag: </h4><p class="inline_block"> {{i[0]}}</p>
+                    %if not accepted_on:
+                        <h1 class="no_ads"> Listan av annonser är tom </h1>
+                    %else:
+                        %for each_ad in accepted_on:
+                            <div class="add">
+                                <h2>{{each_ad[1]}}</h2>
+                                <h4 class="inline">Publicererades: </h4> <p class="inline_block">{{each_ad[3]}}</p>
+                                <div class="showMore">
+                                    <h4>Beskrivning:</h4>
+                                    <p>{{each_ad[2]}}</p>
+                                    <h4 class="inline_block">Företag: </h4><p class="inline_block"> {{each_ad[4]}}</p>
+                                </div>
+                                <div class="arrow">></div>
                             </div>
-                            <div class="arrow">></div>
-                        </div>
+                        %end
                     %end
                 </div>
             </div>
 
 
         <div class="tabContent" id="avslutade_uppdrag">
-            <!--<div class="wrap">
-            for grading in gradings:
-                if user_id == grading['selected']:
-                <div class="add">
-                    <h2>((grading['ad_title']))</h2>
-                    if grading['display'] == False:
-                        <p>Uppdraget visas inte på din profil</p>
-                        <a href="/profiles/((user_id))#mission((grading['uniq_adNr']))">Visa på din profil</a>
-                    end
-                end
-                </div>
-            end
+            <div class="wrap">
+                %if not finished_ads or finished_ads[0]==user_id and finished_ads[1]=='Avslutad':
+                    <h1 class="no_ads"> Listan av annonser är tom </h1>
+                %else:
+                    %for one in finished_ads:
+                        <div class="add">
+                            <h2>{{one[1]}}</h2>
+                            <h4 class="inline">Publicererades: </h4> <p class="inline_block">{{one[3]}}</p>
+                            <div class="showMore">
+                                <h4>Beskrivning:</h4>
+                                <p>{{one[2]}}</p>
+                                <h4 class="inline_block">Företag: </h4><p class="inline_block"> {{one[4]}}</p>
+                            </div>
+                        </div>
+                    %end
+                %end
             </div>
-
-        </div>-->
         </div>
 
         <footer>

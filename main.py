@@ -18,7 +18,6 @@ def startPage():
 	return template('login', pageTitle='Logga in')
 
 
-
 '''*********Login*********'''
 
 
@@ -54,13 +53,18 @@ def admin():
 	log.validate_autho() #kontrollerar om användaren är inloggad
 	username = log.get_user_name() #hämtar användarens namn från DB (returnerar en sträng)
 	userid = log.get_user_id_logged_in() #hämtar användarens id
+	userid=int(userid)
 	user_level = log.get_user_level() #kollar om användaren är uppdragstagare eller student (returnerar 1 eller 2)
-	#all_adds=addmod.load_adds('ads')
 
+
+	grading_ads = addmod.read_data('grading')
 
 	if user_level == 1:
-		complete_adds = addmod.join_ads_employers()
-		return template('student_start', user=username, level="student",  annons=complete_adds, user_id=userid, pageTitle = 'Start')
+		not_applied_on = addmod.available_ads(userid)
+		ads_untreated = addmod.sort_by_status(userid,'Obehandlad')
+		ads_ongoing = addmod.sort_by_status(userid,'vald')
+		ads_finished= addmod.sort_by_status=(userid,'Avslutad')
+		return template('student_start',finished_ads=ads_finished, avail_ads=not_applied_on, accepted_on=ads_ongoing, pending_ad=ads_untreated, user=username, level="student", gradings = grading_ads, user_id=userid, pageTitle = 'Start')
 	else:
 		employer_ads = addmod.get_my_ads(userid)
 		students = addmod.students_that_applied(userid)
@@ -154,9 +158,9 @@ def edit_contact_information():
 def show_adds():
 	log.validate_autho()
 	username=log.get_user_name()
-	complete_adds = addmod.join_ads_employers()
-	print complete_adds
-	return template('adsform.tpl',user=username, annons=complete_adds, pageTitle = 'Annonser' )
+
+
+	return template('adsform.tpl',user=username, pageTitle = 'Annonser' )
 
 @post('/make_ad')
 def ad_done():
@@ -224,8 +228,9 @@ def list_applied_students():
 		username=log.get_user_name()
 		relevant_adds=addmod.get_my_ads(user_id)
 		students_application = addmod.students_that_applied(user_id)
+		feedback_info = get_given_feedback_for_employers(user_id)
 
-		return template('adds.tpl',user_id=user_id, user=username, adds=relevant_adds, students=students_application, pageTitle='Alla uppdrag')
+		return template('adds.tpl',user_id=user_id, user=username, adds=relevant_adds, students=students_application, pageTitle='Alla uppdrag', feedback = feedback_info)
 
 
 		'''if len(relevant_adds)>0:

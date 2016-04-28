@@ -73,29 +73,13 @@ def create_ad_DB():
 
 '''*********Create the AD*********'''
 def do_ad():
-	#mydict={}
-	#mylist=['ad_title', 'ad_text']
 	ad_title=request.forms.get('ad_title')
 	ad_text=request.forms.get('ad_text')
 
-	'''
-	for i in mylist:
-		j=request.forms.get(i)
-		mydict.update({i:j})
-	'''
-
-	ad_title_checked=check_ad_info(ad_title)
+	ad_title_checked=validate_ad_input(ad_title)
 
 	if  ad_title_checked == True:
-		#date_ad_created=time.strftime('%d/%m/%Y')
-		#uniq_number=1
-		#ad_ID=check_adID(uniq_number)
 		creator = log.get_user_id_logged_in()
-		#mydict.update({'uniq_adNr':ad_ID, 'status':'Ingen vald', 'who_applied':[], 'creator':creator, 'date_of_adcreation':date_ad_created, 'the_chosen_one':''})
-
-		#content=load_adds('ads')
-		#content.append(mydict)
-
 		sql="INSERT INTO ads(titel, main_info, creator_id, creation_date)\
 			VALUES ('%s', '%s', '%d', CURDATE())" % (ad_title, ad_text, creator)
 
@@ -103,18 +87,13 @@ def do_ad():
 		mighty_db_says = call_database(sql, ask_it_to)
 		return {'result':True, 'error':'None'}
 
-		'''
-		with open('static/data/ads.json', "w") as fil:
-			json.dump(content, fil, indent=4)
-		'''
-
 	else:
 		return {'result':False, 'error': "Ett fel uppstod - Kontrollera att du gav annonsen en titel"}
 
 
 '''*********Check that a Title for the ad is given*********'''
 
-def check_ad_info(ad_info): #Byt namn på variabeln till validate_ad_input
+def validate_ad_input(ad_info): #Byt namn på variabeln till validate_ad_input
     former_ad_info=load_adds('ads')
     s=list(ad_info)
 
@@ -131,7 +110,6 @@ def check_ad_info(ad_info): #Byt namn på variabeln till validate_ad_input
 
 
 '''*********Check and manage Ads ID*********'''
-
 def check_adID(number):
     all_adds=load_adds('ads')
     for each in all_adds:
@@ -140,6 +118,7 @@ def check_adID(number):
             return check_adID(number)
     return number
 
+
 def get_my_ads(employers_id):
 	sql= "SELECT id, titel, main_info, creator_id, DATE(creation_date) FROM ads WHERE '%d'=ads.creator_id" %(employers_id)
 
@@ -147,18 +126,56 @@ def get_my_ads(employers_id):
 	mighty_db_says = call_database(sql, ask_it_to)
 	return mighty_db_says[0]
 
-'''**********Pair employers to their ads************'''
-def join_ads_employers():
-	sql="SELECT employers.company_name, ads.titel, ads.main_info, employers.id, DATE(ads.creation_date), ads.id \
-	FROM ads \
-	INNER JOIN employers \
-	ON employers.id=ads.creator_id"
+
+def sort_by_status(user, status):
+	sql="SELECT * FROM\
+	(SELECT\
+		a.id,\
+		a.titel,\
+		a.main_info,\
+		DATE(a.creation_date),\
+		b.company_name,\
+		b.id as emp_id,\
+		c.student_id,\
+		c.status\
+		FROM ads a\
+			JOIN employers b\
+				ON a.creator_id=b.id\
+			LEFT OUTER JOIN application c\
+				ON a.id=c.ad_id)\
+		as H1\
+		WHERE H1.student_id='%d' AND H1.status='%s'" % (user, status)
 
 	ask_it_to = ['fetchall()']
 	mighty_db_says = call_database(sql, ask_it_to)
-	joined_employers_ads=mighty_db_says[0]
+	sorted_ads=mighty_db_says[0]
+	return sorted_ads
 
-	return joined_employers_ads
+
+def available_ads(user):
+	sql="SELECT * FROM\
+	(SELECT\
+		a.id,\
+		a.titel,\
+		a.main_info,\
+		DATE(a.creation_date),\
+		b.company_name,\
+		b.id as emp_id,\
+		c.student_id,\
+		c.status\
+		FROM ads a\
+			JOIN employers b\
+				ON a.creator_id=b.id\
+			LEFT OUTER JOIN application c\
+				ON a.id=c.ad_id)\
+		as H1\
+		WHERE H1.student_id!='%d' OR H1.student_id is null" % (user)
+
+	ask_it_to = ['fetchall()']
+	mighty_db_says = call_database(sql, ask_it_to)
+	print_me=mighty_db_says[0]
+
+	return print_me
 
 
 '''******* Delete a specifik ad *******'''
@@ -176,8 +193,11 @@ def choose_ad(annonsID):
 	mighty_db_says = call_database(sql, ask_it_to)
 	return mighty_db_says[0]
 
+
 '''*****Which ads student applied on****'''
 def applied_on(who, status, which_ad_id):
+	sql="SELECT"
+
 	if which_ad_id==None:
 		print "nej"
 		sql="SELECT * FROM application WHERE '%d'=application.student_id \
@@ -265,22 +285,23 @@ def move_ad_to_complete(annons):
 			return {'response':False, 'error':'Något har blivit fel!'}
 
 def ajax_edit_mission():
-		type_of = request.forms.get('mission_type')
-		keys = request.POST.getall("add_key")
-		display = request.forms.get('display')
-		url = request.forms.get('url')
-		grading_id = request.forms.get('grading_id')
-		all_grades = read_data('grading')
+    type_of = request.forms.get('mission_type')
+    keys = request.POST.getall("add_key")
+    display = request.forms.get('display')
+    if display == 'True':
+        print 'Komemr hit!'
+        to_display = 2
+    else:
+        to_display = 1
+    url = request.forms.get('url')
+    grading_id = int(request.forms.get('grading_id'))
 
-		for grade in all_grades:
-			if int(grade['uniq_adNr']) == int(grading_id):
-				for key in keys:
-					grade['keys'].append(key)
-				grade['url'] = url
-				grade['display'] = display
-				grade['type'] = type_of
+    sql="UPDATE feedback SET display='%d', url_demo ='%s', type='%s' WHERE ad_id = '%d'"%(to_display, url, type_of,grading_id)
+    ask_it_to = []
+    call_database(sql, ask_it_to)
 
-		write_to_db(all_grades,'grading')
+
+
 
 def grading_ads(user):
 	sql= "SELECT employers.company_name, J2.*\
@@ -318,16 +339,16 @@ def students_that_applied(user_id):
 	mighty_db_says = call_database(sql, ask_it_to)
 	return mighty_db_says[0]
 
+def get_given_feedback_for_employers(user):
+	sql = "SELECT J1.id feedback.feedback_text, feedback.grade \
+			FROM (SELECT ads.titel, ads.id \
+					FROM ads \
+						INNER JOIN employers \
+					 		ON employers.id=ads.creator_id \
+					WHERE employers.id = '%d') as J1 \
+				INNER JOIN feedback \
+					ON J1.id = feedback.ad_id"%(user)
 
-
-
-
-
-
-
-
-
-
-
-
-
+	ask_it_to = ['fetchall()']
+	mighty_db_says = call_database(sql, ask_it_to)
+	return mighty_db_says[0]
