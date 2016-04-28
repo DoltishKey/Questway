@@ -107,6 +107,7 @@
                                 <p>{{one[2]}}</p>
                                 <h4 class="inline_block">Företag: </h4><p class="inline_block"> {{one[4]}}</p>
                             </div>
+                            <div class="arrow">></div>
                         </div>
                     %end
                 %end
