@@ -79,7 +79,7 @@
                         %for grade in grading:
                             <li class="item">
                                 <form class="update_info">
-                                    <input style="dispaly:none" name="grading_id" value="{{grade[1]}}">
+                                    <input style="dispaly:none" name="grading_id" value="{{grade[2]}}">
                                     %if grade[4] == 1:
                                         <div class="edit_mission_info">
                                             <div>
@@ -97,20 +97,14 @@
                                     <div class="mission_general">
                                         <h4>{{grade[0]}}</h4>
                                         <h3>Type</h3>
-                                        <select name="mission_type">
-                                            <option>Hemsida</option>
-                                            <option>App</option>
-                                            <option>IT-system</option>
-                                            <option>Spel</option>
-                                            <option>Design</option>
-                                        </select>
+                                        <input style="dispaly:none" name="mission_type" value="{{grade[8]}}">
                                         <div class="btn misson_info_control">Kolla in!</div>
                                         <div class="mission_info">
                                             <div class="mission_feedback">
                                                 <p>{{grade[4]}}<span> - {{grade[5]}}</span></p>
                                                 <div class="grade_bar_container">
                                                     <div>
-                                                        <h4>Betyg från {{grade[5]}}:</h4>
+                                                        <h4>Betyg från {{grade[0]}}:</h4>
                                                         <div class="grade_bar">
                                                             % grade_calc = (float(grade[6])/float(5))*float(100)
                                                             <div style="width: {{grade_calc}}%" class="grade_mission" >
