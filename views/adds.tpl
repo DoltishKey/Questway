@@ -33,7 +33,19 @@
                         <h2>{{add[1]}}</h2>
                         <h4 class="inline_block">Publicererades: </h4> 
                         <p class="inline_block">{{add[4]}}</p>
-                        <h4 class="inline_block col2">Antal ansökningar: </h4>
+                        
+                        <!-- Be om hjälp med denna: -->
+                        %for i in adds:
+                            %num_applications = sum(x.count(i[0]) for x in students)
+                                    % if num_applications > 1:
+                                        <h4 class="inline_block col2">Antal ansökningar: {{num_applications}}</h4>
+                                    %elif num_applications == 1:
+                                        <h4 class="inline_block col2">Antal ansökningar: {{num_applications}}</h4>
+                                    %else:
+                                        <h4 class="inline_block col2">Inga ansökningar.</h4>
+                                    %end
+                        %end
+                        
                         <p class="inline_block">5 <!-- Ladda in antal här --></p>
                         <div class="showMore">
                             <h4>Beskrivning:</h4>
@@ -45,7 +57,7 @@
                                     %for student in students:
                                         %if int(student[3]) == int(add[0]):
                                             <li>
-                                                <h4 class="col1"><a href="/profiles/{{student[0]}}">{{student[1]}} {{student[2]}}</a></h4>
+                                                <h4 class="col1"><a href="/profiles/{{student[0]}}" target="_blank">{{student[1]}} {{student[2]}}</a></h4>
                                                 <p class="col1 inline_block">Namn på program, år</p>
                                                 <p class="col2 inline_block">Malmö Högskola</p>
                                                 <p class="col3 inline_block">Övriga kunskaper: PHP, Java, Bootstrap</p>

@@ -112,11 +112,9 @@ function showHide() {
 
          if ($(this).children('.showMore').is(':visible')) {
              $(this).children('.arrow').html("<");
-             console.log('FUNKAR') //Test
          }
          else {
             $(this).children('.arrow').html(">");
-             console.log('FUNKER EJ, NU ÄR VI PÅ ELSE-SATSEN') //Test
          }
      });
 }
