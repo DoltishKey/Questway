@@ -32,7 +32,18 @@
                     %if (any( int(student[3]) == int(add[0]) and (str(student[4]) != 'Obehandlad') for student in students)) == False:
                         <div class="add">
                             <h2>{{add[1]}}</h2>
-                            <h4 class="inline">Publicererades: </h4> <p class="inline_block">{{add[4]}}</p>
+                            <h4 class="inline_block">Publicererades: </h4> 
+                            <p class="inline_block">{{add[4]}}</p>
+
+                            %num_applications = sum(x.count(add[0]) for x in students)
+                            % if num_applications > 1:
+                                <h4 class="inline_block col2">Ansökningar: <span>{{num_applications}}</span></h4>
+                            %elif num_applications == 1:
+                                <h4 class="inline_block col2">Ansökningar: <span>{{num_applications}}</span></h4>
+                            %else:
+                                <h4 class="inline_block col2">Inga ansökningar</h4>
+                            %end
+                            
                             <div class="showMore">
                                 <h4>Beskrivning:</h4>
                                 <p>{{add[2]}}</p>
@@ -40,20 +51,31 @@
                                     <input type="submit" value="Ta bort annons" class="myButton delete_ad">
                                 </form>
 
+                            <h3>Ansökningar:</h3>
+                            <!-- Om antal ansökningar > 0, gör detta: -->
+                            <div id="applications">
                                 <ul>
                                     %for student in students:
                                         %if int(student[3]) == int(add[0]):
-                                            <li><a href="/profiles/{{student[0]}}">{{student[1]}} {{student[2]}} Satus: {{student[4]}}</a><a href="/select_student/{{add[0]}}/{{student[0]}}"> Välj för uppdraget</a></li>
-                                        %end
+                                            <li>
+                                                <h4 class="col1"><a href="/profiles/{{student[0]}}" target="_blank">{{student[1]}} {{student[2]}}</a></h4>
+                                                <p class="col1 inline_block">Namn på program, år</p>
+                                                <p class="col2 inline_block">Malmö Högskola</p>
+                                                <p class="col3 inline_block">Övriga kunskaper: PHP, Java, Bootstrap</p>
+                                                <form name="choose_student" action="" id="choose_student" method="get">
+                                                <input type="submit" name="choose" id="choose" class="myButton" value="Välj student">
+                                                </form>
+                                            </li> 
                                     %end
-                                </ul>
+                                    %end
                             </div>
+                            </div>
+                            <div class="arrow">></div>
                         </div>
                     %end
                 %end
             </div>
         </div>
-
 
         <div class="tabContent" id="pågående_uppdrag">
             <div class="wrap">

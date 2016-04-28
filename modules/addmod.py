@@ -286,22 +286,23 @@ def move_ad_to_complete(annons):
 			return {'response':False, 'error':'Något har blivit fel!'}
 
 def ajax_edit_mission():
-		type_of = request.forms.get('mission_type')
-		keys = request.POST.getall("add_key")
-		display = request.forms.get('display')
-		url = request.forms.get('url')
-		grading_id = request.forms.get('grading_id')
-		all_grades = read_data('grading')
+    type_of = request.forms.get('mission_type')
+    keys = request.POST.getall("add_key")
+    display = request.forms.get('display')
+    if display == 'True':
+        print 'Komemr hit!'
+        to_display = 2
+    else:
+        to_display = 1
+    url = request.forms.get('url')
+    grading_id = int(request.forms.get('grading_id'))
 
-		for grade in all_grades:
-			if int(grade['uniq_adNr']) == int(grading_id):
-				for key in keys:
-					grade['keys'].append(key)
-				grade['url'] = url
-				grade['display'] = display
-				grade['type'] = type_of
+    sql="UPDATE feedback SET display='%d', url_demo ='%s', type='%s' WHERE ad_id = '%d'"%(to_display, url, type_of,grading_id)
+    ask_it_to = []
+    call_database(sql, ask_it_to)
 
-		write_to_db(all_grades,'grading')
+
+
 
 def grading_ads(user):
 	sql= "SELECT employers.company_name, J2.*\
@@ -336,3 +337,17 @@ def students_that_applied(user_id):
 	ask_it_to = ['fetchall()']
 	mighty_db_says = call_database(sql, ask_it_to)
 	return mighty_db_says[0]
+
+def get_given_feedback_for_employers(user):
+    sql = "SELECT J1.id feedback.feedback_text, feedback.grade \
+	           FROM (SELECT ads.titel, ads.id \
+	              FROM ads \
+	                 INNER JOIN employers \
+	                    ON employers.id=ads.creator_id \
+	                       WHERE employers.id = '%d') as J1 \
+	            INNER JOIN feedback \
+	        ON J1.id = feedback.ad_id"%(user)
+
+        ask_it_to = ['fetchall()']
+        mighty_db_says = call_database(sql, ask_it_to)
+    	return mighty_db_says[0]

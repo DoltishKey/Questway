@@ -227,8 +227,9 @@ def list_applied_students():
 		username=log.get_user_name()
 		relevant_adds=addmod.get_my_ads(user_id)
 		students_application = addmod.students_that_applied(user_id)
+		feedback_info = get_given_feedback_for_employers(user_id)
 
-		return template('adds.tpl',user_id=user_id, user=username, adds=relevant_adds, students=students_application, pageTitle='Alla uppdrag')
+		return template('adds.tpl',user_id=user_id, user=username, adds=relevant_adds, students=students_application, pageTitle='Alla uppdrag', feedback = feedback_info)
 
 
 		'''if len(relevant_adds)>0:
