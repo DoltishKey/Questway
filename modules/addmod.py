@@ -303,15 +303,31 @@ def grading_ads(user):
 
 def students_that_applied(user_id):
 	user_id = int(user_id)
-	sql = "SELECT students.id, students.first_name, students.last_name, J1.ad_id, J1.status\
+	sql = "SELECT students.id, students.first_name, students.last_name, J1.ad_id, J1.status, education.titel, education.year\
 	FROM (SELECT student_id, ad_id, status \
 			FROM ads \
 			INNER JOIN application \
 			ON application.ad_id=ads.id \
 			WHERE creator_id = '%d') as J1 \
 	INNER JOIN students \
-	ON J1.student_id = students.id"%(user_id)
+	ON J1.student_id = students.id \
+    INNER JOIN education\
+    ON students.education_id = education.education_id and students.education_year = education.year"%(user_id)
 
 	ask_it_to = ['fetchall()']
 	mighty_db_says = call_database(sql, ask_it_to)
 	return mighty_db_says[0]
+
+
+
+
+
+
+
+
+
+
+
+
+
+

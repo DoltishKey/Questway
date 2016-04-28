@@ -53,6 +53,7 @@
                                     <p>{{i[2]}}</p>
                                     <h4 class="inline_block">Företag: </h4><p class="inline_block"> {{i[0]}}</p>
                                 </div>
+                                <div class="arrow">></div>
                             </div>
                         %end
                 </div>
@@ -69,6 +70,7 @@
                             <p>{{i[2]}}</p>
                             <h4 class="inline_block">Företag: </h4><p class="inline_block"> {{i[0]}}</p>
                             </div>
+                            <div class="arrow">></div>
                         </div>
                     %end
                 </div>
