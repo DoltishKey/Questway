@@ -211,22 +211,17 @@ def applying_for_mission(which_ad):
 
 '''*********Choose a Student********'''
 def who_got_accepted(annons, sokandeID):
-	all_ads=load_adds('ads')
+	log.validate_autho()
 	user=log.get_user_id_logged_in()
+	annons = int(annons)
+	sokandeID = int(sokandeID)
+	sql = "UPDATE application SET status = 'Bortvald' where ad_id='%d'"%(annons)
+	ask_it_to = []
+	mighty_db_says = call_database(sql, ask_it_to)
 
-	what_ad=choose_ad(annons, all_ads, None)
-	print what_ad
-	for who in what_ad['who_applied']:
-		for ad in all_ads:
-			if int(who)==int(sokandeID) and what_ad['uniq_adNr']==ad['uniq_adNr']:
-				print "hey"
-				ad.update({'the_chosen_one':int(sokandeID)})
-				ad['who_applied'].remove(int(sokandeID))
-				print ad
-				print all_ads
-	with open('static/data/ads.json', 'w') as fil:
-		json.dump(all_ads, fil, indent=4)
-	redirect ('/allMissions')
+	sql = "UPDATE application SET status = 'Vald' where ad_id='%d' and student_id = '%d'"%(annons, sokandeID)
+	ask_it_to = []
+	mighty_db_says = call_database(sql, ask_it_to)
 
 
 '''********My list of ads*********'''
@@ -240,28 +235,34 @@ def my_ads(userID):
 
 '''*********Moves AD to Done*********'''
 def move_ad_to_complete(annons):
-    feedback = request.forms.get('feedback')
-    grade = request.forms.get('grade')
-    if feedback == None or len(feedback) == 0:
-        return {'response':False, 'error':'Du måste skriva något!'}
+	feedback = request.forms.get('feedback')
+	grade = int(request.forms.get('grade'))
+	if feedback == None or len(feedback) == 0:
+		return {'response':False, 'error':'Du måste skriva något!'}
 
-    else:
-        employer = log.get_user_id_logged_in()
-        all_ads = read_data('ads')
-        ad = choose_ad(annons, all_ads, 'Student vald')
-        if int(employer) == int(ad['creator']) and ad['status'] == 'Student vald':
-            ad.update({'feedback':feedback, 'grade':grade,'display':False})
-            all_grades = read_data('grading')
-            all_grades.append(ad)
-            write_to_db(all_grades,'grading')
-            for ad_object in all_ads:
-                if int(ad_object['uniq_adNr']) == int(annons):
-                        all_ads.remove(ad_object)
-            write_to_db(all_ads, 'ads')
-            return {'response':True}
+	else:
 
-        else:
-            return {'response':False, 'error':'Något har blivit fel!'}
+		annons = int(annons)
+		employer = log.get_user_id_logged_in()
+		sql="SELECT creator_id FROM ads WHERE id = '%d'"%(annons)
+		ask_it_to = ['fetchall()']
+		mighty_db_says = call_database(sql, ask_it_to)
+
+		mighty_db_says[0][0][0]
+
+		if mighty_db_says[0][0][0] == int(employer):
+			sql="INSERT INTO feedback(ad_id, display, feedback_text, grade) \
+			VALUES('%d', '%d', '%s', '%d')"%(annons, 1, feedback, grade)
+			ask_it_to = []
+			call_database(sql, ask_it_to)
+
+			sql = "UPDATE application SET status = 'Avslutad' WHERE ad_id='%d' AND status='Vald'"%(annons)
+			ask_it_to = []
+			call_database(sql, ask_it_to)
+			return {'response':True}
+
+		else:
+			return {'response':False, 'error':'Något har blivit fel!'}
 
 def ajax_edit_mission():
 		type_of = request.forms.get('mission_type')
@@ -281,13 +282,23 @@ def ajax_edit_mission():
 
 		write_to_db(all_grades,'grading')
 
-def grading_ads():
-	sql= "SELECT ads.titel, feedback.*, employers.company_name  FROM ads, feedback, employers WHERE \
-	ads.id =  (SELECT ad_id FROM application WHERE student_id=39 AND status = 'avslutad') \
-	AND feedback.ad_id =  (SELECT ad_id FROM application WHERE student_id=39 AND status = 'avslutad') \
-	AND employers.id = (SELECT creator_id FROM ads WHERE id =  (SELECT ad_id FROM application WHERE student_id=39 AND status = 'avslutad'))"
+def grading_ads(user):
+	sql= "SELECT employers.company_name, J2.*\
+	    FROM \
+	        (SELECT creator_id, feedback.* \
+	        	FROM (SELECT ads.titel, creator_id, ad_id \
+	        			FROM ads \
+	        			INNER JOIN application \
+	        			ON application.ad_id=ads.id \
+	        			WHERE student_id = '%d' and status = 'Avslutad') as J1 \
+	        	INNER JOIN feedback \
+	        	ON J1.ad_id = feedback.ad_id) as J2 \
+	    INNER JOIN employers \
+	    ON J2.creator_id = employers.id"%(user)
+
 	ask_it_to = ['fetchall()']
 	mighty_db_says = call_database(sql, ask_it_to)
+	print mighty_db_says[0]
 	return mighty_db_says[0]
 
 def students_that_applied(user_id):

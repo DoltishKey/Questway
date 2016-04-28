@@ -3,6 +3,7 @@
     % include('head.tpl')
     <body>
         %include('nav_employers.tpl')
+        <div id="content">
         <form  name="create_ad" id="create_ad" method="POST" action="/make_ad" onsubmit="return createAdValid()">
             <h3 id="ca_Title">Lägg till annons för nytt uppdrag</h3>
 
@@ -18,6 +19,8 @@
             </div>
             <input type="submit" value="Skapa annons" name='uniq_adNr' id="ad_done" class="myButton">
         </form>
+           
         <p id="error"></p>
+        </div>
     </body>
 </html>

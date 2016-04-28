@@ -117,8 +117,7 @@ def profiles(user):
 	user_profile_data = createUsers.show_student_profile(user)
 	is_user_logged_in = log.is_user_logged_in()
 	#grading_ads = sorted( (addmod.read_data('grading')), key=lambda x: x['display'])
-	grading_ads = addmod.grading_ads()
-	print grading_ads
+	grading_ads = addmod.grading_ads(user)
 	username = ""
 	if is_user_logged_in == True:
 		user_levle = log.get_user_level()
@@ -239,9 +238,10 @@ def list_applied_students():
 		return "Du har ej behörighet"
 
 
-@post('/testing/<annons>/<sokandeID>')
+@route('/select_student/<annons>/<sokandeID>')
 def accepted_ones(annons, sokandeID):
 	addmod.who_got_accepted(annons, sokandeID)
+	redirect ('/allMissions')
 
 
 @route('/ad_done/<annons>', method="POST")
@@ -252,7 +252,7 @@ def ad_done(annons):
 		if response['response'] == False:
 			return response['error']
 		else:
-			redirect('/admin')
+			redirect('/allMissions')
 	else:
 		return 'Behörighet saknas!'
 

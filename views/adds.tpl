@@ -14,42 +14,43 @@
 
         <div class="tabContent" id="uppdrag">
             <div class="wrap">
-            %if len(adds)>0:
-                <div>
-                    <a class="btn" id="btn_id_ads" href="/showadds">Lägg till annons</a>
-                </div>
-
-            %else:
-                <h1 class="no_ads"> Listan av annonser är tom </h1>
-                <div class="employers_add_new_ad col btnbox">
+                %if len(adds)>0:
                     <div>
                         <a class="btn" id="btn_id_ads" href="/showadds">Lägg till annons</a>
                     </div>
-                </div>
-            %end
 
-            %for add in adds:
-                    <div class="add">
-                        <h2>{{add[1]}}</h2>
-                        <h4 class="inline_block">Publicererades: </h4> 
-                        <p class="inline_block">{{add[4]}}</p>
-                        
-                        <!-- Be om hjälp med denna: -->
-                        %for i in adds:
-                            %num_applications = sum(x.count(i[0]) for x in students)
-                                    % if num_applications > 1:
-                                        <h4 class="inline_block col2">Antal ansökningar: {{num_applications}}</h4>
-                                    %elif num_applications == 1:
-                                        <h4 class="inline_block col2">Antal ansökningar: {{num_applications}}</h4>
-                                    %else:
-                                        <h4 class="inline_block col2">Inga ansökningar.</h4>
-                                    %end
-                        %end
-                        
-                        <p class="inline_block">5 <!-- Ladda in antal här --></p>
-                        <div class="showMore">
-                            <h4>Beskrivning:</h4>
-                            <p>{{add[2]}}</p>
+                %else:
+                    <h1 class="no_ads"> Listan av annonser är tom </h1>
+                    <div class="employers_add_new_ad col btnbox">
+                        <div>
+                            <a class="btn" id="btn_id_ads" href="/showadds">Lägg till annons</a>
+                        </div>
+                    </div>
+                %end
+
+                %for add in adds:
+                    %if (any( int(student[3]) == int(add[0]) and (str(student[4]) != 'Obehandlad') for student in students)) == False:
+                        <div class="add">
+                            <h2>{{add[1]}}</h2>
+                            <h4 class="inline_block">Publicererades: </h4> 
+                            <p class="inline_block">{{add[4]}}</p>
+
+                            %num_applications = sum(x.count(add[0]) for x in students)
+                            % if num_applications > 1:
+                                <h4 class="inline_block col2">Ansökningar: <span>{{num_applications}}</span></h4>
+                            %elif num_applications == 1:
+                                <h4 class="inline_block col2">Ansökningar: <span>{{num_applications}}</span></h4>
+                            %else:
+                                <h4 class="inline_block col2">Inga ansökningar</h4>
+                            %end
+                            
+                            <div class="showMore">
+                                <h4>Beskrivning:</h4>
+                                <p>{{add[2]}}</p>
+                                <form  name="ta_bort_annons" id="del_annons" method="POST" action="/del_ad/{{add[0]}}">
+                                    <input type="submit" value="Ta bort annons" class="myButton delete_ad">
+                                </form>
+
                             <h3>Ansökningar:</h3>
                             <!-- Om antal ansökningar > 0, gör detta: -->
                             <div id="applications">
@@ -65,50 +66,9 @@
                                                 <input type="submit" name="choose" id="choose" class="myButton" value="Välj student">
                                                 </form>
                                             </li> 
-                                        %end
                                     %end
-                                </ul>
+                                    %end
                             </div>
-                            <!-- Om antal ansökningar = 0, visa detta: -->
-                            <!--<p>Än så länge finnas det inga ansökningar till detta uppdrag.</p>-->
-                            <form  name="ta_bort_annons" id="del_annons" method="POST" action="/del_ad/{{add[0]}}">
-                            <input type="submit" value="Ta bort annons" class="myButton delete_ad">
-                            </form>
-                        </div>
-                        <div class="arrow">></div>
-                </div>
-                %end
-                </div>
-            </div>
-                                    <!--<ul>
-                                        %for student in students:
-                                            %if int(student[3]) == int(add[0]):
-                                                <li><a href="/profiles/{{student[0]}}">{{student[1]}} {{student[2]}} Satus: {{student[4]}}</a></li>
-                                            %end
-                                        %end
-                                    </ul>-->
-                                
-
-
-        <div class="tabContent" id="pågående_uppdrag">
-            <div class="wrap">
-                %if len(adds) == 0:
-                    <h1 class="no_ads"> Listan av annonser är tom </h1>
-                    <div>
-                        <a class="btn" id="btn_id_ads" href="/showadds">Lägg till annons</a>
-                    </div>
-                %end
-                %for add in adds:
-                    %if user_id in add:
-                        <div class="add">
-                            <h2>{{add[1]}}</h2>
-                            <h4 class="inline">Publicererades: </h4> <p class="inline_block">{{add[4]}}</p>
-                            <div class="showMore">
-                                <h4>Beskrivning:</h4>
-                                <p>{{add[2]}}</p>
-                                <form  name="ta_bort_annons" id="del_annons" method="POST" action="/del_ad/{{add[0]}}">
-                                <input type="submit" value="Ta bort annons" class="myButton delete_ad">
-                                </form>
                             </div>
                             <div class="arrow">></div>
                         </div>
@@ -117,12 +77,64 @@
             </div>
         </div>
 
+        <div class="tabContent" id="pågående_uppdrag">
+            <div class="wrap">
+                %if any((student[4] == "Vald") for student in students) == False:
+                    <h1 class="no_ads"> Listan av annonser är tom </h1>
+
+                %else:
+                    %for add in adds:
+                        %if any(int(student[3]) == int(add[0]) and (student[4] == "Vald") for student in students) == True:
+                            <div class="add">
+                                <h2>{{add[1]}}</h2>
+                                <h4 class="inline">Publicererades: </h4> <p class="inline_block">{{add[4]}}</p>
+                                <div class="showMore">
+                                    <h4>Beskrivning:</h4>
+                                    <p>{{add[2]}}</p>
+                                    <ul>
+                                        %for student in students:
+                                            %if int(student[3]) == int(add[0]) and student[4] == 'Vald':
+                                                <li><a href="/profiles/{{student[0]}}">{{student[1]}} {{student[2]}} Satus: {{student[4]}}</a></li>
+                                            %end
+                                        %end
+                                    </ul>
+                                    <a href="/give_feedback/{{add[0]}}">Uppdraget är klart</a>
+                                </div>
+                                <div class="arrow">></div>
+                            </div>
+                        %end
+                    %end
+                %end
+            </div>
+        </div>
+
         <div class="tabContent" id="avslutade_uppdrag">
             <div class="wrap">
-                <h1 class="no_ads"> Du har inga avslutade uppdrag. </h1>
-                <div>
-                    <a class="btn" id="btn_id_ads" href="/showadds">Lägg till annons</a>
-                </div>
+                %if any((student[4] == "Avslutad") for student in students) == False:
+                    <h1 class="no_ads"> Listan av annonser är tom </h1>
+
+                %else:
+                    %for add in adds:
+                        %if any(int(student[3]) == int(add[0]) and (student[4] == "Avslutad") for student in students) == True:
+                            <div class="add">
+                                <h2>{{add[1]}}</h2>
+                                <h4 class="inline">Publicererades: </h4> <p class="inline_block">{{add[4]}}</p>
+                                <div class="showMore">
+                                    <h4>Beskrivning:</h4>
+                                    <p>{{add[2]}}</p>
+                                    <ul>
+                                        %for student in students:
+                                            %if int(student[3]) == int(add[0]) and student[4] == 'Avslutad':
+                                                <li><a href="/profiles/{{student[0]}}">{{student[1]}} {{student[2]}} Satus: {{student[4]}}</a></li>
+                                            %end
+                                        %end
+                                    </ul>
+                                </div>
+                                <div class="arrow">></div>
+                            </div>
+                        %end
+                    %end
+                %end
             </div>
         </div>
 

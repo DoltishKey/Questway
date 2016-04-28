@@ -80,10 +80,10 @@
                             <li class="item">
                                 <form class="update_info">
                                     <input style="dispaly:none" name="grading_id" value="{{grade[1]}}">
-                                    %if grade[3] == 1:
+                                    %if grade[4] == 1:
                                         <div class="edit_mission_info">
                                             <div>
-                                                <h4>{{grade[7]}}</h4>
+                                                <h4>{{grade[0]}}</h4>
                                                 <h4 class="status">Uppdraget visas inte på din profil</h4>
                                                 <div class="btn">Redigera och visa</div>
                                             </div>
@@ -95,7 +95,7 @@
                                         <input type="file" name="fileToUpload" class="fileToUpload" id="fileToUpload">
                                     </div>
                                     <div class="mission_general">
-                                        <h4>{{grade[7]}}</h4>
+                                        <h4>{{grade[0]}}</h4>
                                         <h3>Type</h3>
                                         <select name="mission_type">
                                             <option>Hemsida</option>
@@ -112,7 +112,7 @@
                                                     <div>
                                                         <h4>Betyg från {{grade[5]}}:</h4>
                                                         <div class="grade_bar">
-                                                            % grade_calc = (float(grade[5])/float(5))*float(100)
+                                                            % grade_calc = (float(grade[6])/float(5))*float(100)
                                                             <div style="width: {{grade_calc}}%" class="grade_mission" >
                                                                 <p>{{student[0]}}</p>
                                                             </div>
