@@ -30,13 +30,14 @@
                         %for each in avail_ads:
                                 <div class="add">
                                         <h2>{{each[1]}}</h2>
-                                        <h4 class="inline">Publicererades: </h4> <p class="inline_block">{{each[3]}}</p>
+                                        <h4 class="inline_block">Publicererades: </h4> 
+                                        <p class="inline_block">{{each[3]}}</p>
                                         <div class="showMore">
                                             <h4>Beskrivning:</h4>
                                             <p>{{each[2]}}</p>
                                             <h4 class="inline_block">Företag: </h4><p class="inline_block"> {{each[4]}}</p>
                                             <form  name="sok_annons" id="sok_annons" method="POST" action="/sok_annons/{{each[0]}}">
-                                                <input type="submit" value="Sök annons" class="myButton">
+                                                <input type="submit" value="Sök annons" class="myButton delete_ad">
                                             </form>
                                         </div>
                                     <div class="arrow">></div>
@@ -54,7 +55,8 @@
                         %for every in pending_ad:
                             <div class="add">
                                 <h2>{{every[1]}}</h2>
-                                <h4 class="inline">Publicererades: </h4> <p class="inline_block">{{every[3]}}</p>
+                                <h4 class="inline_block">Publicererades: </h4> 
+                                <p class="inline_block">{{every[3]}}</p>
                                 <div class="showMore">
                                     <h4>Beskrivning:</h4>
                                     <p>{{every[2]}}</p>
@@ -75,7 +77,8 @@
                         %for each_ad in accepted_on:
                             <div class="add">
                                 <h2>{{each_ad[1]}}</h2>
-                                <h4 class="inline">Publicererades: </h4> <p class="inline_block">{{each_ad[3]}}</p>
+                                <h4 class="inline_block">Publicererades: 
+                                </h4> <p class="inline_block">{{each_ad[3]}}</p>
                                 <div class="showMore">
                                     <h4>Beskrivning:</h4>
                                     <p>{{each_ad[2]}}</p>
@@ -97,7 +100,8 @@
                     %for one in finished_ads:
                         <div class="add">
                             <h2>{{one[1]}}</h2>
-                            <h4 class="inline">Publicererades: </h4> <p class="inline_block">{{one[3]}}</p>
+                            <h4 class="inline_block">Publicererades: </h4> 
+                            <p class="inline_block">{{one[3]}}</p>
                             <div class="showMore">
                                 <h4>Beskrivning:</h4>
                                 <p>{{one[2]}}</p>
