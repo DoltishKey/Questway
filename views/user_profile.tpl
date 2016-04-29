@@ -28,12 +28,13 @@
             <div class="contact">
     	        <div>
     	        	<div class="contact_info">
-    		        	<div class="icon circle"></div>
+    		        	<!--<div class="icon circle"></div>-->
+                        <img src="/static/img/phone-call.svg" class="centered_icon" alt="Phone">
     		            <p>070-6645406</p>
 	            	</div>
                     <div class="line"></div>
     	        	<div class="contact_info">
-    		        	<div class="icon circle"></div>
+                        <img src="/static/img/envelope.svg" class="centered_icon" alt="Mail">
     		        	<p>jcbpettersson@gmail.com</p>
     	            </div>
                 </div>
@@ -166,6 +167,9 @@
             </div>
 
 		</main>
-		<footer style=" bottom:0px; width: 100%;">© Questway, 2016</footer>
+		<footer style=" bottom:0px; width: 100%;">
+            © Questway, 2016
+            Icons made by <a href="http://www.flaticon.com/authors/gregor-cresnar" title="Gregor Cresnar">Gregor Cresnar</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+        </footer>
 	</body>
 </html>
