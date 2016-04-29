@@ -78,8 +78,8 @@
                     <ul>
                         %for grade in grading:
                             <li class="item">
-                                <form class="update_info">
-                                    <input style="dispaly:none" name="grading_id" value="{{grade[2]}}">
+                                <form class="update_info" action="/ajax_edit_mission" method="POST" enctype="multipart/form-data">
+                                    <input type="hidden" name="grading_id" value="{{grade[2]}}">
                                     %if grade[4] == 1:
                                         <div class="edit_mission_info">
                                             <div>
@@ -89,7 +89,7 @@
                                             </div>
                                         </div>
                                     %end
-                                    <div class="edit_mission_btn">Redigera</div>
+                                    <div class="edit_mission_btn ">Redigera</div>
                                     <div class="img circle">
                                         <label for="fileToUpload" class="fileToUploadLabel">Ladda upp en bild</label>
                                         <input type="file" name="fileToUpload" class="fileToUpload" id="fileToUpload">
@@ -143,13 +143,18 @@
                                                 </ul>
                                                 <p class="add_one_key">Lägg till +</p>
                                                 <div class="display_or_not">
-                                                    <input type="checkbox" name="display" value="True">Visa uppdraget på din profil
+                                                    %if grade[4] == int(2):
+                                                        %print grade[4]
+                                                        <input type="checkbox" name="display" value="True" checked>Visa uppdraget på din profil
+                                                    %else:
+                                                        <input type="checkbox" name="display" value="True">Visa uppdraget på din profil
+                                                    %end
                                                 </div>
                                             </div>
                                             <div class="mission_link">
                                                 <h4>Länk till resultatet:</h4>
-                                                <a href="#">www.questway.se</a>
-                                                <input type="text" name="url" value="www.questway.se">
+                                                <a href="#">{{grade[7]}}</a>
+                                                <input type="text" name="url" value="{{grade[7]}}">
                                             </div>
                                         </form>
                                     </div>

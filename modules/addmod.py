@@ -1,10 +1,11 @@
 # *-* coding:utf-8 *-*
 import json
-from bottle import request, redirect
+from bottle import request, redirect, static_file
 import time
 import log
 import createUsers
 import MySQLdb
+import os
 
 
 '''*********DB info*********'''
@@ -268,6 +269,17 @@ def ajax_edit_mission():
     type_of = request.forms.get('mission_type')
     keys = request.POST.getall("add_key")
     display = request.forms.get('display')
+    upload  = request.files.get('fileToUpload')
+    print upload
+    name, ext = os.path.splitext(upload.filename)
+    if ext not in ('.png','.jpg','.jpeg'):
+        return 'File extension not allowed.'
+
+    save_path = '/static/img/'
+    upload.save(save_path) # appends upload.filename automatically
+    return 'OK'
+
+
     if display == 'True':
         print 'Komemr hit!'
         to_display = 2
@@ -318,7 +330,7 @@ def students_that_applied(user_id):
 	return mighty_db_says[0]
 
 def get_given_feedback_for_employers(user):
-    sql = "SELECT J1.id feedback.feedback_text, feedback.grade \
+    sql = "SELECT J1.id, feedback.feedback_text, feedback.grade \
 	           FROM (SELECT ads.titel, ads.id \
 	              FROM ads \
 	                 INNER JOIN employers \
@@ -327,6 +339,6 @@ def get_given_feedback_for_employers(user):
 	            INNER JOIN feedback \
 	        ON J1.id = feedback.ad_id"%(user)
 
-        ask_it_to = ['fetchall()']
-        mighty_db_says = call_database(sql, ask_it_to)
-    	return mighty_db_says[0]
+    ask_it_to = ['fetchall()']
+    mighty_db_says = call_database(sql, ask_it_to)
+    return mighty_db_says[0]
