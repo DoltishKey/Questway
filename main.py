@@ -18,7 +18,6 @@ def startPage():
 	return template('login', pageTitle='Logga in')
 
 
-
 '''*********Login*********'''
 
 
@@ -54,13 +53,23 @@ def admin():
 	log.validate_autho() #kontrollerar om användaren är inloggad
 	username = log.get_user_name() #hämtar användarens namn från DB (returnerar en sträng)
 	userid = log.get_user_id_logged_in() #hämtar användarens id
+	userid=userid
 	user_level = log.get_user_level() #kollar om användaren är uppdragstagare eller student (returnerar 1 eller 2)
-	#all_adds=addmod.load_adds('ads')
 
+
+	grading_ads = addmod.read_data('grading')
 
 	if user_level == 1:
-		complete_adds = addmod.join_ads_employers()
-		return template('student_start', user=username, level="student",  annons=complete_adds, user_id=userid, pageTitle = 'Start')
+		ads_to_apply_on=[]
+		not_applied_on = addmod.available_ads(userid)
+		for each in not_applied_on:
+			if each[7]!='Obehandlad' and each[6]==userid or each[7]==None:
+				print "hej"
+				ads_to_apply_on.append(each)
+		ads_untreated = addmod.sort_by_status(userid,'Obehandlad')
+		ads_ongoing = addmod.sort_by_status(userid,'vald')
+		ads_finished = addmod.sort_by_status(userid,'Avslutad')
+		return template('student_start',finished_ads=ads_finished, avail_ads=ads_to_apply_on, accepted_on=ads_ongoing, pending_ad=ads_untreated, user_id=userid, user=username, level="student", gradings = grading_ads, pageTitle = 'Start')
 	else:
 		employer_ads = addmod.get_my_ads(userid)
 		students = addmod.students_that_applied(userid)
@@ -155,9 +164,9 @@ def edit_contact_information():
 def show_adds():
 	log.validate_autho()
 	username=log.get_user_name()
-	complete_adds = addmod.join_ads_employers()
-	print complete_adds
-	return template('adsform.tpl',user=username, annons=complete_adds, pageTitle = 'Annonser' )
+
+
+	return template('adsform.tpl',user=username, pageTitle = 'Annonser' )
 
 @post('/make_ad')
 def ad_done():

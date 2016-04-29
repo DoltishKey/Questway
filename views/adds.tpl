@@ -50,25 +50,26 @@
                                 <form  name="ta_bort_annons" id="del_annons" method="POST" action="/del_ad/{{add[0]}}">
                                     <input type="submit" value="Ta bort annons" class="myButton delete_ad">
                                 </form>
-
-                            <h3>Ansökningar:</h3>
-                            <!-- Om antal ansökningar > 0, gör detta: -->
-                            <div id="applications">
-                                <ul>
-                                    %for student in students:
-                                        %if int(student[3]) == int(add[0]):
-                                            <li>
-                                                <h4 class="col1"><a href="/profiles/{{student[0]}}" target="_blank">{{student[1]}} {{student[2]}}</a></h4>
-                                                <p class="col1 inline_block">Namn på program, år</p>
-                                                <p class="col2 inline_block">Malmö Högskola</p>
-                                                <p class="col3 inline_block">Övriga kunskaper: PHP, Java, Bootstrap</p>
-                                                <form name="choose_student" action="" id="choose_student" method="get">
-                                                <input type="submit" name="choose" id="choose" class="myButton" value="Välj student">
-                                                </form>
-                                            </li> 
-                                    %end
-                                    %end
-                            </div>
+                           
+                                %num_applications = sum(x.count(add[0]) for x in students)
+                                % if num_applications > 1 or num_applications == 1:
+                                    <h3>Ansökningar:</h3>
+                                    <!-- Om antal ansökningar > 0, gör detta: -->
+                                    <div id="applications">
+                                        <ul>
+                                            %for student in students:
+                                                %if int(student[3]) == int(add[0]):
+                                                    <li>
+                                                        <h4 class="col1"><a href="/profiles/{{student[0]}}" target="_blank">{{student[1]}} {{student[2]}}</a></h4>
+                                                        <p class="col1 inline_block">{{student[5]}}, {{student[6]}}</p>
+                                                        <p class="col2 inline_block">Malmö Högskola</p>
+                                                        <!--<p class="col3 inline_block">Övriga kunskaper: PHP, Java, Bootstrap</p>-->
+                                                        <a id="choose" href="/select_student/{{add[0]}}/{{student[0]}}">Välj student</a>
+                                                    </li> 
+                                                %end
+                                            %end
+                                    </div>
+                                %end
                             </div>
                             <div class="arrow">></div>
                         </div>
@@ -87,18 +88,18 @@
                         %if any(int(student[3]) == int(add[0]) and (student[4] == "Vald") for student in students) == True:
                             <div class="add">
                                 <h2>{{add[1]}}</h2>
-                                <h4 class="inline">Publicererades: </h4> <p class="inline_block">{{add[4]}}</p>
+                                <h4 class="inline_block">Publicererades: </h4> <p class="inline_block">{{add[4]}}</p>
                                 <div class="showMore">
                                     <h4>Beskrivning:</h4>
                                     <p>{{add[2]}}</p>
-                                    <ul>
+                                    <ul class="chosen_student">
                                         %for student in students:
                                             %if int(student[3]) == int(add[0]) and student[4] == 'Vald':
-                                                <li><a href="/profiles/{{student[0]}}">{{student[1]}} {{student[2]}} Satus: {{student[4]}}</a></li>
+                                                <li>Vald student för uppdraget: <a href="/profiles/{{student[0]}}">{{student[1]}} {{student[2]}}</a></li>
                                             %end
                                         %end
                                     </ul>
-                                    <a href="/give_feedback/{{add[0]}}">Uppdraget är klart</a>
+                                    <a class="myButton inline_block" id="mission_done" href="/give_feedback/{{add[0]}}">Uppdraget är klart</a>
                                 </div>
                                 <div class="arrow">></div>
                             </div>
@@ -118,17 +119,26 @@
                         %if any(int(student[3]) == int(add[0]) and (student[4] == "Avslutad") for student in students) == True:
                             <div class="add">
                                 <h2>{{add[1]}}</h2>
-                                <h4 class="inline">Publicererades: </h4> <p class="inline_block">{{add[4]}}</p>
+                                <h4 class="inline_block">Publicererades: </h4> <p class="inline_block">{{add[4]}}</p>
                                 <div class="showMore">
                                     <h4>Beskrivning:</h4>
                                     <p>{{add[2]}}</p>
-                                    <ul>
+                                    <ul class="chosen_student">
                                         %for student in students:
                                             %if int(student[3]) == int(add[0]) and student[4] == 'Avslutad':
-                                                <li><a href="/profiles/{{student[0]}}">{{student[1]}} {{student[2]}} Satus: {{student[4]}}</a></li>
+                                                <li>Student som utfört uppdraget:
+                                                    <a href="/profiles/{{student[0]}}">{{student[1]}} {{student[2]}}</a>
+                                                </li>
                                             %end
                                         %end
                                     </ul>
+                                    <h4>Feedback</h4>
+                                    %for f in feedback: 
+                                        % if f[0] == add[0]:
+                                        <p>{{f[1]}}</p>
+                                        <p>Betyg: {{f[2]}}</p>
+                                        %end
+                                    %end
                                 </div>
                                 <div class="arrow">></div>
                             </div>
