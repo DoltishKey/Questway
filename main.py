@@ -53,7 +53,6 @@ def admin():
 	log.validate_autho() #kontrollerar om användaren är inloggad
 	username = log.get_user_name() #hämtar användarens namn från DB (returnerar en sträng)
 	userid = log.get_user_id_logged_in() #hämtar användarens id
-	userid=userid
 	user_level = log.get_user_level() #kollar om användaren är uppdragstagare eller student (returnerar 1 eller 2)
 
 
@@ -155,7 +154,9 @@ def ajax_edit_mission():
 
 @route('/edit')
 def edit_contact_information():
-    return template('change_contact_info')
+    username = log.get_user_name() #hämtar användarens namn från DB (returnerar en sträng)
+    userid = log.get_user_id_logged_in() #hämtar användarens id
+    return template('change_contact_info', pageTitle = 'Redigera kontaktuppgifter', user=username, user_id=userid)
 
 
 '''********Ad-management********'''

@@ -178,6 +178,18 @@ header h1 {
     font-size: 40px;
 }
 
+.add a {
+    color: #666;
+}
+
+.add a:hover {
+    color: #03969b;
+}
+
+.add a:active {
+    color: #000;
+}
+
 .tabs_class {
     list-style-type: none;
     margin: 70px auto 50px auto;
@@ -208,7 +220,6 @@ header h1 {
 .tabs_class li a {
     color: #42454a;
     background-color: #F3F3F3;
-    /*border-bottom: 2px solid #F89406;*/
     position: relative;
     font-size: 18px;
     display: block;
@@ -639,8 +650,16 @@ transition: background-color 5000s ease-in-out 0s;
     color: #000;
 }
 
-#applications h4 a {
+#applications ul a {
     color: #666;
+}
+
+#applications ul a h4 {
+    color: #000;
+    margin-top: 0;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    padding: 0;
 }
 
 #applications p {
@@ -655,7 +674,6 @@ transition: background-color 5000s ease-in-out 0s;
 .col2 {
     position: absolute;
     left: 25%;
-    /*margin-left: 10%;*/
 }
 
 .col3 {
@@ -663,14 +681,7 @@ transition: background-color 5000s ease-in-out 0s;
     left: 50%;
 }
 
-#applications ul li h4 {
-    margin-top: 0;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-    padding: 0;
-}
-
-#choose {
+#applications ul a#choose {
     margin: -20px 0 0 0;
     position: absolute;
     left: 90%;
@@ -702,6 +713,7 @@ transition: background-color 5000s ease-in-out 0s;
     padding: 1%;
     position: relative;
     left: 40%;
+    color: #FFF;
 }
 
 .chosen_student {
