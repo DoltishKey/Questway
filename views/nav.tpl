@@ -1,5 +1,5 @@
 <header>
-    <div class="wrap">
+    <div class="wrap" id="header_wrap">
 		<h1>Questway</h1>
 		<nav class="menu">
 				%from bottle import request

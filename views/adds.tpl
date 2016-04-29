@@ -4,7 +4,7 @@
     <body onload="init()">
         %include('nav_employers.tpl')
 
-        <div class="wrap">
+        <div class="wrap" id="move_under_header">
             <ul id="tabs" class="tabs_class width_of_tabs_1">
                 <li><a href="#uppdrag" onclick="showTab()">Dina uppdrag</a></li>
                 <li><a href="#pågående_uppdrag" onclick="showTab()">Pågående uppdrag</a></li>
