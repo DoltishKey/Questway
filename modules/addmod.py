@@ -1,10 +1,11 @@
 # *-* coding:utf-8 *-*
 import json
-from bottle import request, redirect
+from bottle import request, redirect, static_file
 import time
 import log
 import createUsers
 import MySQLdb
+import os
 
 
 '''*********DB info*********'''
@@ -270,6 +271,17 @@ def ajax_edit_mission():
     type_of = request.forms.get('mission_type')
     keys = request.POST.getall("add_key")
     display = request.forms.get('display')
+    upload  = request.files.get('fileToUpload')
+    print upload
+    name, ext = os.path.splitext(upload.filename)
+    if ext not in ('.png','.jpg','.jpeg'):
+        return 'File extension not allowed.'
+
+    save_path = '/static/img/'
+    upload.save(save_path) # appends upload.filename automatically
+    return 'OK'
+
+
     if display == 'True':
         print 'Komemr hit!'
         to_display = 2

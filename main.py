@@ -147,6 +147,7 @@ def profiles(user):
 @route('/ajax_edit_mission', method="POST")
 def ajax_edit_mission():
 	result = addmod.ajax_edit_mission()
+	redirect('/profiles/39')
 
 
 

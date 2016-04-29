@@ -170,16 +170,14 @@ function edit_mission(){
 
 	$('.edit_mission_btn').click(function(){
 		clicked_parent = $(this).parents('li');
-		if (!clicked_parent.hasClass('edit')){
-			clicked_parent.addClass('edit');
-			enter_edit_mode(clicked_parent);
-		}
+		enter_edit_mode(clicked_parent);
 	});
 }
 
 function enter_edit_mode(clicked_parent) {
-	if (clicked_parent.hasClass('edit')){
-		$('.edit_mission_btn').html('Spara');
+	if (clicked_parent.find('.edit_mission_btn').html() == 'Redigera'){
+		clicked_parent.addClass('edit');
+		clicked_parent.find('.edit_mission_btn').html('Spara');
 		clicked_parent.find('li').hide();
 		clicked_parent.find('select').show();
 		clicked_parent.find('.edit_key').show();
@@ -190,12 +188,26 @@ function enter_edit_mode(clicked_parent) {
 		clicked_parent.find('.mission_link').find('a').hide();
 		remove_key();
 		handle_input();
-		update_mission()
 	}
 	else{
-		$('.edit_mission_btn').html('Redigera');
-	}
+		clicked_parent.find('.edit_mission_btn').html('Redigera');
+		clicked_parent.find('li').show();
+		clicked_parent.find('select').hide();
+		clicked_parent.find('.edit_key').hide();
+		clicked_parent.find('input').hide();
+		clicked_parent.find('.display_or_not').hide();
+		clicked_parent.find('.add_one_key').hide();
+		clicked_parent.find('.fileToUploadLabel').hide();
+		clicked_parent.find('.mission_link').find('a').show();
+		clicked_parent.removeClass('edit');
+		clicked_parent.find('.update_info').submit();
+		//$.ajax({
+		//	type: 'POST',
+		//	url: '/ajax_edit_mission',
+		//	data: $(clicked_parent).find('.update_info').serialize()
+		//});
 
+	}
 }
 
 function handle_input(){
@@ -230,14 +242,7 @@ function remove_key() {
 function update_mission(){
 	$('.edit_mission_btn').click(function(){
 		if ( $(this).html() == 'Spara' ){
-			$.ajax({
-				type: 'POST',
-				url: '/ajax_edit_mission',
-				data: $(this).parents('.update_info').serialize(),
-				success: function(response) {
-					alert('Funkar!')
-				}
-			});
+
 		}
 		else{
 			console.log('Något har gått fel!');
@@ -248,10 +253,10 @@ function update_mission(){
 /* KONTROLLERA INPUT*/
 //LogIN
 function emailValidation(){
-    
+
     var email = document.getElementById("email");
     var error = document.getElementById("error");
-    
+
     var atpos = email.indexOf("@");
     var punktpos = email.lastIndexOf(".");
     if(atpos < 1 || dotpos < atpos + 2 || dotpos + 2 > email.length){
