@@ -4,6 +4,7 @@ from bottle import route, get, post, run, template, error, static_file, request,
 from beaker.middleware import SessionMiddleware
 import json
 import MySQLdb
+import hashlib
 
 
 '''*********Sessions Data*********'''
@@ -29,7 +30,7 @@ def call_database(sql, asked_from_cursor):
 
     except:
         db.rollback()
-        
+
 
     db.close()
     return cursor_answer
@@ -37,6 +38,7 @@ def call_database(sql, asked_from_cursor):
 
 '''*********Authorisering*********'''
 def validate_user(username, password):
+    password = hashlib.sha256(password).hexdigest()
     sql = "SELECT id FROM users WHERE mail = '%s' and password = '%s' " %(username, password)
 
     ask_it_to = ['fetchall()', 'rowcount']

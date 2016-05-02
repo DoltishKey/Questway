@@ -28,50 +28,6 @@ def call_database(sql, asked_from_cursor):
 
 
 
-'''*********Skriv/läsa filer*********'''
-def read_data(file):
-	try:
-		fileIn = open('static/data/'+ file +'.json', 'r')
-		dataRead = json.load(fileIn)
-		fileIn.close()
-	except (IOError, ValueError):
-		validatekDataFile(file)
-		dataRead = read_data(file)
-	return dataRead
-
-def write_to_db(users, db):
-	fileOut = open('static/data/'+ db +'.json', 'w')
-	json.dump(users, fileOut, indent=4)
-	fileOut.close()
-
-def validatekDataFile(file):
-	'''Om databasen inte finns eller är helt tom så skapas en json-fil innehållande en tom lista.'''
-	resList = []
-	dataFile = open('static/data/'+ file +'.json', 'w')
-	json.dump(resList, dataFile, indent=4)
-	dataFile.close()
-
-
-
-'''*********Load adds from DB. If there's not DB, one is created*********'''
-
-def load_adds(file):
-    try:
-        with open('static/data/ads.json', "r") as fil:
-            data=json.load(fil)
-            return data
-
-    except (ValueError, IOError):
-        data=create_ad_DB()
-        return data
-
-def create_ad_DB():
-    with open('static/data/ads.json', 'w') as fil:
-        data=[]
-        json.dump(data, fil, indent=4)
-        return data
-
-
 '''*********Create the AD*********'''
 def do_ad():
 	ad_title=request.forms.get('ad_title')
@@ -267,30 +223,31 @@ def move_ad_to_complete(annons):
 		else:
 			return {'response':False, 'error':'Något har blivit fel!'}
 
-def ajax_edit_mission():
-    type_of = request.forms.get('mission_type')
-    keys = request.POST.getall("add_key")
-    display = request.forms.get('display')
-    upload  = request.files.get('fileToUpload')
+def ajax_edit_mission(ad_id):
+    type_of = request.forms.get('mission_type_'+str(ad_id))
+    print type_of
+    keys = request.POST.getall("add_key_" + str(ad_id))
+    display = request.forms.get('display_'+str(ad_id))
+    print display
+    upload  = request.files.get('fileToUpload_'+str(ad_id))
     print upload
+    print os.getcwd()
     name, ext = os.path.splitext(upload.filename)
     if ext not in ('.png','.jpg','.jpeg'):
         return 'File extension not allowed.'
 
-    save_path = '/static/img/'
-    upload.save(save_path) # appends upload.filename automatically
-    return 'OK'
-
+    save_path = "static/img/uploads"
+    file_path = "{path}/{file}".format(path=save_path, file=upload.filename)
+    upload.save(file_path)
 
     if display == 'True':
-        print 'Komemr hit!'
+        print 'Kommer hit!'
         to_display = 2
     else:
         to_display = 1
-    url = request.forms.get('url')
-    grading_id = int(request.forms.get('grading_id'))
-
-    sql="UPDATE feedback SET display='%d', url_demo ='%s', type='%s' WHERE ad_id = '%d'"%(to_display, url, type_of,grading_id)
+    url = request.forms.get('url_'+str(ad_id))
+    ad_id = int(ad_id)
+    sql="UPDATE feedback SET img_url ='%s', display='%d', url_demo ='%s', type='%s' WHERE ad_id = '%d'"%(file_path,to_display, url, type_of,ad_id)
     ask_it_to = []
     call_database(sql, ask_it_to)
 
