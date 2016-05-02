@@ -36,7 +36,8 @@
 
         <footer>
             <div class="wrap">
-            © Questway, 2016
+                <img id="footlog" src="../static/img/Logga.png" alt="loggan">
+                <p>© Questway, 2016</p>
             </div>
         </footer>
 
