@@ -6,9 +6,15 @@
 
         <div class="wrap" id="move_under_header">
             <ul id="tabs" class="tabs_class width_of_tabs_1">
-                <li><a href="#uppdrag" onclick="showTab()">Dina uppdrag</a></li>
-                <li><a href="#pågående_uppdrag" onclick="showTab()">Pågående uppdrag</a></li>
-                <li><a href="#avslutade_uppdrag" onclick="showTab()">Avslutade uppdrag</a></li>
+                <li>
+                    <a href="#uppdrag" onclick="showTab()">Dina uppdrag</a>
+                </li>
+                <li>
+                    <a href="#pågående_uppdrag" onclick="showTab()">Pågående uppdrag</a>
+                </li>
+                <li>
+                    <a href="#avslutade_uppdrag" onclick="showTab()">Avslutade uppdrag</a>
+                </li>
             </ul>
         </div>
 

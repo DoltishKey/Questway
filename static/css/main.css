@@ -378,7 +378,7 @@ footer p{
 @media screen and (min-width:800px){
     /*FOOTER RESPONSIVITET*/
     #footlog{
-        width: 5%;
+        width: 
     }
 }
 /* För inloggningsformulär: */
@@ -485,8 +485,24 @@ transition: background-color 5000s ease-in-out 0s;
     line-height: 300px;
     color: white;
 }
-
-.contentInContent:first-child > .roundBox {
+.regText{
+    display: none;
+    margin-top: -290px;
+    transition: 0.5s;
+}
+@media screen and (min-width: 900px){
+    .roundBox:hover > .regText{
+        display: block;
+    }
+}
+#regShortCutStud{
+    text-decoration: none;
+    border-radius: 100px;
+}
+#regShortCutEmpl{
+    text-decoration:none;
+}
+.contentInContent:first-child > .shortcut > .roundBox {
     background: #E87E04; /* Gör studentens roundBox orange*/
 }
 
