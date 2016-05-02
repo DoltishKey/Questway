@@ -1,11 +1,10 @@
 # *-* coding:utf-8 *-*
 import json
-from bottle import request, redirect, static_file
+from bottle import request, redirect
 import time
 import log
 import createUsers
 import MySQLdb
-import os
 
 
 '''*********DB info*********'''
@@ -223,6 +222,7 @@ def move_ad_to_complete(annons):
 		else:
 			return {'response':False, 'error':'Något har blivit fel!'}
 
+<<<<<<< Updated upstream
 def ajax_edit_mission(ad_id):
     type_of = request.forms.get('mission_type_'+str(ad_id))
     print type_of
@@ -252,8 +252,6 @@ def ajax_edit_mission(ad_id):
     call_database(sql, ask_it_to)
 
 
-
-
 def grading_ads(user):
 	sql= "SELECT employers.company_name, J2.*\
 	    FROM \
@@ -273,6 +271,8 @@ def grading_ads(user):
 	print mighty_db_says[0]
 	return mighty_db_says[0]
 
+
+
 def students_that_applied(user_id):
 	user_id = int(user_id)
 	sql = "SELECT students.id, students.first_name, students.last_name, J1.ad_id, J1.status, education.titel, education.year, users.mail\
@@ -285,12 +285,14 @@ def students_that_applied(user_id):
 	ON J1.student_id = students.id \
     INNER JOIN education\
     ON students.education_id = education.education_id and students.education_year = education.year\
-    INNER JOIN users \
-    ON users.id = J1.student_id"%(user_id)
+    INNER JOIN users\
+    ON users.id=J1.student_id"%(user_id)
 
 	ask_it_to = ['fetchall()']
 	mighty_db_says = call_database(sql, ask_it_to)
 	return mighty_db_says[0]
+
+
 
 def get_given_feedback_for_employers(user):
 	sql = "SELECT J1.id, feedback.feedback_text, feedback.grade \
