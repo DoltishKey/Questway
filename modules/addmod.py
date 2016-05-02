@@ -222,7 +222,7 @@ def move_ad_to_complete(annons):
 		else:
 			return {'response':False, 'error':'Något har blivit fel!'}
 
-<<<<<<< Updated upstream
+
 def ajax_edit_mission(ad_id):
     type_of = request.forms.get('mission_type_'+str(ad_id))
     print type_of
