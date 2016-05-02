@@ -24,8 +24,8 @@
 
                 <div class="tabContent" id="lediga_uppdrag">
                     <div class="wrap">
-                    %if len(avail_ads)<=0:
-                        <h1 class="no_ads"> Listan av annonser är tom </h1>
+                    %if len(avail_ads)<= 0:
+                        <h2 class="no_ads"> Listan av annonser är tom </h1>
                     %else:
                         %for each in avail_ads:
                                 <div class="add">

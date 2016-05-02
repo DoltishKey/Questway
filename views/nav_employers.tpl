@@ -1,5 +1,5 @@
 <header>
-        <div class="wrap">
+        <div class="wrap" id="header_wrap">
 		<div class="courtesyNav">
 				<p class="courtesyNavItem">Inloggad som <strong>{{user}}</strong></p>
 		</div>

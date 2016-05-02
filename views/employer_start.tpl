@@ -29,6 +29,7 @@
                 <div>
                     <ul>
                         %for i in annons:
+                            %if (any( int(student[3]) == int(i[0]) and (str(student[4]) != 'Obehandlad') for student in students_application)) == False:
         		                <a href="/allMissions" data-value="{{i[0]}}" class="go_to_ad">
                                     <li>
                                         <div>
@@ -46,7 +47,7 @@
                                         <div>></div>
                                     </li>
                                 </a>
-
+                            %end
         	            %end
                     </ul>
                 </div>

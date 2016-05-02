@@ -19,16 +19,23 @@ body {
 	/*height: auto !important;*/
 	height: 650px;
     width: 100%;
-	margin-top: 0px;
+	margin-top: 150px;
     overflow: auto;
 }
 
 header {
-    padding: 25px 0;
-    background-color: #2D3030;/*#EEEAE8*/;
+    height: 150px;
+    background-color: #2D3030;
     color: #FFF;
-    border-bottom: 20px solid #F89406;
+    /*border-bottom: 20px solid #F89406;*/
     z-index: 2;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+#header_wrap {
+    margin: 25px auto;
 }
 
 header h1 {
@@ -178,12 +185,28 @@ header h1 {
     font-size: 40px;
 }
 
+.add a {
+    color: #666;
+}
+
+.add a:hover {
+    color: #03969b;
+}
+
+.add a:active {
+    color: #000;
+}
+
 .tabs_class {
     list-style-type: none;
     margin: 70px auto 50px auto;
     width: 100%;
     padding: 0;
     font-size: 0;
+}
+
+#move_under_header {
+    margin-top: 250px;
 }
 
 .tabs_class li {
@@ -208,7 +231,6 @@ header h1 {
 .tabs_class li a {
     color: #42454a;
     background-color: #F3F3F3;
-    /*border-bottom: 2px solid #F89406;*/
     position: relative;
     font-size: 18px;
     display: block;
@@ -266,6 +288,7 @@ div.container_student_start {
     height: 400px;
     background-color: #E1E1E1;
     overflow: hidden;
+    margin-top: 150px;
 }
 
 div.container_student_start h2 {
@@ -338,7 +361,7 @@ footer {
     height: 100px;
     text-align: center;
     line-height: 5;
-    background: #2D3030;
+    background: #6b6d6d;
 }
 
 /* För inloggningsformulär: */
@@ -417,10 +440,9 @@ transition: background-color 5000s ease-in-out 0s;
 
 
 .content2 {
-    background-color: #5C5E60 /*#3E4244/*#C0B4AD*/;
+    background-color: #EDEDED /*#5C5E60*/;
     width: 100%;
     padding: 10px 0px;
-    border-top: 5px solid #9B938E;
     border-bottom: 5px solid #9B938E;
 }
 
@@ -452,7 +474,7 @@ transition: background-color 5000s ease-in-out 0s;
 }
 
 .contentInContent p {
-    color: #fff;
+    color: #666;
 }
 
  /* Design för knappar */
@@ -488,21 +510,8 @@ transition: background-color 5000s ease-in-out 0s;
     outline:0;
 }
 
-
-/* Ta-bort knappen för varje annons */
-/*.delete_ad{
-    display:inline-block;
-    float:right;
-}
-
-.delete_ad:active{
-    display:inline-block;
-    float:right;
-}
-*/
-
 .no_ads{
-    font-size:2.5vw;
+    font-size:2vw;
     margin: 5% auto;
     text-align: center;
     padding-bottom:30px;
@@ -511,7 +520,6 @@ transition: background-color 5000s ease-in-out 0s;
     padding:5px;
     color: #666;
 }
-
 
 
 /* --- Employers start.tpl --- */
@@ -639,8 +647,16 @@ transition: background-color 5000s ease-in-out 0s;
     color: #000;
 }
 
-#applications h4 a {
+#applications ul a {
     color: #666;
+}
+
+#applications ul a h4 {
+    color: #000;
+    margin-top: 0;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    padding: 0;
 }
 
 #applications p {
@@ -655,7 +671,6 @@ transition: background-color 5000s ease-in-out 0s;
 .col2 {
     position: absolute;
     left: 25%;
-    /*margin-left: 10%;*/
 }
 
 .col3 {
@@ -663,14 +678,7 @@ transition: background-color 5000s ease-in-out 0s;
     left: 50%;
 }
 
-#applications ul li h4 {
-    margin-top: 0;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-    padding: 0;
-}
-
-#choose {
+#applications ul a#choose {
     margin: -20px 0 0 0;
     position: absolute;
     left: 90%;
@@ -702,6 +710,7 @@ transition: background-color 5000s ease-in-out 0s;
     padding: 1%;
     position: relative;
     left: 40%;
+    color: #FFF;
 }
 
 .chosen_student {
@@ -816,6 +825,11 @@ transition: background-color 5000s ease-in-out 0s;
     border-radius: 50%;
 }
 
+.centered_icon {
+    margin: 0 auto;
+    width: 70px;
+}
+
 #profiles .name_tag{
     background-color: #fff;
     border: 4px solid rgba(102, 185, 191, 1);
@@ -836,7 +850,7 @@ transition: background-color 5000s ease-in-out 0s;
 }
 
 .main_education_info{
-    background-color: #EEEAE8;
+    background-color: #e8e8e8;
     text-align: center;
     padding: 20px 0px;
     clear: both;
@@ -910,7 +924,7 @@ transition: background-color 5000s ease-in-out 0s;
 
 
 .pre_missions{
-    background-color: #EEEAE8;
+    background-color: #e8e8e8;
     padding: 40px 0px;
 }
 
@@ -1333,7 +1347,7 @@ transition: background-color 5000s ease-in-out 0s;
 
 @media screen and (min-width:900px){
     #content{
-        margin-top: 0px;
+        margin-top: 150px;
         padding-top: 70px;
     }
     .choicereg{
@@ -1592,6 +1606,7 @@ label{
         margin: 70px auto;
         display: -webkit-flex;
         display: flex;
+        margin-top: 200px;
     }
 
     #employer_how_it_works{
@@ -1667,6 +1682,7 @@ label{
     /* Studentprofil*/
     #profiles .top{
         height: 450px;
+        margin-top: 150px;
     }
 
 
