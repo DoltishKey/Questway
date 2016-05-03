@@ -18,7 +18,7 @@ session_opts = {
 
 '''*********DB info*********'''
 def call_database(sql, asked_from_cursor):
-    db = MySQLdb.connect(host="195.178.232.7", port=4040, user="AC8240", passwd="hejhej123", db="AC8240");
+    db = MySQLdb.connect(host="195.178.232.16", port=3306, user="AC8240", passwd="hejhej123", db="AC8240");
     cursor = db.cursor()
     cursor_answer = []
     try:
