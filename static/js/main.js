@@ -38,8 +38,19 @@ function checkLogIn(){
 function checkCreateEmployer(){
 	$('#create_employer').submit(function(event){
 		event.preventDefault(event);
-		//validering ska in här
 
+        //Email-validering:
+        var email = document.getElementById("email");
+        var error = document.getElementById("error");
+
+        var atpos = email.indexOf("@");
+        var punktpos = email.lastIndexOf(".");
+        if(atpos < 1 || dotpos < atpos + 2 || dotpos + 2 > email.length){
+            error.innerHTML("Du måste ange hela din mailadress. Med @ och allt.");
+            alert("Du måste ange hela din mailadress. Med @ och allt.");
+            email.style.borderColor = "red";
+        }
+        //Email-val end
 
 		$.ajax({
 			type: 'POST',
@@ -67,9 +78,19 @@ function checkCreateEmployer(){
 function checkCreateStudent(){
 	$('#create_student').submit(function(event){
 		event.preventDefault(event);
-		//validering ska in här
 
+		//Email-validering:
+        var email = document.getElementById("email");
+        var error = document.getElementById("error");
 
+        var atpos = email.indexOf("@");
+        var punktpos = email.lastIndexOf(".");
+        if(atpos < 1 || dotpos < atpos + 2 || dotpos + 2 > email.length){
+            error.innerHTML("Du måste ange hela din mailadress. Med @ och allt.");
+            alert("Du måste ange hela din mailadress. Med @ och allt.");
+            email.style.borderColor = "red";
+        }
+        //Email-val end
 		$.ajax({
 			type: 'POST',
 			url: '/ajax_create_user',
@@ -263,7 +284,8 @@ function edith_file(){
 }
 
 /* KONTROLLERA INPUT*/
-//LogIN
+//EMAIL
+/*
 function emailValidation(){
 
     var email = document.getElementById("email");
@@ -273,12 +295,11 @@ function emailValidation(){
     var punktpos = email.lastIndexOf(".");
     if(atpos < 1 || dotpos < atpos + 2 || dotpos + 2 > email.length){
         error.innerHTML("Du måste ange hela din mailadress. Med @ och allt.");
-        email.
         alert("Du måste ange hela din mailadress. Med @ och allt.");
         return false;
         email.style.borderColor = "red";
     }
-}
+}*/
 //Skapa annons
 function createAdValid(){
     var error = document.getElementById("error");
