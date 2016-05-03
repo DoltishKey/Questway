@@ -54,9 +54,9 @@ def validate_Username(email):
 
 def validate_if_student_exists(userID):
 	sql = "SELECT autho_level FROM users WHERE id = '%d'"%(userID)
-	ask_it_to = ['rowcount']
+	ask_it_to = ['fetchall()']
 	mighty_db_says = call_database(sql, ask_it_to)
-	if mighty_db_says[0] == 1:
+	if mighty_db_says[0][0][0] == 1:
 		return True
 
 '''*********funktioner*********'''

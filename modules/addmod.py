@@ -118,6 +118,7 @@ def available_ads(user):
 
 '''******* Delete a specifik ad *******'''
 def erase_ad(ad_id, user_ID):
+    ad_id = int(ad_id)
     sql="INSERT INTO removed_ads(student_id, titel) \
     SELECT application.student_id, ads.titel FROM application \
     INNER JOIN ads \
@@ -205,34 +206,38 @@ def my_ads(userID):
 
 '''*********Moves AD to Done*********'''
 def move_ad_to_complete(annons):
-	feedback = request.forms.get('feedback')
-	grade = int(request.forms.get('grade'))
-	if feedback == None or len(feedback) == 0:
-		return {'response':False, 'error':'Du måste skriva något!'}
+    feedback = request.forms.get('feedback')
+    grade = int(request.forms.get('grade'))
+    if feedback == None or len(feedback) == 0:
+        return {'response':False, 'error':'Du måste skriva något!'}
 
-	else:
+    else:
+        annons = int(annons)
+        employer = log.get_user_id_logged_in()
+        sql="SELECT creator_id FROM ads WHERE id = '%d'"%(annons)
+        ask_it_to = ['fetchall()']
+        mighty_db_says = call_database(sql, ask_it_to)
 
-		annons = int(annons)
-		employer = log.get_user_id_logged_in()
-		sql="SELECT creator_id FROM ads WHERE id = '%d'"%(annons)
-		ask_it_to = ['fetchall()']
-		mighty_db_says = call_database(sql, ask_it_to)
+        mighty_db_says[0][0][0]
 
-		mighty_db_says[0][0][0]
+        if mighty_db_says[0][0][0] == int(employer):
+            sql="INSERT INTO feedback(ad_id, display, feedback_text, grade) \
+            VALUES('%d', '%d', '%s', '%d')"%(annons, 1, feedback, grade)
+            ask_it_to = []
+            call_database(sql, ask_it_to)
 
-		if mighty_db_says[0][0][0] == int(employer):
-			sql="INSERT INTO feedback(ad_id, display, feedback_text, grade) \
-			VALUES('%d', '%d', '%s', '%d')"%(annons, 1, feedback, grade)
-			ask_it_to = []
-			call_database(sql, ask_it_to)
+            sql = "UPDATE application SET status = 'Avslutad' WHERE ad_id='%d' AND status='Vald'"%(annons)
+            ask_it_to = []
+            call_database(sql, ask_it_to)
 
-			sql = "UPDATE application SET status = 'Avslutad' WHERE ad_id='%d' AND status='Vald'"%(annons)
-			ask_it_to = []
-			call_database(sql, ask_it_to)
-			return {'response':True}
+            sql = "UPDATE application SET status = 'Bortvald' WHERE ad_id='%d' AND status='Obehandlad'"%(annons)
+            ask_it_to = []
+            call_database(sql, ask_it_to)
 
-		else:
-			return {'response':False, 'error':'Något har blivit fel!'}
+            return {'response':True}
+
+        else:
+            return {'response':False, 'error':'Något har blivit fel!'}
 
 
 def ajax_edit_mission(ad_id):

@@ -60,8 +60,9 @@ def admin():
 		ads_untreated = addmod.sort_by_status(userid,'Obehandlad')
 		ads_ongoing = addmod.sort_by_status(userid,'vald')
 		ads_finished = addmod.sort_by_status(userid,'Avslutad')
+		denied_missions = addmod.get_denied_missions(int(userid))
 
-		return template('student_start',finished_ads=ads_finished, avail_ads=ads_to_apply_on, accepted_on=ads_ongoing, pending_ad=ads_untreated, user_id=userid, user=username, level="student", pageTitle = 'Start')
+		return template('student_start',finished_ads=ads_finished, avail_ads=ads_to_apply_on, accepted_on=ads_ongoing, pending_ad=ads_untreated, user_id=userid, user=username, level="student", pageTitle = 'Start', denied_missions=denied_missions)
 	else:
 		employer_ads = addmod.get_my_ads(userid)
 		students = addmod.students_that_applied(userid)

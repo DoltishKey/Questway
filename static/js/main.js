@@ -11,8 +11,8 @@ $(document).ready(function() {
 });
 
 function checkLogIn(){
-	$('#logIn').submit(function(){
-		event.preventDefault();
+	$('#logIn').submit(function(event){
+		 event.preventDefault(event);
 		$.ajax({
 			type: 'POST',
 			url: '/ajax',
@@ -36,10 +36,21 @@ function checkLogIn(){
 
 
 function checkCreateEmployer(){
-	$('#create_employer').submit(function(){
-		event.preventDefault();
-		//validering ska in här
+	$('#create_employer').submit(function(event){
+		event.preventDefault(event);
 
+        //Email-validering:
+        var email = document.getElementById("email");
+        var error = document.getElementById("error");
+
+        var atpos = email.indexOf("@");
+        var punktpos = email.lastIndexOf(".");
+        if(atpos < 1 || dotpos < atpos + 2 || dotpos + 2 > email.length){
+            error.innerHTML("Du måste ange hela din mailadress. Med @ och allt.");
+            alert("Du måste ange hela din mailadress. Med @ och allt.");
+            email.style.borderColor = "red";
+        }
+        //Email-val end
 
 		$.ajax({
 			type: 'POST',
@@ -65,11 +76,21 @@ function checkCreateEmployer(){
 
 
 function checkCreateStudent(){
-	$('#create_student').submit(function(){
-		event.preventDefault();
-		//validering ska in här
+	$('#create_student').submit(function(event){
+		event.preventDefault(event);
 
+		//Email-validering:
+        var email = document.getElementById("email");
+        var error = document.getElementById("error");
 
+        var atpos = email.indexOf("@");
+        var punktpos = email.lastIndexOf(".");
+        if(atpos < 1 || dotpos < atpos + 2 || dotpos + 2 > email.length){
+            error.innerHTML("Du måste ange hela din mailadress. Med @ och allt.");
+            alert("Du måste ange hela din mailadress. Med @ och allt.");
+            email.style.borderColor = "red";
+        }
+        //Email-val end
 		$.ajax({
 			type: 'POST',
 			url: '/ajax_create_user',
@@ -138,6 +159,7 @@ function open_close_mission(clicked_parent){
 		$(this).find('.edit_mission_info').show();
 		$(this).find('.fileToUploadLabel').hide();
 		$(this).find('select').hide();
+		$(this).removeClass('edit');
 	});
 	pos_cicked = clicked_parent.position();
 	list_to_make_samll = [];
@@ -158,16 +180,15 @@ function edit_mission(){
 	$('.edit_mission_info').find('.btn').click(function() {
 		$(this).parents('.edit_mission_info').hide();
 		clicked_parent = $(this).parents('li');
-		clicked_parent.addClass('edit');
 		open_close_mission(clicked_parent);
-		enter_edit_mode(clicked_parent)
+		enter_edit_mode(clicked_parent);
 
 	});
 
-	$('.misson_info_control').click(function(){
-		clicked_parent = $(this).parents('li');
-		enter_edit_mode(clicked_parent)
-	});
+	//$('.misson_info_control').click(function(){
+	//	clicked_parent = $(this).parents('li');
+		//enter_edit_mode(clicked_parent);
+	//});
 
 	$('.edit_mission_btn').click(function(){
 		clicked_parent = $(this).parents('li');
@@ -189,6 +210,7 @@ function enter_edit_mode(clicked_parent) {
 		clicked_parent.find('.mission_link').find('a').hide();
 		remove_key();
 		handle_input();
+		//exit_edit_mode(clicked_parent);
 	}
 	else{
 		clicked_parent.find('.edit_mission_btn').html('Redigera');
@@ -201,14 +223,12 @@ function enter_edit_mode(clicked_parent) {
 		clicked_parent.find('.fileToUploadLabel').hide();
 		clicked_parent.find('.mission_link').find('a').show();
 		clicked_parent.removeClass('edit');
-		clicked_parent.find('.update_info').submit();
-		//var formData= new FormData(clicked_parent.find('.update_info'));
-		//$.ajax({
-		//	type: 'POST',
-		//	url: '/ajax_edit_mission',
-		//	data: $(clicked_parent).find('.update_info').serialize()
-		//});
+	}
+}
 
+function exit_edit_mode(clicked_parent){
+	if (clicked_parent.find('.edit_mission_btn').html() == 'Spara'){
+		clicked_parent.find('.update_info').submit();
 	}
 }
 
@@ -264,7 +284,8 @@ function edith_file(){
 }
 
 /* KONTROLLERA INPUT*/
-//LogIN
+//EMAIL
+/*
 function emailValidation(){
 
     var email = document.getElementById("email");
@@ -274,12 +295,11 @@ function emailValidation(){
     var punktpos = email.lastIndexOf(".");
     if(atpos < 1 || dotpos < atpos + 2 || dotpos + 2 > email.length){
         error.innerHTML("Du måste ange hela din mailadress. Med @ och allt.");
-        email.
         alert("Du måste ange hela din mailadress. Med @ och allt.");
         return false;
         email.style.borderColor = "red";
     }
-}
+}*/
 //Skapa annons
 function createAdValid(){
     var error = document.getElementById("error");
