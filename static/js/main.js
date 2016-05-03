@@ -7,6 +7,7 @@ $(document).ready(function() {
 	set_localstorage_val_for_ad();
 	mission_control();
 	edit_mission();
+	edith_file();
 });
 
 function checkLogIn(){
@@ -201,6 +202,7 @@ function enter_edit_mode(clicked_parent) {
 		clicked_parent.find('.mission_link').find('a').show();
 		clicked_parent.removeClass('edit');
 		clicked_parent.find('.update_info').submit();
+		//var formData= new FormData(clicked_parent.find('.update_info'));
 		//$.ajax({
 		//	type: 'POST',
 		//	url: '/ajax_edit_mission',
@@ -248,6 +250,17 @@ function update_mission(){
 			console.log('Något har gått fel!');
 		}
   	});
+}
+
+function edith_file(){
+	$("input:file").change(function (){
+	$('.fileToUploadLabel').hide();
+	$(this).parents('.circle').css('background-image','$(this).val()');
+
+
+
+   });
+
 }
 
 /* KONTROLLERA INPUT*/

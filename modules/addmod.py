@@ -1,16 +1,15 @@
 # *-* coding:utf-8 *-*
 import json
-from bottle import request, redirect, static_file
+from bottle import request, redirect
 import time
 import log
 import createUsers
 import MySQLdb
-import os
 
 
 '''*********DB info*********'''
 def call_database(sql, asked_from_cursor):
-    db = MySQLdb.connect(host="195.178.232.7", port=4040, user="AC8240", passwd="hejhej123", db="AC8240");
+    db = MySQLdb.connect(host="195.178.232.16", port=3306, user="AC8240", passwd="hejhej123", db="AC8240");
     cursor = db.cursor()
     cursor_answer = []
     try:
@@ -28,74 +27,30 @@ def call_database(sql, asked_from_cursor):
 
 
 
-'''*********Skriv/läsa filer*********'''
-def read_data(file):
-	try:
-		fileIn = open('static/data/'+ file +'.json', 'r')
-		dataRead = json.load(fileIn)
-		fileIn.close()
-	except (IOError, ValueError):
-		validatekDataFile(file)
-		dataRead = read_data(file)
-	return dataRead
-
-def write_to_db(users, db):
-	fileOut = open('static/data/'+ db +'.json', 'w')
-	json.dump(users, fileOut, indent=4)
-	fileOut.close()
-
-def validatekDataFile(file):
-	'''Om databasen inte finns eller är helt tom så skapas en json-fil innehållande en tom lista.'''
-	resList = []
-	dataFile = open('static/data/'+ file +'.json', 'w')
-	json.dump(resList, dataFile, indent=4)
-	dataFile.close()
-
-
-
-'''*********Load adds from DB. If there's not DB, one is created*********'''
-
-def load_adds(file):
-    try:
-        with open('static/data/ads.json', "r") as fil:
-            data=json.load(fil)
-            return data
-
-    except (ValueError, IOError):
-        data=create_ad_DB()
-        return data
-
-def create_ad_DB():
-    with open('static/data/ads.json', 'w') as fil:
-        data=[]
-        json.dump(data, fil, indent=4)
-        return data
-
-
 '''*********Create the AD*********'''
 def do_ad():
-	ad_title=request.forms.get('ad_title')
-	ad_text=request.forms.get('ad_text')
+    ad_title=request.forms.get('ad_title')
+    ad_text=request.forms.get('ad_text')
 
-	ad_title_checked=validate_ad_input(ad_title)
+    #ad_title_checked=validate_ad_input(ad_title)
 
-	if  ad_title_checked == True:
-		creator = log.get_user_id_logged_in()
-		sql="INSERT INTO ads(titel, main_info, creator_id, creation_date)\
-			VALUES ('%s', '%s', '%d', CURDATE())" % (ad_title, ad_text, creator)
+    #if  ad_title_checked == True:
+    if  True == True:
+        creator = log.get_user_id_logged_in()
+        sql="INSERT INTO ads(titel, main_info, creator_id, creation_date)\
+        VALUES ('%s', '%s', '%d', CURDATE())" % (ad_title, ad_text, creator)
 
-		ask_it_to = []
-		mighty_db_says = call_database(sql, ask_it_to)
-		return {'result':True, 'error':'None'}
+        ask_it_to = []
+        mighty_db_says = call_database(sql, ask_it_to)
+        return {'result':True, 'error':'None'}
 
-	else:
-		return {'result':False, 'error': "Ett fel uppstod - Kontrollera att du gav annonsen en titel"}
+    else:
+        return {'result':False, 'error': "Ett fel uppstod - Kontrollera att du gav annonsen en titel"}
 
 
 '''*********Check that a Title for the ad is given*********'''
 
-def validate_ad_input(ad_info): #Byt namn på variabeln till validate_ad_input
-    former_ad_info=load_adds('ads')
+def validate_ad_input(ad_info):
     s=list(ad_info)
 
     if not ad_info:
@@ -103,9 +58,7 @@ def validate_ad_input(ad_info): #Byt namn på variabeln till validate_ad_input
     elif s[0]==' ':
         s[0]=''
         ad_info=''.join(s)
-        return check_ad_info(ad_info)
-    elif len(former_ad_info)==0:
-        return True
+        return validate_ad_input(ad_info)
     else:
         return True
 
@@ -130,14 +83,14 @@ def get_my_ads(employers_id):
 
 def sort_by_status(user, status):
 	sql="SELECT * FROM\
-			(SELECT a.id, a.titel, a.main_info, DATE(a.creation_date), b.company_name, b.id as emp_id, c.student_id, c.status\
-				FROM ads a\
-					JOIN employers b\
-						ON a.creator_id=b.id\
-					LEFT OUTER JOIN application c\
-						ON a.id=c.ad_id)\
-					as H1\
-		WHERE H1.student_id='%d' AND H1.status='%s'" % (user, status)
+			(SELECT ads.id, ads.titel, ads.main_info, DATE(ads.creation_date), employers.company_name, employers.id as emp_id, application.student_id, application.status\
+			FROM ads\
+			JOIN employers\
+				ON ads.creator_id=employers.id\
+			LEFT JOIN application\
+				ON ads.id=application.ad_id)\
+			as H1\
+	        WHERE H1.student_id='%d' AND H1.status='%s'" % (user, status)
 
 	ask_it_to = ['fetchall()']
 	mighty_db_says = call_database(sql, ask_it_to)
@@ -146,29 +99,43 @@ def sort_by_status(user, status):
 
 
 def available_ads(user):
-	sql="SELECT * FROM\
-			(SELECT a.id, a.titel, a.main_info, DATE(a.creation_date), b.company_name, b.id as emp_id, c.student_id, c.status\
-				FROM ads a\
-					JOIN employers b\
-						ON a.creator_id=b.id\
-					LEFT OUTER JOIN application c\
-						ON a.id=c.ad_id)\
-					as H1\
-			WHERE H1.student_id!='%d' OR H1.student_id is null" % (user)
 
-	ask_it_to = ['fetchall()']
-	mighty_db_says = call_database(sql, ask_it_to)
-	the_ads=mighty_db_says[0]
-	return the_ads
+    sql="SELECT ads.id, ads.titel, ads.main_info, DATE(ads.creation_date), employers.company_name, employers.id as emp_id, application.student_id, application.status\
+        FROM ads\
+        JOIN employers\
+            ON employers.id=ads.creator_id\
+        LEFT JOIN application\
+            ON ads.id=application.ad_id\
+        WHERE ads.id NOT IN\
+            (SELECT ad_id FROM application WHERE status = 'Vald' OR status = 'Avslutad' OR student_id ='%d'  GROUP BY ad_id)\
+        GROUP BY ads.id" % (user)
+
+    ask_it_to = ['fetchall()']
+    mighty_db_says = call_database(sql, ask_it_to)
+    the_ads=mighty_db_says[0]
+    return the_ads
 
 
 '''******* Delete a specifik ad *******'''
 def erase_ad(ad_id, user_ID):
-	sql= "DELETE FROM ads WHERE id = '%d' and creator_id='%d'" %(int(ad_id), int(user_ID))
-	ask_it_to = []
-	mighty_db_says = call_database(sql, ask_it_to)
+    sql="INSERT INTO removed_ads(student_id, titel) \
+    SELECT application.student_id, ads.titel FROM application \
+    INNER JOIN ads \
+    ON application.ad_id = ads.id \
+    WHERE application.ad_id = '%d'"%(ad_id)
 
-	redirect('/allMissions')
+    ask_it_to = []
+    mighty_db_says = call_database(sql, ask_it_to)
+
+    sql= "DELETE FROM application WHERE ad_id = '%d'" %(int(ad_id))
+    ask_it_to = []
+    mighty_db_says = call_database(sql, ask_it_to)
+
+    sql= "DELETE FROM ads WHERE id = '%d' and creator_id='%d'" %(int(ad_id), int(user_ID))
+    ask_it_to = []
+    mighty_db_says = call_database(sql, ask_it_to)
+
+    redirect('/allMissions')
 
 
 def choose_ad(annonsID):
@@ -267,34 +234,36 @@ def move_ad_to_complete(annons):
 		else:
 			return {'response':False, 'error':'Något har blivit fel!'}
 
-def ajax_edit_mission():
-    type_of = request.forms.get('mission_type')
-    keys = request.POST.getall("add_key")
-    display = request.forms.get('display')
-    upload  = request.files.get('fileToUpload')
-    print upload
-    name, ext = os.path.splitext(upload.filename)
-    if ext not in ('.png','.jpg','.jpeg'):
-        return 'File extension not allowed.'
 
-    save_path = '/static/img/'
-    upload.save(save_path) # appends upload.filename automatically
-    return 'OK'
+def ajax_edit_mission(ad_id):
+    type_of = request.forms.get('mission_type_'+str(ad_id))
+    keys = request.POST.getall("add_key_" + str(ad_id))
+    display = request.forms.get('display_'+str(ad_id))
+    upload  = request.files.get('fileToUpload_'+str(ad_id))
+    if upload != None:
+        name, ext = os.path.splitext(upload.filename)
+        if ext not in ('.png','.jpg','.jpeg'):
+            return 'File extension not allowed.'
 
+        save_path = "static/img/uploads"
+        file_path = "{path}/{file}".format(path=save_path, file=upload.filename)
+        upload.save(file_path)
 
     if display == 'True':
-        print 'Komemr hit!'
+        print 'Kommer hit!'
         to_display = 2
     else:
         to_display = 1
-    url = request.forms.get('url')
-    grading_id = int(request.forms.get('grading_id'))
+    url = request.forms.get('url_'+str(ad_id))
+    ad_id = int(ad_id)
+    if upload == None:
+        sql="UPDATE feedback SET display='%d', url_demo ='%s', type='%s' WHERE ad_id = '%d'"%(to_display, url, type_of,ad_id)
 
-    sql="UPDATE feedback SET display='%d', url_demo ='%s', type='%s' WHERE ad_id = '%d'"%(to_display, url, type_of,grading_id)
+    else:
+        sql="UPDATE feedback SET img_url ='%s', display='%d', url_demo ='%s', type='%s' WHERE ad_id = '%d'"%(file_path,to_display, url, type_of,ad_id)
+
     ask_it_to = []
     call_database(sql, ask_it_to)
-
-
 
 
 def grading_ads(user):
@@ -316,6 +285,8 @@ def grading_ads(user):
 	print mighty_db_says[0]
 	return mighty_db_says[0]
 
+
+
 def students_that_applied(user_id):
 	user_id = int(user_id)
 	sql = "SELECT students.id, students.first_name, students.last_name, J1.ad_id, J1.status, education.titel, education.year, users.mail\
@@ -328,12 +299,14 @@ def students_that_applied(user_id):
 	ON J1.student_id = students.id \
     INNER JOIN education\
     ON students.education_id = education.education_id and students.education_year = education.year\
-    INNER JOIN users \
-    ON users.id = J1.student_id"%(user_id)
+    INNER JOIN users\
+    ON users.id=J1.student_id"%(user_id)
 
 	ask_it_to = ['fetchall()']
 	mighty_db_says = call_database(sql, ask_it_to)
 	return mighty_db_says[0]
+
+
 
 def get_given_feedback_for_employers(user):
 	sql = "SELECT J1.id, feedback.feedback_text, feedback.grade \
@@ -348,3 +321,18 @@ def get_given_feedback_for_employers(user):
 	ask_it_to = ['fetchall()']
 	mighty_db_says = call_database(sql, ask_it_to)
 	return mighty_db_says[0]
+
+def get_denied_missions(user):
+    user = int(user)
+    sql="SELECT A.titel \
+    FROM (SELECT ads.titel \
+        FROM application INNER JOIN ads \
+        ON ads.id=application.ad_id \
+        WHERE application.status='Bortvald' AND application.student_id = '%d') as A \
+    UNION \
+    SELECT removed_ads.titel \
+    FROM removed_ads \
+    WHERE student_id = '%d'"%(user, user)
+    ask_it_to = ['fetchall()']
+    mighty_db_says = call_database(sql, ask_it_to)
+    return mighty_db_says[0]

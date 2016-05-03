@@ -79,8 +79,7 @@
                     <ul>
                         %for grade in grading:
                             <li class="item">
-                                <form class="update_info" action="/ajax_edit_mission" method="POST" enctype="multipart/form-data">
-                                    <input type="hidden" name="grading_id" value="{{grade[2]}}">
+                                <form class="update_info" action="/ajax_edit_mission/{{grade[2]}}" method="POST" enctype="multipart/form-data">
                                     %if grade[4] == 1:
                                         <div class="edit_mission_info">
                                             <div>
@@ -91,14 +90,14 @@
                                         </div>
                                     %end
                                     <div class="edit_mission_btn ">Redigera</div>
-                                    <div class="img circle">
-                                        <label for="fileToUpload" class="fileToUploadLabel">Ladda upp en bild</label>
-                                        <input type="file" name="fileToUpload" class="fileToUpload" id="fileToUpload">
+                                    <div class="img circle" style="background-image:url(../{{grade[3]}});">
+                                        <label for="fileToUpload_{{grade[2]}}" class="fileToUploadLabel">Ladda upp en bild</label>
+                                        <input type="file" name="fileToUpload_{{grade[2]}}" class="fileToUpload" id="fileToUpload_{{grade[2]}}">
                                     </div>
                                     <div class="mission_general">
                                         <h4>{{grade[0]}}</h4>
                                         <h3>Type</h3>
-                                        <input style="dispaly:none" name="mission_type" value="{{grade[8]}}">
+                                        <input style="dispaly:none" name="mission_type_{{grade[2]}}" value="{{grade[8]}}">
                                         <div class="btn misson_info_control">Kolla in!</div>
                                         <div class="mission_info">
                                             <div class="mission_feedback">
@@ -123,22 +122,22 @@
                                                     <li>HTML</li>
                                                     <div class="edit_key">
                                                         <div class="remove_key">X</div>
-                                                        <input type="text" name="add_key" value="HTML" class="add_key" maxlength="20">
+                                                        <input type="text" name="add_key_{{grade[2]}}" value="HTML" class="add_key" maxlength="20">
                                                     </div>
                                                     <li>CSS</li>
                                                     <div class="edit_key">
                                                         <div class="remove_key">X</div>
-                                                        <input type="text" name="add_key" value="CSS" class="add_key" maxlength="20">
+                                                        <input type="text" name="add_key_{{grade[2]}}" value="CSS" class="add_key" maxlength="20">
                                                     </div>
                                                     <li>Pythn</li>
                                                     <div class="edit_key">
                                                         <div class="remove_key">X</div>
-                                                        <input type="text" name="add_key" value="Python" class="add_key" maxlength="20">
+                                                        <input type="text" name="add_key_{{grade[2]}}" value="Python" class="add_key" maxlength="20">
                                                     </div>
                                                     <li>UX</li>
                                                     <div class="edit_key">
                                                         <div class="remove_key">X</div>
-                                                        <input type="text" name="add_key" value="UX" class="add_key" maxlength="20">
+                                                        <input type="text" name="add_key_{{grade[2]}}" value="UX" class="add_key" maxlength="20">
                                                     </div>
 
                                                 </ul>
@@ -146,16 +145,16 @@
                                                 <div class="display_or_not">
                                                     %if grade[4] == int(2):
                                                         %print grade[4]
-                                                        <input type="checkbox" name="display" value="True" checked>Visa uppdraget på din profil
+                                                        <input type="checkbox" name="display_{{grade[2]}}" value="True" checked>Visa uppdraget på din profil
                                                     %else:
-                                                        <input type="checkbox" name="display" value="True">Visa uppdraget på din profil
+                                                        <input type="checkbox" name="display_{{grade[2]}}" value="True">Visa uppdraget på din profil
                                                     %end
                                                 </div>
                                             </div>
                                             <div class="mission_link">
                                                 <h4>Länk till resultatet:</h4>
                                                 <a href="#">{{grade[7]}}</a>
-                                                <input type="text" name="url" value="{{grade[7]}}">
+                                                <input type="text" name="url_{{grade[2]}}" value="{{grade[7]}}">
                                             </div>
                                         </form>
                                     </div>
@@ -169,7 +168,6 @@
 		</main>
 		<footer style=" bottom:0px; width: 100%;">
             © Questway, 2016
-            Icons made by <a href="http://www.flaticon.com/authors/gregor-cresnar" title="Gregor Cresnar">Gregor Cresnar</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
         </footer>
 	</body>
 </html>

@@ -1,6 +1,6 @@
 <header>
     <div class="wrap" id="header_wrap">
-		<h1>Questway</h1>
+		<a id="QWTitle" href="/"><h1>Questway</h1></a>
 		<nav class="menu">
 				%from bottle import request
 

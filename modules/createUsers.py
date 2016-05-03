@@ -4,11 +4,11 @@ from bottle import route, get, post, run, template, error, static_file, request,
 import json
 from validate_email import validate_email
 import MySQLdb
-
+import hashlib
 
 '''*********DB info*********'''
 def call_database(sql, asked_from_cursor):
-    db = MySQLdb.connect(host="195.178.232.7", port=4040, user="AC8240", passwd="hejhej123", db="AC8240");
+    db = MySQLdb.connect(host="195.178.232.16", port=3306, user="AC8240", passwd="hejhej123", db="AC8240");
     cursor = db.cursor()
     cursor_answer = []
     try:
@@ -61,16 +61,17 @@ def validate_if_student_exists(userID):
 
 '''*********funktioner*********'''
 def add_new_user(email, password, user_level):
-	sql = "INSERT INTO users(password, \
+    password = hashlib.sha256(password).hexdigest()
+    sql = "INSERT INTO users(password, \
        autho_level, mail) \
        VALUES ('%s', '%d', '%s' )" % \
        (password, user_level, email)
 
-	ask_it_to = ['lastrowid']
-	mighty_db_says = call_database(sql, ask_it_to)
-	new_user_id = mighty_db_says[0]
+    ask_it_to = ['lastrowid']
+    mighty_db_says = call_database(sql, ask_it_to)
+    new_user_id = mighty_db_says[0]
 
-	return new_user_id
+    return new_user_id
 
 
 def add_new_employer(company_name, org_nr, first_name, last_name, new_user_id):

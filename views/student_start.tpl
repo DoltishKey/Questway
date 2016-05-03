@@ -30,7 +30,7 @@
                         %for each in avail_ads:
                                 <div class="add">
                                         <h2>{{each[1]}}</h2>
-                                        <h4 class="inline_block">Publicererades: </h4> 
+                                        <h4 class="inline_block">Publicererades: </h4>
                                         <p class="inline_block">{{each[3]}}</p>
                                         <div class="showMore">
                                             <h4>Beskrivning:</h4>
@@ -55,7 +55,7 @@
                         %for every in pending_ad:
                             <div class="add">
                                 <h2>{{every[1]}}</h2>
-                                <h4 class="inline_block">Publicererades: </h4> 
+                                <h4 class="inline_block">Publicererades: </h4>
                                 <p class="inline_block">{{every[3]}}</p>
                                 <div class="showMore">
                                     <h4>Beskrivning:</h4>
@@ -65,6 +65,7 @@
                                 <div class="arrow">></div>
                             </div>
                         %end
+                        
                     %end
                 </div>
             </div>
@@ -77,7 +78,7 @@
                         %for each_ad in accepted_on:
                             <div class="add">
                                 <h2>{{each_ad[1]}}</h2>
-                                <h4 class="inline_block">Publicererades: 
+                                <h4 class="inline_block">Publicererades:
                                 </h4> <p class="inline_block">{{each_ad[3]}}</p>
                                 <div class="showMore">
                                     <h4>Beskrivning:</h4>
@@ -100,7 +101,7 @@
                     %for one in finished_ads:
                         <div class="add">
                             <h2>{{one[1]}}</h2>
-                            <h4 class="inline_block">Publicererades: </h4> 
+                            <h4 class="inline_block">Publicererades: </h4>
                             <p class="inline_block">{{one[3]}}</p>
                             <div class="showMore">
                                 <h4>Beskrivning:</h4>
