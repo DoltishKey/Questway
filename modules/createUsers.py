@@ -171,6 +171,7 @@ def create_student():
 		return {'result':True, 'email':email, 'password':password}
 
 
+    
 def ajax_new_user_validation():
 	email = request.forms.get('email')
 	if email == None or len(email) == 0 or validate_email.validate_email(email) == False:
@@ -179,7 +180,7 @@ def ajax_new_user_validation():
 		return {'result': False, 'error':'User exists'}
 	else:
 		return {'result': True}
-
+    
 def show_student_profile(user):
 	try:
 		if validate_if_student_exists(user) == True:
