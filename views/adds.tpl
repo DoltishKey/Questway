@@ -64,7 +64,7 @@
                                     <div id="applications">
                                         <ul>
                                             %for student in students:
-                                                %if int(student[3]) == int(add[0]):x
+                                                %if int(student[3]) == int(add[0]):
                                                     <a href="/profiles/{{student[0]}}" target="_blank">
                                                         <li>
                                                             <h4 class="col1">{{student[1]}} {{student[2]}}</h4>

@@ -49,8 +49,7 @@ def do_ad():
 
 '''*********Check that a Title for the ad is given*********'''
 
-def validate_ad_input(ad_info): #Byt namn på variabeln till validate_ad_input
-    former_ad_info=load_adds('ads')
+def validate_ad_input(ad_info):
     s=list(ad_info)
 
     if not ad_info:
@@ -58,9 +57,7 @@ def validate_ad_input(ad_info): #Byt namn på variabeln till validate_ad_input
     elif s[0]==' ':
         s[0]=''
         ad_info=''.join(s)
-        return check_ad_info(ad_info)
-    elif len(former_ad_info)==0:
-        return True
+        return validate_ad_input(ad_info)
     else:
         return True
 
@@ -101,20 +98,22 @@ def sort_by_status(user, status):
 
 
 def available_ads(user):
-	sql="SELECT * FROM\
-			(SELECT a.id, a.titel, a.main_info, DATE(a.creation_date), b.company_name, b.id as emp_id, c.student_id, c.status\
-				FROM ads a\
-					JOIN employers b\
-						ON a.creator_id=b.id\
-					LEFT OUTER JOIN application c\
-						ON a.id=c.ad_id)\
-					as H1\
-			WHERE H1.student_id!='%d' OR H1.student_id is null" % (user)
+    sql="SELECT * FROM\
+            (SELECT * FROM\
+                (SELECT a.id, a.titel, a.main_info, DATE(a.creation_date), b.company_name, b.id as emp_id, c.student_id, c.status\
+                    FROM ads a\
+                        JOIN employers b\
+                            ON a.creator_id=b.id\
+                        LEFT OUTER JOIN application c\
+                            ON a.id=c.ad_id)\
+                        as H1\
+                    WHERE H1.student_id!='%d' AND H1.status='Obehandlad' OR H1.status is null) as H2\
+            GROUP BY H2.id" %(user)
 
-	ask_it_to = ['fetchall()']
-	mighty_db_says = call_database(sql, ask_it_to)
-	the_ads=mighty_db_says[0]
-	return the_ads
+    ask_it_to = ['fetchall()']
+    mighty_db_says = call_database(sql, ask_it_to)
+    the_ads=mighty_db_says[0]
+    return the_ads
 
 
 '''******* Delete a specifik ad *******'''

@@ -57,12 +57,18 @@ def admin():
 
 	if user_level == 1:
 		ads_to_apply_on=[]
-		not_applied_on = addmod.available_ads(userid)
-		for each in not_applied_on:
-			if each[7]!='Obehandlad' and each[6]==userid or each[7]==None:
-				print "hej"
-				ads_to_apply_on.append(each)
+		not_applied_on=addmod.available_ads(userid)
 		ads_untreated = addmod.sort_by_status(userid,'Obehandlad')
+
+		for each in not_applied_on:
+			for every in ads_untreated:
+				if each[6]==every[6]:
+					print "hej"
+					pass
+				else:
+					print "då"
+					ads_to_apply_on.append(each)
+
 		ads_ongoing = addmod.sort_by_status(userid,'vald')
 		ads_finished = addmod.sort_by_status(userid,'Avslutad')
 
