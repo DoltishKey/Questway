@@ -40,8 +40,13 @@
                             <h2>{{add[1]}}</h2>
                             <h4 class="inline_block">Publicererades: </h4>
                             <p class="inline_block">{{add[4]}}</p>
-
-                            %num_applications = sum(x.count(add[0]) for x in students)
+                            %num_applications =0
+                            %for stud in students:
+                                %if stud[3] == add[0]:
+                                    %num_applications = num_applications + 1
+                                %end
+                            %end
+                            <!--num_applications = sum(x.count(add[0]) for x in students)-->
                             % if num_applications > 1:
                                 <h4 class="inline_block number_of_applications">Ansökningar: <span>{{num_applications}}</span></h4>
                             %elif num_applications == 1:
@@ -56,8 +61,7 @@
                                 <form  name="ta_bort_annons" id="del_annons" method="POST" action="/del_ad/{{add[0]}}">
                                     <input type="submit" value="Ta bort annons" class="myButton delete_ad">
                                 </form>
-
-                                %num_applications = sum(x.count(add[0]) for x in students)
+                                <!--num_applications = sum(x.count(add[0]) for x in students)-->
                                 % if num_applications > 1 or num_applications == 1:
                                     <h3>Ansökningar:</h3>
                                     <!-- Om antal ansökningar > 0, gör detta: -->

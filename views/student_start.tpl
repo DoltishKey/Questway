@@ -64,8 +64,13 @@
                                 </div>
                                 <div class="arrow">></div>
                             </div>
-                        %end
-                        
+                            %end
+                            %for item in denied_missions:
+                                <div class="add">
+                                    <h2>{{item[0]}}</h2>
+                                    <p class="inline_block">Tyvärr så fick du inte updpraget.</p>
+                                </div>
+                            %end
                     %end
                 </div>
             </div>
