@@ -56,24 +56,12 @@ def admin():
 	user_level = log.get_user_level() #kollar om användaren är uppdragstagare eller student (returnerar 1 eller 2)
 
 	if user_level == 1:
-		ads_to_apply_on=[]
-		not_applied_on=addmod.available_ads(userid)
+		ads_to_apply_on=addmod.available_ads(userid)
 		ads_untreated = addmod.sort_by_status(userid,'Obehandlad')
-
-		for each in not_applied_on:
-			for every in ads_untreated:
-				if each[6]==every[6]:
-					print "hej"
-					pass
-				else:
-					print "då"
-					ads_to_apply_on.append(each)
-
 		ads_ongoing = addmod.sort_by_status(userid,'vald')
 		ads_finished = addmod.sort_by_status(userid,'Avslutad')
-		denied_missions = addmod.get_denied_missions(userid)
 
-		return template('student_start',finished_ads=ads_finished, avail_ads=ads_to_apply_on, accepted_on=ads_ongoing, pending_ad=ads_untreated, user_id=userid, user=username, level="student", pageTitle = 'Start', denied_missions = denied_missions)
+		return template('student_start',finished_ads=ads_finished, avail_ads=ads_to_apply_on, accepted_on=ads_ongoing, pending_ad=ads_untreated, user_id=userid, user=username, level="student", pageTitle = 'Start')
 	else:
 		employer_ads = addmod.get_my_ads(userid)
 		students = addmod.students_that_applied(userid)

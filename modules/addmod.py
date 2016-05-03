@@ -83,14 +83,14 @@ def get_my_ads(employers_id):
 
 def sort_by_status(user, status):
 	sql="SELECT * FROM\
-			(SELECT a.id, a.titel, a.main_info, DATE(a.creation_date), b.company_name, b.id as emp_id, c.student_id, c.status\
-				FROM ads a\
-					JOIN employers b\
-						ON a.creator_id=b.id\
-					LEFT OUTER JOIN application c\
-						ON a.id=c.ad_id)\
-					as H1\
-		WHERE H1.student_id='%d' AND H1.status='%s'" % (user, status)
+			(SELECT ads.id, ads.titel, ads.main_info, DATE(ads.creation_date), employers.company_name, employers.id as emp_id, application.student_id, application.status\
+			FROM ads\
+			JOIN employers\
+				ON ads.creator_id=employers.id\
+			LEFT JOIN application\
+				ON ads.id=application.ad_id)\
+			as H1\
+	        WHERE H1.student_id='%d' AND H1.status='%s'" % (user, status)
 
 	ask_it_to = ['fetchall()']
 	mighty_db_says = call_database(sql, ask_it_to)
@@ -99,17 +99,16 @@ def sort_by_status(user, status):
 
 
 def available_ads(user):
-    sql="SELECT * FROM\
-            (SELECT * FROM\
-                (SELECT a.id, a.titel, a.main_info, DATE(a.creation_date), b.company_name, b.id as emp_id, c.student_id, c.status\
-                    FROM ads a\
-                        JOIN employers b\
-                            ON a.creator_id=b.id\
-                        LEFT OUTER JOIN application c\
-                            ON a.id=c.ad_id)\
-                        as H1\
-                    WHERE H1.student_id!='%d' AND H1.status='Obehandlad' OR H1.status is null) as H2\
-            GROUP BY H2.id" %(user)
+
+    sql="SELECT ads.id, ads.titel, ads.main_info, DATE(ads.creation_date), employers.company_name, employers.id as emp_id, application.student_id, application.status\
+        FROM ads\
+        JOIN employers\
+            ON employers.id=ads.creator_id\
+        LEFT JOIN application\
+            ON ads.id=application.ad_id\
+        WHERE ads.id NOT IN\
+            (SELECT ad_id FROM application WHERE status = 'Vald' OR status = 'Avslutad' OR student_id ='%d'  GROUP BY ad_id)\
+        GROUP BY ads.id" % (user)
 
     ask_it_to = ['fetchall()']
     mighty_db_says = call_database(sql, ask_it_to)

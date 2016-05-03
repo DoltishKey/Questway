@@ -65,12 +65,7 @@
                                 <div class="arrow">></div>
                             </div>
                         %end
-                        %for every in denied_missions:
-                            <div class="add">
-                                <h2>{{every[0]}}</h2>
-                                <p>Uppdraget gick till en annan sökande.</p>
-                            </div>
-                        %end
+                        
                     %end
                 </div>
             </div>
