@@ -37,15 +37,15 @@
 
                             %num_applications = sum(x.count(add[0]) for x in students)
                             % if num_applications > 1:
-                                <h4 class="inline_block col2">Ansökningar: <span>{{num_applications}}</span></h4>
+                                <h4 class="inline_block number_of_applications">Ansökningar: <span>{{num_applications}}</span></h4>
                             %elif num_applications == 1:
-                                <h4 class="inline_block col2">Ansökningar: <span>{{num_applications}}</span></h4>
+                                <h4 class="inline_block number_of_applications">Ansökningar: <span>{{num_applications}}</span></h4>
                             %else:
-                                <h4 class="inline_block col2">Inga ansökningar</h4>
+                                <h4 class="inline_block number_of_applications">Inga ansökningar</h4>
                             %end
                             
                             <div class="showMore">
-                                <h4>Beskrivning:</h4>
+                                <h4 class="clear">Beskrivning:</h4>
                                 <p>{{add[2]}}</p>
                                 <form  name="ta_bort_annons" id="del_annons" method="POST" action="/del_ad/{{add[0]}}">
                                     <input type="submit" value="Ta bort annons" class="myButton delete_ad">

@@ -168,6 +168,14 @@ header h1 {
     padding: 0;
 }
 
+/*.add .number_of_applications {
+    float: left;
+}*/
+
+.clear {
+    clear: both;
+}
+
 .add form {
     margin-top: 15px;
 }
@@ -664,13 +672,19 @@ transition: background-color 5000s ease-in-out 0s;
     padding: 0;
 }
 
+#applications .number_of_applications {
+    position: relative;
+    left: 40%;
+    float: left;
+}
+
 .col1 {
     margin-left: 2%;
 }
 
 .col2 {
     position: absolute;
-    left: 25%;
+    left: 27%;
 }
 
 .col3 {
@@ -681,7 +695,7 @@ transition: background-color 5000s ease-in-out 0s;
 #applications ul a#choose {
     margin: -20px 0 0 0;
     position: absolute;
-    left: 90%;
+    left: 88%;
     display: inline-block;
     padding: 10px;
     text-transform: none;
@@ -690,6 +704,12 @@ transition: background-color 5000s ease-in-out 0s;
     background-color: #078f91;
     box-shadow: none;
     color: #FFF;
+}
+
+@media screen and (max-width:1200px){
+    #applications ul a#choose {
+        left: 83%;
+    }
 }
 
 #choose:hover {
@@ -1319,8 +1339,20 @@ transition: background-color 5000s ease-in-out 0s;
     #feedback_form {
         width: 65%;
     }
+    
+    /* ----- Ansökningar till en annons------ */
+    #applications ul a#choose {
+        left: 80%;
+    }
+    
+    .col2 {
+        left: 35%;
+    }
+    
+    /* ----- Ansökningar till en annons SLUT ----- */
 
 }
+
 /* ----- Välj Typ av användare ------ */
 #content{
     text-align: center;
@@ -1464,6 +1496,16 @@ label{
     }
 }
 
+@media screen and (max-width:670px) {
+    #applications ul a#choose {
+        left: 70%;
+    }
+    
+    .col2 {
+        left: 40%;
+    }
+}
+
 @media screen and (max-width:600px){
 
    /* För inloggningssidan: */
@@ -1544,7 +1586,7 @@ label{
 
     .contentInContent p {
         padding: 5% 2%;
-        background: /*#C4BEBB*/#C0B4AD;
+        background: #C0B4AD;
         color: black;
     }
 
@@ -1583,6 +1625,10 @@ label{
         padding: 8% 3%;
     }
     
+    .add {
+        padding: 25px 25px 25px 10px;
+    }
+    
     .add > .arrow {
         width: 40px;
     }
@@ -1596,6 +1642,23 @@ label{
     #feedback_form {
         width: 100%;
         padding: 0;
+    }
+    
+    #applications {
+        width: 95%;
+    }
+    
+    #applications ul a#choose {
+        left: 70%;
+        font-size: 85%;
+    }
+    
+    .col2 {
+        left: 40%;
+    }
+    
+    #applications p {
+        font-size: 80%;
     }
 }
 
