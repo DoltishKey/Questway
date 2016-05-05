@@ -83,12 +83,16 @@ def get_my_ads(employers_id):
 
 def sort_by_status(user, status):
 	sql="SELECT * FROM\
-			(SELECT ads.id, ads.titel, ads.main_info, DATE(ads.creation_date), employers.company_name, employers.id as emp_id, application.student_id, application.status\
+			(SELECT ads.id, ads.titel, ads.main_info, DATE(ads.creation_date), employers.company_name, employers.id as emp_id, application.student_id, application.status, employers.first_name, employers.last_name, users.mail, feedback.feedback_text, feedback.grade\
 			FROM ads\
 			JOIN employers\
 				ON ads.creator_id=employers.id\
+            JOIN users\
+                ON employers.id = users.id\
 			LEFT JOIN application\
-				ON ads.id=application.ad_id)\
+				ON ads.id=application.ad_id\
+            LEFT JOIN feedback\
+                ON application.ad_id = feedback.ad_id AND application.status = 'Avslutad')\
 			as H1\
 	        WHERE H1.student_id='%d' AND H1.status='%s'" % (user, status)
 

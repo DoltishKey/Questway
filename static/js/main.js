@@ -141,6 +141,12 @@ function showHide() {
      });
 }
 
+// För att visa feedback-meddelande när student har ansökt på annons:
+
+function thanks_for_applying() {
+    document.getElementById('thanks_for_applying').style.display = 'block'
+}
+
 function mission_control(){
 	$('.misson_info_control').click(function() {
 		clicked_parent = $(this).parents('li');

@@ -18,9 +18,9 @@
 
 
 				%if request.path == 'about':
-					<a class="currentMenuItem" href="">Om oss</a>
+					<a class="currentMenuItem" href="/about_us">Om oss</a>
 				%else:
-					<a href="">Om oss</a>
+					<a href="/about_us">Om oss</a>
 				%end
 		</nav>
     </div>

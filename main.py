@@ -75,6 +75,9 @@ gradings = grading_ads,
 
 '''
 
+@route('/about_us')
+def about_us_page():
+    return template('about_us', pageTitle = 'Om Questway')
 
 '''********Create-user********'''
 @route('/create')

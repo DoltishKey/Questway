@@ -276,12 +276,19 @@ header h1 {
 
 div.tabContent {
     background-color: #FFF;
-    margin: 0 0 60px 0;
+    margin: 0 0 120px 0;
     min-height: 400px;
 }
 
 div.tabContent.hide {
     display: none;
+}
+
+div#thanks_for_applying {
+    display: none;
+    width: 500px;
+    margin: 0 auto 30px auto;
+    color: #13af54;
 }
 
 div.wrap_around_tab_content {
@@ -352,6 +359,19 @@ div.container_student_start h2 {
 }
 
 /* ______________________ */
+
+.about_us_info {
+    width: 40%;
+    background: #FFF;
+    margin: 20px auto 60px auto;
+    padding: 2%;
+    line-height: 2;
+}
+
+.about_questway {
+    font-size: 200%;
+    text-transform: uppercase;
+}
 
 .column2 { /* En extra kolumn i uppdrag */
     margin-left: 50px;
@@ -1387,7 +1407,10 @@ transition: background-color 5000s ease-in-out 0s;
     }
     
     /* ----- Ansökningar till en annons SLUT ----- */
-
+    
+    .about_us_info {
+    width: 60%;
+    }
 }
 
 /* ----- Välj Typ av användare ------ */
@@ -1694,6 +1717,14 @@ label{
     
     #applications p {
         font-size: 80%;
+    }
+    
+    .about_us_info {
+        width: 90%;
+    }
+
+    .about_questway {
+        font-size: 150%;
     }
 }
 
