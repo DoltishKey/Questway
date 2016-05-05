@@ -242,9 +242,13 @@ def move_ad_to_complete(annons):
 
 def ajax_edit_mission(ad_id):
     type_of = request.forms.get('mission_type_'+str(ad_id))
+    print type_of
     keys = request.POST.getall("add_key_" + str(ad_id))
+    print keys
     display = request.forms.get('display_'+str(ad_id))
+    print display
     upload  = request.files.get('fileToUpload_'+str(ad_id))
+    print upload
     if upload != None:
         name, ext = os.path.splitext(upload.filename)
         if ext not in ('.png','.jpg','.jpeg'):
@@ -255,7 +259,6 @@ def ajax_edit_mission(ad_id):
         upload.save(file_path)
 
     if display == 'True':
-        print 'Kommer hit!'
         to_display = 2
     else:
         to_display = 1
@@ -287,7 +290,6 @@ def grading_ads(user):
 
 	ask_it_to = ['fetchall()']
 	mighty_db_says = call_database(sql, ask_it_to)
-	print mighty_db_says[0]
 	return mighty_db_says[0]
 
 

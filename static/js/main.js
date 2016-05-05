@@ -159,7 +159,8 @@ function open_close_mission(clicked_parent){
 		$(this).find('.edit_mission_info').show();
 		$(this).find('.fileToUploadLabel').hide();
 		$(this).find('select').hide();
-		$(this).removeClass('edit');
+
+		exit_edit_mode($(this));
 	});
 	pos_cicked = clicked_parent.position();
 	list_to_make_samll = [];
@@ -192,44 +193,42 @@ function edit_mission(){
 
 	$('.edit_mission_btn').click(function(){
 		clicked_parent = $(this).parents('li');
-		enter_edit_mode(clicked_parent);
+		if($(this).html()== 'Redigera'){
+			enter_edit_mode(clicked_parent);
+		}
+		else{
+			clicked_parent.find('.update_info').submit();
+			exit_edit_mode(clicked_parent);
+		}
 	});
 }
 
 function enter_edit_mode(clicked_parent) {
-	if (clicked_parent.find('.edit_mission_btn').html() == 'Redigera'){
-		clicked_parent.addClass('edit');
-		clicked_parent.find('.edit_mission_btn').html('Spara');
-		clicked_parent.find('li').hide();
-		clicked_parent.find('select').show();
-		clicked_parent.find('.edit_key').show();
-		clicked_parent.find('input').show();
-		clicked_parent.find('.display_or_not').show();
-		clicked_parent.find('.add_one_key').show();
-		clicked_parent.find('.fileToUploadLabel').show();
-		clicked_parent.find('.mission_link').find('a').hide();
-		remove_key();
-		handle_input();
-		//exit_edit_mode(clicked_parent);
-	}
-	else{
-		clicked_parent.find('.edit_mission_btn').html('Redigera');
-		clicked_parent.find('li').show();
-		clicked_parent.find('select').hide();
-		clicked_parent.find('.edit_key').hide();
-		clicked_parent.find('input').hide();
-		clicked_parent.find('.display_or_not').hide();
-		clicked_parent.find('.add_one_key').hide();
-		clicked_parent.find('.fileToUploadLabel').hide();
-		clicked_parent.find('.mission_link').find('a').show();
-		clicked_parent.removeClass('edit');
-	}
+	clicked_parent.addClass('edit');
+	clicked_parent.find('.edit_mission_btn').html('Spara');
+	clicked_parent.find('li').hide();
+	clicked_parent.find('select').show();
+	clicked_parent.find('.edit_key').show();
+	clicked_parent.find('input').show();
+	clicked_parent.find('.display_or_not').show();
+	clicked_parent.find('.add_one_key').show();
+	clicked_parent.find('.fileToUploadLabel').show();
+	clicked_parent.find('.mission_link').find('a').hide();
+	remove_key();
+	handle_input();
 }
 
 function exit_edit_mode(clicked_parent){
-	if (clicked_parent.find('.edit_mission_btn').html() == 'Spara'){
-		clicked_parent.find('.update_info').submit();
-	}
+	clicked_parent.find('.edit_mission_btn').html('Redigera');
+	clicked_parent.find('li').show();
+	clicked_parent.find('select').hide();
+	clicked_parent.find('.edit_key').hide();
+	clicked_parent.find('input').hide();
+	clicked_parent.find('.type_container').find('input').hide();
+	clicked_parent.find('.add_one_key').hide();
+	clicked_parent.find('.fileToUploadLabel').hide();
+	clicked_parent.find('.mission_link').find('a').show();
+	clicked_parent.removeClass('edit');
 }
 
 function handle_input(){

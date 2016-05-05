@@ -96,8 +96,10 @@
                                     </div>
                                     <div class="mission_general">
                                         <h4>{{grade[0]}}</h4>
-                                        <h3>Type</h3>
-                                        <input style="dispaly:none" name="mission_type_{{grade[2]}}" value="{{grade[8]}}">
+                                        <div class="type_container">
+                                            <h3>{{grade[8]}}</h3>
+                                            <input type="text" name="mission_type_{{grade[2]}}" value="{{grade[8]}}">
+                                        </div>
                                         <div class="btn misson_info_control">Kolla in!</div>
                                         <div class="mission_info">
                                             <div class="mission_feedback">
@@ -144,7 +146,6 @@
                                                 <p class="add_one_key">Lägg till +</p>
                                                 <div class="display_or_not">
                                                     %if grade[4] == int(2):
-                                                        %print grade[4]
                                                         <input type="checkbox" name="display_{{grade[2]}}" value="True" checked>Visa uppdraget på din profil
                                                     %else:
                                                         <input type="checkbox" name="display_{{grade[2]}}" value="True">Visa uppdraget på din profil
