@@ -36,7 +36,7 @@
                                             <h4>Beskrivning:</h4>
                                             <p>{{each[2]}}</p>
                                             <h4 class="inline_block">Företag: </h4><p class="inline_block"> {{each[4]}}</p>
-                                            <form  name="sok_annons" id="sok_annons" method="POST" action="/sok_annons/{{each[0]}}">
+                                            <form  name="sok_annons" id="sok_annons" method="POST" action="/apply_on_ad/{{each[0]}}">
                                                 <input type="submit" value="Sök annons" class="myButton delete_ad">
                                             </form>
                                         </div>
@@ -65,7 +65,7 @@
                                 <div class="arrow">></div>
                             </div>
                         %end
-                        
+
                     %end
                 </div>
             </div>

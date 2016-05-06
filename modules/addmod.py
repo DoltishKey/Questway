@@ -1,13 +1,12 @@
 # *-* coding:utf-8 *-*
-import json
 from bottle import request, redirect
-import time
 import log
 import createUsers
 import MySQLdb
 
 
 '''*********DB info*********'''
+
 def call_database(sql, asked_from_cursor):
     db = MySQLdb.connect(host="195.178.232.16", port=3306, user="AC8240", passwd="hejhej123", db="AC8240");
     cursor = db.cursor()
@@ -26,16 +25,13 @@ def call_database(sql, asked_from_cursor):
     return cursor_answer
 
 
-
 '''*********Create the AD*********'''
 def do_ad():
     ad_title=request.forms.get('ad_title')
     ad_text=request.forms.get('ad_text')
 
-    #ad_title_checked=validate_ad_input(ad_title)
-
-    #if  ad_title_checked == True:
-    if  True == True:
+    ad_title_checked=validate_ad_input(ad_title)
+    if  ad_title_checked == True:
         creator = log.get_user_id_logged_in()
         sql="INSERT INTO ads(titel, main_info, creator_id, creation_date)\
         VALUES ('%s', '%s', '%d', CURDATE())" % (ad_title, ad_text, creator)
@@ -63,43 +59,37 @@ def validate_ad_input(ad_info):
         return True
 
 
-'''*********Check and manage Ads ID*********'''
-def check_adID(number):
-    all_adds=load_adds('ads')
-    for each in all_adds:
-        if each['uniq_adNr']==number:
-            number+=1
-            return check_adID(number)
-    return number
-
+'''*********Check and manage Ads*********'''
 
 def get_my_ads(employers_id):
-	sql= "SELECT id, titel, main_info, creator_id, DATE(creation_date) FROM ads WHERE '%d'=ads.creator_id" %(employers_id)
+    ''' return a logged-in employers ads'''
+    sql= "SELECT id, titel, main_info, creator_id, DATE(creation_date) FROM ads WHERE '%d'=ads.creator_id" %(employers_id)
 
-	ask_it_to = ['fetchall()']
-	mighty_db_says = call_database(sql, ask_it_to)
-	return mighty_db_says[0]
+    ask_it_to = ['fetchall()']
+    mighty_db_says = call_database(sql, ask_it_to)
+    return mighty_db_says[0]
 
 
 def sort_by_status(user, status):
-	sql="SELECT * FROM\
-			(SELECT ads.id, ads.titel, ads.main_info, DATE(ads.creation_date), employers.company_name, employers.id as emp_id, application.student_id, application.status\
-			FROM ads\
-			JOIN employers\
-				ON ads.creator_id=employers.id\
-			LEFT JOIN application\
-				ON ads.id=application.ad_id)\
-			as H1\
-	        WHERE H1.student_id='%d' AND H1.status='%s'" % (user, status)
+    '''List the ads relevant for a specifik user and with a specifik status'''
+    sql="SELECT * FROM\
+            (SELECT ads.id, ads.titel, ads.main_info, DATE(ads.creation_date), employers.company_name, employers.id as emp_id, application.student_id, application.status\
+            FROM ads\
+            JOIN employers\
+                ON ads.creator_id=employers.id\
+            LEFT JOIN application\
+                ON ads.id=application.ad_id)\
+            as H1\
+        WHERE H1.student_id='%d' AND H1.status='%s'" % (user, status)
 
-	ask_it_to = ['fetchall()']
-	mighty_db_says = call_database(sql, ask_it_to)
-	the_ads=mighty_db_says[0]
-	return the_ads
+    ask_it_to = ['fetchall()']
+    mighty_db_says = call_database(sql, ask_it_to)
+    the_ads=mighty_db_says[0]
+    return the_ads
 
 
 def available_ads(user):
-
+    '''List the ads which a student have not applied on'''
     sql="SELECT ads.id, ads.titel, ads.main_info, DATE(ads.creation_date), employers.company_name, employers.id as emp_id, application.student_id, application.status\
         FROM ads\
         JOIN employers\
@@ -117,6 +107,7 @@ def available_ads(user):
 
 
 '''******* Delete a specifik ad *******'''
+
 def erase_ad(ad_id, user_ID):
     sql="INSERT INTO removed_ads(student_id, titel) \
     SELECT application.student_id, ads.titel FROM application \
@@ -138,69 +129,53 @@ def erase_ad(ad_id, user_ID):
     redirect('/allMissions')
 
 
-def choose_ad(annonsID):
-	sql= "SELECT * FROM ads WHERE id='%d'" %(annonsID)
-	ask_it_to = ['fetchall()']
-	mighty_db_says = call_database(sql, ask_it_to)
-	return mighty_db_says[0]
-
-
 '''*****Which ads student applied on****'''
 def applied_on(who, status, which_ad_id):
+    '''Check that the student have not applied before on a specifik ad'''
+    if which_ad_id==None:
+        sql="SELECT * FROM application WHERE '%d'=application.student_id \
+        AND application.status='%s'" %(who, status)
+    else:
+        sql="SELECT * FROM application WHERE '%d'=application.student_id \
+        AND application.status='%s' AND application.ad_id='%d'" %(who, status, which_ad_id)
 
-	if which_ad_id==None:
-		print "nej"
-		sql="SELECT * FROM application WHERE '%d'=application.student_id \
-		AND application.status='%s'" %(who, status)
-	else:
-		print "ja"
-		sql="SELECT * FROM application WHERE '%d'=application.student_id \
-		AND application.status='%s' AND application.ad_id='%d'" %(who, status, which_ad_id)
-
-	ask_it_to = ['fetchall()']
-	mighty_db_says = call_database(sql, ask_it_to)
-	return mighty_db_says[0]
+    ask_it_to = ['fetchall()']
+    mighty_db_says = call_database(sql, ask_it_to)
+    return mighty_db_says[0]
 
 '''****** Student Applying on ad *****'''
 def applying_for_mission(which_ad):
-	log.validate_autho()
-	which_ad=int(which_ad)
-	user=log.get_user_id_logged_in()
-	ads_user_applied_on=applied_on(user, 'Obehandlad', which_ad)
+    '''Create an application in the DB on a specifik ad'''
+    log.validate_autho()
+    which_ad=int(which_ad)
+    user=log.get_user_id_logged_in()
+    ads_user_applied_on=applied_on(user, 'Obehandlad', which_ad)
 
-	if len(ads_user_applied_on)>0:
-		return {'result':False, 'error':'Du har redan ansökt på denna annons!'}
-	else:
-		sql="INSERT INTO application(ad_id, student_id, status)\
-			VALUES ('%d', '%d', '%s')" % (which_ad, user, 'Obehandlad')
-		ask_it_to = []
-		mighty_db_says = call_database(sql, ask_it_to)
-		return {'result':True, 'error':None}
+    if len(ads_user_applied_on)>0:
+        return {'result':False, 'error':'Du har redan ansökt på denna annons!'}
+    else:
+        sql="INSERT INTO application(ad_id, student_id, status)\
+            VALUES ('%d', '%d', '%s')" % (which_ad, user, 'Obehandlad')
+        ask_it_to = []
+        mighty_db_says = call_database(sql, ask_it_to)
+        return {'result':True, 'error':None}
 
 
 
 '''*********Choose a Student********'''
 def who_got_accepted(annons, sokandeID):
-	log.validate_autho()
-	user=log.get_user_id_logged_in()
-	annons = int(annons)
-	sokandeID = int(sokandeID)
-	sql = "UPDATE application SET status = 'Bortvald' where ad_id='%d'"%(annons)
-	ask_it_to = []
-	mighty_db_says = call_database(sql, ask_it_to)
+    '''An application is accepted. The remainding applications status is change to Bortvald'''
+    log.validate_autho()
+    user=log.get_user_id_logged_in()
+    annons = int(annons)
+    sokandeID = int(sokandeID)
+    sql = "UPDATE application SET status = 'Bortvald' where ad_id='%d'"%(annons)
+    ask_it_to = []
+    mighty_db_says = call_database(sql, ask_it_to)
 
-	sql = "UPDATE application SET status = 'Vald' where ad_id='%d' and student_id = '%d'"%(annons, sokandeID)
-	ask_it_to = []
-	mighty_db_says = call_database(sql, ask_it_to)
-
-
-'''********My list of ads*********'''
-def my_ads(userID):
-	userID = int(userID)
-	sql = "SELECT * FROM ads WHERE creator_id = '%d'"%(userID)
-	ask_it_to = ['fetchall()']
-	mighty_db_says = call_database(sql, ask_it_to)
-	return mighty_db_says[0]
+    sql = "UPDATE application SET status = 'Vald' where ad_id='%d' and student_id = '%d'"%(annons, sokandeID)
+    ask_it_to = []
+    mighty_db_says = call_database(sql, ask_it_to)
 
 
 '''*********Moves AD to Done*********'''
@@ -211,7 +186,6 @@ def move_ad_to_complete(annons):
 		return {'response':False, 'error':'Du måste skriva något!'}
 
 	else:
-
 		annons = int(annons)
 		employer = log.get_user_id_logged_in()
 		sql="SELECT creator_id FROM ads WHERE id = '%d'"%(annons)
@@ -307,7 +281,6 @@ def students_that_applied(user_id):
 	return mighty_db_says[0]
 
 
-
 def get_given_feedback_for_employers(user):
 	sql = "SELECT J1.id, feedback.feedback_text, feedback.grade \
 			FROM (SELECT ads.titel, ads.id \
@@ -321,6 +294,7 @@ def get_given_feedback_for_employers(user):
 	ask_it_to = ['fetchall()']
 	mighty_db_says = call_database(sql, ask_it_to)
 	return mighty_db_says[0]
+
 
 def get_denied_missions(user):
     user = int(user)

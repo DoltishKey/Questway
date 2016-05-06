@@ -21,7 +21,7 @@
             </div>
             <div class="employers_add_new_ad col">
                 <div>
-                    <a class="btn" href="/showadds">Lägg till annons</a>
+                    <a class="btn" href="/do_new_ad">Lägg till annons</a>
                 </div>
             </div>
             <div class="emloyers_all_adds col">
