@@ -24,6 +24,7 @@
 
                 <div class="tabContent" id="lediga_uppdrag">
                     <div class="wrap">
+                    <div id="thanks_for_applying">Tack för din ansökan. Uppdraget finns nu under "Sökta uppdrag".</div>
                     %if len(avail_ads)<= 0:
                         <h2 class="no_ads"> Listan av annonser är tom </h1>
                     %else:
@@ -37,7 +38,7 @@
                                             <p>{{each[2]}}</p>
                                             <h4 class="inline_block">Företag: </h4><p class="inline_block"> {{each[4]}}</p>
                                             <form  name="sok_annons" id="sok_annons" method="POST" action="/apply_on_ad/{{each[0]}}">
-                                                <input type="submit" value="Sök annons" class="myButton delete_ad">
+                                                <input type="submit" value="Sök annons" class="myButton delete_ad" onclick="thanks_for_applying()">
                                             </form>
                                         </div>
                                     <div class="arrow">></div>
@@ -65,7 +66,12 @@
                                 <div class="arrow">></div>
                             </div>
                         %end
-
+                        %for item in denied_missions:
+                            <div class="add">
+                                <h2>{{item[0]}}</h2>
+                                <p class="inline_block">Tyvärr så fick du inte uppdraget.</p>
+                            </div>
+                        %end
                     %end
                 </div>
             </div>
@@ -83,7 +89,11 @@
                                 <div class="showMore">
                                     <h4>Beskrivning:</h4>
                                     <p>{{each_ad[2]}}</p>
-                                    <h4 class="inline_block">Företag: </h4><p class="inline_block"> {{each_ad[4]}}</p>
+                                    <h4 class="inline_block">Företag: </h4>
+                                    <p class="inline_block"> {{each_ad[4]}}</p>
+                                    <h4>Kontakt:</h4>
+                                    <p>Kontaktperson: {{each_ad[8]}} {{each_ad[9]}}</p>
+                                    <p>Epostadress: <a href="mailto:{{each_ad[10]}}" target="_top">{{each_ad[10]}}</a></p>
                                 </div>
                                 <div class="arrow">></div>
                             </div>
@@ -107,6 +117,12 @@
                                 <h4>Beskrivning:</h4>
                                 <p>{{one[2]}}</p>
                                 <h4 class="inline_block">Företag: </h4><p class="inline_block"> {{one[4]}}</p>
+                                <h4>Kontakt:</h4>
+                                <p>Kontaktperson: {{one[8]}} {{one[9]}}</p>
+                                <p>Epostadress: <a href="mailto:{{one[10]}}" target="_top">{{one[10]}}</a></p>
+                                <h4>Feedback från företaget:</h4>
+                                <p>{{one[11]}}</p>
+                                <p>Betyg: {{one[12]}}</p>
                             </div>
                             <div class="arrow">></div>
                         </div>

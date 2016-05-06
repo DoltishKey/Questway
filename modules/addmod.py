@@ -73,12 +73,16 @@ def get_my_ads(employers_id):
 def sort_by_status(user, status):
     '''List the ads relevant for a specifik user and with a specifik status'''
     sql="SELECT * FROM\
-            (SELECT ads.id, ads.titel, ads.main_info, DATE(ads.creation_date), employers.company_name, employers.id as emp_id, application.student_id, application.status\
+            (SELECT ads.id, ads.titel, ads.main_info, DATE(ads.creation_date), employers.company_name, employers.id as emp_id, application.student_id, application.status, employers.first_name, employers.last_name, users.mail, feedback.feedback_text, feedback.grade\
             FROM ads\
             JOIN employers\
                 ON ads.creator_id=employers.id\
+            JOIN users\
+                ON employers.id = users.id\
             LEFT JOIN application\
-                ON ads.id=application.ad_id)\
+                ON ads.id=application.ad_id\
+            LEFT JOIN feedback\
+                ON application.ad_id = feedback.ad_id AND application.status = 'Avslutad')\
             as H1\
         WHERE H1.student_id='%d' AND H1.status='%s'" % (user, status)
 
@@ -109,6 +113,7 @@ def available_ads(user):
 '''******* Delete a specifik ad *******'''
 
 def erase_ad(ad_id, user_ID):
+    ad_id = int(ad_id)
     sql="INSERT INTO removed_ads(student_id, titel) \
     SELECT application.student_id, ads.titel FROM application \
     INNER JOIN ads \
@@ -180,40 +185,49 @@ def who_got_accepted(annons, sokandeID):
 
 '''*********Moves AD to Done*********'''
 def move_ad_to_complete(annons):
-	feedback = request.forms.get('feedback')
-	grade = int(request.forms.get('grade'))
-	if feedback == None or len(feedback) == 0:
-		return {'response':False, 'error':'Du måste skriva något!'}
+    feedback = request.forms.get('feedback')
+    grade = int(request.forms.get('grade'))
+    if feedback == None or len(feedback) == 0:
+        return {'response':False, 'error':'Du måste skriva något!'}
 
-	else:
-		annons = int(annons)
-		employer = log.get_user_id_logged_in()
-		sql="SELECT creator_id FROM ads WHERE id = '%d'"%(annons)
-		ask_it_to = ['fetchall()']
-		mighty_db_says = call_database(sql, ask_it_to)
+    else:
+        annons = int(annons)
+        employer = log.get_user_id_logged_in()
+        sql="SELECT creator_id FROM ads WHERE id = '%d'"%(annons)
+        ask_it_to = ['fetchall()']
+        mighty_db_says = call_database(sql, ask_it_to)
 
-		mighty_db_says[0][0][0]
+        mighty_db_says[0][0][0]
 
-		if mighty_db_says[0][0][0] == int(employer):
-			sql="INSERT INTO feedback(ad_id, display, feedback_text, grade) \
-			VALUES('%d', '%d', '%s', '%d')"%(annons, 1, feedback, grade)
-			ask_it_to = []
-			call_database(sql, ask_it_to)
+        if mighty_db_says[0][0][0] == int(employer):
+            sql="INSERT INTO feedback(ad_id, display, feedback_text, grade) \
+            VALUES('%d', '%d', '%s', '%d')"%(annons, 1, feedback, grade)
+            ask_it_to = []
+            call_database(sql, ask_it_to)
 
-			sql = "UPDATE application SET status = 'Avslutad' WHERE ad_id='%d' AND status='Vald'"%(annons)
-			ask_it_to = []
-			call_database(sql, ask_it_to)
-			return {'response':True}
+            sql = "UPDATE application SET status = 'Avslutad' WHERE ad_id='%d' AND status='Vald'"%(annons)
+            ask_it_to = []
+            call_database(sql, ask_it_to)
 
-		else:
-			return {'response':False, 'error':'Något har blivit fel!'}
+            sql = "UPDATE application SET status = 'Bortvald' WHERE ad_id='%d' AND status='Obehandlad'"%(annons)
+            ask_it_to = []
+            call_database(sql, ask_it_to)
+
+            return {'response':True}
+
+        else:
+            return {'response':False, 'error':'Något har blivit fel!'}
 
 
 def ajax_edit_mission(ad_id):
     type_of = request.forms.get('mission_type_'+str(ad_id))
+    print type_of
     keys = request.POST.getall("add_key_" + str(ad_id))
+    print keys
     display = request.forms.get('display_'+str(ad_id))
+    print display
     upload  = request.files.get('fileToUpload_'+str(ad_id))
+    print upload
     if upload != None:
         name, ext = os.path.splitext(upload.filename)
         if ext not in ('.png','.jpg','.jpeg'):
@@ -224,7 +238,6 @@ def ajax_edit_mission(ad_id):
         upload.save(file_path)
 
     if display == 'True':
-        print 'Kommer hit!'
         to_display = 2
     else:
         to_display = 1
@@ -256,7 +269,6 @@ def grading_ads(user):
 
 	ask_it_to = ['fetchall()']
 	mighty_db_says = call_database(sql, ask_it_to)
-	print mighty_db_says[0]
 	return mighty_db_says[0]
 
 

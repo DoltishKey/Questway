@@ -34,7 +34,14 @@
                                     <li>
                                         <div>
                                             <h3>{{i[1]}}</h3>
-                                            %num_applications = sum(x.count(i[0]) for x in students_application)
+
+                                            %num_applications =0
+                                            %for stud in students_application:
+                                                %if stud[3] == i[0]:
+                                                    %num_applications = num_applications + 1
+                                                %end
+                                            %end
+                                            <!--num_applications = sum(x.count(i[0]) for x in students_application)-->
                                             % if num_applications > 1:
                                                 <p><span>{{num_applications}}</span> ansökningar</p>
                                             %elif num_applications == 1:

@@ -58,12 +58,19 @@ def admin():
 		ads_untreated = addmod.sort_by_status(userid,'Obehandlad')
 		ads_ongoing = addmod.sort_by_status(userid,'vald')
 		ads_finished = addmod.sort_by_status(userid,'Avslutad')
-		return template('student_start',finished_ads=ads_finished, avail_ads=ads_to_apply_on, accepted_on=ads_ongoing, pending_ad=ads_untreated, user_id=userid, user=username, level="student", pageTitle = 'Start')
+		denied_missions = addmod.get_denied_missions(int(userid))
+		return template('student_start',finished_ads=ads_finished, avail_ads=ads_to_apply_on, accepted_on=ads_ongoing, pending_ad=ads_untreated, user_id=userid, user=username, level="student", pageTitle = 'Start', denied_missions=denied_missions)
+
 	else:
 		employer_ads = addmod.get_my_ads(userid)
 		students = addmod.students_that_applied(userid)
 		return template('employer_start', user=username, user_id=userid,  level="arbetsgivare", annons=employer_ads, pageTitle = 'Start', students_application = students)
 
+
+
+@route('/about_us')
+def about_us_page():
+    return template('about_us', pageTitle = 'Om Questway')
 
 '''********Create-user********'''
 @route('/create')
@@ -149,6 +156,7 @@ def edit_contact_information():
 
 
 '''********Ad-management********'''
+
 @route('/do_new_ad')
 def do_new_ad():
 	'''Returns a view where the logged-in employer can fill in information for a new ad'''
