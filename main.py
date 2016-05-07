@@ -174,6 +174,10 @@ def ad_done():
 	else:
 		return response['error']
 
+@get('/make_ad')
+def no_get():
+	redirect('/admin')
+
 
 '''*****Delete ad*****'''
 
