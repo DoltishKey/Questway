@@ -3,7 +3,7 @@
 		<div class="courtesyNav">
 				<p class="courtesyNavItem">Inloggad som <strong>{{user}}</strong></p>
 		</div>
-		<a id="QWTitle" href="/"><h1>Questway</h1></a>
+		<a id="QWTitle" href="/admin"><h1>Questway</h1></a>
             <nav class="menu" id="employerMenu">
                     %from bottle import request
 
