@@ -2,7 +2,6 @@
 import bottle
 from bottle import route, get, post, run, template, error, static_file, request, redirect, abort, response, app
 from beaker.middleware import SessionMiddleware
-import json
 import MySQLdb
 import hashlib
 

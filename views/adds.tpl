@@ -22,20 +22,20 @@
             <div class="wrap">
                 %if len(adds)>0:
                     <div>
-                        <a class="btn" id="btn_id_ads" href="/showadds">Lägg till annons</a>
+                        <a class="btn" id="btn_id_ads" href="/do_new_ad">Lägg till annons</a>
                     </div>
 
                 %else:
                     <h1 class="no_ads"> Listan av annonser är tom </h1>
                     <div class="employers_add_new_ad col btnbox">
                         <div>
-                            <a class="btn" id="btn_id_ads" href="/showadds">Lägg till annons</a>
+                            <a class="btn" id="btn_id_ads" href="/do_new_ad">Lägg till annons</a>
                         </div>
                     </div>
                 %end
 
                 %for add in adds:
-                    %if (any( int(student[3]) == int(add[0]) and (str(student[4]) != 'Obehandlad') for student in students)) == False:
+                    %if (any(int(student[3]) == int(add[0]) and (str(student[4]) != 'Obehandlad') for student in students)) == False:
                         <div class="add">
                             <h2>{{add[1]}}</h2>
                             <h4 class="inline_block">Publicererades: </h4>

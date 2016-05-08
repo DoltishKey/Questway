@@ -1,7 +1,6 @@
 # *-* coding:utf-8 *-*
 import bottle
 from bottle import route, get, post, run, template, error, static_file, request, redirect, abort, response, app
-import json
 from validate_email import validate_email
 import MySQLdb
 import hashlib
@@ -22,25 +21,6 @@ def call_database(sql, asked_from_cursor):
 
     db.close()
     return cursor_answer
-
-
-'''*********Läs & skriv till fil*********'''
-def read_data(file):
-	try:
-		fileIn = open('static/data/'+ file +'.json', 'r')
-		dataRead = json.load(fileIn)
-		fileIn.close()
-	except (IOError, ValueError):
-		validatekDataFile(file)
-		dataRead = read_data(file)
-	return dataRead
-
-def validatekDataFile(file):
-	'''Om databasen inte finns eller är helt tom så skapas en json-fil innehållande en tom lista.'''
-	resList = []
-	dataFile = open('static/data/'+ file +'.json', 'w')
-	json.dump(resList, dataFile, indent=4)
-	dataFile.close()
 
 
 '''*********Validering*********'''
@@ -85,7 +65,6 @@ def add_new_employer(company_name, org_nr, first_name, last_name, new_user_id):
 	ask_it_to = []
 	mighty_db_says = call_database(sql, ask_it_to)
 
-	#call_database(sql, False);
 
 def add_new_student(first_name, last_name, program, year, new_user_id):
 	program = int(program)
