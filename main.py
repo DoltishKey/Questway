@@ -126,6 +126,7 @@ def profiles(user):
 	is_user_logged_in = log.is_user_logged_in()
 	#grading_ads = sorted( (addmod.read_data('grading')), key=lambda x: x['display'])
 	grading_ads = addmod.grading_ads(user)
+	grading_skills = addmod.get_ad_skills(user)
 	username = ""
 	if is_user_logged_in == True:
 		user_levle = log.get_user_level()
@@ -137,15 +138,15 @@ def profiles(user):
 		education_info = user_profile_data['education_info']
 		student_info = user_profile_data['student_info']
 		student_name = student_info[0] + ' ' + student_info[1]
-		return template('user_profile', user = username, user_autho = user_levle, user_id = user, student= student_info, education = education_info, pageTitle = student_name, grading = grading_ads )
+		return template('user_profile', user = username, user_autho = user_levle, user_id = user, student= student_info, education = education_info, pageTitle = student_name, grading = grading_ads, grading_skills = grading_skills )
 
 	else:
 		return 'Användaren finns inte!'
 
 
-@route('/ajax_edit_mission/<ad_id>', method="POST")
-def ajax_edit_mission(ad_id):
-	result = addmod.ajax_edit_mission(ad_id)
+@route('/edit_mission/<ad_id>', method="POST")
+def edit_mission(ad_id):
+	result = addmod.edit_mission(ad_id)
 	redirect('/profiles/39')
 
 

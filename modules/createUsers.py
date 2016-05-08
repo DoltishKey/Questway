@@ -53,11 +53,12 @@ def validate_Username(email):
 		return True
 
 def validate_if_student_exists(userID):
-	sql = "SELECT autho_level FROM users WHERE id = '%d'"%(userID)
-	ask_it_to = ['fetchall()']
-	mighty_db_says = call_database(sql, ask_it_to)
-	if mighty_db_says[0][0][0] == 1:
-		return True
+    sql = "SELECT autho_level FROM users WHERE id = '%d'"%(userID)
+    ask_it_to = ['fetchall()']
+    mighty_db_says = call_database(sql, ask_it_to)
+    if len(mighty_db_says[0]) != 0:
+        if mighty_db_says[0][0][0] == 1:
+            return True
 
 '''*********funktioner*********'''
 def add_new_user(email, password, user_level):
@@ -171,7 +172,7 @@ def create_student():
 		return {'result':True, 'email':email, 'password':password}
 
 
-    
+
 def ajax_new_user_validation():
 	email = request.forms.get('email')
 	if email == None or len(email) == 0 or validate_email.validate_email(email) == False:
@@ -180,7 +181,7 @@ def ajax_new_user_validation():
 		return {'result': False, 'error':'User exists'}
 	else:
 		return {'result': True}
-    
+
 def show_student_profile(user):
 	try:
 		if validate_if_student_exists(user) == True:

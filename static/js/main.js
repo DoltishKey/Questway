@@ -232,8 +232,11 @@ function exit_edit_mode(clicked_parent){
 }
 
 function handle_input(){
+
 	$('.add_one_key').click(function() {
-		var inputNode = '<div class="edit_key" style="display:inline-block"><div class="remove_key">X</div><input type="text" value="" name="add_key" class="add_key" style="display:inline-block" maxlength="20" autofocus><div>';
+		var parent_classes = $(this).parents('.key_continer').attr('class');
+		var num = parent_classes.substr(parent_classes.length - 1);
+		var inputNode = '<div class="edit_key" style="display:inline-block"><div class="remove_key">X</div><input type="text" value="" name="add_key_'+num+'" class="add_key" style="display:inline-block" maxlength="20" autofocus><div>';
 		var add_here = $(this).siblings('.keys');
 		$(inputNode).appendTo(add_here);
 		$('.keys').find('input:last').focus();
@@ -241,7 +244,9 @@ function handle_input(){
 
 	$('.keys').on('keypress', '.add_key', function(key){
 		if(key.which == 13) {
-			var inputNode = '<div class="edit_key" style="display:inline-block"><div class="remove_key">X</div><input type="text" value="" name="add_key" class="add_key" style="display:inline-block" maxlength="20" autofocus><div>';
+			var parent_classes = $(this).parents('.key_continer').attr('class');
+			var num = parent_classes.substr(parent_classes.length - 1);
+			var inputNode = '<div class="edit_key" style="display:inline-block"><div class="remove_key">X</div><input type="text" value="" name="add_key_'+num+'" class="add_key" style="display:inline-block" maxlength="20" autofocus><div>';
 			var add_here = $(this).parents('.keys');
 			$(inputNode).appendTo(add_here);
 			$('.keys').find('input:last').focus();

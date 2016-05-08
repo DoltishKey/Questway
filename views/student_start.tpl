@@ -49,7 +49,7 @@
 
             <div class="tabContent" id="sökta_uppdrag">
                 <div class="wrap">
-                    %if not pending_ad:
+                    %if not pending_ad and not denied_missions:
                         <h1 class="no_ads"> Listan av annonser är tom </h1>
                     %else:
                         %for every in pending_ad:

@@ -5,6 +5,8 @@ import time
 import log
 import createUsers
 import MySQLdb
+import os.path
+import random, string
 
 
 '''*********DB info*********'''
@@ -216,11 +218,13 @@ def move_ad_to_complete(annons):
         employer = log.get_user_id_logged_in()
         sql="SELECT creator_id FROM ads WHERE id = '%d'"%(annons)
         ask_it_to = ['fetchall()']
-        mighty_db_says = call_database(sql, ask_it_to)
+        mighty_db_says_about_employer = call_database(sql, ask_it_to)
 
-        mighty_db_says[0][0][0]
+        sql="SELECT student_id FROM application WHERE status = 'Vald'"
+        ask_it_to = ['fetchall()']
+        mighty_db_says_about_status = call_database(sql, ask_it_to)
 
-        if mighty_db_says[0][0][0] == int(employer):
+        if mighty_db_says_about_employer[0][0][0] == int(employer) and len(mighty_db_says_about_status[0]) == 1:
             sql="INSERT INTO feedback(ad_id, display, feedback_text, grade) \
             VALUES('%d', '%d', '%s', '%d')"%(annons, 1, feedback, grade)
             ask_it_to = []
@@ -240,21 +244,22 @@ def move_ad_to_complete(annons):
             return {'response':False, 'error':'Något har blivit fel!'}
 
 
-def ajax_edit_mission(ad_id):
+def edit_mission(ad_id):
     type_of = request.forms.get('mission_type_'+str(ad_id))
-    print type_of
     keys = request.POST.getall("add_key_" + str(ad_id))
-    print keys
     display = request.forms.get('display_'+str(ad_id))
-    print display
     upload  = request.files.get('fileToUpload_'+str(ad_id))
-    print upload
     if upload != None:
         name, ext = os.path.splitext(upload.filename)
         if ext not in ('.png','.jpg','.jpeg'):
             return 'File extension not allowed.'
 
         save_path = "static/img/uploads"
+        upload.filename = str(''.join(random.choice(string.lowercase + string.digits) for i in range(16)))+str(ext)
+        while os.path.isfile('static/img/uploads/' + upload.filename) == True:
+            upload.filename = str(''.join(random.choice(string.lowercase + string.digits) for i in range(16)))+str(ext)
+
+        print upload.filename
         file_path = "{path}/{file}".format(path=save_path, file=upload.filename)
         upload.save(file_path)
 
@@ -272,6 +277,23 @@ def ajax_edit_mission(ad_id):
 
     ask_it_to = []
     call_database(sql, ask_it_to)
+
+    ask_it_to = []
+    sql = "DELETE FROM ad_skills WHERE ad_id = '%d'"%(ad_id)
+    call_database(sql, ask_it_to)
+
+    for key in keys:
+        ask_it_to = []
+        sql = "INSERT INTO skills (name) \
+        VALUES ('%s') \
+        ON DUPLICATE KEY UPDATE name = name;"%(key)
+        call_database(sql, ask_it_to)
+
+        ask_it_to = []
+        sql = "INSERT INTO ad_skills (skill, ad_id) \
+        VALUES ((select name from skills where name = '%s'), (select id from ads where id = '%d'))"%(key, ad_id )
+        call_database(sql, ask_it_to)
+
 
 
 def grading_ads(user):
@@ -340,6 +362,15 @@ def get_denied_missions(user):
     SELECT removed_ads.titel \
     FROM removed_ads \
     WHERE student_id = '%d'"%(user, user)
+    ask_it_to = ['fetchall()']
+    mighty_db_says = call_database(sql, ask_it_to)
+    return mighty_db_says[0]
+
+def get_ad_skills(user):
+    sql="SELECT ad_skills.* \
+    FROM (SELECT ad_id FROM application WHERE student_id='%d' AND status = 'Avslutad') as J \
+    JOIN ad_skills \
+    ON ad_skills.ad_id = J.ad_id"%(int(user))
     ask_it_to = ['fetchall()']
     mighty_db_says = call_database(sql, ask_it_to)
     return mighty_db_says[0]
