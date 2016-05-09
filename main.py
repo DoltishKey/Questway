@@ -145,9 +145,13 @@ def profiles(user):
 	grading_ads = addmod.grading_ads(user)
 	grading_skills = addmod.get_ad_skills(user)
 	username = ""
+	this_user = False
 	if is_user_logged_in == True:
 		user_levle = log.get_user_level()
 		username = log.get_user_name()
+		logged_in_id = log.get_user_id_logged_in()
+		if int(logged_in_id) == int(user):
+			this_user = True
 	else:
 		user_levle = 0
 
@@ -155,10 +159,11 @@ def profiles(user):
 		education_info = user_profile_data['education_info']
 		student_info = user_profile_data['student_info']
 		student_name = student_info[0] + ' ' + student_info[1]
-		return template('user_profile', user = username, user_autho = user_levle, user_id = user, student= student_info, education = education_info, pageTitle = student_name, grading = grading_ads, grading_skills = grading_skills )
+		print student_info
+		return template('user_profile', user = username, user_autho = user_levle, user_id = user, student= student_info, education = education_info, pageTitle = student_name, grading = grading_ads, grading_skills = grading_skills, this_user=this_user )
 
 	else:
-		return 'Användaren finns inte!'
+		return template('error_message', pageTitle = 'Användaren finns inte!', user = username, user_autho = user_levle, user_id = user, error_message='Det har fel!') 
 
 
 @route('/edit_mission/<ad_id>', method="POST")
