@@ -44,12 +44,13 @@
             </div>
         </div>
 
-        <footer>
+        %include('footer.tpl')
+        <!--<footer>
             <div class="wrap">
                 <img id="footlog" src="../static/img/Logga.png" alt="loggan">
                 <p>© Questway, 2016</p>
             </div>
-        </footer>
+        </footer>-->
 
 	</body>
 </html>

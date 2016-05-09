@@ -22,5 +22,6 @@
            
         <p id="error"></p>
         </div>
+        %include('footer.tpl')
     </body>
 </html>

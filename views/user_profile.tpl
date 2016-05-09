@@ -157,8 +157,6 @@
             %end
 
 		</main>
-		<footer style=" bottom:0px; width: 100%;">
-            © Questway, 2016
-        </footer>
+		%include('footer.tpl')
 	</body>
 </html>

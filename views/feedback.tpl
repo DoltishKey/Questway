@@ -20,10 +20,6 @@
             </form>
         </div>
         
-        <footer>
-            <div class="wrap">
-                <p>Copyright Questway, 2016</p>
-            </div>
-        </footer>
+        %include('footer.tpl')
 	</body>
 </html>

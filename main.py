@@ -79,7 +79,19 @@ def admin():
 
 @route('/about_us')
 def about_us_page():
-    return template('about_us', pageTitle = 'Om Questway')
+    log.validate_autho() #kontrollerar om användaren är inloggad
+    username = log.get_user_name() #hämtar användarens namn från DB (returnerar en sträng)
+    userid = log.get_user_id_logged_in() #hämtar användarens id
+    user_level = log.get_user_level() #kollar om användaren är uppdragstagare eller student (returnerar 1 eller 2)
+    return template('about_us', pageTitle = 'Om Questway', user=username, user_autho=user_level, user_id=userid)
+
+@route('/help')
+def help_page():
+    log.validate_autho() #kontrollerar om användaren är inloggad
+    username = log.get_user_name() #hämtar användarens namn från DB (returnerar en sträng)
+    userid = log.get_user_id_logged_in() #hämtar användarens id
+    user_level = log.get_user_level() #kollar om användaren är uppdragstagare eller student (returnerar 1 eller 2)
+    return template('help.tpl', pageTitle = 'Hjälp - Questway', user = username, user_autho=user_level, user_id = userid)
 
 '''********Create-user********'''
 @route('/create')

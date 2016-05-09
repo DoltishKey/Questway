@@ -78,6 +78,6 @@
             </div>
             <div class="push"></div> <!-- Är till för att footer ska hamna längst ner, ta ej bort --><!--Kolla på position:fixed istället-->
         </div>
-        <footer>© Questway, 2016</footer>
+        %include('footer.tpl')
 	</body>
 </html>

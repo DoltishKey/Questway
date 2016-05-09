@@ -7,10 +7,6 @@
             <p>Detta går ej att göra ännu.</p>
         </div>
         
-        <footer>
-            <div class="wrap">
-                <p>Copyright Questway, 2016</p>
-            </div>
-        </footer>
+        %include('footer.tpl')
     </body>
 </html>
