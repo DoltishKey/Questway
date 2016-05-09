@@ -142,10 +142,23 @@ function showHide() {
 }
 
 // För att visa feedback-meddelande när student har ansökt på annons:
+/*$( "apply_button" ).click( function () {
+    sessionStorage.reloadAfterPageLoad = true;
+    window.location.reload();
+} );
+$( function () {
+    if ( sessionStorage.reloadAfterPageLoad ) {
+        document.getElementById('thanks_for_applying').style.display = 'block'
+        sessionStorage.reloadAfterPageLoad = false;
+    }
+} )*/
+
 
 function thanks_for_applying() {
     document.getElementById('thanks_for_applying').style.display = 'block'
 }
+
+// SLUT visa feedback-meddelande
 
 function mission_control(){
 	$('.misson_info_control').click(function() {

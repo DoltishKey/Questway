@@ -36,9 +36,9 @@
                                         <div class="showMore">
                                             <h4>Beskrivning:</h4>
                                             <p>{{each[2]}}</p>
-                                            <h4 class="inline_block">Företag: </h4><p class="inline_block"> {{each[4]}}</p>
+                                            <h4 class="inline_block">Företag: </h4> <p class="inline_block"> {{each[4]}}</p>
                                             <form  name="sok_annons" id="sok_annons" method="POST" action="/apply_on_ad/{{each[0]}}">
-                                                <input type="submit" value="Sök annons" class="myButton delete_ad" onclick="thanks_for_applying()">
+                                                <input type="submit" value="Sök annons" class="myButton delete_ad" id="apply_button" onclick="thanks_for_applying()">
                                             </form>
                                         </div>
                                     <div class="arrow">></div>
@@ -67,7 +67,7 @@
                             </div>
                         %end
                         %for item in denied_missions:
-                            <div class="add">
+                            <div class="add" id="denied_ads">
                                 <h2>{{item[0]}}</h2>
                                 <p class="inline_block">Tyvärr så fick du inte uppdraget.</p>
                             </div>
