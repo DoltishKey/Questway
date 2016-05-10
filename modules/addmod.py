@@ -73,7 +73,7 @@ def get_my_ads(employers_id):
 
 
 def sort_by_status(user):
-    '''List the ads relevant for a specifik user and with a specifik status'''
+    '''List the ads relevant for a specifik user'''
     sql="SELECT * FROM\
 			    (SELECT ads.id, ads.titel, ads.main_info, DATE(ads.creation_date), employers.company_name, employers.id as emp_id,\
                 application.student_id, application.status, employers.first_name, employers.last_name, users.mail, feedback.feedback_text, feedback.grade\
@@ -105,7 +105,7 @@ def available_ads(user):
         LEFT JOIN application\
             ON ads.id=application.ad_id\
         WHERE ads.id NOT IN\
-            (SELECT ad_id FROM application WHERE status = 'Vald' OR status = 'Avslutad' OR student_id ='%d'  GROUP BY ad_id)\
+            (SELECT ad_id FROM application WHERE status = 'Vald' OR status = 'Avslutad' OR student_id ='%d' GROUP BY ad_id)\
         GROUP BY ads.id" % (user)
 
     ask_it_to = ['fetchall()']

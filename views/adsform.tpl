@@ -13,13 +13,13 @@
             </div>
 
             <div class="ca_Formblock"  id="ca_Inputs">
-                <input type="input" name="ad_title" id="ca_title" value="" placeholder="Kort beskrivande titel" required>
+                <input type="input" name="ad_title" id="ca_title" value="" placeholder="Kort beskrivande titel" required pattern=".*\S+.*" title="Du måste ange en titel">
                 <br>
                 <textarea rows="4" cols="50" type="input" name="ad_text" id="ca_text" value="" placeholder="Lite längre beskrivande text." required></textarea>
             </div>
             <input type="submit" value="Skapa annons" name='uniq_adNr' id="ad_done" class="myButton">
         </form>
-           
+
         <p id="error"></p>
         </div>
     </body>
