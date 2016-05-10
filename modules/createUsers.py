@@ -66,19 +66,20 @@ def add_new_employer(company_name, org_nr, first_name, last_name, new_user_id):
 	mighty_db_says = call_database(sql, ask_it_to)
 
 
-def add_new_student(first_name, last_name, program, year, new_user_id):
-	program = int(program)
-	year = int(year)
-	sql = "INSERT INTO students(first_name, last_name, education_id, education_year, id) \
+def add_new_student(first_name, last_name, program, year, new_user_id, phone):
+    program = int(program)
+    year = int(year)
+    phone_nr = int(phone)
+    sql = "INSERT INTO students(first_name, last_name, education_id, education_year, id, phone) \
        VALUES ('%s', '%s', (select education_id from education where education_id = '%d' and year = '%d'), \
-	    (select year from education where year = '%d' and education_id = '%d'), (select id from users where id = '%d') )" \
-		%(first_name, last_name, program, year, year, program, new_user_id)
+       (select year from education where year = '%d' and education_id = '%d'), (select id from users where id = '%d'), phone='%d' )" \
+        %(first_name, last_name, program, year, year, program, new_user_id, phone_nr)
 
-	ask_it_to = []
-	mighty_db_says = call_database(sql, ask_it_to)
+    ask_it_to = []
+    mighty_db_says = call_database(sql, ask_it_to)
 
 def get_student_main_info(user):
-	sql = "SELECT * FROM students WHERE id = '%d'"%(user)
+	sql = "SELECT students.*, users.mail FROM students, users WHERE id = '%d'"%(user)
 	ask_it_to = ['fetchall()']
 	mighty_db_says = call_database(sql, ask_it_to)
 	user_info = mighty_db_says[0][0]
@@ -126,29 +127,31 @@ def create_employer():
 
 
 def create_student():
-	first_name = request.forms.get('first_name')
-	last_name = request.forms.get('last_name')
-	program = request.forms.get('program')
-	year = request.forms.get('year')
-	email = request.forms.get('email').lower()
-	password = request.forms.get('password')
+    first_name = request.forms.get('first_name')
+    last_name = request.forms.get('last_name')
+    program = request.forms.get('program')
+    year = request.forms.get('year')
+    email = request.forms.get('email').lower()
+    phone = request.forms.get('phone')
+    password = request.forms.get('password')
 
-	user_inputs=[first_name, last_name, program, year, email, password]
-	for user_input in user_inputs:
-		if user_input == None or len(user_input) == 0:
-			return {'result':False, 'error': 'Inget fält får vara tomt!'}
+    user_inputs=[first_name, last_name, program, year, email,phone, password]
+    for user_input in user_inputs:
+        if user_input == None or len(user_input) == 0:
+            return {'result':False, 'error': 'Inget fält får vara tomt!'}
 
-	if validate_Username(email) == True:
-		return {'result':False, 'error':'Tyvärr - en användare med samma email finns redan!'}
+    if validate_Username(email) == True:
+        return {'result':False, 'error':'Tyvärr - en användare med samma email finns redan!'}
 
-	elif validate_email.validate_email(email) == False:
-		return {'result':False, 'error':'Du måste ange en riktig email!'}
+    elif validate_email.validate_email(email) == False:
+        return {'result':False, 'error':'Du måste ange en riktig email!'}
 
-	else:
-		user_level = 1
-		new_user_id = add_new_user(email, password, user_level)
-		add_new_student(first_name, last_name, program, year, new_user_id)
-		return {'result':True, 'email':email, 'password':password}
+    else:
+        user_level = 1
+        new_user_id = add_new_user(email, password, user_level)
+        print phone
+        add_new_student(first_name, last_name, program, year, new_user_id, phone)
+        return {'result':True, 'email':email, 'password':password}
 
 
 

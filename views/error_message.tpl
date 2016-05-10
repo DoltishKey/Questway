@@ -13,8 +13,16 @@
 				% include('nav.tpl')
 
 			%end
-        <p>{{error_message}}</p>
-            
+        
+        <p class="error">{{error_message}}</p>
+        
+        %if user_autho == 1 or user_autho == 2:
+            <p><a href="/admin">Gå tillbaka till startsidan</a></p>
+        %else:
+            <p><a href="/">Gå tillbaka till startsidan</a></p>
+        %end
+         
+    %include('footer.tpl')
     </body>
 
 </html>

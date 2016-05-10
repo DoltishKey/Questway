@@ -60,6 +60,7 @@
                 </div>
             </div>
       </main>
-      <footer>Copyright Questway, 2016</footer>
+      
+    %include('footer.tpl')
 	</body>
 </html>

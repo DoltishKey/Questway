@@ -14,7 +14,8 @@
                 </p>
             </div>
         </div>
-        <footer>© Questway, 2016</footer>
+    
+        %include('footer.tpl')
 	</body>
 	<script src="/static/js/jquery.js"></script>
 	<script src="/static/js/main.js"></script>
