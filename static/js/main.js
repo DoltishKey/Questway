@@ -11,8 +11,8 @@ $(document).ready(function() {
 });
 
 function checkLogIn(){
-	$('#logIn').submit(function(){
-		event.preventDefault();
+	$('#logIn').submit(function(event){
+		 event.preventDefault(event);
 		$.ajax({
 			type: 'POST',
 			url: '/ajax',
@@ -36,9 +36,9 @@ function checkLogIn(){
 
 
 function checkCreateEmployer(){
-	$('#create_employer').submit(function(){
-		event.preventDefault();
-		
+	$('#create_employer').submit(function(event){
+		event.preventDefault(event);
+
         //Email-validering:
         var email = document.getElementById("email");
         var error = document.getElementById("error");
@@ -76,22 +76,21 @@ function checkCreateEmployer(){
 
 
 function checkCreateStudent(){
-	$('#create_student').submit(function(){
-		event.preventDefault();
-        
-		//Email-validering:
-        var email = document.getElementById("email");
-        var error = document.getElementById("error");
+	$('#create_student').submit(function(event){
+		event.preventDefault(event);
 
-        var atpos = email.indexOf("@");
-        var punktpos = email.lastIndexOf(".");
-        if(atpos < 1 || dotpos < atpos + 2 || dotpos + 2 > email.length){
-            error.innerHTML("Du måste ange hela din mailadress. Med @ och allt.");
-            alert("Du måste ange hela din mailadress. Med @ och allt.");
-            email.style.borderColor = "red";
-        }
+		//Email-validering:
+        //var email = document.getElementById("email");
+        //var error = document.getElementById("error");
+
+        //var atpos = email.indexOf("@");
+        //var punktpos = email.lastIndexOf(".");
+        //if(atpos < 1 || dotpos < atpos + 2 || dotpos + 2 > email.length){
+        //    error.innerHTML("Du måste ange hela din mailadress. Med @ och allt.");
+        //    alert("Du måste ange hela din mailadress. Med @ och allt.");
+        //    email.style.borderColor = "red";
+        //}
         //Email-val end
-        
 		$.ajax({
 			type: 'POST',
 			url: '/ajax_create_user',
@@ -142,6 +141,25 @@ function showHide() {
      });
 }
 
+// För att visa feedback-meddelande när student har ansökt på annons:
+/*$( "apply_button" ).click( function () {
+    sessionStorage.reloadAfterPageLoad = true;
+    window.location.reload();
+} );
+$( function () {
+    if ( sessionStorage.reloadAfterPageLoad ) {
+        document.getElementById('thanks_for_applying').style.display = 'block'
+        sessionStorage.reloadAfterPageLoad = false;
+    }
+} )*/
+
+
+function thanks_for_applying() {
+    document.getElementById('thanks_for_applying').style.display = 'block'
+}
+
+// SLUT visa feedback-meddelande
+
 function mission_control(){
 	$('.misson_info_control').click(function() {
 		clicked_parent = $(this).parents('li');
@@ -160,6 +178,8 @@ function open_close_mission(clicked_parent){
 		$(this).find('.edit_mission_info').show();
 		$(this).find('.fileToUploadLabel').hide();
 		$(this).find('select').hide();
+
+		exit_edit_mode($(this));
 	});
 	pos_cicked = clicked_parent.position();
 	list_to_make_samll = [];
@@ -180,63 +200,62 @@ function edit_mission(){
 	$('.edit_mission_info').find('.btn').click(function() {
 		$(this).parents('.edit_mission_info').hide();
 		clicked_parent = $(this).parents('li');
-		clicked_parent.addClass('edit');
 		open_close_mission(clicked_parent);
-		enter_edit_mode(clicked_parent)
+		enter_edit_mode(clicked_parent);
 
 	});
 
-	$('.misson_info_control').click(function(){
-		clicked_parent = $(this).parents('li');
-		enter_edit_mode(clicked_parent)
-	});
+	//$('.misson_info_control').click(function(){
+	//	clicked_parent = $(this).parents('li');
+		//enter_edit_mode(clicked_parent);
+	//});
 
 	$('.edit_mission_btn').click(function(){
 		clicked_parent = $(this).parents('li');
-		enter_edit_mode(clicked_parent);
+		if($(this).html()== 'Redigera'){
+			enter_edit_mode(clicked_parent);
+		}
+		else{
+			clicked_parent.find('.update_info').submit();
+			exit_edit_mode(clicked_parent);
+		}
 	});
 }
 
 function enter_edit_mode(clicked_parent) {
-	if (clicked_parent.find('.edit_mission_btn').html() == 'Redigera'){
-		clicked_parent.addClass('edit');
-		clicked_parent.find('.edit_mission_btn').html('Spara');
-		clicked_parent.find('li').hide();
-		clicked_parent.find('select').show();
-		clicked_parent.find('.edit_key').show();
-		clicked_parent.find('input').show();
-		clicked_parent.find('.display_or_not').show();
-		clicked_parent.find('.add_one_key').show();
-		clicked_parent.find('.fileToUploadLabel').show();
-		clicked_parent.find('.mission_link').find('a').hide();
-		remove_key();
-		handle_input();
-	}
-	else{
-		clicked_parent.find('.edit_mission_btn').html('Redigera');
-		clicked_parent.find('li').show();
-		clicked_parent.find('select').hide();
-		clicked_parent.find('.edit_key').hide();
-		clicked_parent.find('input').hide();
-		clicked_parent.find('.display_or_not').hide();
-		clicked_parent.find('.add_one_key').hide();
-		clicked_parent.find('.fileToUploadLabel').hide();
-		clicked_parent.find('.mission_link').find('a').show();
-		clicked_parent.removeClass('edit');
-		clicked_parent.find('.update_info').submit();
-		//var formData= new FormData(clicked_parent.find('.update_info'));
-		//$.ajax({
-		//	type: 'POST',
-		//	url: '/ajax_edit_mission',
-		//	data: $(clicked_parent).find('.update_info').serialize()
-		//});
+	clicked_parent.addClass('edit');
+	clicked_parent.find('.edit_mission_btn').html('Spara');
+	clicked_parent.find('li').hide();
+	clicked_parent.find('select').show();
+	clicked_parent.find('.edit_key').show();
+	clicked_parent.find('input').show();
+	clicked_parent.find('.display_or_not').show();
+	clicked_parent.find('.add_one_key').show();
+	clicked_parent.find('.fileToUploadLabel').show();
+	clicked_parent.find('.mission_link').find('a').hide();
+	remove_key();
+	handle_input();
+}
 
-	}
+function exit_edit_mode(clicked_parent){
+	clicked_parent.find('.edit_mission_btn').html('Redigera');
+	clicked_parent.find('li').show();
+	clicked_parent.find('select').hide();
+	clicked_parent.find('.edit_key').hide();
+	clicked_parent.find('input').hide();
+	clicked_parent.find('.type_container').find('input').hide();
+	clicked_parent.find('.add_one_key').hide();
+	clicked_parent.find('.fileToUploadLabel').hide();
+	clicked_parent.find('.mission_link').find('a').show();
+	clicked_parent.removeClass('edit');
 }
 
 function handle_input(){
+
 	$('.add_one_key').click(function() {
-		var inputNode = '<div class="edit_key" style="display:inline-block"><div class="remove_key">X</div><input type="text" value="" name="add_key" class="add_key" style="display:inline-block" maxlength="20" autofocus><div>';
+		var parent_classes = $(this).parents('.key_continer').attr('class');
+		var num = parent_classes.substr(parent_classes.length - 1);
+		var inputNode = '<div class="edit_key" style="display:inline-block"><div class="remove_key">X</div><input type="text" value="" name="add_key_'+num+'" class="add_key" style="display:inline-block" maxlength="20" autofocus><div>';
 		var add_here = $(this).siblings('.keys');
 		$(inputNode).appendTo(add_here);
 		$('.keys').find('input:last').focus();
@@ -244,7 +263,9 @@ function handle_input(){
 
 	$('.keys').on('keypress', '.add_key', function(key){
 		if(key.which == 13) {
-			var inputNode = '<div class="edit_key" style="display:inline-block"><div class="remove_key">X</div><input type="text" value="" name="add_key" class="add_key" style="display:inline-block" maxlength="20" autofocus><div>';
+			var parent_classes = $(this).parents('.key_continer').attr('class');
+			var num = parent_classes.substr(parent_classes.length - 1);
+			var inputNode = '<div class="edit_key" style="display:inline-block"><div class="remove_key">X</div><input type="text" value="" name="add_key_'+num+'" class="add_key" style="display:inline-block" maxlength="20" autofocus><div>';
 			var add_here = $(this).parents('.keys');
 			$(inputNode).appendTo(add_here);
 			$('.keys').find('input:last').focus();

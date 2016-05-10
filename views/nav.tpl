@@ -1,6 +1,6 @@
 <header>
     <div class="wrap" id="header_wrap">
-		<a id="QWTitle" href="/"><h1>Questway</h1></a>
+		<a id="QWTitle" href="/admin"><h1>Questway</h1></a>
 		<nav class="menu">
 				%from bottle import request
 
@@ -18,9 +18,9 @@
 
 
 				%if request.path == 'about':
-					<a class="currentMenuItem" href="">Om oss</a>
+					<a class="currentMenuItem" href="/about_us">Om oss</a>
 				%else:
-					<a href="">Om oss</a>
+					<a href="/about_us">Om oss</a>
 				%end
 		</nav>
     </div>

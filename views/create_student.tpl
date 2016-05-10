@@ -4,7 +4,7 @@
 	<body>
         <div class="wrapper">
             %include('nav.tpl')
-            
+
             <div id="content">
 
             <form name="create_student" id="create_student" method="post" action="/do_create_student">
@@ -20,6 +20,8 @@
                     <label for="year">Årskurs</label>
                     <br>
                     <label for="email">Mejl</label>
+                    <br>
+					<label for="phone">Tele</label>
                     <br>
                     <label for="password">Lösenord</label>
                 </div>
@@ -38,6 +40,8 @@
                     <input placeholder="Årskurs" type="input" name="year" id="year" value="">
                     <br>
                     <input placeholder="Mejl" type="input" name="email" id="email" value="">
+                    <br>
+					<input placeholder="Telefon" type="input" name="phone" id="phone" value="">
                     <br>
                     <input placeholder="Lösenord" type="input" name="password" id="password" value="">
                 </div>
@@ -78,6 +82,6 @@
             </div>
             <div class="push"></div> <!-- Är till för att footer ska hamna längst ner, ta ej bort --><!--Kolla på position:fixed istället-->
         </div>
-        <footer>© Questway, 2016</footer>
+        %include('footer.tpl')
 	</body>
 </html>

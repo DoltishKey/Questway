@@ -1,7 +1,6 @@
 # *-* coding:utf-8 *-*
 import bottle
 from bottle import route, get, post, run, template, error, static_file, request, redirect, abort, response, app
-import json
 from validate_email import validate_email
 import MySQLdb
 import hashlib
@@ -24,25 +23,6 @@ def call_database(sql, asked_from_cursor):
     return cursor_answer
 
 
-'''*********Läs & skriv till fil*********'''
-def read_data(file):
-	try:
-		fileIn = open('static/data/'+ file +'.json', 'r')
-		dataRead = json.load(fileIn)
-		fileIn.close()
-	except (IOError, ValueError):
-		validatekDataFile(file)
-		dataRead = read_data(file)
-	return dataRead
-
-def validatekDataFile(file):
-	'''Om databasen inte finns eller är helt tom så skapas en json-fil innehållande en tom lista.'''
-	resList = []
-	dataFile = open('static/data/'+ file +'.json', 'w')
-	json.dump(resList, dataFile, indent=4)
-	dataFile.close()
-
-
 '''*********Validering*********'''
 def validate_Username(email):
 	sql = "SELECT * FROM users WHERE mail = '%s'" %(email)
@@ -53,11 +33,12 @@ def validate_Username(email):
 		return True
 
 def validate_if_student_exists(userID):
-	sql = "SELECT autho_level FROM users WHERE id = '%d'"%(userID)
-	ask_it_to = ['rowcount']
-	mighty_db_says = call_database(sql, ask_it_to)
-	if mighty_db_says[0] == 1:
-		return True
+    sql = "SELECT autho_level FROM users WHERE id = '%d'"%(userID)
+    ask_it_to = ['fetchall()']
+    mighty_db_says = call_database(sql, ask_it_to)
+    if len(mighty_db_says[0]) != 0:
+        if mighty_db_says[0][0][0] == 1:
+            return True
 
 '''*********funktioner*********'''
 def add_new_user(email, password, user_level):
@@ -84,21 +65,20 @@ def add_new_employer(company_name, org_nr, first_name, last_name, new_user_id):
 	ask_it_to = []
 	mighty_db_says = call_database(sql, ask_it_to)
 
-	#call_database(sql, False);
 
-def add_new_student(first_name, last_name, program, year, new_user_id):
-	program = int(program)
-	year = int(year)
-	sql = "INSERT INTO students(first_name, last_name, education_id, education_year, id) \
-       VALUES ('%s', '%s', (select education_id from education where education_id = '%d' and year = '%d'), \
-	    (select year from education where year = '%d' and education_id = '%d'), (select id from users where id = '%d') )" \
-		%(first_name, last_name, program, year, year, program, new_user_id)
+def add_new_student(first_name, last_name, program, year, new_user_id, phone_nr):
+    program = int(program)
+    year = int(year)
+    phone_nr= int(phone_nr)
+    sql = "INSERT INTO students(first_name, last_name, phone, education_id, education_year, id) \
+       VALUES ('%s', '%s', '%d' , (select education_id from education where education_id = '%d' and year = '%d'), \
+       (select year from education where year = '%d' and education_id = '%d'), (select id from users where id = '%d'))" %(first_name, last_name, phone_nr, program, year, year, program, new_user_id)
 
-	ask_it_to = []
-	mighty_db_says = call_database(sql, ask_it_to)
+    ask_it_to = []
+    mighty_db_says = call_database(sql, ask_it_to)
 
 def get_student_main_info(user):
-	sql = "SELECT * FROM students WHERE id = '%d'"%(user)
+	sql = "SELECT students.*, users.mail FROM users JOIN students on users.id = students.id WHERE students.id = '%d'"%(user)
 	ask_it_to = ['fetchall()']
 	mighty_db_says = call_database(sql, ask_it_to)
 	user_info = mighty_db_says[0][0]
@@ -146,29 +126,31 @@ def create_employer():
 
 
 def create_student():
-	first_name = request.forms.get('first_name')
-	last_name = request.forms.get('last_name')
-	program = request.forms.get('program')
-	year = request.forms.get('year')
-	email = request.forms.get('email').lower()
-	password = request.forms.get('password')
+    first_name = request.forms.get('first_name')
+    last_name = request.forms.get('last_name')
+    program = request.forms.get('program')
+    year = request.forms.get('year')
+    email = request.forms.get('email').lower()
+    phone = request.forms.get('phone')
+    password = request.forms.get('password')
 
-	user_inputs=[first_name, last_name, program, year, email, password]
-	for user_input in user_inputs:
-		if user_input == None or len(user_input) == 0:
-			return {'result':False, 'error': 'Inget fält får vara tomt!'}
+    user_inputs=[first_name, last_name, program, year, email,phone, password]
+    for user_input in user_inputs:
+        if user_input == None or len(user_input) == 0:
+            return {'result':False, 'error': 'Inget fält får vara tomt!'}
 
-	if validate_Username(email) == True:
-		return {'result':False, 'error':'Tyvärr - en användare med samma email finns redan!'}
+    if validate_Username(email) == True:
+        return {'result':False, 'error':'Tyvärr - en användare med samma email finns redan!'}
 
-	elif validate_email.validate_email(email) == False:
-		return {'result':False, 'error':'Du måste ange en riktig email!'}
+    elif validate_email.validate_email(email) == False:
+        return {'result':False, 'error':'Du måste ange en riktig email!'}
 
-	else:
-		user_level = 1
-		new_user_id = add_new_user(email, password, user_level)
-		add_new_student(first_name, last_name, program, year, new_user_id)
-		return {'result':True, 'email':email, 'password':password}
+    else:
+        user_level = 1
+        new_user_id = add_new_user(email, password, user_level)
+        add_new_student(first_name, last_name, program, year, new_user_id, phone)
+        return {'result':True, 'email':email, 'password':password}
+
 
 
 def ajax_new_user_validation():

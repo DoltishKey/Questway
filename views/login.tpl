@@ -15,7 +15,7 @@
                     <input placeholder="Email" type="input" name="email" id="email" value="">
                     <!--<label for="password">Lösenord</label>-->
                     <input placeholder="Lösenord" type="password" name="password" id="password" value="">
-                    <input class="myButton" type="submit" id="log_in_button" value="Logga in" onclick="emailValidation()">	
+                    <input class="myButton" type="submit" id="log_in_button" value="Logga in">	
                 <p id="error"></p>
                 </form>
             </div>
@@ -44,12 +44,13 @@
             </div>
         </div>
 
-        <footer>
+        %include('footer.tpl')
+        <!--<footer>
             <div class="wrap">
                 <img id="footlog" src="../static/img/Logga.png" alt="loggan">
                 <p>© Questway, 2016</p>
             </div>
-        </footer>
+        </footer>-->
 
 	</body>
 </html>

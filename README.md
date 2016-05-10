@@ -2,11 +2,11 @@
 
 INSTALL MYSQLdb ON MAC
 
-Öppna terminalen och installera Xcode. Detta gör du genom att skriva in kommandot:
+ (1)Öppna terminalen och installera Xcode. Detta gör du genom att skriva in kommandot:
 
     $ xcode-select --install
-    
-Gå in på följande länk: http://brew.sh/
+
+ (2)Gå in på följande länk: http://brew.sh/
 
      * Följ instruktionerna högst upp på sidan, eller:
         - klistra in: /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -14,7 +14,8 @@ Gå in på följande länk: http://brew.sh/
         - Du kommer bli informerad och få Godkänna (med retur-tangenten/skriva in ditt lösenord) varje steg i processen
      * Se till att gå igenom hela installationsprocessen.
 
-När homebrew är installerat skriv in följande i terminalen, i tur och ordning. Följande kommandon kommer installera wget, MySQL och MySQL-python:
+
+ (3)När homebrew är installerat skriv in följande i terminalen, i tur och ordning. Följande kommandon kommer installera wget, MySQL och MySQL-python:
 
     $ brew install wget
     $ brew install MySQL
@@ -23,5 +24,4 @@ När homebrew är installerat skriv in följande i terminalen, i tur och ordning
         - If "command not found" skriver du in följande:
     $ sudo easy_install pip
     $ sudo pip install MySQL-python
-            
-            
+   

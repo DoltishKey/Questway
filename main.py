@@ -6,7 +6,6 @@ from modules import createUsers
 from modules import addmod
 from bottle import route, get, post, run, template, error, static_file, request, redirect, abort, response, app
 from beaker.middleware import SessionMiddleware
-import json
 import MySQLdb
 
 
@@ -15,15 +14,20 @@ import MySQLdb
 
 @route('/')
 def startPage():
-	return template('login', pageTitle='Logga in')
+	if log.is_user_logged_in()==False:
+		return template('login', pageTitle='Logga in')
+	else:
+		redirect('/admin')
 
 
 '''*********Login*********'''
 
-
 @route('/login')
 def login():
-	return template('login', pageTitle='Logga in')
+	if log.is_user_logged_in()==False:
+		return template('login', pageTitle='Logga in')
+	else:
+		redirect('/admin')
 
 @route('/ajax', method="POST")
 def ajax_validation():
@@ -56,37 +60,67 @@ def admin():
 	user_level = log.get_user_level() #kollar om användaren är uppdragstagare eller student (returnerar 1 eller 2)
 
 	if user_level == 1:
-		ads_to_apply_on=addmod.available_ads(userid)
-		ads_untreated = addmod.sort_by_status(userid,'Obehandlad')
-		ads_ongoing = addmod.sort_by_status(userid,'vald')
-		ads_finished = addmod.sort_by_status(userid,'Avslutad')
+		ads_untreated=[]
+		ads_ongoing=[]
+		ads_finished=[]
 
-		return template('student_start',finished_ads=ads_finished, avail_ads=ads_to_apply_on, accepted_on=ads_ongoing, pending_ad=ads_untreated, user_id=userid, user=username, level="student", pageTitle = 'Start')
+		ads_to_apply_on=addmod.available_ads(userid)
+		all_ads=addmod.sort_by_status(userid)
+		for each in all_ads:
+			print each
+			if each[7]=='Obehandlad':
+				ads_untreated.append(each)
+			elif each[7]=='Vald':
+				ads_ongoing.append(each)
+			elif each[7]=='Avslutad':
+				ads_finished.append(each)
+		denied_missions = addmod.get_denied_missions(int(userid))
+		return template('student_start',finished_ads=ads_finished, avail_ads=ads_to_apply_on, accepted_on=ads_ongoing, pending_ad=ads_untreated, user_id=userid, user=username, level="student", pageTitle = 'Start', denied_missions=denied_missions)
+
 	else:
 		employer_ads = addmod.get_my_ads(userid)
 		students = addmod.students_that_applied(userid)
 		return template('employer_start', user=username, user_id=userid,  level="arbetsgivare", annons=employer_ads, pageTitle = 'Start', students_application = students)
 
-'''
-edited out from line 72 in RETURN template(student_start):
 
-gradings = grading_ads,
 
-'''
+@route('/about_us')
+def about_us_page():
+    log.validate_autho() #kontrollerar om användaren är inloggad
+    username = log.get_user_name() #hämtar användarens namn från DB (returnerar en sträng)
+    userid = log.get_user_id_logged_in() #hämtar användarens id
+    user_level = log.get_user_level() #kollar om användaren är uppdragstagare eller student (returnerar 1 eller 2)
+    return template('about_us', pageTitle = 'Om Questway', user=username, user_autho=user_level, user_id=userid)
 
+@route('/help')
+def help_page():
+    log.validate_autho() #kontrollerar om användaren är inloggad
+    username = log.get_user_name() #hämtar användarens namn från DB (returnerar en sträng)
+    userid = log.get_user_id_logged_in() #hämtar användarens id
+    user_level = log.get_user_level() #kollar om användaren är uppdragstagare eller student (returnerar 1 eller 2)
+    return template('help.tpl', pageTitle = 'Hjälp - Questway', user = username, user_autho=user_level, user_id = userid)
 
 '''********Create-user********'''
 @route('/create')
 def create_employer():
-	return template('create_user', pageTitle='Student | Uppdragsgivare')
+	if log.is_user_logged_in()==False:
+		return template('create_user', pageTitle='Student | Uppdragsgivare')
+	else:
+		redirect('/admin')
 
 @route('/create_student')
 def create_student():
-	return template('create_student', pageTitle='Skapa profil')
+	if log.is_user_logged_in()==False:
+		return template('create_student', pageTitle='Skapa profil')
+	else:
+		redirect('/admin')
 
 @route('/create_employer')
 def create_employer():
-	return template('create_employer', pageTitle='Skapa profil')
+	if log.is_user_logged_in()==False:
+		return template('create_employer', pageTitle='Skapa profil')
+	else:
+		redirect('/admin')
 
 
 @route('/ajax_create_user', method="POST")
@@ -123,12 +157,17 @@ def profiles(user):
 	user = int(user)
 	user_profile_data = createUsers.show_student_profile(user)
 	is_user_logged_in = log.is_user_logged_in()
-	#grading_ads = sorted( (addmod.read_data('grading')), key=lambda x: x['display'])
+
 	grading_ads = addmod.grading_ads(user)
+	grading_skills = addmod.get_ad_skills(user)
 	username = ""
+	this_user = False
 	if is_user_logged_in == True:
 		user_levle = log.get_user_level()
 		username = log.get_user_name()
+		logged_in_id = log.get_user_id_logged_in()
+		if int(logged_in_id) == int(user):
+			this_user = True
 	else:
 		user_levle = 0
 
@@ -136,16 +175,17 @@ def profiles(user):
 		education_info = user_profile_data['education_info']
 		student_info = user_profile_data['student_info']
 		student_name = student_info[0] + ' ' + student_info[1]
-		return template('user_profile', user = username, user_autho = user_levle, user_id = user, student= student_info, education = education_info, pageTitle = student_name, grading = grading_ads )
+		print student_info
+		return template('user_profile', user = username, user_autho = user_levle, user_id = user, student= student_info, education = education_info, pageTitle = student_name, grading = grading_ads, grading_skills = grading_skills, this_user=this_user )
 
 	else:
-		return 'Användaren finns inte!'
+		return template('error_message', pageTitle = 'Användaren finns inte!', user = username, user_autho = user_levle, user_id = user, error_message='Det har fel!')
 
 
-@route('/ajax_edit_mission/<ad_id>', method="POST")
-def ajax_edit_mission(ad_id):
-	result = addmod.ajax_edit_mission(ad_id)
-	redirect('/profiles/39')
+@route('/edit_mission/<ad_id>', method="POST")
+def edit_mission(ad_id):
+	result = addmod.edit_mission(ad_id)
+	redirect('/profiles/' + str(result))
 
 
 
@@ -153,23 +193,29 @@ def ajax_edit_mission(ad_id):
 
 @route('/edit')
 def edit_contact_information():
-    username = log.get_user_name() #hämtar användarens namn från DB (returnerar en sträng)
-    userid = log.get_user_id_logged_in() #hämtar användarens id
-    return template('change_contact_info', pageTitle = 'Redigera kontaktuppgifter', user=username, user_id=userid)
+	if log.get_user_level() == 2:
+		username = log.get_user_name() #hämtar användarens namn från DB (returnerar en sträng)
+		userid = log.get_user_id_logged_in() #hämtar användarens id
+		return template('change_contact_info', pageTitle = 'Redigera kontaktuppgifter', user=username, user_id=userid)
+	else:
+		return "Behörighet saknas!"
 
 
 '''********Ad-management********'''
 
-@route('/showadds')
-def show_adds():
+@route('/do_new_ad')
+def do_new_ad():
+	'''Returns a view where the logged-in employer can fill in information for a new ad'''
 	log.validate_autho()
-	username=log.get_user_name()
+	if log.get_user_level() == 2:
+		username=log.get_user_name()
+		return template('adsform.tpl',user=username, pageTitle = 'Annonser')
+	else:
+		return "Behörighet saknas!"
 
-
-	return template('adsform.tpl',user=username, pageTitle = 'Annonser' )
-
-@post('/make_ad')
+@route('/make_ad', method="POST")
 def ad_done():
+	'''Creates a new ad in the DB'''
 	log.validate_autho()
 	response=addmod.do_ad()
 	if response['result']==True:
@@ -177,17 +223,16 @@ def ad_done():
 	else:
 		return response['error']
 
-    #if log.get_user_level() == 2:
-    	#addmod.do_ad()
-
-    #else:
-    	#return 'Behörighet saknas!'
+@route('/make_ad')
+def no_get():
+	redirect('/admin')
 
 
-'''*****Ta bort annons****'''
+'''*****Delete ad*****'''
 
-@post('/del_ad/<which_ad>')
+@route('/del_ad/<which_ad>', method="POST")
 def del_ad(which_ad):
+	'''Deletes a specifik ad in the DB'''
 	log.validate_autho()
 	if log.get_user_level() == 2:
 		user_logged_in=log.get_user_id_logged_in()
@@ -196,10 +241,11 @@ def del_ad(which_ad):
 		return 'Behörighet saknas!'
 
 
-'''****Studenten kan söka en annons****'''
+'''****Students can apply on an ad****'''
 
-@post('/sok_annons/<which_ad>')
+@route('/apply_on_ad/<which_ad>', method="POST")
 def apply_for_mission(which_ad):
+	'''Onclick on template - student applies on a specifik ad'''
 	log.validate_autho()
 	response=addmod.applying_for_mission(which_ad)
 	if response['result']==True:
@@ -208,26 +254,11 @@ def apply_for_mission(which_ad):
 		return response['error']
 
 
-'''
-    for add in all_adds:
-        if int(add['uniq_adNr'])==int(annons):
-            if user in add['who_applied']:
-                return "Du har redan ansökt på denna annons!"
-            else:
-                what_add['who_applied'].append(user)
-                add['who_applied']=what_add['who_applied']
-
-    with open('static/data/ads.json', 'w') as fil:
-        json.dump(all_adds, fil, indent=4)
-
-    redirect('/admin')
-'''
-
-
-'''****Listar de studenter som sökt ett specifik uppdrag***'''
+'''****All the ads and their applications listed***'''
 
 @route('/allMissions')
 def list_applied_students():
+	'''lists all ads with their specific application status'''
 	log.validate_autho()
 	if log.get_user_level() == 2:
 		user_id=log.get_user_id_logged_in()
@@ -237,29 +268,24 @@ def list_applied_students():
 		feedback_info = addmod.get_given_feedback_for_employers(user_id)
 
 		return template('adds.tpl',user_id=user_id, user=username, adds=relevant_adds, students=students_application, pageTitle='Alla uppdrag', feedback = feedback_info)
-
-
-		'''if len(relevant_adds)>0:
-			open_ad=addmod.choose_ad(5)
-			return template('adds.tpl',user_id=user_id, user=username, adds=relevant_adds, students=students, open_ad=open_ad, pageTitle='Alla uppdrag')
-		else:
-			open_ad=0
-			return template('adds.tpl',user_id=user_id, user=username, adds=relevant_adds, students=students, open_ad=open_ad, pageTitle='Alla uppdrag')'''
 	else:
 		return "Du har ej behörighet"
 
 
-@route('/select_student/<annons>/<sokandeID>')
-def accepted_ones(annons, sokandeID):
-	addmod.who_got_accepted(annons, sokandeID)
-	redirect ('/allMissions')
+@route('/select_student/<ad>/<appliersID>')
+def accepted_ones(ad, appliersID):
+	if log.get_user_level() == 2:
+		addmod.who_got_accepted(ad, appliersID)
+		redirect ('/allMissions')
+	else:
+		return "Behörighet saknas!"
 
 
-@route('/ad_done/<annons>', method="POST")
-def ad_done(annons):
+@route('/ad_done/<ad>', method="POST")
+def ad_done(ad):
 	log.validate_autho()
 	if log.get_user_level() == 2:
-		response = addmod.move_ad_to_complete(int(annons))
+		response = addmod.move_ad_to_complete(int(ad))
 		if response['response'] == False:
 			return response['error']
 		else:
@@ -270,8 +296,11 @@ def ad_done(annons):
 
 @route('/give_feedback/<ad_nr>')
 def give_feedback(ad_nr):
-	username = log.get_user_name()
-	return template('feedback', adnr=ad_nr, pageTitle = 'Ge feedback', user=username )
+	if log.get_user_level() == 2:
+		username = log.get_user_name()
+		return template('feedback', adnr=ad_nr, pageTitle = 'Ge feedback', user=username )
+	else:
+		return "Behörighet saknas!"
 
 
 
