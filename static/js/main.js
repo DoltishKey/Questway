@@ -40,16 +40,16 @@ function checkCreateEmployer(){
 		event.preventDefault(event);
 
         //Email-validering:
-        var email = document.getElementById("email");
-        var error = document.getElementById("error");
+        //var email = document.getElementById("email");
+        //var error = document.getElementById("error");
 
-        var atpos = email.indexOf("@");
-        var punktpos = email.lastIndexOf(".");
-        if(atpos < 1 || dotpos < atpos + 2 || dotpos + 2 > email.length){
-            error.innerHTML("Du måste ange hela din mailadress. Med @ och allt.");
-            alert("Du måste ange hela din mailadress. Med @ och allt.");
-            email.style.borderColor = "red";
-        }
+        //var atpos = email.indexOf("@");
+        //var punktpos = email.lastIndexOf(".");
+        //if(atpos < 1 || dotpos < atpos + 2 || dotpos + 2 > email.length){
+        //    error.innerHTML("Du måste ange hela din mailadress. Med @ och allt.");
+        //    alert("Du måste ange hela din mailadress. Med @ och allt.");
+        //    email.style.borderColor = "red";
+        //}
         //Email-val end
 
 		$.ajax({
@@ -235,6 +235,7 @@ function enter_edit_mode(clicked_parent) {
 	clicked_parent.find('.mission_link').find('a').hide();
 	remove_key();
 	handle_input();
+	img_handleing();
 }
 
 function exit_edit_mode(clicked_parent){
@@ -271,6 +272,21 @@ function handle_input(){
 			$('.keys').find('input:last').focus();
   		}
 	});
+}
+
+function img_handleing(){
+	$('.fileToUpload').change(function(){
+		var parten = $(this).parents('.circle')
+		if (this.files && this.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(){
+				var dataURL = reader.result;
+				parten.css('background-image', 'url('+dataURL+')');
+			}
+			reader.readAsDataURL(this.files[0])
+		}
+		$(this).siblings('.fileToUploadLabel').show();
+  	});
 }
 
 function remove_key() {

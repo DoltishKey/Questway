@@ -67,7 +67,6 @@ def admin():
 		ads_to_apply_on=addmod.available_ads(userid)
 		all_ads=addmod.sort_by_status(userid)
 		for each in all_ads:
-			print each
 			if each[7]=='Obehandlad':
 				ads_untreated.append(each)
 			elif each[7]=='Vald':
@@ -182,10 +181,10 @@ def profiles(user):
 		return template('error_message', pageTitle = 'Användaren finns inte!', user = username, user_autho = user_levle, user_id = user, error_message='Det har fel!')
 
 
-@route('/edit_mission/<ad_id>', method="POST")
-def edit_mission(ad_id):
-	result = addmod.edit_mission(ad_id)
-	redirect('/profiles/' + str(result))
+@route('/edit_mission/<user>/<ad_id>', method="POST")
+def edit_mission(user,ad_id):
+	addmod.edit_mission(ad_id)
+	redirect('/profiles/' + str(user))
 
 
 

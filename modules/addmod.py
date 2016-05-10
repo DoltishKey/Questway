@@ -201,7 +201,7 @@ def move_ad_to_complete(annons):
         ask_it_to = ['fetchall()']
         mighty_db_says_about_employer = call_database(sql, ask_it_to)
 
-        sql="SELECT student_id FROM application WHERE status = 'Vald'"
+        sql="SELECT student_id FROM application WHERE status = 'Vald' and ad_id='%d'"%(int(annons))
         ask_it_to = ['fetchall()']
         mighty_db_says_about_status = call_database(sql, ask_it_to)
 
@@ -226,6 +226,7 @@ def move_ad_to_complete(annons):
 
 
 def edit_mission(ad_id):
+    '''Handle edit by studetns on completed missions that displays on profile'''
     type_of = request.forms.get('mission_type_'+str(ad_id))
     keys = request.POST.getall("add_key_" + str(ad_id))
     display = request.forms.get('display_'+str(ad_id))
@@ -263,6 +264,7 @@ def edit_mission(ad_id):
     sql = "DELETE FROM ad_skills WHERE ad_id = '%d'"%(ad_id)
     call_database(sql, ask_it_to)
 
+    #Måste fixas - inte ok att den ser ut såhär!
     for key in keys:
         ask_it_to = []
         sql = "INSERT INTO skills (name) \
@@ -278,43 +280,45 @@ def edit_mission(ad_id):
 
 
 def grading_ads(user):
-	sql= "SELECT employers.company_name, J2.*\
-	    FROM \
-	        (SELECT creator_id, feedback.* \
-	        	FROM (SELECT ads.titel, creator_id, ad_id \
-	        			FROM ads \
-	        			INNER JOIN application \
-	        			ON application.ad_id=ads.id \
-	        			WHERE student_id = '%d' and status = 'Avslutad') as J1 \
-	        	INNER JOIN feedback \
-	        	ON J1.ad_id = feedback.ad_id) as J2 \
-	    INNER JOIN employers \
-	    ON J2.creator_id = employers.id"%(user)
+    '''Returns all ads that studetn has completed'''
+    sql= "SELECT employers.company_name, J2.*\
+        FROM \
+            (SELECT creator_id, feedback.* \
+            FROM (SELECT ads.titel, creator_id, ad_id \
+               FROM ads \
+               INNER JOIN application \
+               ON application.ad_id=ads.id \
+               WHERE student_id = '%d' and status = 'Avslutad') as J1 \
+               INNER JOIN feedback \
+                ON J1.ad_id = feedback.ad_id) as J2 \
+        INNER JOIN employers \
+        ON J2.creator_id = employers.id"%(user)
 
-	ask_it_to = ['fetchall()']
-	mighty_db_says = call_database(sql, ask_it_to)
-	return mighty_db_says[0]
+    ask_it_to = ['fetchall()']
+    mighty_db_says = call_database(sql, ask_it_to)
+    return mighty_db_says[0]
 
 
 
 def students_that_applied(user_id):
-	user_id = int(user_id)
-	sql = "SELECT students.id, students.first_name, students.last_name, J1.ad_id, J1.status, education.titel, education.year, users.mail\
-	FROM (SELECT student_id, ad_id, status \
-			FROM ads \
-			INNER JOIN application \
-			ON application.ad_id=ads.id \
-			WHERE creator_id = '%d') as J1 \
-	INNER JOIN students \
-	ON J1.student_id = students.id \
+    '''Returns all studetns that applied on each of employers mission'''
+    user_id = int(user_id)
+    sql = "SELECT students.id, students.first_name, students.last_name, J1.ad_id, J1.status, education.titel, education.year, users.mail\
+    FROM (SELECT student_id, ad_id, status \
+            FROM ads \
+            INNER JOIN application \
+            ON application.ad_id=ads.id \
+            WHERE creator_id = '%d') as J1 \
+    INNER JOIN students \
+    ON J1.student_id = students.id \
     INNER JOIN education\
     ON students.education_id = education.education_id and students.education_year = education.year\
     INNER JOIN users\
     ON users.id=J1.student_id"%(user_id)
 
-	ask_it_to = ['fetchall()']
-	mighty_db_says = call_database(sql, ask_it_to)
-	return mighty_db_says[0]
+    ask_it_to = ['fetchall()']
+    mighty_db_says = call_database(sql, ask_it_to)
+    return mighty_db_says[0]
 
 
 def get_given_feedback_for_employers(user):
@@ -333,6 +337,7 @@ def get_given_feedback_for_employers(user):
 
 
 def get_denied_missions(user):
+    '''Returns all missions that student did not get.'''
     user = int(user)
     sql="SELECT A.titel \
     FROM (SELECT ads.titel \
@@ -348,6 +353,7 @@ def get_denied_missions(user):
     return mighty_db_says[0]
 
 def get_ad_skills(user):
+    '''Returns all skills needed for each ad'''
     sql="SELECT ad_skills.* \
     FROM (SELECT ad_id FROM application WHERE student_id='%d' AND status = 'Avslutad') as J \
     JOIN ad_skills \

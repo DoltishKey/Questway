@@ -70,6 +70,7 @@ def add_new_student(first_name, last_name, program, year, new_user_id, phone_nr)
     program = int(program)
     year = int(year)
     phone_nr= int(phone_nr)
+    print 'kommer hit!'
     sql = "INSERT INTO students(first_name, last_name, phone, education_id, education_year, id) \
        VALUES ('%s', '%s', '%d' , (select education_id from education where education_id = '%d' and year = '%d'), \
        (select year from education where year = '%d' and education_id = '%d'), (select id from users where id = '%d'))" %(first_name, last_name, phone_nr, program, year, year, program, new_user_id)

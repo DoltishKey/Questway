@@ -82,7 +82,7 @@
                                 %if this_user == True:
                                     <li class="item">
 
-                                        <form class="update_info" action="/edit_mission/{{grade[2]}}" method="POST" enctype="multipart/form-data">
+                                        <form class="update_info" action="/edit_mission/{{user_id}}/{{grade[2]}}" method="POST" enctype="multipart/form-data">
                                             %if grade[4] == 1:
                                                 <div class="edit_mission_info">
                                                     <div>
