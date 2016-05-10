@@ -27,25 +27,25 @@
                 </div>
 
                 <div class="form_inputs">
-                    <input placeholder="Förnamn" type="input" name="first_name" id="first_name" value="">
+                    <input placeholder="Förnamn" type="input" name="first_name" id="first_name" value="" required>
                     <br>
-                    <input placeholder="Efternamn" type="input" name="last_name" id="last_name" value="">
+                    <input placeholder="Efternamn" type="input" name="last_name" id="last_name" value="" required>
                     <br>
-                    <select name="program" id="program" value="">
+                    <select name="program" id="program" value="" required>
                         <option value="1">Informationsarkitekt</option>
                         <option value="2">Systemutvecklare</option>
                         <option value="3">App</option>
 				    </select>
                     <br>
-                    <input placeholder="Årskurs" type="input" name="year" id="year" value="">
+                    <input placeholder="Årskurs" type="input" name="year" id="year" value="" required>
                     <br>
-                    <input placeholder="Mejl" type="input" name="email" id="email" value="">
+                    <input placeholder="Mejl" type="input" name="email" id="email" value="" required>
                     <br>
-					<input placeholder="Telefon" type="input" name="phone" id="phone" value="">
+					<input placeholder="Telefon" type="input" name="phone" id="phone" value="" required>
                     <br>
-                    <input placeholder="Lösenord" type="input" name="password" id="password" value="">
+                    <input placeholder="Lösenord" type="input" name="password" id="password" value="" required>
                 </div>
-                <input class="create_account myButton" type="submit" value="Skapa konto">
+                <input class="create_account myButton" type="submit" value="Skapa konto" required>
                <!--
                <label for="first_name">Förnamn</label>
                <input placeholder="Förnamn" type="input" name="first_name" id="first_name" value="">

@@ -469,7 +469,7 @@ footer > .wrap {
 
 #footlog{
     margin-top: 50px;
-    width: 10%;
+    width: 40%;
     margin: auto;
 }
 
@@ -1660,7 +1660,7 @@ label{
         float: left;
     }
     #content{
-        padding-top: 150px;
+        padding-top: 230px;
     }
     #profiles{
         padding-top: 150px;
@@ -1791,7 +1791,6 @@ label{
     #applications p {
         font-size: 80%;
     }
-<<<<<<< HEAD
     /*----Employer----*/
     #admin_start_employer{
         padding-top: 150px;
@@ -1806,8 +1805,6 @@ label{
         padding-top: 0px;
     }
     /*--- - END - ---*/
-=======
-    
     .about_us_info {
         width: 90%;
     }
@@ -1815,7 +1812,6 @@ label{
     .about_questway {
         font-size: 150%;
     }
->>>>>>> origin/master
 }
 
 @media screen and (min-width:960px){
