@@ -67,6 +67,7 @@ def admin():
 		ads_to_apply_on=addmod.available_ads(userid)
 		all_ads=addmod.sort_by_status(userid)
 		for each in all_ads:
+			print each
 			if each[7]=='Obehandlad':
 				ads_untreated.append(each)
 			elif each[7]=='Vald':
@@ -178,7 +179,7 @@ def profiles(user):
 		return template('user_profile', user = username, user_autho = user_levle, user_id = user, student= student_info, education = education_info, pageTitle = student_name, grading = grading_ads, grading_skills = grading_skills, this_user=this_user )
 
 	else:
-		return template('error_message', pageTitle = 'Användaren finns inte!', user = username, user_autho = user_levle, user_id = user, error_message='Det har fel!') 
+		return template('error_message', pageTitle = 'Användaren finns inte!', user = username, user_autho = user_levle, user_id = user, error_message='Det har fel!')
 
 
 @route('/edit_mission/<ad_id>', method="POST")

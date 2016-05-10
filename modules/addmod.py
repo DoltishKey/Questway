@@ -88,7 +88,7 @@ def sort_by_status(user):
                     ON application.ad_id = feedback.ad_id AND application.status = 'Avslutad'\
                 WHERE student_id='%d')\
 		        as H1\
-        WHERE H1.status='Obehandlad' OR H1.status='Vald' OR H1.status='Avslutad' OR H1.status='Bortvald'" %(user)
+        WHERE H1.status='Obehandlad' OR H1.status='Vald' OR H1.status='Avslutad' OR H1.status='Bortvald' ORDER BY status" %(user)
 
     ask_it_to = ['fetchall()']
     mighty_db_says = call_database(sql, ask_it_to)

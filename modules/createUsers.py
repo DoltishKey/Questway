@@ -66,20 +66,19 @@ def add_new_employer(company_name, org_nr, first_name, last_name, new_user_id):
 	mighty_db_says = call_database(sql, ask_it_to)
 
 
-def add_new_student(first_name, last_name, program, year, new_user_id, phone):
+def add_new_student(first_name, last_name, program, year, new_user_id, phone_nr):
     program = int(program)
     year = int(year)
-    phone_nr = int(phone)
-    sql = "INSERT INTO students(first_name, last_name, education_id, education_year, id, phone) \
-       VALUES ('%s', '%s', (select education_id from education where education_id = '%d' and year = '%d'), \
-       (select year from education where year = '%d' and education_id = '%d'), (select id from users where id = '%d'), phone='%d' )" \
-        %(first_name, last_name, program, year, year, program, new_user_id, phone_nr)
+    phone_nr= int(phone_nr)
+    sql = "INSERT INTO students(first_name, last_name, phone, education_id, education_year, id) \
+       VALUES ('%s', '%s', '%d' , (select education_id from education where education_id = '%d' and year = '%d'), \
+       (select year from education where year = '%d' and education_id = '%d'), (select id from users where id = '%d'))" %(first_name, last_name, phone_nr, program, year, year, program, new_user_id)
 
     ask_it_to = []
     mighty_db_says = call_database(sql, ask_it_to)
 
 def get_student_main_info(user):
-	sql = "SELECT students.*, users.mail FROM students, users WHERE id = '%d'"%(user)
+	sql = "SELECT students.*, users.mail FROM users JOIN students on users.id = students.id WHERE students.id = '%d'"%(user)
 	ask_it_to = ['fetchall()']
 	mighty_db_says = call_database(sql, ask_it_to)
 	user_info = mighty_db_says[0][0]
@@ -149,7 +148,6 @@ def create_student():
     else:
         user_level = 1
         new_user_id = add_new_user(email, password, user_level)
-        print phone
         add_new_student(first_name, last_name, program, year, new_user_id, phone)
         return {'result':True, 'email':email, 'password':password}
 

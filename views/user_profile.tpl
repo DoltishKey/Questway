@@ -30,12 +30,12 @@
     	        	<div class="contact_info">
     		        	<!--<div class="icon circle"></div>-->
                         <img src="/static/img/phone-call.svg" class="centered_icon" alt="Phone">
-    		            <p>070-6645406</p>
+    		            <p>{{student[5]}}</p>
 	            	</div>
                     <div class="line"></div>
     	        	<div class="contact_info">
                         <img src="/static/img/envelope.svg" class="centered_icon" alt="Mail">
-    		        	<p>jcbpettersson@gmail.com</p>
+    		        	<p>{{student[6]}}</p>
     	            </div>
                 </div>
             </div>
