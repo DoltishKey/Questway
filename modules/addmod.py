@@ -49,6 +49,7 @@ def do_ad():
 '''*********Check that a Title for the ad is given*********'''
 
 def validate_ad_input(ad_info):
+    '''Last point of validation that it exists a title'''
     s=list(ad_info)
 
     if not ad_info:
@@ -64,7 +65,7 @@ def validate_ad_input(ad_info):
 '''*********Check and manage Ads*********'''
 
 def get_my_ads(employers_id):
-    ''' return a logged-in employers ads'''
+    ''' Return a logged-in employers ads'''
     sql= "SELECT id, titel, main_info, creator_id, DATE(creation_date) FROM ads WHERE '%d'=ads.creator_id" %(employers_id)
 
     ask_it_to = ['fetchall()']

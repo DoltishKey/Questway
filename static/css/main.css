@@ -469,7 +469,7 @@ footer > .wrap {
 
 #footlog{
     margin-top: 50px;
-    width: 10%;
+    width: 40%;
     margin: auto;
 }
 
@@ -1651,8 +1651,7 @@ label{
         position: fixed;
         padding: 30px 0px;
         text-align: center;
-/*
-        background: #E87E04;*/
+        /*background: #E87E04;*/
     }
     .menu{
         margin-top: -10px;
@@ -1660,12 +1659,11 @@ label{
         margin-left: 0%;
         float: left;
     }
-
     #content{
-        padding-top: 150px;
+        padding-top: 230px;
     }
     #profiles{
-        padding-top: 120px;
+        padding-top: 150px;
     }
     .wrapperLogin{
         padding-top: 70px;
@@ -1766,6 +1764,10 @@ label{
     position: relative;
     top: 220px;
     }
+    .no_ads{
+        font-size: 23px;
+        width: 80%;
+    }
     /* Startsida för studenter SLUT */
 
     #feedback_form {
@@ -1790,6 +1792,20 @@ label{
         font-size: 80%;
     }
 
+    /*----Employer----*/
+    #admin_start_employer{
+        padding-top: 150px;
+    }
+    #move_under_header{
+        margin-top: 150px;
+    }
+    #tabs{
+        margin: 70px auto 10px auto;
+    }
+    #uppdrag{
+        padding-top: 0px;
+    }
+    /*--- - END - ---*/
     .about_us_info {
         width: 90%;
     }
