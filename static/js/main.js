@@ -41,19 +41,35 @@ function checkCreateEmployer(){
     $('#create_employer').submit(function(event){
         event.preventDefault(event);
 
+
         //Email-validering:
+        var company_name = document.getElementById("company_name");
+        var org_nr = document.getElementById("org_nr");
+        var fname = document.getElementById("first_name");
+        var lname = document.getElementById("last_name");
         var email = document.getElementById("email");
+        var password = document.getElementById("password");
         var error = document.getElementById("error");
 
-        var atpos = email.indexOf("@");
-        var punktpos = email.lastIndexOf(".");
-        if(atpos < 1 || dotpos < atpos + 2 || dotpos + 2 > email.length){
-            error.innerHTML("Du måste ange hela din mailadress. Med @ och allt.");
-            alert("Du måste ange hela din mailadress. Med @ och allt.");
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value))
+        {
+            return true;
+        }else{
+            /*error.innerHTML("Du måste ange hela din mailadress. Med @ och allt.");
+
+            Denna finns här ifall man vill i ett senare skede göra så att det visas ett felmeddelande PÅ sidan i <p id=error> istället för en popup-ruta
+            */
+            alert("Du måste ange en hel och riktig mailadress. Med @ och allt.");
             email.style.borderColor = "red";
+            return false;
         }
         //Email-val end
 
+        //BLANK Check START
+        if (company_name.value == null || org_nr.value == null || fname.value == null || lname.value == null || email.value == null || password.value == null){
+            alert("Nu har du nog missat fyllat i ett fällt.");
+        }
+        //BLANK Check END
         $.ajax({
             type: 'POST',
             url: '/ajax_create_user',
@@ -80,18 +96,20 @@ function checkCreateEmployer(){
 function checkCreateStudent(){
     $('#create_student').submit(function(event){
         event.preventDefault(event);
-
         //Email-validering:
-        //var email = document.getElementById("email");
-        //var error = document.getElementById("error");
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value))
+        {
+            return true;
+        }else{
+            /*error.innerHTML("Du måste ange hela din mailadress. Med @ och allt.");
 
-        //var atpos = email.indexOf("@");
-        //var punktpos = email.lastIndexOf(".");
-        //if(atpos < 1 || dotpos < atpos + 2 || dotpos + 2 > email.length){
-        //    error.innerHTML("Du måste ange hela din mailadress. Med @ och allt.");
-        //    alert("Du måste ange hela din mailadress. Med @ och allt.");
-        //    email.style.borderColor = "red";
-        //}
+            Denna finns här ifall man vill i ett senare skede göra så att det visas ett felmeddelande PÅ sidan i <p id=error> istället för en popup-ruta
+            */
+            alert("Du måste ange en hel och riktig mailadress. Med @ och allt.");
+            email.style.borderColor = "red";
+            return false;
+        }
+
         //Email-val end
         $.ajax({
             type: 'POST',
@@ -234,6 +252,7 @@ function enter_edit_mode(clicked_parent) {
     clicked_parent.find('.mission_link').find('a').hide();
     remove_key();
     handle_input();
+    img_handleing();
 }
 
 function exit_edit_mode(clicked_parent){
@@ -270,6 +289,21 @@ function handle_input(){
             $('.keys').find('input:last').focus();
           }
     });
+}
+
+function img_handleing(){
+    $('.fileToUpload').change(function(){
+        var parten = $(this).parents('.circle')
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(){
+                var dataURL = reader.result;
+                parten.css('background-image', 'url('+dataURL+')');
+            }
+            reader.readAsDataURL(this.files[0])
+        }
+        $(this).siblings('.fileToUploadLabel').show();
+      });
 }
 
 function remove_key() {

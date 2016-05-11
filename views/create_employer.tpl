@@ -23,17 +23,17 @@
                     <label for="password">Lösenord</label>
                 </div>
                 <div class="form_inputs">
-                    <input placeholder="Företagsnamn" type="input" name="company_name" id="company_name" value="">
+                    <input placeholder="Företagsnamn" type="input" name="company_name" id="company_name" value="" required>
                     <br>
-                    <input placeholder="Org.nr" type="input" name="org_nr" id="org_nr" value="">
+                    <input placeholder="Org.nr" type="input" name="org_nr" id="org_nr" value="" required>
                     <br>
-                    <input placeholder="Förnamn" type="input" name="first_name" id="first_name" value="">
+                    <input placeholder="Förnamn" type="input" name="first_name" id="first_name" value="" required>
                     <br>
-                    <input placeholder="Efternamn" type="input" name="last_name" id="last_name" value="">
+                    <input placeholder="Efternamn" type="input" name="last_name" id="last_name" value="" required>
                     <br>
-                    <input placeholder="Mejl" type="input" name="email" id="email" value="">
+                    <input placeholder="Mejl" type="input" name="email" id="email" value="" required>
                     <br>
-                    <input placeholder="Lösenord" type="input" name="password" id="password" value="">
+                    <input placeholder="Lösenord" type="input" name="password" id="password" value="" required>
                 </div>
                 <!--
                 <label for="company_name">Företag</label>

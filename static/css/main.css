@@ -249,7 +249,7 @@ header h1 {
     font-size: 0px;
     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit  */
     -moz-box-sizing: border-box;    /* Firefox, other Gecko         */
-    box-sizing: border-box; 
+    box-sizing: border-box;
 }
 
 .width_of_tabs_1 li {
@@ -323,7 +323,7 @@ div.wrap_around_tab_content {
     min-height: 500px;
     background-color: #FFF;
     overflow: hidden;
-    border-bottom: 2px solid #8A8C8C; 
+    border-bottom: 2px solid #8A8C8C;
 }
 
 div.container_student_start {
@@ -350,14 +350,14 @@ div.container_student_start h2 {
     color: #FFF;
 }
 
-.tabContent .showMore form .delete_ad { 
-    position: relative; 
+.tabContent .showMore form .delete_ad {
+    position: relative;
     left: 40%;
     display: inline;
 }
 
 @media screen and (max-width:743px) {
-    
+
     .tabs_class li a {
         font-size: 14px;
     }
@@ -534,7 +534,7 @@ footer > .wrap {
 
 #footlog{
     margin-top: 50px;
-    width: 10%;
+    width: 40%;
     margin: auto;
 }
 
@@ -542,7 +542,7 @@ footer > .wrap {
 @media screen and (min-width:800px){
     /*FOOTER RESPONSIVITET*/
     #footlog{
-        width: 
+        width:
     }
 }
 /* För inloggningsformulär: */
@@ -954,7 +954,7 @@ transition: background-color 5000s ease-in-out 0s;
     margin: 0;
     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit  */
     -moz-box-sizing: border-box;    /* Firefox, other Gecko         */
-    box-sizing: border-box; 
+    box-sizing: border-box;
 }
 
 #feedback_form label:nth-of-type(2) {
@@ -968,13 +968,13 @@ transition: background-color 5000s ease-in-out 0s;
     border-radius: none;
     padding: 3%;
     font-size: 15px;
-    font-family: 'Roboto', sans-serif; 
+    font-family: 'Roboto', sans-serif;
     font-weight: 300;
     color: #666;
     outline: none;
     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit  */
     -moz-box-sizing: border-box;    /* Firefox, other Gecko         */
-    box-sizing: border-box; 
+    box-sizing: border-box;
     resize: none;
 }
 
@@ -1218,7 +1218,7 @@ transition: background-color 5000s ease-in-out 0s;
 .pre_missions .img{
     background-image: url('/static/img/bild1.jpg');
     background-repeat: no-repeat;
-    background-position: center center;
+    background-position: center 15%;
     background-size: cover;
 }
 
@@ -1468,7 +1468,7 @@ transition: background-color 5000s ease-in-out 0s;
     transform: scale(1.2);
 }
 @media screen and (max-width:900px){
-    
+
 }
 @media screen and (min-width:900px){
     #ca_Labels{
@@ -1482,20 +1482,20 @@ transition: background-color 5000s ease-in-out 0s;
 
 
 @media screen and (max-width:960px){
-    
+
     .menu {
         width: 50%;
     }
-    
+
     .menu > a {
         font-size: 14px;
         width: 32%;
     }
-    
+
     #employerMenu > a {
         width: 24.5%;
     }
-    
+
     #wrapContent {
     width: 667px;
     margin: auto;
@@ -1524,26 +1524,26 @@ transition: background-color 5000s ease-in-out 0s;
     .content2 {
         padding: 0px;
     }
-    
+
     .wrap {
         width: 90%;
     }
-    
+
     #feedback_form {
         width: 65%;
     }
-    
+
     /* ----- Ansökningar till en annons------ */
     #applications ul a#choose {
         left: 80%;
     }
-    
+
     .col2 {
         left: 35%;
     }
-    
+
     /* ----- Ansökningar till en annons SLUT ----- */
-    
+
     .about_us_info {
     width: 60%;
     }
@@ -1697,7 +1697,7 @@ label{
     #applications ul a#choose {
         left: 70%;
     }
-    
+
     .col2 {
         left: 40%;
     }
@@ -1716,8 +1716,7 @@ label{
         position: fixed;
         padding: 30px 0px;
         text-align: center;
-/*
-        background: #E87E04;*/
+        /*background: #E87E04;*/
     }
     .menu{
         margin-top: -10px;
@@ -1725,12 +1724,11 @@ label{
         margin-left: 0%;
         float: left;
     }
-
     #content{
-        padding-top: 150px;
+        padding-top: 230px;
     }
     #profiles{
-        padding-top: 120px;
+        padding-top: 150px;
     }
     .wrapperLogin{
         padding-top: 70px;
@@ -1806,55 +1804,73 @@ label{
     .courtesyNav {
         display: none;
     }
-    
+
     .pageTitle {
         font-size: 22px;
     }
-    
+
     .tabs_class li {
         font-size: 2.7vw;
     }
-    
+
     .tabs_class li a {
         padding: 8% 3%;
     }
-    
+
     .add {
         padding: 25px 25px 25px 10px;
     }
-    
+
     .add > .arrow {
         width: 40px;
     }
-    
+
     div.container_student_start h2 {
     position: relative;
     top: 220px;
     }
+    .no_ads{
+        font-size: 23px;
+        width: 80%;
+    }
     /* Startsida för studenter SLUT */
-    
+
     #feedback_form {
         width: 100%;
         padding: 0;
     }
-    
+
     #applications {
         width: 95%;
     }
-    
+
     #applications ul a#choose {
         left: 70%;
         font-size: 85%;
     }
-    
+
     .col2 {
         left: 40%;
     }
-    
+
     #applications p {
         font-size: 80%;
     }
-    
+
+    /*----Employer----*/
+    #admin_start_employer{
+        padding-top: 150px;
+    }
+    #move_under_header{
+        margin-top: 150px;
+    }
+    #tabs{
+        margin: 70px auto 10px auto;
+    }
+    #uppdrag{
+        padding-top: 0px;
+    }
+    /*--- - END - ---*/
     .about_us_info {
         width: 90%;
     }
@@ -1899,7 +1915,7 @@ label{
     #btn_id{
         max-width:100%;
     }
-    
+
     .btnbox{
         float:none;
         margin:auto;
@@ -1907,7 +1923,7 @@ label{
         max-width:100%;
         height: auto;
     }
-    
+
     #btn_id_ads {
         max-width: 30%;
         margin-bottom: 30px;

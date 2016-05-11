@@ -49,6 +49,7 @@ def do_ad():
 '''*********Check that a Title for the ad is given*********'''
 
 def validate_ad_input(ad_info):
+    '''Last point of validation that it exists a title'''
     s=list(ad_info)
 
     if not ad_info:
@@ -64,7 +65,7 @@ def validate_ad_input(ad_info):
 '''*********Check and manage Ads*********'''
 
 def get_my_ads(employers_id):
-    ''' return a logged-in employers ads'''
+    ''' Return a logged-in employers ads'''
     sql= "SELECT id, titel, main_info, creator_id, DATE(creation_date) FROM ads WHERE '%d'=ads.creator_id" %(employers_id)
 
     ask_it_to = ['fetchall()']
@@ -73,7 +74,7 @@ def get_my_ads(employers_id):
 
 
 def sort_by_status(user):
-    '''List the ads relevant for a specifik user and with a specifik status'''
+    '''List the ads relevant for a specifik user'''
     sql="SELECT * FROM\
                 (SELECT ads.id, ads.titel, ads.main_info, DATE(ads.creation_date), employers.company_name, employers.id as emp_id,\
                 application.student_id, application.status, employers.first_name, employers.last_name, users.mail, feedback.feedback_text, feedback.grade\
@@ -88,7 +89,7 @@ def sort_by_status(user):
                     ON application.ad_id = feedback.ad_id AND application.status = 'Avslutad'\
                 WHERE student_id='%d')\
                 as H1\
-        WHERE H1.status='Obehandlad' OR H1.status='Vald' OR H1.status='Avslutad' OR H1.status='Bortvald'" %(user)
+        WHERE H1.status='Obehandlad' OR H1.status='Vald' OR H1.status='Avslutad' OR H1.status='Bortvald' ORDER BY status" %(user)
 
     ask_it_to = ['fetchall()']
     mighty_db_says = call_database(sql, ask_it_to)
@@ -105,7 +106,7 @@ def available_ads(user):
         LEFT JOIN application\
             ON ads.id=application.ad_id\
         WHERE ads.id NOT IN\
-            (SELECT ad_id FROM application WHERE status = 'Vald' OR status = 'Avslutad' OR student_id ='%d'  GROUP BY ad_id)\
+            (SELECT ad_id FROM application WHERE status = 'Vald' OR status = 'Avslutad' OR student_id ='%d' GROUP BY ad_id)\
         GROUP BY ads.id" % (user)
 
     ask_it_to = ['fetchall()']
@@ -200,7 +201,7 @@ def move_ad_to_complete(annons):
         ask_it_to = ['fetchall()']
         mighty_db_says_about_employer = call_database(sql, ask_it_to)
 
-        sql="SELECT student_id FROM application WHERE status = 'Vald'"
+        sql="SELECT student_id FROM application WHERE status = 'Vald' and ad_id='%d'"%(int(annons))
         ask_it_to = ['fetchall()']
         mighty_db_says_about_status = call_database(sql, ask_it_to)
 
@@ -225,6 +226,7 @@ def move_ad_to_complete(annons):
 
 
 def edit_mission(ad_id):
+    '''Handle edit by studetns on completed missions that displays on profile'''
     type_of = request.forms.get('mission_type_'+str(ad_id))
     keys = request.POST.getall("add_key_" + str(ad_id))
     display = request.forms.get('display_'+str(ad_id))
@@ -262,6 +264,7 @@ def edit_mission(ad_id):
     sql = "DELETE FROM ad_skills WHERE ad_id = '%d'"%(ad_id)
     call_database(sql, ask_it_to)
 
+    #Måste fixas - inte ok att den ser ut såhär!
     for key in keys:
         ask_it_to = []
         sql = "INSERT INTO skills (name) \
@@ -277,15 +280,16 @@ def edit_mission(ad_id):
 
 
 def grading_ads(user):
+    '''Returns all ads that studetn has completed'''
     sql= "SELECT employers.company_name, J2.*\
         FROM \
             (SELECT creator_id, feedback.* \
-                FROM (SELECT ads.titel, creator_id, ad_id \
-                        FROM ads \
-                        INNER JOIN application \
-                        ON application.ad_id=ads.id \
-                        WHERE student_id = '%d' and status = 'Avslutad') as J1 \
-                INNER JOIN feedback \
+            FROM (SELECT ads.titel, creator_id, ad_id \
+               FROM ads \
+               INNER JOIN application \
+               ON application.ad_id=ads.id \
+               WHERE student_id = '%d' and status = 'Avslutad') as J1 \
+               INNER JOIN feedback \
                 ON J1.ad_id = feedback.ad_id) as J2 \
         INNER JOIN employers \
         ON J2.creator_id = employers.id"%(user)
@@ -297,6 +301,7 @@ def grading_ads(user):
 
 
 def students_that_applied(user_id):
+    '''Returns all studetns that applied on each of employers mission'''
     user_id = int(user_id)
     sql = "SELECT students.id, students.first_name, students.last_name, J1.ad_id, J1.status, education.titel, education.year, users.mail\
     FROM (SELECT student_id, ad_id, status \
@@ -332,6 +337,7 @@ def get_given_feedback_for_employers(user):
 
 
 def get_denied_missions(user):
+    '''Returns all missions that student did not get.'''
     user = int(user)
     sql="SELECT A.titel \
     FROM (SELECT ads.titel \
@@ -347,6 +353,7 @@ def get_denied_missions(user):
     return mighty_db_says[0]
 
 def get_ad_skills(user):
+    '''Returns all skills needed for each ad'''
     sql="SELECT ad_skills.* \
     FROM (SELECT ad_id FROM application WHERE student_id='%d' AND status = 'Avslutad') as J \
     JOIN ad_skills \
