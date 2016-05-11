@@ -22,9 +22,9 @@ body {
     background-position: center;
     background-color: #555;
     color: #fff;
-	height: 650px;
+    height: 650px;
     width: 100%;
-	margin-top: 140px;
+    margin-top: 140px;
     overflow: auto;
 }
 
@@ -81,14 +81,6 @@ header h1 {
     /*background-color: #E87E04;*/
 }
 
-#employerMenu > a {
-    width: 24.7%;
-}
-
-/*.menu > a:first-child {
-    border-left: none;
-}*/
-
 .menu > a:last-child {
     border-right: 1px solid #FFF;
 }
@@ -131,19 +123,12 @@ header h1 {
 
 #wrapper { /* Wrapper för alla sidor för att footer ska hamna längst ner */
     min-height: 100%;
-    margin-bottom: 130px;
-    margin-top: 150px;
+    position: relative;
+    overflow: hidden;
 }
 
-#wrapper:after {
-    content: "";
-    display: block;
-    height: 130px;
-}
-
-#wrap_all_content { /* Wrap för själva innehållet för att footer ska hamna längst ner */
-    overflow:auto;
-	padding-bottom: 130px;  /* must be same height as the footer */
+#content_wrap {
+    padding-bottom: 200px;
 }
 
 /*Tabbar: */
@@ -298,7 +283,6 @@ header h1 {
 div.tabContent {
     background-color: #FFF;
     margin: 0 0 120px 0;
-    min-height: 400px;
 }
 
 div.tabContent.hide {
@@ -488,8 +472,12 @@ footer {
     text-align: center;
     background: #4f5454;
     display: block;
-    height: auto;
+    height: 200px;
     overflow: auto;
+    margin: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
 
 footer > .wrap {
@@ -624,7 +612,6 @@ transition: background-color 5000s ease-in-out 0s;
     background-color: #EDEDED /*#5C5E60*/;
     width: 100%;
     padding: 10px 0px;
-    border-bottom: 5px solid #9B938E;
 }
 
 #wrapContent {
@@ -677,13 +664,13 @@ transition: background-color 5000s ease-in-out 0s;
  /* Design för knappar */
 .myButton {
     -moz-box-shadow: 0px 10px 14px -5px #276873;
-	-webkit-box-shadow: 0px 10px 14px -5px #276873;
-	box-shadow: 5px 7px 10px -7px #000;
+    -webkit-box-shadow: 0px 10px 14px -5px #276873;
+    box-shadow: 5px 7px 10px -7px #000;
     padding:13px 32px;
-	text-decoration:none;
+    text-decoration:none;
     font-size:16px;
-	font-weight: 200;
-	background-color:#E87E04;
+    font-weight: 200;
+    background-color:#E87E04;
     color: #FFF;
     border: 0px;
     text-shadow:0px 1px 0px #3d768a;
@@ -692,10 +679,10 @@ transition: background-color 5000s ease-in-out 0s;
 .myButton:hover {
     background-color: #EB9532;
     /*background:linear-gradient(to bottom, #2B3D44 5%, #537785 100%);
-	background:-moz-linear-gradient(top, #2B3D44 5%, #537785 100%);
-	background:-webkit-linear-gradient(top, #2B3D44 5%, #537785 100%);
-	background:-o-linear-gradient(top, #2B3D44 5%, #537785 100%);
-	background:-ms-linear-gradient(top, #2B3D44 5%, #537785 100%);*/
+    background:-moz-linear-gradient(top, #2B3D44 5%, #537785 100%);
+    background:-webkit-linear-gradient(top, #2B3D44 5%, #537785 100%);
+    background:-o-linear-gradient(top, #2B3D44 5%, #537785 100%);
+    background:-ms-linear-gradient(top, #2B3D44 5%, #537785 100%);*/
 }
 
 .myButton:active {
@@ -1012,10 +999,10 @@ transition: background-color 5000s ease-in-out 0s;
 /* --- Student profile.tpl --- */
 
 #profiles ul{
-	padding-left: 0px;
+    padding-left: 0px;
 }
 #profiles li{
-	list-style-type: none;
+    list-style-type: none;
 }
 
 #profiles .top{
@@ -1101,7 +1088,7 @@ transition: background-color 5000s ease-in-out 0s;
 }
 
 .contact{
-	background-color: #fff;
+    background-color: #fff;
     padding: 30px 0px;
 }
 
@@ -1117,10 +1104,10 @@ transition: background-color 5000s ease-in-out 0s;
 }
 
 .contact_info .icon{
-	height: 50px;
-	width: 50px;
-	background-color: black;
-	border: 4px solid rgba(102, 185, 191, 0.9);
+    height: 50px;
+    width: 50px;
+    background-color: black;
+    border: 4px solid rgba(102, 185, 191, 0.9);
     margin: 0 auto;
     margin-bottom: 10px;
 }
@@ -1138,7 +1125,7 @@ transition: background-color 5000s ease-in-out 0s;
 }
 
 .pre_missions li{
-	background-color: rgba(102, 185, 191, 1);
+    background-color: rgba(102, 185, 191, 1);
     text-align: center;
     color: #fff;
     padding: 20px 0px;
@@ -1492,10 +1479,6 @@ transition: background-color 5000s ease-in-out 0s;
         width: 32%;
     }
 
-    #employerMenu > a {
-        width: 24.5%;
-    }
-
     #wrapContent {
     width: 667px;
     margin: auto;
@@ -1546,6 +1529,10 @@ transition: background-color 5000s ease-in-out 0s;
 
     .about_us_info {
     width: 60%;
+    }
+
+    #admin_start_employer {
+        margin-top: 170px;
     }
 }
 
@@ -1629,7 +1616,7 @@ transition: background-color 5000s ease-in-out 0s;
     margin-top: -80px;
 }
 #content{
-    padding-bottom: 10%;
+    padding-bottom: 5%;
     background-color: #ddd;
 }
 #create_student{
@@ -1882,12 +1869,13 @@ label{
 
 @media screen and (min-width:960px){
     #admin_start_employer{
-        min-height: 80%;
+        /*min-height: 50%;*/
         /*max-width: 1500px;*/
-        margin: 70px auto;
+        margin: 70px auto 0 auto;
         display: -webkit-flex;
         display: flex;
         margin-top: 200px;
+        padding-bottom: 200px;
     }
 
     #employer_how_it_works{

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
         % include('head.tpl')
-	<body>
+    <body>
+        <div id="wrapper">
         % include('nav_employers.tpl')
-		<main id="admin_start_employer">
+        <main id="admin_start_employer">
             <div id="employer_how_it_works" class="col">
                 <h2>Hur funkar det?</h2>
                 <div>
@@ -30,7 +31,7 @@
                     <ul>
                         %for i in annons:
                             %if (any( int(student[3]) == int(i[0]) and (str(student[4]) != 'Obehandlad') for student in students_application)) == False:
-        		                <a href="/allMissions" data-value="{{i[0]}}" class="go_to_ad">
+                                <a href="/allMissions" data-value="{{i[0]}}" class="go_to_ad">
                                     <li>
                                         <div>
                                             <h3>{{i[1]}}</h3>
@@ -55,12 +56,13 @@
                                     </li>
                                 </a>
                             %end
-        	            %end
+                        %end
                     </ul>
                 </div>
             </div>
       </main>
-      
+
     %include('footer.tpl')
-	</body>
+    </div>
+    </body>
 </html>
