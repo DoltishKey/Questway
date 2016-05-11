@@ -1,5 +1,9 @@
 html{
-   min-height: 100%;
+    min-height: 100%;
+    height: 100%;
+    clear: both;
+    padding: 0;
+    margin: 0;
 }
 
 body {
@@ -8,6 +12,8 @@ body {
     font-weight: 300;
     font-size: 16px;
     margin: 0;
+    padding: 0;
+    clear: both;
 }
 
 .wrapperLogin {
@@ -16,8 +22,6 @@ body {
     background-position: center;
     background-color: #555;
     color: #fff;
-    /*min-height: 100%;*/
-	/*height: auto !important;*/
 	height: 650px;
     width: 100%;
 	margin-top: 140px;
@@ -123,6 +127,23 @@ header h1 {
     width: 80%;
     margin: 0 auto;
     z-index: 0;
+}
+
+#wrapper { /* Wrapper för alla sidor för att footer ska hamna längst ner */
+    min-height: 100%;
+    margin-bottom: 130px;
+    margin-top: 150px;
+}
+
+#wrapper:after {
+    content: "";
+    display: block;
+    height: 130px;
+}
+
+#wrap_all_content { /* Wrap för själva innehållet för att footer ska hamna längst ner */
+    overflow:auto;
+	padding-bottom: 130px;  /* must be same height as the footer */
 }
 
 /*Tabbar: */
@@ -285,6 +306,7 @@ div.tabContent.hide {
 }
 
 div#thanks_for_applying {
+    /* Blir synlig via JavaScript när man ansökt till uppdrag */
     display: none;
     width: 500px;
     margin: 0 auto 30px auto;
@@ -404,6 +426,47 @@ div.container_student_start h2 {
 
 /* ---- Help page || END ----*/
 
+/* ---- Error message template ----*/
+
+#error_message_container_div {
+    margin: 150px auto 150px auto;
+    width: 40%;
+    min-height: 50%;
+    text-align: center;
+    overflow: auto;
+}
+
+#error_message_container_div a {
+    color: #000;
+}
+
+#error_message_container_div a:hover {
+    color: #00c4cc;
+}
+
+#error_message_container_div a:active {
+    text-decoration: underline;
+    color: #000;
+}
+
+#error_message_container_div img {
+    width: 15%;
+    margin: 100px auto 0 auto;
+}
+
+.error {
+    padding: 2%;
+    width: 95%;
+    margin: 50px auto 30px auto;
+    background-color: rgba(191, 47, 47, 0.5);
+    border: 2px solid #9e021e;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+/* ---- Error message template || END ---- */
+
 .column2 { /* En extra kolumn i uppdrag */
     margin-left: 50px;
 }
@@ -419,12 +482,14 @@ div.container_student_start h2 {
     /*blir synlig när den behövs. Via js-funktionen: checkLogIn*/
     display: none;
 }
+
 footer {
     color: #FFF;
-    height: auto;
     text-align: center;
-    background: #6b6d6d;
-    bottom: 0px;
+    background: #4f5454;
+    display: block;
+    height: auto;
+    overflow: auto;
 }
 
 footer > .wrap {

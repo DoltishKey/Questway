@@ -52,25 +52,25 @@ def validate_user(username, password):
 
 
 def validate_autho():
-	session = request.environ.get('beaker.session')
-	try:
-		session['userId']
-		return True
+    session = request.environ.get('beaker.session')
+    try:
+        session['userId']
+        return True
 
-	except:
-		redirect('/login')
+    except:
+        redirect('/login')
 
 def is_user_logged_in():
-	session = request.environ.get('beaker.session')
-	try:
-		session['userId']
-		return True
-	except:
-		return False
+    session = request.environ.get('beaker.session')
+    try:
+        session['userId']
+        return True
+    except:
+        return False
 
 def get_user_id_logged_in():
-	session = request.environ.get('beaker.session')
-	return session['userId']
+    session = request.environ.get('beaker.session')
+    return session['userId']
 
 def get_user_name():
     session = request.environ.get('beaker.session')
@@ -118,11 +118,10 @@ def log_in_new_user(email, password):
         session.save()
 
 
-
 def log_out():
-	session = request.environ.get('beaker.session')
-	session.delete()
-	session.save()
+    session = request.environ.get('beaker.session')
+    session.delete()
+    session.save()
 
 def ajax_validation():
     username = request.forms.get('email')

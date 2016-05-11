@@ -2,7 +2,7 @@
 <html>
     % include('head.tpl')
 	<body>
-        <div class="wrapper">
+        <div id="wrapper">
             %include('nav.tpl')
             <div id="content">
                 <h3>Skapa profil som:</h3>
@@ -14,7 +14,7 @@
                 </p>
             </div>
         </div>
-    
+
         %include('footer.tpl')
 	</body>
 	<script src="/static/js/jquery.js"></script>

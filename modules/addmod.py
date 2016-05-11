@@ -75,19 +75,19 @@ def get_my_ads(employers_id):
 def sort_by_status(user):
     '''List the ads relevant for a specifik user and with a specifik status'''
     sql="SELECT * FROM\
-			    (SELECT ads.id, ads.titel, ads.main_info, DATE(ads.creation_date), employers.company_name, employers.id as emp_id,\
+                (SELECT ads.id, ads.titel, ads.main_info, DATE(ads.creation_date), employers.company_name, employers.id as emp_id,\
                 application.student_id, application.status, employers.first_name, employers.last_name, users.mail, feedback.feedback_text, feedback.grade\
-			    FROM ads\
-			    JOIN employers\
-			        ON ads.creator_id=employers.id\
+                FROM ads\
+                JOIN employers\
+                    ON ads.creator_id=employers.id\
                 JOIN users\
                     ON employers.id = users.id\
-			    LEFT JOIN application\
-			        ON ads.id=application.ad_id\
+                LEFT JOIN application\
+                    ON ads.id=application.ad_id\
                 LEFT JOIN feedback\
                     ON application.ad_id = feedback.ad_id AND application.status = 'Avslutad'\
                 WHERE student_id='%d')\
-		        as H1\
+                as H1\
         WHERE H1.status='Obehandlad' OR H1.status='Vald' OR H1.status='Avslutad' OR H1.status='Bortvald'" %(user)
 
     ask_it_to = ['fetchall()']
@@ -113,8 +113,7 @@ def available_ads(user):
     the_ads=mighty_db_says[0]
     return the_ads
 
-
-'''******* Delete a specifik ad *******'''
+'''******* Delete a specific ad *******'''
 
 def erase_ad(ad_id, user_ID):
     ad_id = int(ad_id)
@@ -278,58 +277,58 @@ def edit_mission(ad_id):
 
 
 def grading_ads(user):
-	sql= "SELECT employers.company_name, J2.*\
-	    FROM \
-	        (SELECT creator_id, feedback.* \
-	        	FROM (SELECT ads.titel, creator_id, ad_id \
-	        			FROM ads \
-	        			INNER JOIN application \
-	        			ON application.ad_id=ads.id \
-	        			WHERE student_id = '%d' and status = 'Avslutad') as J1 \
-	        	INNER JOIN feedback \
-	        	ON J1.ad_id = feedback.ad_id) as J2 \
-	    INNER JOIN employers \
-	    ON J2.creator_id = employers.id"%(user)
+    sql= "SELECT employers.company_name, J2.*\
+        FROM \
+            (SELECT creator_id, feedback.* \
+                FROM (SELECT ads.titel, creator_id, ad_id \
+                        FROM ads \
+                        INNER JOIN application \
+                        ON application.ad_id=ads.id \
+                        WHERE student_id = '%d' and status = 'Avslutad') as J1 \
+                INNER JOIN feedback \
+                ON J1.ad_id = feedback.ad_id) as J2 \
+        INNER JOIN employers \
+        ON J2.creator_id = employers.id"%(user)
 
-	ask_it_to = ['fetchall()']
-	mighty_db_says = call_database(sql, ask_it_to)
-	return mighty_db_says[0]
+    ask_it_to = ['fetchall()']
+    mighty_db_says = call_database(sql, ask_it_to)
+    return mighty_db_says[0]
 
 
 
 def students_that_applied(user_id):
-	user_id = int(user_id)
-	sql = "SELECT students.id, students.first_name, students.last_name, J1.ad_id, J1.status, education.titel, education.year, users.mail\
-	FROM (SELECT student_id, ad_id, status \
-			FROM ads \
-			INNER JOIN application \
-			ON application.ad_id=ads.id \
-			WHERE creator_id = '%d') as J1 \
-	INNER JOIN students \
-	ON J1.student_id = students.id \
+    user_id = int(user_id)
+    sql = "SELECT students.id, students.first_name, students.last_name, J1.ad_id, J1.status, education.titel, education.year, users.mail\
+    FROM (SELECT student_id, ad_id, status \
+            FROM ads \
+            INNER JOIN application \
+            ON application.ad_id=ads.id \
+            WHERE creator_id = '%d') as J1 \
+    INNER JOIN students \
+    ON J1.student_id = students.id \
     INNER JOIN education\
     ON students.education_id = education.education_id and students.education_year = education.year\
     INNER JOIN users\
     ON users.id=J1.student_id"%(user_id)
 
-	ask_it_to = ['fetchall()']
-	mighty_db_says = call_database(sql, ask_it_to)
-	return mighty_db_says[0]
+    ask_it_to = ['fetchall()']
+    mighty_db_says = call_database(sql, ask_it_to)
+    return mighty_db_says[0]
 
 
 def get_given_feedback_for_employers(user):
-	sql = "SELECT J1.id, feedback.feedback_text, feedback.grade \
-			FROM (SELECT ads.titel, ads.id \
-					FROM ads \
-						INNER JOIN employers \
-					 		ON employers.id=ads.creator_id \
-					WHERE employers.id = '%d') as J1 \
-				INNER JOIN feedback \
-					ON J1.id = feedback.ad_id"%(user)
+    sql = "SELECT J1.id, feedback.feedback_text, feedback.grade \
+            FROM (SELECT ads.titel, ads.id \
+                    FROM ads \
+                        INNER JOIN employers \
+                             ON employers.id=ads.creator_id \
+                    WHERE employers.id = '%d') as J1 \
+                INNER JOIN feedback \
+                    ON J1.id = feedback.ad_id"%(user)
 
-	ask_it_to = ['fetchall()']
-	mighty_db_says = call_database(sql, ask_it_to)
-	return mighty_db_says[0]
+    ask_it_to = ['fetchall()']
+    mighty_db_says = call_database(sql, ask_it_to)
+    return mighty_db_says[0]
 
 
 def get_denied_missions(user):
