@@ -1,5 +1,9 @@
 html{
-   min-height: 100%;
+    min-height: 100%;
+    height: 100%;
+    clear: both;
+    padding: 0;
+    margin: 0;
 }
 
 body {
@@ -8,6 +12,8 @@ body {
     font-weight: 300;
     font-size: 16px;
     margin: 0;
+    padding: 0;
+    clear: both;
 }
 
 .wrapperLogin {
@@ -16,11 +22,9 @@ body {
     background-position: center;
     background-color: #555;
     color: #fff;
-    /*min-height: 100%;*/
-	/*height: auto !important;*/
-	height: 650px;
+    height: 650px;
     width: 100%;
-	margin-top: 140px;
+    margin-top: 140px;
     overflow: auto;
 }
 
@@ -77,14 +81,6 @@ header h1 {
     /*background-color: #E87E04;*/
 }
 
-#employerMenu > a {
-    width: 24.7%;
-}
-
-/*.menu > a:first-child {
-    border-left: none;
-}*/
-
 .menu > a:last-child {
     border-right: 1px solid #FFF;
 }
@@ -125,6 +121,16 @@ header h1 {
     z-index: 0;
 }
 
+#wrapper { /* Wrapper för alla sidor för att footer ska hamna längst ner */
+    min-height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+#content_wrap {
+    padding-bottom: 150px;
+}
+
 /*Tabbar: */
 
 .add {
@@ -151,6 +157,8 @@ header h1 {
 .add h4 {
     padding: 2% 0 0 0;
     margin: 0;
+    overflow: hidden;
+    verical-align: top;
 }
 
 .add h4.inline_block:first-child {
@@ -160,6 +168,8 @@ header h1 {
 .add p {
     margin: 0.5% 0;
     width: 90%;
+    overflow: hidden;
+    verical-align: top;
 }
 
 .add p.inline_block {
@@ -277,7 +287,6 @@ header h1 {
 div.tabContent {
     background-color: #FFF;
     margin: 0 0 120px 0;
-    min-height: 400px;
 }
 
 div.tabContent.hide {
@@ -285,6 +294,7 @@ div.tabContent.hide {
 }
 
 div#thanks_for_applying {
+    /* Blir synlig via JavaScript när man ansökt till uppdrag */
     display: none;
     width: 500px;
     margin: 0 auto 30px auto;
@@ -341,6 +351,12 @@ div.container_student_start h2 {
     }
 }
 
+@media screen and (max-width:585px) {
+    .tabs_class li a {
+        font-size: 2.5vw;
+    }
+}
+
 
 /* Annonser visa/dölja: */
 
@@ -361,6 +377,7 @@ div.container_student_start h2 {
 .inline_block {
     display: inline-block;
     vertical-align: top;
+    line-height: 1;
 }
 
 .block {
@@ -373,7 +390,7 @@ div.container_student_start h2 {
 .about_us_info {
     width: 40%;
     background: #FFF;
-    margin: 20px auto 60px auto;
+    margin: 50px auto 60px auto;
     padding: 2%;
     line-height: 2;
 }
@@ -381,6 +398,10 @@ div.container_student_start h2 {
 .about_questway {
     font-size: 200%;
     text-transform: uppercase;
+    background-color: #00c4cc;
+    color: #FFF;
+    padding: 2%;
+    margin: 0;
 }
 
 /* ---- About us page || END---- */
@@ -391,40 +412,83 @@ div.container_student_start h2 {
     width: 600px;
     background: #FFF;
     padding: 3% 5%;
-    margin: 0 auto;
+    margin: 0 auto 50px auto;
+}
+
+#container_of_container {
+    margin-top: 150px;
+    text-align: center;
+    background-color: #DDD;
+    overflow: hidden;
 }
 
 .help_heading {
     margin: 0 auto 2% auto;
-    padding: 1% 5%;
-    border-bottom: 10px solid #00c4cc;
-    color: #00c4cc;
+    padding: 2%;
+    /*border-bottom: 10px solid #00c4cc;*/
+    background-color: #00c4cc;
+    color: #FFF;
     text-transform: uppercase;
 }
 
 /* ---- Help page || END ----*/
 
+/* ---- Error message template ----*/
+
+#error_message_container_div {
+    margin: 150px auto 150px auto;
+    width: 40%;
+    min-height: 50%;
+    text-align: center;
+    overflow: auto;
+}
+
+#error_message_container_div a {
+    color: #000;
+}
+
+#error_message_container_div a:hover {
+    color: #00c4cc;
+}
+
+#error_message_container_div a:active {
+    text-decoration: underline;
+    color: #000;
+}
+
+#error_message_container_div img {
+    width: 15%;
+    margin: 100px auto 0 auto;
+}
+
+.error {
+    padding: 2%;
+    width: 95%;
+    margin: 50px auto 30px auto;
+    background-color: rgba(191, 47, 47, 0.5);
+    border: 2px solid #9e021e;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+/* ---- Error message template || END ---- */
+
 .column2 { /* En extra kolumn i uppdrag */
     margin-left: 50px;
 }
 
-#logIn #error{
-    text-align: center;
-    color: red;
-    padding: 10px;
-    border-radius: 5px;
-    background: rgba(200,0,0,0.3);
-    width: 75%;
-    margin: auto;
-    /*blir synlig när den behövs. Via js-funktionen: checkLogIn*/
-    display: none;
-}
 footer {
     color: #FFF;
-    height: auto;
-    text-align: center;
-    background: #6b6d6d;
-    bottom: 0px;
+    background: #4f5454;
+    display: block;
+    height: 150px;
+    width: 100%;
+    overflow: auto;
+    margin: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
 
 footer > .wrap {
@@ -433,21 +497,24 @@ footer > .wrap {
 
 .footer_col1 {
     width: 25%;
-    padding: 3%;
+    padding: 3% 3% 3% 0;
     float: left;
+    text-align: left;
 }
 
 .footer_col2 {
     width: 25%;
     float: left;
-    padding: 3%;
+    padding: 0 3%;
     margin-left: 3%;
+    text-align: center;
 }
 
 .footer_col3 {
     width: 25%;
     float: right;
-    padding: 3%;
+    padding: 3% 0 3% 3%;
+    text-align: right;
 }
 
 .footer_col3 a {
@@ -489,6 +556,33 @@ footer > .wrap {
     background-color: rgba(45, 48, 48, 0.7);
     box-shadow: 0px 10px 14px -7px #000;
     border-radius: 10px;
+}
+
+#logIn p {
+    width: 40%;
+    margin: 10px auto;
+    text-align: center;
+    color: #FFF;
+}
+
+#logIn p a {
+    color: #FFF;
+}
+
+#logIn p a:hover {
+    color: #F89406;
+}
+
+#logIn #error{
+    text-align: center;
+    color: red;
+    padding: 10px;
+    border-radius: 5px;
+    background: rgba(200,0,0,0.3);
+    width: 75%;
+    margin: auto;
+    /*blir synlig när den behövs. Via js-funktionen: checkLogIn*/
+    display: none;
 }
 
 #logIn h2{
@@ -559,7 +653,6 @@ transition: background-color 5000s ease-in-out 0s;
     background-color: #EDEDED /*#5C5E60*/;
     width: 100%;
     padding: 10px 0px;
-    border-bottom: 5px solid #9B938E;
 }
 
 #wrapContent {
@@ -572,6 +665,7 @@ transition: background-color 5000s ease-in-out 0s;
     display: inline-block;
     padding: 50px;
     text-align: center;
+    vertical-align: top;
 }
 
 .roundBox {
@@ -606,19 +700,21 @@ transition: background-color 5000s ease-in-out 0s;
 }
 
 .contentInContent p {
-    color: #666;
+    color: #444444;
+    line-height: 1.5;
+    height: 200px;
 }
 
  /* Design för knappar */
 .myButton {
     -moz-box-shadow: 0px 10px 14px -5px #276873;
-	-webkit-box-shadow: 0px 10px 14px -5px #276873;
-	box-shadow: 5px 7px 10px -7px #000;
+    -webkit-box-shadow: 0px 10px 14px -5px #276873;
+    box-shadow: 5px 7px 10px -7px #000;
     padding:13px 32px;
-	text-decoration:none;
+    text-decoration:none;
     font-size:16px;
-	font-weight: 200;
-	background-color:#E87E04;
+    font-weight: 200;
+    background-color:#E87E04;
     color: #FFF;
     border: 0px;
     text-shadow:0px 1px 0px #3d768a;
@@ -627,10 +723,10 @@ transition: background-color 5000s ease-in-out 0s;
 .myButton:hover {
     background-color: #EB9532;
     /*background:linear-gradient(to bottom, #2B3D44 5%, #537785 100%);
-	background:-moz-linear-gradient(top, #2B3D44 5%, #537785 100%);
-	background:-webkit-linear-gradient(top, #2B3D44 5%, #537785 100%);
-	background:-o-linear-gradient(top, #2B3D44 5%, #537785 100%);
-	background:-ms-linear-gradient(top, #2B3D44 5%, #537785 100%);*/
+    background:-moz-linear-gradient(top, #2B3D44 5%, #537785 100%);
+    background:-webkit-linear-gradient(top, #2B3D44 5%, #537785 100%);
+    background:-o-linear-gradient(top, #2B3D44 5%, #537785 100%);
+    background:-ms-linear-gradient(top, #2B3D44 5%, #537785 100%);*/
 }
 
 .myButton:active {
@@ -659,6 +755,7 @@ transition: background-color 5000s ease-in-out 0s;
     display: none;
     border-bottom: 2px solid #BFBFBF;
     padding: 15px 0px;
+    overflow: auto;
 }
 
 #employer_how_it_works > h2, #employer_how_it_works > div{
@@ -687,9 +784,8 @@ transition: background-color 5000s ease-in-out 0s;
 }
 
 .btn:hover{
-    background-color: #5B514A;
-    transition: background-color 0.7s ease;
-    color: #BD6822;
+    background-color: #ce6f02;
+    transition: background-color 0.2s ease;
 }
 
 .emloyers_all_adds{
@@ -931,7 +1027,7 @@ transition: background-color 5000s ease-in-out 0s;
 #submit_feedback {
     display: block;
     width: 30%;
-    margin-top: 30px;
+    margin: 30px auto 0 auto;
     border-radius: 4px;
 }
 
@@ -947,10 +1043,10 @@ transition: background-color 5000s ease-in-out 0s;
 /* --- Student profile.tpl --- */
 
 #profiles ul{
-	padding-left: 0px;
+    padding-left: 0px;
 }
 #profiles li{
-	list-style-type: none;
+    list-style-type: none;
 }
 
 #profiles .top{
@@ -1036,7 +1132,7 @@ transition: background-color 5000s ease-in-out 0s;
 }
 
 .contact{
-	background-color: #fff;
+    background-color: #fff;
     padding: 30px 0px;
 }
 
@@ -1052,10 +1148,10 @@ transition: background-color 5000s ease-in-out 0s;
 }
 
 .contact_info .icon{
-	height: 50px;
-	width: 50px;
-	background-color: black;
-	border: 4px solid rgba(102, 185, 191, 0.9);
+    height: 50px;
+    width: 50px;
+    background-color: black;
+    border: 4px solid rgba(102, 185, 191, 0.9);
     margin: 0 auto;
     margin-bottom: 10px;
 }
@@ -1073,7 +1169,7 @@ transition: background-color 5000s ease-in-out 0s;
 }
 
 .pre_missions li{
-	background-color: rgba(102, 185, 191, 1);
+    background-color: rgba(102, 185, 191, 1);
     text-align: center;
     color: #fff;
     padding: 20px 0px;
@@ -1362,46 +1458,67 @@ transition: background-color 5000s ease-in-out 0s;
     color: #E87E04;
 }
 /*ca = Create Ad*/
-#ca_Title{
-    margin-bottom: -10px;
+#add_ad{
     background-color: #999;
     padding: 2%;
+    margin-top: -4.2%;
     color: #000;
+    width: 100%;
 }
-.ca_Formblock{
-    width: 30%;
-    display: inline-block;
-    padding: 10px;
+
+#create_ad {
+    width: 50%;
+    margin: 0 auto;
 }
-#ca_Labels{
-    text-align: right;
-    margin-left:-10%;
-}
-#ca_Labels label{
+
+#create_ad label{
     display: block;
-    margin: 65px auto
+    margin: 10px auto;
 }
-#ca_Inputs{
-    width: 40%;
-}
+
 #ca_text{
     height: 50px;
 }
-#ca_Inputs input, #ca_Inputs textarea{
+
+#create_ad input, #create_ad textarea{
     background: #FFF9F6;
     color: #000;
-    height: 30px;
     width: 100%;
     font-size: 15px;
     background: white;
     text-align: center;
-    border-radius: 8px;
+    border-radius: 5px;
+    border: none;
+    margin: 10px 0;
 }
-#ad_done{
+
+#create_ad input:focus, #create_ad textarea:focus {
+    outline: 0;
+}
+
+#create_ad #ca_title {
+    height: 40px;
+    box-sizing: border-box;
+}
+
+#create_ad textarea {
+    height: 200px;
+    resize: none;
+    box-sizing: border-box;
+    padding: 2%;
+}
+
+#create_ad #ad_done {
     display: block;
     margin: 25px auto;
     transform: scale(1.2);
+    width: 30%;
+    color: #FFF;
+    border-radius: none;
+    background: #E87E04;
+    text-align: center;
 }
+
 @media screen and (max-width:900px){
 
 }
@@ -1425,10 +1542,6 @@ transition: background-color 5000s ease-in-out 0s;
     .menu > a {
         font-size: 14px;
         width: 32%;
-    }
-
-    #employerMenu > a {
-        width: 24.5%;
     }
 
     #wrapContent {
@@ -1482,13 +1595,41 @@ transition: background-color 5000s ease-in-out 0s;
     .about_us_info {
     width: 60%;
     }
+
+    #admin_start_employer {
+        margin-top: 170px;
+    }
+
+    #btn_id_ads {
+        max-width: 30%;
+        margin-bottom: 30px;
+        margin-top: -10px;
+    }
+
+    #create_ad {
+        width: 70%;
+    }
+
+    #add_ad {
+        margin-top: 0;
+    }
+
+    #error_message_container_div img {
+        width: 30%;
+    }
 }
 
 /* ----- Välj Typ av användare ------ */
 #content{
-    padding-top: 20%;
+    padding-bottom: 5%;
+    background-color: #ddd;
     text-align: center;
 }
+
+.content_create_user > h3 {
+    margin-top: 50px;
+}
+
 .choicereg{
     text-align: center;
     padding: 7%;
@@ -1507,6 +1648,7 @@ transition: background-color 5000s ease-in-out 0s;
 }
 #studentreg{
     background: #E87E04;
+    margin-left: 30px;
 }
 
 @media screen and (min-width:900px){
@@ -1519,7 +1661,7 @@ transition: background-color 5000s ease-in-out 0s;
         padding: 3%;
         display: inline-block;
         width: 20%;
-        margin: 10px;
+        margin: 70px 0 100px 0;
         color: #fff;
         border-radius: 10px;
         font-size: 130%;
@@ -1534,7 +1676,6 @@ transition: background-color 5000s ease-in-out 0s;
 }
 #employerform_Title{
     background: #59ABE3;
-
 }
 #create_employer input, select{
     background: #FFF9F6;
@@ -1545,6 +1686,13 @@ transition: background-color 5000s ease-in-out 0s;
     background: white;
     text-align: center;
     border-radius: 8px;
+}
+#create_employer #create_student_account{
+    width: 20%;
+    margin: 30px auto;
+    display: block;
+    padding: 1%;
+    line-height: 0.3;
 }
 @media screen and (min-width:900px){
     #create_employer{
@@ -1563,10 +1711,7 @@ transition: background-color 5000s ease-in-out 0s;
     padding: 5% 0%;
     margin-top: -80px;
 }
-#content{
-    padding-bottom: 10%;
-    background-color: #ddd;
-}
+
 #create_student{
     width: 100%;
     text-align: center;
@@ -1580,7 +1725,7 @@ label{
     display: inline-block;
     left: 1%;
 }
-#create_student input, select{
+#create_student input, #create_student select{
     background: #FFF9F6;
     color: #000;
     height: 30px;
@@ -1589,6 +1734,13 @@ label{
     background: white;
     text-align: center;
     border-radius: 8px;
+}
+#create_student #create_student_account {
+    width: 20%;
+    margin: 30px auto;
+    display: block;
+    padding: 1%;
+    line-height: 0.3;
 }
 .form_labels{
     display: inline-block;
@@ -1600,7 +1752,7 @@ label{
     width: 49.3%;
     text-align: center;
 }
-.form_inputs select,input{
+.form_inputs select, .form_inputs input{
     margin: 17px auto;
     max-width: 300px;
 }
@@ -1659,6 +1811,15 @@ label{
         margin-left: 0%;
         float: left;
     }
+
+    .menu a:first-child {
+        border-left: none;
+    }
+
+    .menu a:last-child {
+        border-right: none;
+    }
+
     #content{
         padding-top: 230px;
     }
@@ -1700,7 +1861,7 @@ label{
     }
 
     #wrapContent {
-        background: #9B938E;
+        background: #CCCCCC;
         width: 100%;
         padding: 0;
     }
@@ -1713,8 +1874,10 @@ label{
 
     .contentInContent p {
         padding: 5% 2%;
-        background: #C0B4AD;
+        background: #EDEDED;
         color: black;
+        margin-top: 0;
+        margin-bottom: 8%;
     }
 
     .roundBox {
@@ -1724,6 +1887,11 @@ label{
         line-height: 100px;
         margin: 0;
         padding: 0;
+    }
+
+    .roundBox h2 {
+        margin-top: 8%;
+        font-weight: bold;
     }
 
      /* För startsidan för studenter: */
@@ -1760,6 +1928,18 @@ label{
         width: 40px;
     }
 
+    .footer_col1 {
+        text-align: center;
+    }
+
+    .footer_col2 {
+        padding-top: 3%;
+    }
+
+    .footer_col3 {
+        text-align: center;
+    }
+
     div.container_student_start h2 {
     position: relative;
     top: 220px;
@@ -1793,9 +1973,7 @@ label{
     }
 
     /*----Employer----*/
-    #admin_start_employer{
-        padding-top: 150px;
-    }
+
     #move_under_header{
         margin-top: 150px;
     }
@@ -1813,13 +1991,36 @@ label{
     .about_questway {
         font-size: 150%;
     }
+
+    #btn_id_ads {
+        max-width: 50%;
+        margin-top: 30px;
+    }
+
+    #create_ad {
+        width: 85%;
+    }
+
+    #create_ad #ad_done {
+        font-size: 2.5vw;
+        padding: 3%;
+    }
+
+    #error_message_container_div {
+        width: 70%;
+    }
+
+    .error {
+        width: 90%;
+    }
 }
 
 @media screen and (min-width:960px){
     #admin_start_employer{
-        min-height: 80%;
+        /*min-height: 50%;*/
         /*max-width: 1500px;*/
-        margin: 70px auto;
+        margin: 70px auto 0 auto;
+        display: -webkit-flex;
         display: -webkit-flex;
         display: flex;
         margin-top: 200px;
@@ -1829,7 +2030,8 @@ label{
         display: block;
         border-bottom: none;
         background-color: #EEEAE8;
-        padding: 0px;
+        padding: 2%;
+        box-sizing: border-box;
     }
 
     #toggle_how_it_works{
@@ -1838,7 +2040,7 @@ label{
 
     .col{
         width: 33%;
-        height: 400px;
+        height: 450px;
         margin: 40px 10px;
         padding: 0px;
         border-bottom: 2px solid #EEEAE8;
@@ -1866,8 +2068,14 @@ label{
     }
 
 
-    #employer_how_it_works h2, #employer_how_it_works div{
-        margin: 50px;
+    #employer_how_it_works div{
+        margin: 20px;
+        line-height: 1.5;
+    }
+
+    #employer_how_it_works h2 {
+        margin: 0 0 10px 0;
+        text-align: center;
     }
 
     .employers_add_new_ad{

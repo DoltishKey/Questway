@@ -2,8 +2,9 @@
 <html>
     %include('head.tpl')
     <body onload="init()">
+        <div id="wrapper">
         %include('nav_employers.tpl')
-
+        <div id="content_wrap">
         <div class="wrap" id="move_under_header">
             <ul id="tabs" class="tabs_class width_of_tabs_1">
                 <li>
@@ -161,7 +162,9 @@
                 %end
             </div>
         </div>
+        </div>
 
         %include('footer.tpl')
+        </div>
     </body>
 </html>

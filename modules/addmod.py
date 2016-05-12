@@ -61,7 +61,7 @@ def sort_by_status(user, cursor):
                 JOIN users\
                     ON employers.id = users.id\
                 LEFT JOIN application\
-                ON ads.id=application.ad_id\
+                    ON ads.id=application.ad_id\
                 LEFT JOIN feedback\
                     ON application.ad_id = feedback.ad_id AND application.status = 'Avslutad'\
                 WHERE student_id='%d')\
@@ -88,8 +88,7 @@ def available_ads(user, cursor):
     mighty_db_says = cursor.fetchall()
     return mighty_db_says
 
-
-'''******* Delete a specifik ad *******'''
+'''******* Delete a specific ad *******'''
 
 def erase_ad(ad_id, user_ID, cursor):
     '''Deletes an ad from DB based on userinput data'''
@@ -284,7 +283,6 @@ def students_that_applied(user_id, cursor):
     cursor.execute(sql)
     mighty_db_says = cursor.fetchall()
     return mighty_db_says
-
 
 def get_given_feedback_for_employers(user, cursor):
     sql = "SELECT J1.id, feedback.feedback_text, feedback.grade \

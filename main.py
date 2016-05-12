@@ -26,20 +26,20 @@ def hang_up_on_database():
 
 @route('/')
 def startPage():
-	if log.is_user_logged_in()==False:
-		return template('login', pageTitle='Logga in')
-	else:
-		redirect('/admin')
+    if log.is_user_logged_in()==False:
+        return template('login', pageTitle='Logga in')
+    else:
+        redirect('/admin')
 
 
 '''*********Login*********'''
 
 @route('/login')
 def login():
-	if log.is_user_logged_in()==False:
-		return template('login', pageTitle='Logga in')
-	else:
-		redirect('/admin')
+    if log.is_user_logged_in()==False:
+        return template('login', pageTitle='Logga in')
+    else:
+        redirect('/admin')
 
 @route('/ajax', method="POST")
 def ajax_validation():
@@ -58,15 +58,14 @@ def do_login():
 	hang_up_on_database()
 	if response == True:
 		redirect('/admin')
-
 	else:
 		return 'Tyvärr - användaren finns inte!'
 
 
 @route('/log_out')
 def log_out():
-	log.log_out()
-	redirect('/login')
+    log.log_out()
+    redirect('/login')
 
 @route('/admin')
 def admin():
@@ -104,44 +103,44 @@ def admin():
 
 @route('/about_us')
 def about_us_page():
-	cursor = call_database()
-	log.validate_autho() #kontrollerar om användaren är inloggad
-	username = log.get_user_name(cursor) #hämtar användarens namn från DB (returnerar en sträng)
-	userid = log.get_user_id_logged_in() #hämtar användarens id
-	user_level = log.get_user_level(cursor) #kollar om användaren är uppdragstagare eller student (returnerar 1 eller 2)
-	hang_up_on_database()
-	return template('about_us', pageTitle = 'Om Questway', user=username, user_autho=user_level, user_id=userid)
+	if log.is_user_logged_in() == False:
+		return template('about_us', pageTitle = 'Om Questway', user_autho = "3")
+	else:
+		cursor = call_database()
+		username = log.get_user_name(cursor) #hämtar användarens namn från DB (returnerar en sträng)
+		userid = log.get_user_id_logged_in() #hämtar användarens id
+		user_level = log.get_user_level(cursor) #kollar om användaren är uppdragstagare eller student (returnerar 1 eller 2)
+		hang_up_on_database()
+		return template('about_us', pageTitle = 'Om Questway', user=username, user_autho=user_level, user_id=userid)
 
 @route('/help')
 def help_page():
-    log.validate_autho() #kontrollerar om användaren är inloggad
-    username = log.get_user_name() #hämtar användarens namn från DB (returnerar en sträng)
-    userid = log.get_user_id_logged_in() #hämtar användarens id
-    user_level = log.get_user_level() #kollar om användaren är uppdragstagare eller student (returnerar 1 eller 2)
-    return template('help.tpl', pageTitle = 'Hjälp - Questway', user = username, user_autho=user_level, user_id = userid)
+    if log.is_user_logged_in() == False:
+        return template('help.tpl', pageTitle = 'Hjälp - Questway', user_autho = "3")
+    else:
+        username = log.get_user_name() #hämtar användarens namn från DB (returnerar en sträng)
+        userid = log.get_user_id_logged_in() #hämtar användarens id
+        user_level = log.get_user_level() #kollar om användaren är uppdragstagare eller student (returnerar 1 eller 2)
+        return template('help.tpl', pageTitle = 'Hjälp - Questway', user = username, user_autho=user_level, user_id = userid)
 
 '''********Create-user********'''
 @route('/create')
 def create_employer():
-	if log.is_user_logged_in()==False:
-		return template('create_user', pageTitle='Student | Uppdragsgivare')
-	else:
-		redirect('/admin')
+    return template('create_user', pageTitle='Student | Uppdragsgivare')
 
 @route('/create_student')
 def create_student():
-	if log.is_user_logged_in()==False:
-		return template('create_student', pageTitle='Skapa profil')
-	else:
-		redirect('/admin')
+    if log.is_user_logged_in()==False:
+        return template('create_student', pageTitle='Skapa profil')
+    else:
+        redirect('/admin')
 
 @route('/create_employer')
 def create_employer():
-	if log.is_user_logged_in()==False:
-		return template('create_employer', pageTitle='Skapa profil')
-	else:
-		redirect('/admin')
-
+    if log.is_user_logged_in()==False:
+        return template('create_employer', pageTitle='Skapa profil')
+    else:
+        redirect('/admin')
 
 @route('/ajax_create_user', method="POST")
 def ajax_validation():
@@ -162,11 +161,12 @@ def do_create_employer():
 	cursor = call_database()
 	response = handleUsers.create_employer(cursor)
 	db.commit()
-	hang_up_on_database()
 	if response['result'] == True:
-		log.log_in_new_user(response['email'], response['password'])
+		log.log_in_new_user(response['email'], response['password'], cursor)
+		hang_up_on_database()
 		redirect('/admin')
 	else:
+		hang_up_on_database()
 		return response['error']
 
 @route('/do_create_student', method = 'POST')
@@ -175,12 +175,14 @@ def do_create_employer():
 	cursor = call_database()
 	response = handleUsers.create_student(cursor)
 	db.commit()
-	hang_up_on_database()
 	if response['result'] == True:
-		log.log_in_new_user(response['email'], response['password'])
+		log.log_in_new_user(response['email'], response['password'], cursor)
+		hang_up_on_database()
 		redirect('/admin')
 	else:
+		hang_up_on_database()
 		return response['error']
+
 
 @route('/profiles/<user>')
 def profiles(user):
@@ -223,8 +225,6 @@ def edit_mission(user,ad_id):
 	db.commit()
 	hang_up_on_database()
 	redirect('/profiles/' + str(user))
-
-
 
 '''********Change contact information********'''
 
@@ -270,9 +270,10 @@ def ad_done():
 	else:
 		return response['error']
 
+
 @route('/make_ad')
 def no_get():
-	redirect('/admin')
+    redirect('/admin')
 
 
 '''*****Delete ad*****'''
@@ -303,13 +304,12 @@ def apply_for_mission(which_ad):
 	cursor = call_database()
 	log.validate_autho()
 	response=addmod.applying_for_mission(which_ad, cursor)
-	db.commit
+	db.commit()
 	hang_up_on_database()
 	if response['result']==True:
 		redirect('/admin')
 	else:
 		return response['error']
-
 
 '''****All the ads and their applications listed***'''
 
@@ -384,7 +384,7 @@ def error404(error):
 
 @route('/static/<filename:path>')
 def server_static(filename):
-	return static_file(filename, root="static")
+    return static_file(filename, root="static")
 
 
 app = SessionMiddleware(app(), log.session_opts)

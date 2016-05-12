@@ -86,28 +86,28 @@ def get_education_info(program, year, cursor):
 '''*********Main - Functions*********'''
 def create_employer(cursor):
     '''Prepair the information before creating an employer-profile'''
-	company_name = request.forms.get('company_name')
-	org_nr = request.forms.get('org_nr')
-	first_name = request.forms.get('first_name')
-	last_name = request.forms.get('last_name')
-	email = request.forms.get('email').lower()
-	password = request.forms.get('password')
-	user_inputs=[company_name, org_nr, first_name,last_name,email,password]
-	for user_input in user_inputs:
-		if user_input == None or len(user_input) == 0:
-			return {'result':False, 'error': 'Inget fält får vara tomt!'}
+    company_name = request.forms.get('company_name')
+    org_nr = request.forms.get('org_nr')
+    first_name = request.forms.get('first_name')
+    last_name = request.forms.get('last_name')
+    email = request.forms.get('email').lower()
+    password = request.forms.get('password')
+    user_inputs=[company_name, org_nr, first_name,last_name,email,password]
+    for user_input in user_inputs:
+        if user_input == None or len(user_input) == 0:
+            return {'result':False, 'error': 'Inget fält får vara tomt!'}
 
-	if validate_Username(email, cursor) == True:
-		return {'result':False, 'error':'Tyvärr - en användare med samma email finns redan!'}
+    if validate_Username(email, cursor) == True:
+        return {'result':False, 'error':'Tyvärr - en användare med samma email finns redan!'}
 
-	elif validate_email.validate_email(email) == False:
-		return {'result':False, 'error':'Du måste ange en riktig email!'}
+    elif validate_email.validate_email(email) == False:
+        return {'result':False, 'error':'Du måste ange en riktig email!'}
 
-	else:
-		user_level = 2
-		new_user_id = add_new_user(email, password, user_level, cursor)
-		add_new_employer(company_name, org_nr, first_name, last_name, new_user_id, cursor)
-		return {'result':True, 'email':email, 'password':password}
+    else:
+        user_level = 2
+        new_user_id = add_new_user(email, password, user_level, cursor)
+        add_new_employer(company_name, org_nr, first_name, last_name, new_user_id, cursor)
+        return {'result':True, 'email':email, 'password':password}
 
 
 def create_student(cursor):
@@ -149,14 +149,14 @@ def ajax_new_user_validation(cursor):
 
 def show_student_profile(user,cursor):
     '''Retrieves all information for a students profile-page'''
-	try:
-		if validate_if_student_exists(user,cursor) == True:
-			student_main_info = get_student_main_info(user, cursor)
-			education_info = get_education_info(student_main_info[2],student_main_info[3], cursor)
-			return {'exists':True, 'student_info': student_main_info, 'education_info':education_info}
+    try:
+        if validate_if_student_exists(user,cursor) == True:
+            student_main_info = get_student_main_info(user, cursor)
+            education_info = get_education_info(student_main_info[2],student_main_info[3], cursor)
+            return {'exists':True, 'student_info': student_main_info, 'education_info':education_info}
 
-		else:
-			return {'exists':False}
+        else:
+            return {'exists':False}
 
-	except ValueError:
-		return {'exists':False}
+    except ValueError:
+        return {'exists':False}
