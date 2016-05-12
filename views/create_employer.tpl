@@ -36,20 +36,8 @@
                         <br>
                         <input placeholder="Lösenord" type="input" name="password" id="password" value="" required>
                     </div>
-                    <!--
-                    <label for="company_name">Företag</label>
-                    <input placeholder="Företagsnamn" type="input" name="company_name" id="company_name" value="">
-                    <label for="org_nr">Org.nr</label>
-                    <input placeholder="Org.nr" type="input" name="org_nr" id="org_nr" value="">
-                    <label for="first_name">Förnamn</label>
-                    <input placeholder="Förnamn" type="input" name="first_name" id="first_name" value="">
-                    <label for="last_name">Efternamn</label>
-                    <input placeholder="Efternamn" type="input" name="last_name" id="last_name" value="">
-                    <label for="email">Mejl</label>
-                    <input placeholder="Mejl" type="input" name="email" id="email" value="">
-                    <label for="password">Lösenord</label>
-                    <input placeholder="Lösenord" type="input" name="password" id="password" value="">-->
-                    <input class="myButton" id="logInButton" type="submit" value="Skapa konto">
+                    
+                    <input class="myButton" id="create_student_account" type="submit" value="Skapa konto">
                 </form>
 
                 <p id="error"></p>

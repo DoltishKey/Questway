@@ -1687,6 +1687,13 @@ transition: background-color 5000s ease-in-out 0s;
     text-align: center;
     border-radius: 8px;
 }
+#create_employer #create_student_account{
+    width: 20%;
+    margin: 30px auto;
+    display: block;
+    padding: 1%;
+    line-height: 0.3;
+}
 @media screen and (min-width:900px){
     #create_employer{
 
