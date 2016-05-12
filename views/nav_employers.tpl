@@ -2,27 +2,28 @@
         <div class="wrap" id="header_wrap">
         <div class="courtesyNav">
                 <p class="courtesyNavItem">Inloggad som <strong>{{user}}</strong></p>
-        </div>
-        <a id="QWTitle" href="/admin"><h1>Questway</h1></a>
+            </div>
+            <a id="QWTitle" href="/admin"><h1>Questway</h1></a>
+            <img alt="meny" src="../static/img/menyicons/kryss.png" id="menyknapp" onclick="showHideMenu()" onload="menuSetUp()">
             <nav class="menu">
                     %from bottle import request
 
                     %if request.path == '/admin':
-                        <a class="currentMenuItem" href="/admin">Start</a>
+                        <a  class="currentMenuItem allMenuItems" href="/admin">Start</a>
                     %else:
-                        <a href="/admin">Start</a>
+                        <a class=" allMenuItems" href="/admin">Start</a>
                     %end
 
                     %if request.path == '/allMissions':
-                        <a class="currentMenuItem" href="/allMissions">Uppdrag</a>
+                        <a  class="currentMenuItem allMenuItems" href="/allMissions">Uppdrag</a>
                     %else:
-                        <a href="/allMissions">Uppdrag</a>
+                        <a class=" allMenuItems" href="/allMissions">Uppdrag</a>
                     %end
 
                     %if request.path == '/log_out':
-                        <a class="currentMenuItem" href="/log_out">Logga</a>
+                        <a class="currentMenuItem allMenuItems" href="/log_out">Logga</a>
                     %else:
-                        <a href="/log_out">Logga ut</a>
+                        <a class=" allMenuItems" href="/log_out">Logga ut</a>
                     %end
             </nav>
         </div>
