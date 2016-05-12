@@ -15,36 +15,19 @@ session_opts = {
 }
 
 
-'''*********DB info*********'''
-def call_database(sql, asked_from_cursor):
-    db = MySQLdb.connect(host="195.178.232.16", port=3306, user="AC8240", passwd="hejhej123", db="AC8240");
-    cursor = db.cursor()
-    cursor_answer = []
-    try:
-        cursor.execute(sql)
-        for query in asked_from_cursor:
-            cursor_answer.append(eval('cursor.'+query))
-
-        db.commit()
-
-    except:
-        db.rollback()
-
-
-    db.close()
-    return cursor_answer
-
-
-'''*********Authorisering*********'''
-def validate_user(username, password):
+'''*********Authorisation*********'''
+def validate_user(username, password, cursor):
+    '''Checks that login-information is correct'''
     password = hashlib.sha256(password).hexdigest()
     sql = "SELECT id FROM users WHERE mail = '%s' and password = '%s' " %(username, password)
 
-    ask_it_to = ['fetchall()', 'rowcount']
-    mighty_db_says = call_database(sql, ask_it_to)
+    #call_database()
+    cursor.execute(sql)
+    mighty_db_says = cursor.fetchall()
+    #hang_up_on_database()
 
-    if mighty_db_says[1] == 1:
-        user_id = mighty_db_says[0][0][0] #
+    if len(mighty_db_says) == 1:
+        user_id = mighty_db_says[0][0] #
         return {'id':user_id, 'result':True}
 
     else:
@@ -52,6 +35,7 @@ def validate_user(username, password):
 
 
 def validate_autho():
+    '''Checks that the user is logged in'''
 	session = request.environ.get('beaker.session')
 	try:
 		session['userId']
@@ -61,6 +45,7 @@ def validate_autho():
 		redirect('/login')
 
 def is_user_logged_in():
+    '''Checks that the user in logged in'''
 	session = request.environ.get('beaker.session')
 	try:
 		session['userId']
@@ -69,36 +54,39 @@ def is_user_logged_in():
 		return False
 
 def get_user_id_logged_in():
+    '''Returns ID of logged in user'''
 	session = request.environ.get('beaker.session')
 	return session['userId']
 
-def get_user_name():
+def get_user_name(cursor):
+    '''Returns First name of logged in user'''
     session = request.environ.get('beaker.session')
-    if get_user_level() == 1:
+    if get_user_level(cursor) == 1:
         sql = "SELECT first_name FROM students WHERE id = '%d'"%(session['userId'])
 
     else:
         sql = "SELECT first_name FROM employers WHERE id = '%d'"%(session['userId'])
 
-    ask_it_to = ['fetchall()']
-    mighty_db_says = call_database(sql, ask_it_to)
-    first_name = mighty_db_says[0][0][0]
+    cursor.execute(sql)
+    mighty_db_says = cursor.fetchall()
+    first_name = mighty_db_says[0][0]
     return first_name
 
-def get_user_level():
+def get_user_level(cursor):
+    '''Returns access-level of logged in user'''
     session = request.environ.get('beaker.session')
     sql = "SELECT autho_level FROM users WHERE id = '%d'"%(session['userId'])
-
-    ask_it_to = ['fetchall()']
-    mighty_db_says = call_database(sql, ask_it_to)
-    autho_level = mighty_db_says[0][0][0]
+    cursor.execute(sql)
+    mighty_db_says = cursor.fetchall()
+    autho_level = mighty_db_says[0][0]
     return autho_level
 
 '''*********Funktioner*********'''
-def login():
+def login(cursor):
+    '''Do login'''
     username = request.forms.get('email')
     password = request.forms.get('password')
-    user_status = validate_user(username, password)
+    user_status = validate_user(username, password, cursor)
     if user_status['result'] == True:
         userID = user_status['id']
         session = request.environ.get('beaker.session')
@@ -110,6 +98,7 @@ def login():
         return False
 
 def log_in_new_user(email, password):
+    '''From creating profile - logg in'''
     user_status = validate_user(email, password)
     if user_status['result'] == True:
         userID = user_status['id']
@@ -124,10 +113,10 @@ def log_out():
 	session.delete()
 	session.save()
 
-def ajax_validation():
+def ajax_validation(cursor):
     username = request.forms.get('email')
     password = request.forms.get('password')
-    user_status = validate_user(username, password)
+    user_status = validate_user(username, password, cursor)
     if user_status['result'] == True:
         return True
 
