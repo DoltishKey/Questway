@@ -17,7 +17,8 @@
                         <!--<label for="password">Lösenord</label>-->
                         <input placeholder="Lösenord" type="password" name="password" id="password" value="">
                         <input class="myButton" type="submit" id="log_in_button" value="Logga in">
-                    <p id="error"></p>
+                        <p id="error"></p>
+                        <p>Eller <a href="/create">registrera dig</a>.</p>
                     </form>
                 </div>
             </div>
@@ -31,7 +32,7 @@
                                 <p class="regText">Registrera dig nu!</p>
                             </div>
                         </a>
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
+                        <p>Är du student på Malmö Högskola och studerar en data/it-inriktad utbildning? Är du intresserad av att arbeta vid sidan av dina studier? Då är Questway något för dig. Här kan du ansöka till mindre uppdrag åt företag i Malmöregionen, en bra möjlighet att skaffa dig erfarenhet samt bygga på ditt CV inför ditt framtida yrkesliv.  </p>
                     </div>
                     <div class="contentInContent">
                         <a id="regShortCutStud" href="/create_employer">
@@ -40,7 +41,7 @@
                                 <p class="regText">Registrera dig nu!</p>
                             </div>
                         </a>
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
+                        <p>Är du i behov av hjälp med något IT-inriktat projekt, så som t. ex. att bygga en webbplats eller en app, men saknar resurser för att utföra detta? På Questway finns möjligheten att anlita studenter som kan hjälpa dig med detta, för en låg kostnad och i utbyte mot en referens samt praktisk erfarenhet.</p>
                     </div>
                 </div>
             </div>

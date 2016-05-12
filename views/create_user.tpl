@@ -5,7 +5,7 @@
         <div id="wrapper">
             %include('nav.tpl')
             <div id="content_wrap">
-                <div id="content">
+                <div id="content" class="content_create_user">
                     <h3>Skapa profil som:</h3>
                 <!--<img src="../static/img/qwback.jpg" alt="qwbackground">
                     <div id="slogan"><p>Lorem ipsum dolor sit amet, <br>consectetur adipiscing elit.</p></div>-->

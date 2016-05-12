@@ -45,7 +45,7 @@
                         <br>
                         <input placeholder="Lösenord" type="input" name="password" id="password" value="" required>
                     </div>
-                    <input class="create_account myButton" type="submit" value="Skapa konto" required>
+                    <input class="myButton" id="create_student_account" type="submit" value="Skapa konto" required>
                    <!--
                    <label for="first_name">Förnamn</label>
                    <input placeholder="Förnamn" type="input" name="first_name" id="first_name" value="">
