@@ -4,14 +4,18 @@ from bottle import route, get, post, run, template, error, static_file, request,
 from beaker.middleware import SessionMiddleware
 import MySQLdb
 import hashlib
+import random, string
 
 
 '''*********Sessions Data*********'''
+secret_key = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(24))
 session_opts = {
     'session.type': 'file',
     'session.data_dir': './session',
     'session.auto': True,
     'session.timeout': 3600,
+    'session.key':'questway_user',
+    'session.secret': secret_key,
 }
 
 
