@@ -43,7 +43,10 @@ def validate_autho():
     session = request.environ.get('beaker.session')
     try:
         session['userId']
-        return True
+        if request.environ.get('REMOTE_ADDR') == session['userIP']:
+            return True
+        else:
+            redirect('/login')
 
     except:
         redirect('/login')
@@ -53,7 +56,10 @@ def is_user_logged_in():
     session = request.environ.get('beaker.session')
     try:
         session['userId']
-        return True
+        if request.environ.get('REMOTE_ADDR') == session['userIP']:
+            return True
+        else:
+            return False
     except:
         return False
 
@@ -94,6 +100,8 @@ def login(cursor):
     if user_status['result'] == True:
         userID = user_status['id']
         session = request.environ.get('beaker.session')
+        client_ip = request.environ.get('REMOTE_ADDR')
+        session['userIP'] = client_ip
         session['userId'] = userID
         session.save()
         return True
