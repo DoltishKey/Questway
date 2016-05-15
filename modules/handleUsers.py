@@ -9,8 +9,8 @@ import hashlib
 '''*********Validation*********'''
 def validate_Username(email, cursor):
     '''check that the email do not already exist in DB'''
-    sql = "SELECT * FROM users WHERE mail = '%s'" %(email)
-    cursor.execute(sql)
+    sql = "SELECT * FROM users WHERE mail = %s"
+    cursor.execute(sql, (email,))
     mighty_db_says = cursor.fetchall()
 
     if mighty_db_says:
@@ -18,8 +18,9 @@ def validate_Username(email, cursor):
 
 def validate_if_student_exists(userID, cursor):
     '''Check that there is a student with a specific user-id'''
-    sql = "SELECT autho_level FROM users WHERE id = '%d'"%(userID)
-    cursor.execute(sql)
+    userID = int(userID)
+    sql = "SELECT autho_level FROM users WHERE id = %s"
+    cursor.execute(sql, (userID,))
     mighty_db_says = cursor.fetchall()
     if len(mighty_db_says) != 0:
         if mighty_db_says[0][0] == 1:
@@ -31,10 +32,9 @@ def add_new_user(email, password, user_level, cursor):
     password = hashlib.sha256(password).hexdigest()
     sql = "INSERT INTO users(password, \
        autho_level, mail) \
-       VALUES ('%s', '%d', '%s' )" % \
-       (password, user_level, email)
+       VALUES (%s, %s, %s )"
 
-    cursor.execute(sql)
+    cursor.execute(sql, (password, user_level, email,))
     mighty_db_says =cursor.lastrowid
     return mighty_db_says
 
@@ -44,9 +44,8 @@ def add_new_employer(company_name, org_nr, first_name, last_name, new_user_id, c
     org_nr = int(org_nr)
     sql = "INSERT INTO employers(first_name, \
        last_name, company_name, org_nr, id) \
-       VALUES ('%s', '%s', '%s', '%d', (select id from users where id = '%d') )" \
-       %(first_name, last_name, company_name, org_nr, new_user_id)
-    cursor.execute(sql)
+       VALUES (%s, %s, %s, %s, (select id from users where id = %s) )"
+    cursor.execute(sql, (first_name, last_name, company_name, org_nr, new_user_id,))
 
 
 def add_new_student(first_name, last_name, program, year, new_user_id, phone_nr, cursor):
@@ -55,15 +54,15 @@ def add_new_student(first_name, last_name, program, year, new_user_id, phone_nr,
     year = int(year)
     phone_nr= int(phone_nr)
     sql = "INSERT INTO students(first_name, last_name, phone, education_id, education_year, id) \
-       VALUES ('%s', '%s', '%d' , (select education_id from education where education_id = '%d' and year = '%d'), \
-       (select year from education where year = '%d' and education_id = '%d'), (select id from users where id = '%d'))" %(first_name, last_name, phone_nr, program, year, year, program, new_user_id)
-    cursor.execute(sql)
+       VALUES (%s, %s, %s , (select education_id from education where education_id = %s and year = %s), \
+       (select year from education where year = %s and education_id = %s), (select id from users where id = %s))"
+    cursor.execute(sql, (first_name, last_name, phone_nr, program, year, year, program, new_user_id,))
 
 
 def get_student_main_info(user, cursor):
     '''Retrieve generall information about a student in the DB'''
-    sql = "SELECT students.*, users.mail FROM users JOIN students on users.id = students.id WHERE students.id = '%d'"%(user)
-    cursor.execute(sql)
+    sql = "SELECT students.*, users.mail FROM users JOIN students on users.id = students.id WHERE students.id = %s"
+    cursor.execute(sql, (user,))
     mighty_db_says = cursor.fetchall()
     user_info = mighty_db_says[0]
     return user_info
@@ -71,14 +70,14 @@ def get_student_main_info(user, cursor):
 def get_education_info(program, year, cursor):
     '''Retrieve all information about a program based on year/which program'''
     sql = "SELECT titel, tagline, main_info_one, main_info_two, main_info_three, img_url \
-    FROM education WHERE education_id = '%d' AND year = '%d'"%(program, year)
-    cursor.execute(sql)
+    FROM education WHERE education_id = %s AND year = %s"
+    cursor.execute(sql, (program, year,))
     mighty_db_says=cursor.fetchall()
     education_info = mighty_db_says[0]
 
     sql = sql = "SELECT skill FROM education_skills\
-    WHERE education_id = '%d' AND education_year = '%d'"%(program, year)
-    cursor.execute(sql)
+    WHERE education_id = %s AND education_year = %s"
+    cursor.execute(sql, (program, year,))
     education_skills = cursor.fetchall()
     return {'education_info':education_info, 'education_skills':education_skills}
 
