@@ -42,6 +42,14 @@ def validate_ad_input(ad_info):
 
 '''*********Check and manage Ads*********'''
 
+def get_ad_creator_id(cursor, ad_nr):
+    ''' Return id of ads creator'''
+    sql= "SELECT creator_id FROM ads WHERE id=%s"
+    cursor.execute(sql, (ad_nr,))
+    mighty_db_says = cursor.fetchall()
+    print mighty_db_says[0][0]
+    return mighty_db_says[0][0]
+
 def get_my_ads(employers_id, cursor):
     ''' Return a logged-in employers ads'''
     sql= "SELECT id, titel, main_info, creator_id, DATE(creation_date) FROM ads WHERE %s=ads.creator_id"
