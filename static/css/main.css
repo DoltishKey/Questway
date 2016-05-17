@@ -1735,7 +1735,7 @@ label{
     text-align: center;
     border-radius: 8px;
 }
-#create_student #create_student_account {
+#create_student_account {
     width: 20%;
     margin: 30px auto;
     display: block;
@@ -1789,7 +1789,21 @@ label{
         left: 40%;
     }
 }
-
+@media screen and (max-width:690px){
+    #menyknapp{
+        display: none;
+        position: fixed;
+        width: 15%;
+        left: 100%;
+        margin-left: -20%;
+        top: 2%;
+    }
+    .meny{
+    }
+    .allMenuItems{
+        
+    }
+}
 @media screen and (max-width:690px){
 
    /* För inloggningssidan: */
@@ -1810,6 +1824,7 @@ label{
         width: 103.5%;
         margin-left: 0%;
         float: left;
+        display: block;
     }
 
     .menu a:first-child {
@@ -1949,7 +1964,6 @@ label{
         width: 80%;
     }
     /* Startsida för studenter SLUT */
-
     #feedback_form {
         width: 100%;
         padding: 0;
@@ -1973,7 +1987,9 @@ label{
     }
 
     /*----Employer----*/
-
+    #create_employer #create_student_account{
+        width: 70%;
+    }
     #move_under_header{
         margin-top: 150px;
     }

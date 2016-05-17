@@ -23,10 +23,10 @@ session_opts = {
 def validate_user(username, password, cursor):
     '''Checks that login-information is correct'''
     password = hashlib.sha256(password).hexdigest()
-    sql = "SELECT id FROM users WHERE mail = '%s' and password = '%s' " %(username, password)
+    sql = "SELECT id FROM users WHERE mail = %s and password = %s "
 
     #call_database()
-    cursor.execute(sql)
+    cursor.execute(sql, (username, password,))
     mighty_db_says = cursor.fetchall()
     #hang_up_on_database()
 
@@ -72,12 +72,12 @@ def get_user_name(cursor):
     '''Returns First name of logged in user'''
     session = request.environ.get('beaker.session')
     if get_user_level(cursor) == 1:
-        sql = "SELECT first_name FROM students WHERE id = '%d'"%(session['userId'])
+        sql = "SELECT first_name FROM students WHERE id = %s"
 
     else:
-        sql = "SELECT first_name FROM employers WHERE id = '%d'"%(session['userId'])
+        sql = "SELECT first_name FROM employers WHERE id = %s"
 
-    cursor.execute(sql)
+    cursor.execute(sql, (session['userId'],))
     mighty_db_says = cursor.fetchall()
     first_name = mighty_db_says[0][0]
     return first_name
@@ -85,8 +85,8 @@ def get_user_name(cursor):
 def get_user_level(cursor):
     '''Returns access-level of logged in user'''
     session = request.environ.get('beaker.session')
-    sql = "SELECT autho_level FROM users WHERE id = '%d'"%(session['userId'])
-    cursor.execute(sql)
+    sql = "SELECT autho_level FROM users WHERE id = %s"
+    cursor.execute(sql, (session['userId'],))
     mighty_db_says = cursor.fetchall()
     autho_level = mighty_db_says[0][0]
     return autho_level

@@ -10,8 +10,9 @@ $(document).ready(function() {
     edith_file();
     thanks_for_applying();
     check_if_feedback_should_display();
+    
+    
 });
-
 function checkLogIn(){
     $('#logIn').submit(function(event){
          event.preventDefault(event);
@@ -338,23 +339,6 @@ function edith_file(){
 
 }
 
-/* KONTROLLERA INPUT*/
-//EMAIL
-/*
-function emailValidation(){
-
-    var email = document.getElementById("email");
-    var error = document.getElementById("error");
-
-    var atpos = email.indexOf("@");
-    var punktpos = email.lastIndexOf(".");
-    if(atpos < 1 || dotpos < atpos + 2 || dotpos + 2 > email.length){
-        error.innerHTML("Du måste ange hela din mailadress. Med @ och allt.");
-        alert("Du måste ange hela din mailadress. Med @ och allt.");
-        return false;
-        email.style.borderColor = "red";
-    }
-}*/
 //Skapa annons
 function createAdValid(){
     var error = document.getElementById("error");
@@ -373,4 +357,23 @@ function createAdValid(){
     }else{
         return true;
     }
+}
+
+function menuSetUp(){
+ document.getElementsByClassName("menu").style.display = "none";
+}
+function showHideMenu(){
+    var meny = document.getElementsByClassName("menu");
+    
+    var knapp = document.getElementById("menyknapp");
+    
+    if (meny.style.display == "block"){
+        meny.style.display = "none";
+        knapp.src = "../img/menyicons/kryss.png";
+        
+    }else if (meny.style.display == "none"){
+        meny.style.display = "block";
+        knapp.src = "../img/menyicons/menyicon2.png";
+    }
+    alert("fgh");
 }
