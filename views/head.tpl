@@ -11,12 +11,12 @@
         <script src="/static/js/jquery.js"></script>
         <script src="/static/js/tabs.js" type="text/javascript"></script>
         <script src="/static/js/main.js" type="text/javascript"></script>
-        <script src="../static/js/jquery.js"></script>
-        <!-- Validering av registreringen -->
+        <!--script src="../static/js/jquery.js"></script>
+        Validering av registreringen 
         <script src="../static/js/create_validation/js-webshim/minified/polyfiller.js"></script> 
         <script> 
             webshim.activeLang('en');
             webshims.polyfill('forms');
             webshims.cfg.no$Switch = true;
-        </script>
+        </script-->
     </head>

@@ -41,8 +41,6 @@ function checkLogIn(){
 function checkCreateEmployer(){
     $('#create_employer').submit(function(event){
         event.preventDefault(event);
-
-
         
         var company_name = document.getElementById("company_name"),
             org_nr = document.getElementById("org_nr"),
@@ -52,7 +50,6 @@ function checkCreateEmployer(){
             error = document.getElementById("error");
         //Email-validering:
         var email = document.getElementById("email");
-        alert("Variabeln skapas...");
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value))
         {
             return true;
@@ -70,7 +67,7 @@ function checkCreateEmployer(){
 
         //BLANK Check START
         if (company_name.value == null || org_nr.value == null || fname.value == null || lname.value == null || email.value == null || password.value == null){
-            alert("Nu har du nog missat fyllat i ett fällt.");
+            alert("Nu har du nog missat fylla i ett fällt.");
         }
         //BLANK Check END
         $.ajax({
