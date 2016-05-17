@@ -26,20 +26,21 @@ def hang_up_on_database():
 
 @route('/')
 def startPage():
-    if log.is_user_logged_in()==False:
-        return template('login', pageTitle='Logga in')
-    else:
-        redirect('/admin')
+	if log.is_user_logged_in()==True:
+		redirect('/admin')
+	else:
+		redirect('/login')
 
 
 '''*********Login*********'''
 
 @route('/login')
 def login():
-    if log.is_user_logged_in()==False:
-        return template('login', pageTitle='Logga in')
-    else:
-        redirect('/admin')
+	if log.is_user_logged_in()==True:
+		redirect('/admin')
+	else:
+		return template('login', pageTitle='Logga in')
+
 
 @route('/ajax', method="POST")
 def ajax_validation():
