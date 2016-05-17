@@ -360,7 +360,7 @@ function createAdValid(){
         return true;
     }
 }
-/*
+
 function menuSetUp(){
  document.getElementsByClassName("menu").style.display = "none";
 }
@@ -378,4 +378,4 @@ function showHideMenu(){
         knapp.src = "../img/menyicons/menyicon2.png";
     }
     alert("fgh");
-}*/
+}
