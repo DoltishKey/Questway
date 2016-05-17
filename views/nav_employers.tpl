@@ -4,7 +4,7 @@
                 <p class="courtesyNavItem">Inloggad som <strong>{{user}}</strong></p>
             </div>
             <a id="QWTitle" href="/admin"><h1>Questway</h1></a>
-            <img alt="meny" src="../static/img/menyicons/kryss.png" id="menyknapp" onclick="showHideMenu()" onload="menuSetUp()">
+            <!--<img alt="meny" src="../static/img/menyicons/menyicon2.png" id="menyknapp" onclick="showHideMenu()" onload="menuSetUp()">-->
             <nav class="menu">
                     %from bottle import request
 
