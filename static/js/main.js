@@ -51,8 +51,26 @@ function checkCreateEmployer(){
         //Email-validering:
         var email = document.getElementById("email");
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value))
-        {
-            return true;
+        {   
+            $.ajax({
+                type: 'POST',
+                url: '/ajax_create_user',
+                data: $(this).serialize(),
+                success: function(response) {
+                       if (response == 'ok'){
+                        document.getElementById("create_employer").submit();
+                       }
+                       else if(response=='User exists'){
+                           $('#error').html('Det finns redan en användare med angiven email!');
+                       }
+                       else if(response=='Bad input'){
+                           $('#error').html('Du måste skriva in en email!');
+                       }
+                       else{
+                           $('#error').html('Något har blivit fel!');
+                       }
+                   }
+        });
         }else{
             alert("Du måste ange en hel och riktig mailadress. Med @ och allt.");
             email.style.borderColor = "red";
@@ -64,31 +82,13 @@ function checkCreateEmployer(){
             */
         }
         //Email-validation end
-
+/*
         //BLANK Check START
         if (company_name.value == null || org_nr.value == null || fname.value == null || lname.value == null || email.value == null || password.value == null){
             alert("Nu har du nog missat fylla i ett fällt.");
-        }
+        }*/
         //BLANK Check END
-        $.ajax({
-            type: 'POST',
-            url: '/ajax_create_user',
-            data: $(this).serialize(),
-            success: function(response) {
-                   if (response == 'ok'){
-                    document.getElementById("create_employer").submit();
-                   }
-                   else if(response=='User exists'){
-                       $('#error').html('Det finns redan en användare med angiven email!');
-                   }
-                   else if(response=='Bad input'){
-                       $('#error').html('Du måste skriva in en email!');
-                   }
-                   else{
-                       $('#error').html('Något har blivit fel!');
-                   }
-               }
-        });
+
       });
 }
 
@@ -99,7 +99,25 @@ function checkCreateStudent(){
         //Email-validering:
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value))
         {
-            return true;
+            $.ajax({
+                type: 'POST',
+                url: '/ajax_create_user',
+                data: $(this).serialize(),
+                success: function(response) {
+                       if (response == 'ok'){
+                        document.getElementById("create_student").submit();
+                       }
+                       else if(response=='User exists'){
+                           $('#error').html('Det finns redan en användare med angiven email!');
+                       }
+                       else if(response=='Bad input'){
+                           $('#error').html('Du måste skriva in en email!');
+                       }
+                       else{
+                           $('#error').html('Något har blivit fel!');
+                       }
+                   }
+            });
         }
         else{
             /*error.innerHTML("Du måste ange hela din mailadress. Med @ och allt.");
@@ -112,25 +130,7 @@ function checkCreateStudent(){
         }
 
         //Email-val end
-        $.ajax({
-            type: 'POST',
-            url: '/ajax_create_user',
-            data: $(this).serialize(),
-            success: function(response) {
-                   if (response == 'ok'){
-                    document.getElementById("create_student").submit();
-                   }
-                   else if(response=='User exists'){
-                       $('#error').html('Det finns redan en användare med angiven email!');
-                   }
-                   else if(response=='Bad input'){
-                       $('#error').html('Du måste skriva in en email!');
-                   }
-                   else{
-                       $('#error').html('Något har blivit fel!');
-                   }
-               }
-        });
+        
       });
 }
 
