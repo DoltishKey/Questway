@@ -366,7 +366,8 @@ def ad_done(ad):
 @route('/give_feedback/<ad_nr>')
 def give_feedback(ad_nr):
 	cursor = call_database()
-	if log.get_user_level(cursor) == 2:
+	log.validate_autho()
+	if log.get_user_level(cursor) == 2 and log.get_user_id_logged_in() == addmod.get_ad_creator_id(cursor, int(ad_nr)):
 		username = log.get_user_name(cursor)
 		hang_up_on_database()
 		return template('feedback', adnr=ad_nr, pageTitle = 'Ge feedback', user=username )
