@@ -43,15 +43,14 @@ function checkCreateEmployer(){
         event.preventDefault(event);
 
 
+        
+        var company_name = document.getElementById("company_name"),
+            org_nr = document.getElementById("org_nr"),
+            fname = document.getElementById("first_name"), 
+            lname = document.getElementById("last_name"), 
+            password = document.getElementById("password"), 
+            error = document.getElementById("error");
         //Email-validering:
-        /*
-        var company_name = document.getElementById("company_name");
-        var org_nr = document.getElementById("org_nr");
-        var fname = document.getElementById("first_name");
-        var lname = document.getElementById("last_name");
-        var password = document.getElementById("password");
-        var error = document.getElementById("error");
-        */
         var email = document.getElementById("email");
         alert("Variabeln skapas...");
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value))
