@@ -6,25 +6,7 @@ import os.path
 import random, string
 
 
-'''*********Create the AD*********'''
-def do_ad(cursor):
-    '''Get data from user and create an ad'''
-    ad_title=request.forms.get('ad_title')
-    ad_text=request.forms.get('ad_text')
-
-    ad_title_checked=validate_ad_input(ad_title)
-    if  ad_title_checked == True:
-        creator = log.get_user_id_logged_in()
-        sql="INSERT INTO ads(titel, main_info, creator_id, creation_date)\
-        VALUES (%s, %s, %s, CURDATE())"
-        cursor.execute(sql, (ad_title, ad_text, creator,))
-        return {'result':True, 'error':'None'}
-
-    else:
-        return {'result':False, 'error': "Ett fel uppstod - Kontrollera att du gav annonsen en titel"}
-
-
-'''*********Check that a Title for the ad is given*********'''
+'''*********Ad validators*********'''
 
 def validate_ad_input(ad_info):
     '''Last point of validation to check that it exists a title'''
@@ -40,7 +22,7 @@ def validate_ad_input(ad_info):
         return True
 
 
-'''*********Check and manage Ads*********'''
+'''*********General ad info*********'''
 
 def get_ad_creator_id(cursor, ad_nr):
     ''' Return id of ads creator'''
@@ -57,6 +39,43 @@ def get_my_ads(employers_id, cursor):
     mighty_db_says = cursor.fetchall()
     return mighty_db_says
 
+
+'''*********Create/remove AD*********'''
+def do_ad(cursor):
+    '''Get data from user and create an ad'''
+    ad_title=request.forms.get('ad_title')
+    ad_text=request.forms.get('ad_text')
+
+    ad_title_checked=validate_ad_input(ad_title)
+    if  ad_title_checked == True:
+        creator = log.get_user_id_logged_in()
+        sql="INSERT INTO ads(titel, main_info, creator_id, creation_date)\
+        VALUES (%s, %s, %s, CURDATE())"
+        cursor.execute(sql, (ad_title, ad_text, creator,))
+        return {'result':True, 'error':'None'}
+
+    else:
+        return {'result':False, 'error': "Ett fel uppstod - Kontrollera att du gav annonsen en titel"}
+
+def erase_ad(ad_id, user_ID, cursor):
+    '''Deletes an ad from DB based on userinput data'''
+    ad_id = int(ad_id)
+    user_ID = int(user_ID)
+    sql="INSERT INTO removed_ads(student_id, titel) \
+    SELECT application.student_id, ads.titel FROM application \
+    INNER JOIN ads \
+    ON application.ad_id = ads.id \
+    WHERE application.ad_id = %s"
+    cursor.execute(sql, (ad_id,))
+
+    sql= "DELETE FROM application WHERE ad_id = %s"
+    cursor.execute(sql, (ad_id,))
+
+    sql= "DELETE FROM ads WHERE id = %s and creator_id=%s"
+    cursor.execute(sql, (ad_id, user_ID,))
+
+
+'''*********AD listing*********'''
 
 def sort_by_status(user, cursor):
     '''List the ads relevant for a specifik user'''
@@ -96,41 +115,64 @@ def available_ads(user, cursor):
     mighty_db_says = cursor.fetchall()
     return mighty_db_says
 
-'''******* Delete a specific ad *******'''
-
-def erase_ad(ad_id, user_ID, cursor):
-    '''Deletes an ad from DB based on userinput data'''
-    ad_id = int(ad_id)
-    user_ID = int(user_ID)
-    sql="INSERT INTO removed_ads(student_id, titel) \
-    SELECT application.student_id, ads.titel FROM application \
-    INNER JOIN ads \
-    ON application.ad_id = ads.id \
-    WHERE application.ad_id = %s"
-    cursor.execute(sql, (ad_id,))
-
-    sql= "DELETE FROM application WHERE ad_id = %s"
-    cursor.execute(sql, (ad_id,))
-
-    sql= "DELETE FROM ads WHERE id = %s and creator_id=%s"
-    cursor.execute(sql, (ad_id, user_ID,))
-
-
-'''*****Which ads student applied on****'''
-def applied_on(who, status, which_ad_id, cursor):
-    '''Check that the student have not applied before on a specifik ad'''
-    if which_ad_id==None:
-        sql="SELECT * FROM application WHERE %s=application.student_id \
-        AND application.status=%s"
-        cursor.execute(sql, (who, status,))
-    else:
-        sql="SELECT * FROM application WHERE %s=application.student_id \
-        AND application.status=%s AND application.ad_id=%s"
-        cursor.execute(sql,(who, status, which_ad_id,))
+def get_denied_missions(user, cursor):
+    '''Returns all missions that student did not get.'''
+    user = int(user)
+    sql="SELECT A.titel \
+    FROM (SELECT ads.titel \
+        FROM application INNER JOIN ads \
+        ON ads.id=application.ad_id \
+        WHERE application.status='Bortvald' AND application.student_id = %s) as A \
+    UNION \
+    SELECT removed_ads.titel \
+    FROM removed_ads \
+    WHERE student_id = %s"
+    cursor.execute(sql, (user, user,))
     mighty_db_says = cursor.fetchall()
     return mighty_db_says
 
-'''****** Student Applying on ad *****'''
+def students_that_applied(user_id, cursor):
+    '''Returns all studetns that applied on each of employers mission'''
+    user_id = int(user_id)
+    sql = "SELECT students.id, students.first_name, students.last_name, J1.ad_id, J1.status, education.titel, education.year, users.mail\
+    FROM (SELECT student_id, ad_id, status \
+            FROM ads \
+            INNER JOIN application \
+            ON application.ad_id=ads.id \
+            WHERE creator_id = %s) as J1 \
+    INNER JOIN students \
+    ON J1.student_id = students.id \
+    INNER JOIN education\
+    ON students.education_id = education.education_id and students.education_year = education.year\
+    INNER JOIN users\
+    ON users.id=J1.student_id"
+    cursor.execute(sql, (user_id,))
+    mighty_db_says = cursor.fetchall()
+    return mighty_db_says
+
+def grading_ads(user, cursor):
+    '''Returns all ads that studetn has completed'''
+    user = int(user)
+    sql= "SELECT employers.company_name, J2.*\
+        FROM \
+            (SELECT creator_id, feedback.* \
+            FROM (SELECT ads.titel, creator_id, ad_id \
+               FROM ads \
+               INNER JOIN application \
+               ON application.ad_id=ads.id \
+               WHERE student_id = %s and status = 'Avslutad') as J1 \
+               INNER JOIN feedback \
+                ON J1.ad_id = feedback.ad_id) as J2 \
+        INNER JOIN employers \
+        ON J2.creator_id = employers.id"
+    cursor.execute(sql,(user,))
+    mighty_db_says = cursor.fetchall()
+    return mighty_db_says
+
+
+
+
+'''******Application manegment*****'''
 def applying_for_mission(which_ad, cursor):
     '''Create an application in the DB on a specifik ad'''
     which_ad=int(which_ad)
@@ -145,9 +187,20 @@ def applying_for_mission(which_ad, cursor):
         cursor.execute(sql,(which_ad, user,))
         return {'result':True, 'error':None}
 
+def applied_on(who, status, which_ad_id, cursor):
+    '''Check that the student have not applied before on a specifik ad'''
+    if which_ad_id==None:
+        sql="SELECT * FROM application WHERE %s=application.student_id \
+        AND application.status=%s"
+        cursor.execute(sql, (who, status,))
+    else:
+        sql="SELECT * FROM application WHERE %s=application.student_id \
+        AND application.status=%s AND application.ad_id=%s"
+        cursor.execute(sql,(who, status, which_ad_id,))
+    mighty_db_says = cursor.fetchall()
+    return mighty_db_says
 
 
-'''*********Choose a Student********'''
 def who_got_accepted(annons, sokandeID, cursor):
     '''An application is accepted. The remainding applications status is change to Bortvald'''
     log.validate_autho()
@@ -161,7 +214,12 @@ def who_got_accepted(annons, sokandeID, cursor):
     cursor.execute(sql, (annons, sokandeID,))
 
 
-'''*********Moves AD to Done*********'''
+
+
+
+
+'''**************Feedback section**************'''
+
 def move_ad_to_complete(annons, cursor):
     '''Change status on ad and gives feedback to student'''
     feedback = request.forms.get('feedback')
@@ -195,6 +253,21 @@ def move_ad_to_complete(annons, cursor):
 
         else:
             return {'response':False, 'error':'Något har blivit fel!'}
+
+
+
+def get_given_feedback_for_employers(user, cursor):
+    sql = "SELECT J1.id, feedback.feedback_text, feedback.grade \
+        FROM (SELECT ads.titel, ads.id \
+            FROM ads \
+            INNER JOIN employers \
+            ON employers.id=ads.creator_id \
+            WHERE employers.id = %s) as J1 \
+                INNER JOIN feedback \
+                ON J1.id = feedback.ad_id"
+    cursor.execute(sql, (user,))
+    mighty_db_says = cursor.fetchall()
+    return mighty_db_says
 
 
 def edit_mission(ad_id, cursor):
@@ -249,82 +322,10 @@ def edit_mission(ad_id, cursor):
         key = list(key)
         key.append(int(ad_id))
         new_keys.append(tuple(key))
-    print new_keys
     sql = "INSERT INTO ad_skills (skill, ad_id) \
     VALUES ((select name from skills where name = (%s)), (select id from ads where id = (%s)))"
     cursor.executemany(sql, new_keys)
     #Skills handeling - END
-
-
-def grading_ads(user, cursor):
-    '''Returns all ads that studetn has completed'''
-    user = int(user)
-    sql= "SELECT employers.company_name, J2.*\
-        FROM \
-            (SELECT creator_id, feedback.* \
-            FROM (SELECT ads.titel, creator_id, ad_id \
-               FROM ads \
-               INNER JOIN application \
-               ON application.ad_id=ads.id \
-               WHERE student_id = %s and status = 'Avslutad') as J1 \
-               INNER JOIN feedback \
-                ON J1.ad_id = feedback.ad_id) as J2 \
-        INNER JOIN employers \
-        ON J2.creator_id = employers.id"
-    cursor.execute(sql,(user,))
-    mighty_db_says = cursor.fetchall()
-    return mighty_db_says
-
-
-
-def students_that_applied(user_id, cursor):
-    '''Returns all studetns that applied on each of employers mission'''
-    user_id = int(user_id)
-    sql = "SELECT students.id, students.first_name, students.last_name, J1.ad_id, J1.status, education.titel, education.year, users.mail\
-    FROM (SELECT student_id, ad_id, status \
-            FROM ads \
-            INNER JOIN application \
-            ON application.ad_id=ads.id \
-            WHERE creator_id = %s) as J1 \
-    INNER JOIN students \
-    ON J1.student_id = students.id \
-    INNER JOIN education\
-    ON students.education_id = education.education_id and students.education_year = education.year\
-    INNER JOIN users\
-    ON users.id=J1.student_id"
-    cursor.execute(sql, (user_id,))
-    mighty_db_says = cursor.fetchall()
-    return mighty_db_says
-
-def get_given_feedback_for_employers(user, cursor):
-    sql = "SELECT J1.id, feedback.feedback_text, feedback.grade \
-        FROM (SELECT ads.titel, ads.id \
-            FROM ads \
-            INNER JOIN employers \
-            ON employers.id=ads.creator_id \
-            WHERE employers.id = %s) as J1 \
-                INNER JOIN feedback \
-                ON J1.id = feedback.ad_id"
-    cursor.execute(sql, (user,))
-    mighty_db_says = cursor.fetchall()
-    return mighty_db_says
-
-
-def get_denied_missions(user, cursor):
-    '''Returns all missions that student did not get.'''
-    user = int(user)
-    sql="SELECT A.titel \
-    FROM (SELECT ads.titel \
-        FROM application INNER JOIN ads \
-        ON ads.id=application.ad_id \
-        WHERE application.status='Bortvald' AND application.student_id = %s) as A \
-    UNION \
-    SELECT removed_ads.titel \
-    FROM removed_ads \
-    WHERE student_id = %s"
-    cursor.execute(sql, (user, user,))
-    mighty_db_says = cursor.fetchall()
-    return mighty_db_says
 
 def get_ad_skills(user, cursor):
     '''Returns all skills needed for each ad'''
