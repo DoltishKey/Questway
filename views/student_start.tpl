@@ -26,7 +26,7 @@
                         <div class="wrap">
                         <div id="thanks_for_applying">Tack för din ansökan. Uppdraget finns nu under "Sökta uppdrag".</div>
                         %if len(avail_ads)<= 0:
-                            <h2 class="no_ads"> Listan av annonser är tom </h1>
+                            <h2 class="no_ads"> Listan av annonser är tom </h2>
                         %else:
                             %for each in avail_ads:
                                     <div class="add">
