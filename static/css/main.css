@@ -703,6 +703,7 @@ transition: background-color 5000s ease-in-out 0s;
     color: #444444;
     line-height: 1.5;
     height: 200px;
+    font-family: 'Helvetica Neue';
 }
 
  /* Design för knappar */
