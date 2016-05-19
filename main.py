@@ -14,19 +14,19 @@ cursor = None
 def call_database():
 	global db
 	global cursor
-	db = MySQLdb.connect(host="195.178.232.16", port=3306, user="AC8240", passwd="hejhej123", db="AC8240");
+	db = MySQLdb.connect(host="195.178.232.16", port=3306, user="AC8240", passwd="hejhej123", db="AC8240")
 	cursor = db.cursor()
 	return cursor
 
 def hang_up_on_database():
-    global db
-    db = db.close()
+	global db
+	db = db.close()
 
 '''*********Routes*********'''
 
 @route('/')
 def startPage():
-	if log.is_user_logged_in()==True:
+	if log.is_user_logged_in() == True:
 		redirect('/admin')
 	else:
 		redirect('/login')
@@ -36,7 +36,7 @@ def startPage():
 
 @route('/login')
 def login():
-	if log.is_user_logged_in()==True:
+	if log.is_user_logged_in() == True:
 		redirect('/admin')
 	else:
 		return template('login', pageTitle='Logga in')
@@ -52,7 +52,7 @@ def ajax_validation():
 	else:
 		return 'ok'
 
-@route('/do_login', method = 'POST')
+@route('/do_login', method='POST')
 def do_login():
 	cursor = call_database()
 	response = log.login(cursor)
@@ -65,8 +65,8 @@ def do_login():
 
 @route('/log_out')
 def log_out():
-    log.log_out()
-    redirect('/login')
+	log.log_out()
+	redirect('/login')
 
 @route('/admin')
 def admin():
@@ -77,9 +77,9 @@ def admin():
 	user_level = log.get_user_level(cursor) #kollar om användaren är uppdragstagare eller student (returnerar 1 eller 2)
 
 	if user_level == 1:
-		ads_untreated=[]
-		ads_ongoing=[]
-		ads_finished=[]
+		ads_untreated = []
+		ads_ongoing = []
+		ads_finished = []
 
 		ads_to_apply_on=addmod.available_ads(userid, cursor)
 		all_ads=addmod.sort_by_status(userid, cursor)
