@@ -114,8 +114,10 @@ def log_in_new_user(email, password, cursor):
     user_status = validate_user(email, password, cursor)
     if user_status['result'] == True:
         userID = user_status['id']
+        client_ip = request.environ.get('REMOTE_ADDR')
         session = request.environ.get('beaker.session')
         session['userId'] = userID
+        session['userIP'] = client_ip
         session.save()
 
 

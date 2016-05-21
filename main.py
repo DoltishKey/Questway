@@ -167,7 +167,6 @@ def do_create_employer():
 		hang_up_on_database()
 		redirect('/admin')
 	else:
-		hang_up_on_database()
 		return response['error']
 
 @route('/do_create_student', method = 'POST')
@@ -181,7 +180,6 @@ def do_create_employer():
 		hang_up_on_database()
 		redirect('/admin')
 	else:
-		hang_up_on_database()
 		return response['error']
 
 
