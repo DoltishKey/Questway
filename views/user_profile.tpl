@@ -16,12 +16,12 @@
             %end
             <div id="content_wrap">
                 <main id="profiles">
-                    <div class="top">
+                    <div class="top" style="background-image:url({{education['education_info'][5]}})">
                         <div>
                             <div class="circle name_tag">
                                 <h2>{{student[0]}}</h2>
                             </div>
-                            <div>
+                            <div class="profil_intro">
                                 <h4>{{education['education_info'][0]}}</h4>
                                 <h3>{{education['education_info'][1]}}</h3>
                             </div>
@@ -44,19 +44,25 @@
                     <div class="main_education_info">
                         <div class="container">
                             <div class="education_info">
-                                <div class="icon circle"></div>
+                                <div class="icon circle">
+                                    <img src="/static/img/heart.svg" alt="heart"/>
+                                </div>
                                 <div>
                                     <p>{{education['education_info'][2]}}</p>
                                 </div>
                             </div>
                             <div class="education_info">
-                                <div class="icon circle"></div>
+                                <div class="icon circle">
+                                    <img src="/static/img/light.svg" alt="lightbulb"/>
+                                </div>
                                 <div>
                                     <p>{{education['education_info'][3]}}</p>
                                 </div>
                             </div>
                             <div class="education_info">
-                                <div class="icon circle"></div>
+                                <div class="icon circle">
+                                    <img src="/static/img/rocket.svg" alt="spacerocket"/>
+                                </div>
                                 <div>
                                     <p>{{education['education_info'][4]}}</p>
                                 </div>

@@ -1802,7 +1802,7 @@ label{
     .meny{
     }
     .allMenuItems{
-        
+
     }
 }
 @media screen and (max-width:690px){
@@ -2137,6 +2137,13 @@ label{
     }
     #profiles .top h3{
         margin-top: 10px;
+    }
+
+    #profiles .profil_intro h3{
+        font-size: 2.5em;
+    }
+    #profiles .profil_intro h4{
+        font-size: 1.8em;
     }
 
     .main_education_info .container{

@@ -60,7 +60,7 @@ def do_login():
 	if response == True:
 		redirect('/admin')
 	else:
-		return 'Tyvärr - användaren finns inte!'
+		return return_error('Tyvärr - användaren finns inte!')
 
 
 @route('/log_out')
@@ -70,8 +70,8 @@ def log_out():
 
 @route('/admin')
 def admin():
-	log.validate_autho()
-	cursor = call_database() #kontrollerar om användaren är inloggad
+	log.validate_autho() #kontrollerar om användaren är inloggad
+	cursor = call_database()
 	username = log.get_user_name(cursor) #hämtar användarens namn från DB (returnerar en sträng)
 	userid = log.get_user_id_logged_in() #hämtar användarens id
 	user_level = log.get_user_level(cursor) #kollar om användaren är uppdragstagare eller student (returnerar 1 eller 2)
@@ -90,7 +90,7 @@ def admin():
 				ads_ongoing.append(each)
 			elif each[7]=='Avslutad':
 				ads_finished.append(each)
-		denied_missions = addmod.get_denied_missions(int(userid), cursor)
+		denied_missions = addmod.get_denied_missions(userid, cursor)
 		hang_up_on_database()
 		return template('student_start',finished_ads=ads_finished, avail_ads=ads_to_apply_on, accepted_on=ads_ongoing, pending_ad=ads_untreated, user_id=userid, user=username, level="student", pageTitle = 'Start', denied_missions=denied_missions)
 
@@ -99,8 +99,6 @@ def admin():
 		students = addmod.students_that_applied(userid, cursor)
 		hang_up_on_database()
 		return template('employer_start', user=username, user_id=userid,  level="arbetsgivare", annons=employer_ads, pageTitle = 'Start', students_application = students)
-
-
 
 @route('/about_us')
 def about_us_page():
@@ -116,18 +114,23 @@ def about_us_page():
 
 @route('/help')
 def help_page():
-    if log.is_user_logged_in() == False:
-        return template('help.tpl', pageTitle = 'Hjälp - Questway', user_autho = "3")
-    else:
-        username = log.get_user_name() #hämtar användarens namn från DB (returnerar en sträng)
-        userid = log.get_user_id_logged_in() #hämtar användarens id
-        user_level = log.get_user_level() #kollar om användaren är uppdragstagare eller student (returnerar 1 eller 2)
-        return template('help.tpl', pageTitle = 'Hjälp - Questway', user = username, user_autho=user_level, user_id = userid)
+	if log.is_user_logged_in() == False:
+		return template('help.tpl', pageTitle = 'Hjälp - Questway', user_autho = "3")
+	else:
+		cursor = call_database()
+		username = log.get_user_name(cursor) #hämtar användarens namn från DB (returnerar en sträng)
+		userid = log.get_user_id_logged_in() #hämtar användarens id
+		user_level = log.get_user_level(cursor) #kollar om användaren är uppdragstagare eller student (returnerar 1 eller 2)
+		hang_up_on_database()
+		return template('help.tpl', pageTitle = 'Hjälp - Questway', user = username, user_autho=user_level, user_id = userid)
 
 '''********Create-user********'''
 @route('/create')
-def create_employer():
-    return template('create_user', pageTitle='Student | Uppdragsgivare')
+def create_user():
+	if log.is_user_logged_in()==False:
+		return template('create_user', pageTitle='Student | Uppdragsgivare')
+	else:
+		redirect('/admin')
 
 @route('/create_student')
 def create_student():
@@ -144,7 +147,7 @@ def create_employer():
         redirect('/admin')
 
 @route('/ajax_create_user', method="POST")
-def ajax_validation():
+def ajax_create_validation():
 	cursor = call_database()
 	result = handleUsers.ajax_new_user_validation(cursor)
 	hang_up_on_database()
@@ -155,38 +158,37 @@ def ajax_validation():
 	else:
 		return 'ok'
 
-
-@route('/do_create_employer', method = 'POST')
-def do_create_employer():
+@route('/do_create_user/<user>', method = 'POST')
+def do_create_user(user):
 	global db
-	cursor = call_database()
-	response = handleUsers.create_employer(cursor)
-	db.commit()
-	if response['result'] == True:
-		log.log_in_new_user(response['email'], response['password'], cursor)
-		hang_up_on_database()
-		redirect('/admin')
+	if log.is_user_logged_in()==False:
+		cursor = call_database()
+		if user == "student":
+			response = handleUsers.create_student(cursor)
+		elif user == "employer":
+			response = handleUsers.create_employer(cursor)
+		else:
+			hang_up_on_database()
+			return return_error("Något har blivit fel!")
+		db.commit()
+		if response['result'] == True:
+			log.log_in_new_user(response['email'], response['password'], cursor)
+			hang_up_on_database()
+			redirect('/admin')
+		else:
+			hang_up_on_database()
+			return return_error(response['error'])
 	else:
-		return response['error']
-
-@route('/do_create_student', method = 'POST')
-def do_create_employer():
-	global db
-	cursor = call_database()
-	response = handleUsers.create_student(cursor)
-	db.commit()
-	if response['result'] == True:
-		log.log_in_new_user(response['email'], response['password'], cursor)
-		hang_up_on_database()
 		redirect('/admin')
-	else:
-		return response['error']
-
 
 @route('/profiles/<user>')
 def profiles(user):
+	try:
+		user = int(user)
+	except:
+		return return_error('Användaren finns inte!')
+
 	cursor = call_database()
-	user = int(user)
 	user_profile_data = handleUsers.show_student_profile(user, cursor)
 	is_user_logged_in = log.is_user_logged_in()
 
@@ -198,7 +200,7 @@ def profiles(user):
 		user_levle = log.get_user_level(cursor)
 		username = log.get_user_name(cursor)
 		logged_in_id = log.get_user_id_logged_in()
-		if int(logged_in_id) == int(user):
+		if logged_in_id == user:
 			this_user = True
 	else:
 		user_levle = 0
@@ -209,35 +211,27 @@ def profiles(user):
 		education_info = user_profile_data['education_info']
 		student_info = user_profile_data['student_info']
 		student_name = student_info[0] + ' ' + student_info[1]
-		print student_info
 		return template('user_profile', user = username, user_autho = user_levle, user_id = user, student= student_info, education = education_info, pageTitle = student_name, grading = grading_ads, grading_skills = grading_skills, this_user=this_user )
 
 	else:
-		return template('error_message', pageTitle = 'Användaren finns inte!', user = username, user_autho = user_levle, user_id = user, error_message='Det har fel!')
-
+		return return_error('Användaren finns inte!')
 
 @route('/edit_mission/<user>/<ad_id>', method="POST")
 def edit_mission(user,ad_id):
 	global db
-	cursor = call_database()
-	addmod.edit_mission(ad_id, cursor)
-	db.commit()
-	hang_up_on_database()
-	redirect('/profiles/' + str(user))
-
-'''********Change contact information********'''
-
-@route('/edit')
-def edit_contact_information():
-	cursor = call_database()
-	if log.get_user_level(cursor) == 2:
-		username = log.get_user_name(cursor) #hämtar användarens namn från DB (returnerar en sträng)
-		userid = log.get_user_id_logged_in() #hämtar användarens id
+	try:
+		int(user)
+		int(ad_id)
+	except:
+		return return_error('Något har blciti fel!')
+	log.validate_autho()
+	if int(log.get_user_id_logged_in()) == int(user):
+		cursor = call_database()
+		addmod.edit_mission(ad_id, cursor)
+		db.commit()
 		hang_up_on_database()
-		return template('change_contact_info', pageTitle = 'Redigera kontaktuppgifter', user=username, user_id=userid)
-	else:
-		hang_up_on_database()
-		return "Behörighet saknas!"
+		redirect('/profiles/' + str(user))
+	return return_error('Ej behörighet!')
 
 
 '''********Ad-management********'''
@@ -253,7 +247,7 @@ def do_new_ad():
 		return template('adsform.tpl',user=username, pageTitle = 'Annonser')
 	else:
 		hang_up_on_database()
-		return "Behörighet saknas!"
+		return return_error('Behörighet saknas')
 
 @route('/make_ad', method="POST")
 def ad_done():
@@ -267,7 +261,7 @@ def ad_done():
 	if response['result']==True:
 		redirect('/admin')
 	else:
-		return response['error']
+		return return_error(response['error'])
 
 
 @route('/make_ad')
@@ -291,7 +285,7 @@ def del_ad(which_ad):
 		redirect('/allMissions')
 	else:
 		hang_up_on_database()
-		return 'Behörighet saknas!'
+		return return_error('Behörighet saknas')
 
 
 '''****Students can apply on an ad****'''
@@ -308,7 +302,7 @@ def apply_for_mission(which_ad):
 	if response['result']==True:
 		redirect('/admin')
 	else:
-		return response['error']
+		return return_error(response['error'])
 
 '''****All the ads and their applications listed***'''
 
@@ -327,7 +321,7 @@ def list_applied_students():
 		return template('adds.tpl',user_id=user_id, user=username, adds=relevant_adds, students=students_application, pageTitle='Alla uppdrag', feedback = feedback_info)
 	else:
 		hang_up_on_database()
-		return "Du har ej behörighet"
+		return return_error('Behörighet saknas')
 
 
 @route('/select_student/<ad>/<appliersID>')
@@ -341,12 +335,15 @@ def accepted_ones(ad, appliersID):
 		redirect ('/allMissions')
 	else:
 		hang_up_on_database()
-		return "Behörighet saknas!"
-
+		return return_error('Behörighet saknas')
 
 @route('/ad_done/<ad>', method="POST")
 def ad_done(ad):
 	global db
+	try:
+		int(ad)
+	except:
+		return return_error('Nu har något blivit fel!')
 	cursor = call_database()
 	log.validate_autho()
 	if log.get_user_level(cursor) == 2:
@@ -354,12 +351,12 @@ def ad_done(ad):
 		db.commit()
 		hang_up_on_database()
 		if response['response'] == False:
-			return response['error']
+			return return_error(response['error'])
 		else:
 			redirect('/allMissions')
 	else:
 		hang_up_on_database()
-		return 'Behörighet saknas!'
+		return return_error('Behörighet saknas')
 
 
 @route('/give_feedback/<ad_nr>')
@@ -372,8 +369,18 @@ def give_feedback(ad_nr):
 		return template('feedback', adnr=ad_nr, pageTitle = 'Ge feedback', user=username )
 	else:
 		hang_up_on_database()
-		return "Behörighet saknas!"
+		return return_error('Behörighet saknas')
 
+
+def return_error(error_message):
+	cursor = call_database()
+	if log.is_user_logged_in == True:
+		userid = log.get_user_id_logged_in()
+		user_level = log.get_user_level(cursor)
+		username = log.get_user_name(cursor)
+		return template('error_message', pageTitle = error_message, user = username, user_autho = user_level, user_id = user, error_message=error_message)
+	else:
+		return template('error_message', pageTitle = error_message, user_autho = 3, error_message=error_message)
 
 
 '''********Övriga Routes********'''
