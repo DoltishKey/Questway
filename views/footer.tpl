@@ -4,7 +4,7 @@
             <p>© Questway, 2016</p>
         </div>
         <div class="footer_col2">
-            <img id="footlog" src="../static/img/Logga.png" alt="loggan">
+            <img id="footlog" src="/static/img/Logga.png" alt="loggan">
         </div>
         <div class="footer_col3">
             <p>

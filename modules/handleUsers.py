@@ -18,13 +18,21 @@ def validate_Username(email, cursor):
 
 def validate_if_student_exists(userID, cursor):
     '''Check that there is a student with a specific user-id'''
-    userID = int(userID)
     sql = "SELECT autho_level FROM users WHERE id = %s"
     cursor.execute(sql, (userID,))
     mighty_db_says = cursor.fetchall()
     if len(mighty_db_says) != 0:
         if mighty_db_says[0][0] == 1:
             return True
+
+def ajax_new_user_validation(cursor):
+	email = request.forms.get('email')
+	if email == None or len(email) == 0 or validate_email.validate_email(email) == False:
+		return {'result': False, 'error':'Bad input'}
+	elif validate_Username(email, cursor) == True:
+		return {'result': False, 'error':'User exists'}
+	else:
+		return {'result': True}
 
 '''*********Funktions*********'''
 def add_new_user(email, password, user_level, cursor):
@@ -75,8 +83,8 @@ def get_education_info(program, year, cursor):
     mighty_db_says=cursor.fetchall()
     education_info = mighty_db_says[0]
 
-    sql = sql = "SELECT skill FROM education_skills\
-    WHERE education_id = %s AND education_year = %s"
+    sql = "SELECT DISTINCT skill FROM education_skills\
+    WHERE education_id = %s AND education_year <= %s"
     cursor.execute(sql, (program, year,))
     education_skills = cursor.fetchall()
     return {'education_info':education_info, 'education_skills':education_skills}
@@ -84,17 +92,21 @@ def get_education_info(program, year, cursor):
 
 '''*********Main - Functions*********'''
 def create_employer(cursor):
-    '''Prepair the information before creating an employer-profile'''
+    '''Prepare the information before creating an employer-profile'''
     company_name = request.forms.get('company_name')
     org_nr = request.forms.get('org_nr')
     first_name = request.forms.get('first_name')
     last_name = request.forms.get('last_name')
-    email = request.forms.get('email').lower()
+    email = request.forms.get('email')
     password = request.forms.get('password')
     user_inputs=[company_name, org_nr, first_name,last_name,email,password]
     for user_input in user_inputs:
         if user_input == None or len(user_input) == 0:
             return {'result':False, 'error': 'Inget fält får vara tomt!'}
+    try:
+        int(org_nr)
+    except:
+        return {'result':False, 'error': 'Organisationsnummer får bara vara siffror!'}
 
     if validate_Username(email, cursor) == True:
         return {'result':False, 'error':'Tyvärr - en användare med samma email finns redan!'}
@@ -110,12 +122,12 @@ def create_employer(cursor):
 
 
 def create_student(cursor):
-    '''Prepair the information before creating a student-profile'''
+    '''Prepare the information before creating a student-profile'''
     first_name = request.forms.get('first_name')
     last_name = request.forms.get('last_name')
     program = request.forms.get('program')
     year = request.forms.get('year')
-    email = request.forms.get('email').lower()
+    email = request.forms.get('email')
     phone = request.forms.get('phone')
     password = request.forms.get('password')
 
@@ -123,6 +135,13 @@ def create_student(cursor):
     for user_input in user_inputs:
         if user_input == None or len(user_input) == 0:
             return {'result':False, 'error': 'Inget fält får vara tomt!'}
+
+    try:
+        int(program)
+        int(year)
+        int(phone)
+    except:
+        return {'result':False, 'error': 'Tele får bara vara siffror!'}
 
     if validate_Username(email, cursor) == True:
         return {'result':False, 'error':'Tyvärr - en användare med samma email finns redan!'}
@@ -136,15 +155,6 @@ def create_student(cursor):
         add_new_student(first_name, last_name, program, year, new_user_id, phone, cursor)
         return {'result':True, 'email':email, 'password':password}
 
-
-def ajax_new_user_validation(cursor):
-	email = request.forms.get('email')
-	if email == None or len(email) == 0 or validate_email.validate_email(email) == False:
-		return {'result': False, 'error':'Bad input'}
-	elif validate_Username(email, cursor) == True:
-		return {'result': False, 'error':'User exists'}
-	else:
-		return {'result': True}
 
 def show_student_profile(user,cursor):
     '''Retrieves all information for a students profile-page'''

@@ -7,7 +7,7 @@
             <div id="content_wrap">
                 <div id="content">
 
-                <form name="create_student" id="create_student" method="post" action="/do_create_student">
+                <form name="create_student" id="create_student" method="post" action="/do_create_user/student">
                    <h3 class="form_head" id="studentform_Title">Skapa profil | Student</h3>
 
                     <div class="form_labels">
@@ -37,7 +37,11 @@
                             <option value="3">App</option>
                         </select>
                         <br>
-                        <input placeholder="Årskurs" type="input" name="year" id="year" value="" required>
+                        <select id="year" name="year" value="" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
                         <br>
                         <input placeholder="Mejl" type="input" name="email" id="email" value="" required>
                         <br>

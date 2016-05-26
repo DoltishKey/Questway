@@ -77,13 +77,15 @@ function checkCreateEmployer(){
             /*
             error.innerHTML("Du måste ange hela din mailadress. Med @ och allt.");
 
-            Denna finns här ifall man vill i ett senare skede göra så att det visas ett felmeddelande PÅ sidan i <p id=error> istället för en popup-ruta
+            Denna finns här ifall man vill i ett senare skede göra så att det visas ett felmeddelande PÅ sidan i <p id=error>
+            istället för en popup-ruta
             */
         }
         //Email-validation end
 /*
         //BLANK Check START
-        if (company_name.value == null || org_nr.value == null || fname.value == null || lname.value == null || email.value == null || password.value == null){
+        if (company_name.value == null || org_nr.value == null || fname.value == null || lname.value == null
+        || email.value == null || password.value == null){
             alert("Nu har du nog missat fylla i ett fällt.");
         }*/
         //BLANK Check END
@@ -120,7 +122,8 @@ function checkCreateStudent(){
         else{
             /*error.innerHTML("Du måste ange hela din mailadress. Med @ och allt.");
 
-            Denna finns här ifall man vill i ett senare skede göra så att det visas ett felmeddelande PÅ sidan i <p id=error> istället för en popup-ruta
+            Denna finns här ifall man vill i ett senare skede göra så att det visas ett felmeddelande PÅ sidan i <p id=error>
+            istället för en popup-ruta
             */
             alert("Du måste ange en hel och riktig mailadress. Med @ och allt.");
             email.style.borderColor = "red";
@@ -220,10 +223,6 @@ function edit_mission(){
 
     });
 
-    //$('.misson_info_control').click(function(){
-    //	clicked_parent = $(this).parents('li');
-        //enter_edit_mode(clicked_parent);
-    //});
 
     $('.edit_mission_btn').click(function(){
         clicked_parent = $(this).parents('li');
