@@ -303,7 +303,7 @@ def edit_mission(ad_id, cursor):
     #Image handeling
     if upload != None:
         name, ext = os.path.splitext(upload.filename)
-        if ext not in ('.png','.jpg','.jpeg'):
+        if ext.lower() not in ('.png','.jpg','.jpeg', '.PNG'):
             return 'File extension not allowed.'
 
         save_path = "static/img/uploads"
