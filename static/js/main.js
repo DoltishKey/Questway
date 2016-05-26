@@ -10,8 +10,8 @@ $(document).ready(function() {
     edith_file();
     thanks_for_applying();
     check_if_feedback_should_display();
-    
-    
+
+
 });
 function checkLogIn(){
     $('#logIn').submit(function(event){
@@ -37,21 +37,20 @@ function checkLogIn(){
       });
 }
 
-
 function checkCreateEmployer(){
     $('#create_employer').submit(function(event){
         event.preventDefault(event);
-        
+
         var company_name = document.getElementById("company_name"),
             org_nr = document.getElementById("org_nr"),
-            fname = document.getElementById("first_name"), 
-            lname = document.getElementById("last_name"), 
-            password = document.getElementById("password"), 
+            fname = document.getElementById("first_name"),
+            lname = document.getElementById("last_name"),
+            password = document.getElementById("password"),
             error = document.getElementById("error");
         //Email-validering:
         var email = document.getElementById("email");
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value))
-        {   
+        {
             $.ajax({
                 type: 'POST',
                 url: '/ajax_create_user',
@@ -61,13 +60,13 @@ function checkCreateEmployer(){
                         document.getElementById("create_employer").submit();
                        }
                        else if(response=='User exists'){
-                           $('#error').html('Det finns redan en användare med angiven email!');
+                           //$('#error').html('Det finns redan en användare med angiven email!');
                        }
                        else if(response=='Bad input'){
-                           $('#error').html('Du måste skriva in en email!');
+                           //$('#error').html('Du måste skriva in en email!');
                        }
                        else{
-                           $('#error').html('Något har blivit fel!');
+                           //$('#error').html('Något har blivit fel!');
                        }
                    }
         });
@@ -91,7 +90,6 @@ function checkCreateEmployer(){
 
       });
 }
-
 
 function checkCreateStudent(){
     $('#create_student').submit(function(event){
@@ -130,7 +128,7 @@ function checkCreateStudent(){
         }
 
         //Email-val end
-        
+
       });
 }
 
@@ -146,7 +144,6 @@ function set_localstorage_val_for_ad(){
         localStorage.setItem("clicked_ad", val);
     });
 }
-
 
 // För att dölja/visa annonser:
 function showHide() {
@@ -363,13 +360,13 @@ function menuSetUp(){
 }
 function showHideMenu(){
     var meny = document.getElementsByClassName("menu");
-    
+
     var knapp = document.getElementById("menyknapp");
-    
+
     if (meny.style.display == "block"){
         meny.style.display = "none";
         knapp.src = "../img/menyicons/kryss.png";
-        
+
     }else if (meny.style.display == "none"){
         meny.style.display = "block";
         knapp.src = "../img/menyicons/menyicon2.png";
