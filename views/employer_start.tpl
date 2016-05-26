@@ -1,3 +1,7 @@
+<!--
+Skriven av: Jacob (HTML+CSS)
+Uppdaterad av: Sofia
+-->
 <!DOCTYPE html>
 <html>
         % include('head.tpl')

@@ -1,5 +1,9 @@
 # *-* coding:utf-8 *-*
 #!/usr/bin/python
+'''
+*******Creator*******
+Se varje funktion
+'''
 import bottle
 from modules import log
 from modules import handleUsers
@@ -12,6 +16,7 @@ db = None
 cursor = None
 
 def call_database():
+	#Skriven av: Jari & Jacob (Parprogrammering)
 	global db
 	global cursor
 	db = MySQLdb.connect(host="195.178.232.16", port=3306, user="AC8240", passwd="hejhej123", db="AC8240")
@@ -19,6 +24,7 @@ def call_database():
 	return cursor
 
 def hang_up_on_database():
+	#Skriven av: Jari & Jacob (Parprogrammering)
 	global db
 	db = db.close()
 
@@ -26,6 +32,7 @@ def hang_up_on_database():
 
 @route('/')
 def startPage():
+	#Skriven av: Jari
 	if log.is_user_logged_in() == True:
 		redirect('/admin')
 	else:
@@ -36,6 +43,7 @@ def startPage():
 
 @route('/login')
 def login():
+	#Skriven av: Jacob
 	if log.is_user_logged_in() == True:
 		redirect('/admin')
 	else:
@@ -44,6 +52,7 @@ def login():
 
 @route('/ajax', method="POST")
 def ajax_validation():
+	#Skriven av: Jacob
 	cursor = call_database()
 	result = log.ajax_validation(cursor)
 	hang_up_on_database()
@@ -54,6 +63,7 @@ def ajax_validation():
 
 @route('/do_login', method='POST')
 def do_login():
+	#Skriven av: Jacob
 	cursor = call_database()
 	response = log.login(cursor)
 	hang_up_on_database()
@@ -65,11 +75,14 @@ def do_login():
 
 @route('/log_out')
 def log_out():
+	#Skriven av: Jacob
 	log.log_out()
 	redirect('/login')
 
 @route('/admin')
 def admin():
+	#Skriven av: Jacob & Jari
+	#Mindre uppdateringar: Sofia
 	log.validate_autho() #kontrollerar om användaren är inloggad
 	cursor = call_database()
 	username = log.get_user_name(cursor) #hämtar användarens namn från DB (returnerar en sträng)
@@ -102,6 +115,7 @@ def admin():
 
 @route('/about_us')
 def about_us_page():
+	#Skriven av Sofia
 	if log.is_user_logged_in() == False:
 		return template('about_us', pageTitle = 'Om Questway', user_autho = "3")
 	else:
@@ -114,6 +128,7 @@ def about_us_page():
 
 @route('/help')
 def help_page():
+	#Skriven av Sofia
 	if log.is_user_logged_in() == False:
 		return template('help.tpl', pageTitle = 'Hjälp - Questway', user_autho = "3")
 	else:
@@ -127,6 +142,7 @@ def help_page():
 '''********Create-user********'''
 @route('/create')
 def create_user():
+	#Skriven av: Jacob
 	if log.is_user_logged_in()==False:
 		return template('create_user', pageTitle='Student | Uppdragsgivare')
 	else:
@@ -134,20 +150,23 @@ def create_user():
 
 @route('/create_student')
 def create_student():
-    if log.is_user_logged_in()==False:
-        return template('create_student', pageTitle='Skapa profil')
-    else:
-        redirect('/admin')
+	#Skriven av: Jacob
+	if log.is_user_logged_in()==False:
+		return template('create_student', pageTitle='Skapa profil')
+	else:
+		redirect('/admin')
 
 @route('/create_employer')
 def create_employer():
-    if log.is_user_logged_in()==False:
-        return template('create_employer', pageTitle='Skapa profil')
-    else:
-        redirect('/admin')
+	#Skriven av Jacob
+	if log.is_user_logged_in()==False:
+		return template('create_employer', pageTitle='Skapa profil')
+	else:
+		redirect('/admin')
 
 @route('/ajax_create_user', method="POST")
 def ajax_create_validation():
+	#Skriven av Jacob
 	cursor = call_database()
 	result = handleUsers.ajax_new_user_validation(cursor)
 	hang_up_on_database()
@@ -160,6 +179,7 @@ def ajax_create_validation():
 
 @route('/do_create_user/<user>', method = 'POST')
 def do_create_user(user):
+	#Skriven av Jacob
 	global db
 	if log.is_user_logged_in()==False:
 		cursor = call_database()
@@ -183,6 +203,7 @@ def do_create_user(user):
 
 @route('/profiles/<user>')
 def profiles(user):
+	#Skriven av Jacob
 	try:
 		user = int(user)
 	except:
@@ -218,6 +239,7 @@ def profiles(user):
 
 @route('/edit_mission/<user>/<ad_id>', method="POST")
 def edit_mission(user,ad_id):
+	#Skriven av Jacob
 	global db
 	try:
 		int(user)
@@ -238,6 +260,7 @@ def edit_mission(user,ad_id):
 
 @route('/do_new_ad')
 def do_new_ad():
+	#Skriven av Jari
 	'''Returns a view where the logged-in employer can fill in information for a new ad'''
 	cursor = call_database()
 	log.validate_autho()
@@ -251,6 +274,7 @@ def do_new_ad():
 
 @route('/make_ad', method="POST")
 def ad_done():
+	#Skriven av Jari
 	'''Creates a new ad in the DB'''
 	global db
 	cursor = call_database()
@@ -266,13 +290,15 @@ def ad_done():
 
 @route('/make_ad')
 def no_get():
-    redirect('/admin')
+	#Skriven av Jari
+	redirect('/admin')
 
 
 '''*****Delete ad*****'''
 
 @route('/del_ad/<which_ad>', method="POST")
 def del_ad(which_ad):
+	#Skriven av Jari
 	'''Deletes a specifik ad in the DB'''
 	global db
 	cursor = call_database()
@@ -292,6 +318,7 @@ def del_ad(which_ad):
 
 @route('/apply_on_ad/<which_ad>', method="POST")
 def apply_for_mission(which_ad):
+	#Skriven av Jari
 	'''Onclick on template - student applies on a specifik ad'''
 	global db
 	cursor = call_database()
@@ -308,6 +335,7 @@ def apply_for_mission(which_ad):
 
 @route('/allMissions')
 def list_applied_students():
+	#Skriven av Jari
 	'''lists all ads with their specific application status'''
 	cursor = call_database()
 	log.validate_autho()
@@ -326,6 +354,7 @@ def list_applied_students():
 
 @route('/select_student/<ad>/<appliersID>')
 def accepted_ones(ad, appliersID):
+	#Skriven av Jari
 	global db
 	cursor = call_database()
 	if log.get_user_level(cursor) == 2:
@@ -339,6 +368,7 @@ def accepted_ones(ad, appliersID):
 
 @route('/ad_done/<ad>', method="POST")
 def ad_done(ad):
+	#Skriven av Jari
 	global db
 	try:
 		int(ad)
@@ -361,6 +391,7 @@ def ad_done(ad):
 
 @route('/give_feedback/<ad_nr>')
 def give_feedback(ad_nr):
+	#Skriven av Jacob
 	cursor = call_database()
 	log.validate_autho()
 	if log.get_user_level(cursor) == 2 and log.get_user_id_logged_in() == addmod.get_ad_creator_id(cursor, int(ad_nr)):
@@ -373,6 +404,7 @@ def give_feedback(ad_nr):
 
 
 def return_error(error_message):
+	#Skriven av Jacob
 	cursor = call_database()
 	if log.is_user_logged_in == True:
 		userid = log.get_user_id_logged_in()

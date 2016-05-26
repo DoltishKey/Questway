@@ -1,3 +1,7 @@
+<!--
+Skriven av: Jacob (HTML)
+Skriven av: ??Sofia?? (CSS)
+-->
 <header>
     <div class="wrap" id="header_wrap">
         <a id="QWTitle" href="/"><h1>Questway</h1></a>

@@ -1,3 +1,7 @@
+/****************
+Skriven av: Sofia
+****************/
+
 var tabLinks = new Array();
 var contentDivs = new Array();
 

@@ -1,3 +1,7 @@
+/****************
+Skriven av: Se funktioner
+****************/
+
 $(document).ready(function() {
     checkLogIn();
     checkCreateEmployer();
@@ -14,6 +18,9 @@ $(document).ready(function() {
 
 });
 function checkLogIn(){
+    /****************
+    Skriven av: Jacob
+    ****************/
     $('#logIn').submit(function(event){
          event.preventDefault(event);
         $.ajax({
@@ -39,6 +46,11 @@ function checkLogIn(){
 
 
 function checkCreateEmployer(){
+    /****************
+    Skriven av: Jacob & Philip
+    Jacob: Ajax
+    Philip: Email-validering
+    ****************/
     $('#create_employer').submit(function(event){
         event.preventDefault(event);
 
@@ -71,31 +83,21 @@ function checkCreateEmployer(){
                        }
                    }
         });
-        }else{
-            alert("Du måste ange en hel och riktig mailadress. Med @ och allt.");
-            email.style.borderColor = "red";
-            return false;
-            /*
-            error.innerHTML("Du måste ange hela din mailadress. Med @ och allt.");
-
-            Denna finns här ifall man vill i ett senare skede göra så att det visas ett felmeddelande PÅ sidan i <p id=error>
-            istället för en popup-ruta
-            */
         }
-        //Email-validation end
-/*
-        //BLANK Check START
-        if (company_name.value == null || org_nr.value == null || fname.value == null || lname.value == null
-        || email.value == null || password.value == null){
-            alert("Nu har du nog missat fylla i ett fällt.");
-        }*/
-        //BLANK Check END
-
+        else{
+            alert("Du måste ange en hel och riktig mailadress. Med @ och allt.");
+            email.style.borderColor = "red"
+            return false
+        }
       });
 }
 
-
 function checkCreateStudent(){
+    /****************
+    Skriven av: Jacob & Philip
+    Jacob: Ajax
+    Philip: Email-validering
+    ****************/
     $('#create_student').submit(function(event){
         event.preventDefault(event);
         //Email-validering:
@@ -138,12 +140,18 @@ function checkCreateStudent(){
 }
 
 function give_emplyers_more_info(){
+    /****************
+    Skriven av: Jacob
+    ****************/
     $('#toggle_how_it_works').click(function(){
         $('#employer_how_it_works').slideToggle('slow');
     });
 }
 
 function set_localstorage_val_for_ad(){
+    /****************
+    Skriven av: Sofia
+    ****************/
     $('.go_to_ad').click(function functionName() {
         val = $(this).data( 'value' );
         localStorage.setItem("clicked_ad", val);
@@ -153,6 +161,9 @@ function set_localstorage_val_for_ad(){
 
 // För att dölja/visa annonser:
 function showHide() {
+    /****************
+    Skriven av: Sofia
+    ****************/
      $('.add').click(function(){
          $(this).children('.showMore').toggle();
 
@@ -167,6 +178,9 @@ function showHide() {
 
 // För att visa feedback meddelande vid ansökan till annons:
 function check_if_feedback_should_display() {
+    /****************
+    Skriven av: Sofia
+    ****************/
     if(sessionStorage.getItem("name")) {
         document.getElementById("thanks_for_applying").style.display = 'block';
         sessionStorage.clear();
@@ -174,6 +188,9 @@ function check_if_feedback_should_display() {
 }
 
 function thanks_for_applying() {
+    /****************
+    Skriven av: Sofa
+    ****************/
     $('.sok_annons').submit( function () {
         sessionStorage.setItem("name", "applied");
     } );
@@ -182,14 +199,19 @@ function thanks_for_applying() {
 // SLUT visa feedback-meddelande
 
 function mission_control(){
+    /****************
+    Skriven av: Jacob
+    ****************/
     $('.misson_info_control').click(function() {
         clicked_parent = $(this).parents('li');
         open_close_mission(clicked_parent);
-
     });
 }
 
 function open_close_mission(clicked_parent){
+    /****************
+    Skriven av: Jacob
+    ****************/
     $('.small').each(function(){
         $(this).removeClass('small');
     });
@@ -218,6 +240,9 @@ function open_close_mission(clicked_parent){
 }
 
 function edit_mission(){
+    /****************
+    Skriven av: Jacob
+    ****************/
     $('.edit_mission_info').find('.btn').click(function() {
         $(this).parents('.edit_mission_info').hide();
         clicked_parent = $(this).parents('li');
@@ -228,6 +253,9 @@ function edit_mission(){
 
 
     $('.edit_mission_btn').click(function(){
+        /****************
+        Skriven av: Jacob
+        ****************/
         clicked_parent = $(this).parents('li');
         if($(this).html()== 'Redigera'){
             enter_edit_mode(clicked_parent);
@@ -240,6 +268,9 @@ function edit_mission(){
 }
 
 function enter_edit_mode(clicked_parent) {
+    /****************
+    Skriven av: Jacob
+    ****************/
     clicked_parent.addClass('edit');
     clicked_parent.find('.edit_mission_btn').html('Spara');
     clicked_parent.find('li').hide();
@@ -256,6 +287,9 @@ function enter_edit_mode(clicked_parent) {
 }
 
 function exit_edit_mode(clicked_parent){
+    /****************
+    Skriven av: Jacob
+    ****************/
     clicked_parent.find('.edit_mission_btn').html('Redigera');
     clicked_parent.find('li').show();
     clicked_parent.find('select').hide();
@@ -269,7 +303,9 @@ function exit_edit_mode(clicked_parent){
 }
 
 function handle_input(){
-
+    /****************
+    Skriven av: Jacob
+    ****************/
     $('.add_one_key').click(function() {
         var num = $(this).parents('.key_continer').data('add');
         var inputNode = '<div class="edit_key" style="display:inline-block"><div class="remove_key">X</div><input type="text" value="" name="add_key_'+num+'" class="add_key" style="display:inline-block" maxlength="20" autofocus><div>';
@@ -290,6 +326,9 @@ function handle_input(){
 }
 
 function img_handleing(){
+    /****************
+    Skriven av: Jacob
+    ****************/
     $('.fileToUpload').change(function(){
         var parten = $(this).parents('.circle')
         if (this.files && this.files[0]) {
@@ -305,6 +344,9 @@ function img_handleing(){
 }
 
 function remove_key() {
+    /****************
+    Skriven av: Jacob
+    ****************/
     $('.keys').on('click', '.remove_key', function(){
         $(this).parents('.edit_key').remove();
     });
@@ -316,6 +358,9 @@ function remove_key() {
 }
 
 function update_mission(){
+    /****************
+    Skriven av: Jacob
+    ****************/
     $('.edit_mission_btn').click(function(){
         if ( $(this).html() == 'Spara' ){
 
@@ -327,18 +372,20 @@ function update_mission(){
 }
 
 function edith_file(){
+    /****************
+    Skriven av: Jacob
+    ****************/
     $("input:file").change(function (){
     $('.fileToUploadLabel').hide();
     $(this).parents('.circle').css('background-image','$(this).val()');
-
-
-
    });
-
 }
 
 //Skapa annons
 function createAdValid(){
+    /****************
+    Skriven av: Philip
+    ****************/
     var error = document.getElementById("error");
     var ad_title = document.getElementById("ad_title");
     var ad_text = document.getElementById("ad_text");
@@ -358,6 +405,9 @@ function createAdValid(){
 }
 
 function menuSetUp(){
+    /****************
+    Skriven av: Philip
+    ****************/
  document.getElementsByClassName("menu").style.display = "none";
 }
 function showHideMenu(){
