@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<!--
+Skriven av: Jari (HTML + Python)
+Skriven av: ??Sofia?? (HTML + CSS)
+Mindre uppdateringra av: Jacob (Python för listnign av nekade uppdarg)
+-->
 <html>
 
     %include('head.tpl')

@@ -1,4 +1,11 @@
 # *-* coding:utf-8 *-*
+
+'''
+*******Creator******* 
+Skriven av: Jacob
+Mindre uppdateringar: Jari
+'''
+
 import bottle
 from bottle import route, get, post, run, template, error, static_file, request, redirect, abort, response, app
 from beaker.middleware import SessionMiddleware
@@ -29,7 +36,7 @@ def validate_user(username, password, cursor):
     mighty_db_says = cursor.fetchall()
 
     if len(mighty_db_says) == 1:
-        user_id = mighty_db_says[0][0] #
+        user_id = mighty_db_says[0][0]
         return {'id':user_id, 'result':True}
 
     else:
@@ -108,7 +115,7 @@ def login(cursor):
         return False
 
 def log_in_new_user(email, password, cursor):
-    '''From creating profile - logg in'''
+    '''From creating profile - loggs in user without need of input'''
     user_status = validate_user(email, password, cursor)
     if user_status['result'] == True:
         userID = user_status['id']

@@ -1,3 +1,6 @@
+<!--
+Skriven av: Philip (HTML + CSS)
+-->
 <!DOCTYPE html>
 <html>
     % include('head.tpl')
@@ -50,37 +53,6 @@
                         <input placeholder="Lösenord" type="input" name="password" id="password" value="" required>
                     </div>
                     <input class="myButton" id="create_student_account" type="submit" value="Skapa konto" required>
-                   <!--
-                   <label for="first_name">Förnamn</label>
-                   <input placeholder="Förnamn" type="input" name="first_name" id="first_name" value="">
-                    <br>
-
-                       <label for="last_name">Efternamn</label>
-                    <input placeholder="Efternamn" type="input" name="last_name" id="last_name" value="">
-                    <br>
-
-                    <label for="program">Utbildning</label>
-                    <select name="program" id="program" value="">
-                        <option value="1">Informationsarkitekt</option>
-                        <option value="2">Systemutvecklare</option>
-                        <option value="3">App</option>
-                    </select>
-                    <br>
-
-                    <label for="year">Årskurs</label>
-                    <input placeholder="Årskurs" type="input" name="year" id="year" value="">
-                    <br>
-
-                    <label for="email">Mejl</label>
-                    <input placeholder="Mejl" type="input" name="email" id="email" value="">
-                    <br>
-
-                    <label for="password">Lösenord</label>
-                    <input placeholder="Lösenord" type="input" name="password" id="password" value="">
-
-                    <input id="logInButton" type="submit" value="Skapa konto">
-                    <br>
-                    -->
                 </form>
                 <p id="error"></p>
                 </div>

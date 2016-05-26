@@ -1,3 +1,7 @@
+<!--
+Skriven av: Jacob (HTML)
+Skriven av: ??Sofia?? (CSS)
+-->
 <header>
         <div class="wrap" id="header_wrap">
         <div class="courtesyNav">

@@ -1,4 +1,11 @@
 # *-* coding:utf-8 *-*
+
+'''
+*******Creator*******
+Se varje funktion
+'''
+
+
 from bottle import request
 import log
 import MySQLdb
@@ -9,6 +16,7 @@ import random, string
 '''*********Ad validators*********'''
 
 def validate_ad_input(ad_info):
+    #Skriven av: Jari
     '''Last point of validation to check that it exists a title'''
     s=list(ad_info)
 
@@ -25,6 +33,7 @@ def validate_ad_input(ad_info):
 '''*********General ad info*********'''
 
 def get_ad_creator_id(cursor, ad_nr):
+    #Skriven av: Jari
     ''' Return id of ads creator'''
     sql= "SELECT creator_id FROM ads WHERE id=%s"
     cursor.execute(sql, (ad_nr,))
@@ -33,6 +42,7 @@ def get_ad_creator_id(cursor, ad_nr):
     return mighty_db_says[0][0]
 
 def get_my_ads(employers_id, cursor):
+    #Skriven av: Jari
     ''' Return a logged-in employers ads'''
     sql= "SELECT id, titel, main_info, creator_id, DATE(creation_date) FROM ads WHERE %s=ads.creator_id"
     cursor.execute(sql, (employers_id,))
@@ -42,6 +52,7 @@ def get_my_ads(employers_id, cursor):
 
 '''*********Create/remove AD*********'''
 def do_ad(cursor):
+    #Skriven av: Jari
     '''Get data from user and create an ad'''
     ad_title=request.forms.get('ad_title')
     ad_text=request.forms.get('ad_text')
@@ -58,6 +69,8 @@ def do_ad(cursor):
         return {'result':False, 'error': "Ett fel uppstod - Kontrollera att du gav annonsen en titel"}
 
 def erase_ad(ad_id, user_ID, cursor):
+    #Skriven av: Jari
+    #Uppdaterad av: Jacob (flytt till sql)
     '''Deletes an ad from DB based on userinput data'''
     ad_id = int(ad_id)
     user_ID = int(user_ID)
@@ -78,6 +91,8 @@ def erase_ad(ad_id, user_ID, cursor):
 '''*********AD listing*********'''
 
 def sort_by_status(user, cursor):
+    #Skriven av: Jari
+    #Mindre uppdateringar av: Jacob
     '''List the ads relevant for a specifik user'''
     sql="SELECT * FROM\
                 (SELECT ads.id, ads.titel, ads.main_info, DATE(ads.creation_date), employers.company_name, employers.id as emp_id,\
@@ -101,6 +116,7 @@ def sort_by_status(user, cursor):
 
 
 def available_ads(user, cursor):
+    #Skriven av: Jari & Jacob (Parprogrammering)
     '''List the ads which a student have not applied on'''
     sql="SELECT ads.id, ads.titel, ads.main_info, DATE(ads.creation_date), employers.company_name, employers.id as emp_id, application.student_id, application.status\
         FROM ads\
@@ -116,6 +132,7 @@ def available_ads(user, cursor):
     return mighty_db_says
 
 def get_denied_missions(user, cursor):
+    #Skriven av: Jacob
     '''Returns all missions that student did not get.'''
     user = int(user)
     sql="SELECT A.titel \
@@ -132,6 +149,7 @@ def get_denied_missions(user, cursor):
     return mighty_db_says
 
 def students_that_applied(user_id, cursor):
+    #Skriven av: Jari & Jacob (Parprogrammering)
     '''Returns all studetns that applied on each of employers mission'''
     user_id = int(user_id)
     sql = "SELECT students.id, students.first_name, students.last_name, J1.ad_id, J1.status, education.titel, education.year, users.mail\
@@ -151,6 +169,7 @@ def students_that_applied(user_id, cursor):
     return mighty_db_says
 
 def grading_ads(user, cursor):
+    #Skriven av: Jacob
     '''Returns all ads that studetn has completed'''
     user = int(user)
     sql= "SELECT employers.company_name, J2.*\
@@ -174,6 +193,8 @@ def grading_ads(user, cursor):
 
 '''******Application manegment*****'''
 def applying_for_mission(which_ad, cursor):
+    #Skriven av: Jari
+    #Uppdateringar: Jacob (flytt till sql)
     '''Create an application in the DB on a specifik ad'''
     which_ad=int(which_ad)
     user=log.get_user_id_logged_in()
@@ -188,6 +209,7 @@ def applying_for_mission(which_ad, cursor):
         return {'result':True, 'error':None}
 
 def applied_on(who, status, which_ad_id, cursor):
+    #Skriven av: Jari
     '''Check that the student have not applied before on a specifik ad'''
     if which_ad_id==None:
         sql="SELECT * FROM application WHERE %s=application.student_id \
@@ -202,6 +224,8 @@ def applied_on(who, status, which_ad_id, cursor):
 
 
 def who_got_accepted(annons, sokandeID, cursor):
+    #Skriven av: Jari
+    #Uppdaeringar av: Jacob (flytt till sql)
     '''An application is accepted. The remainding applications status is change to Bortvald'''
     log.validate_autho()
     user=log.get_user_id_logged_in()
@@ -215,11 +239,8 @@ def who_got_accepted(annons, sokandeID, cursor):
 
 
 
-
-
-
 '''**************Feedback section**************'''
-
+    #Skriven av: Jacob
 def move_ad_to_complete(annons, cursor):
     '''Change status on ad and gives feedback to student'''
     feedback = request.forms.get('feedback')
@@ -257,6 +278,7 @@ def move_ad_to_complete(annons, cursor):
 
 
 def get_given_feedback_for_employers(user, cursor):
+    #Skriven av: Jacob
     sql = "SELECT J1.id, feedback.feedback_text, feedback.grade \
         FROM (SELECT ads.titel, ads.id \
             FROM ads \
@@ -271,6 +293,7 @@ def get_given_feedback_for_employers(user, cursor):
 
 
 def edit_mission(ad_id, cursor):
+    #Skriven av: Jacob
     '''Handle edit by students on completed missions that displays on profile'''
     type_of = request.forms.get('mission_type_'+str(ad_id))
     keys = request.POST.getall("add_key_" + str(ad_id))
@@ -328,6 +351,7 @@ def edit_mission(ad_id, cursor):
     #Skills handeling - END
 
 def get_ad_skills(user, cursor):
+    #Skriven av: Jacob
     '''Returns all skills needed for each ad'''
     user = int(user)
     sql="SELECT ad_skills.* \

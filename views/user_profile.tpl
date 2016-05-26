@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<!--
+Skriven av: Jacob (HTML + CSS)
+Mindre uppdateringra av: Sofia
+-->
 <html>
 
     % include('head.tpl')

@@ -1,3 +1,6 @@
+<!--
+Skriven av: ??Sofia/Philip?? (HTML+CSS)
+-->
 <footer>
     <div class="wrap">
         <div class="footer_col1">
