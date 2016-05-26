@@ -25,10 +25,8 @@ def validate_user(username, password, cursor):
     password = hashlib.sha256(password).hexdigest()
     sql = "SELECT id FROM users WHERE mail = %s and password = %s "
 
-    #call_database()
     cursor.execute(sql, (username, password,))
     mighty_db_says = cursor.fetchall()
-    #hang_up_on_database()
 
     if len(mighty_db_says) == 1:
         user_id = mighty_db_says[0][0] #
@@ -39,7 +37,7 @@ def validate_user(username, password, cursor):
 
 
 def validate_autho():
-    '''Checks that the user is logged in'''
+    '''Checks that the user is logged in else redirects. Used to protect auto-pages'''
     session = request.environ.get('beaker.session')
     try:
         session['userId']
@@ -52,7 +50,7 @@ def validate_autho():
         redirect('/login')
 
 def is_user_logged_in():
-    '''Checks that the user in logged in'''
+    '''Checks that the user in logged in used when just status is needed'''
     session = request.environ.get('beaker.session')
     try:
         session['userId']
@@ -93,9 +91,9 @@ def get_user_level(cursor):
 
 '''*********Funktioner*********'''
 def login(cursor):
-    '''Do login'''
-    username = request.forms.get('email')
-    password = request.forms.get('password')
+    '''Grants user permission. Sets userID in session and current IP '''
+    username = str(request.forms.get('email'))
+    password = str(request.forms.get('password'))
     user_status = validate_user(username, password, cursor)
     if user_status['result'] == True:
         userID = user_status['id']
@@ -114,8 +112,10 @@ def log_in_new_user(email, password, cursor):
     user_status = validate_user(email, password, cursor)
     if user_status['result'] == True:
         userID = user_status['id']
+        client_ip = request.environ.get('REMOTE_ADDR')
         session = request.environ.get('beaker.session')
         session['userId'] = userID
+        session['userIP'] = client_ip
         session.save()
 
 
@@ -125,6 +125,7 @@ def log_out():
     session.save()
 
 def ajax_validation(cursor):
+    '''Validates if user is allowed to proceed login'''
     username = request.forms.get('email')
     password = request.forms.get('password')
     user_status = validate_user(username, password, cursor)

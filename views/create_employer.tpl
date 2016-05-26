@@ -8,7 +8,7 @@
                 <div id="content">
                 <!--<img src="../static/img/qwback.jpg" alt="qwbackground">
                     <div id="slogan"><p>Lorem ipsum dolor sit amet, <br>consectetur adipiscing elit.</p></div>-->
-                <form name="create_employer" id="create_employer" method="post" action="/do_create_employer">
+                <form name="create_employer" id="create_employer" method="post" action="/do_create_user/employer">
                     <h3 class="form_head" id="employerform_Title">Skapa profil | Uppdragsgivare</h3>
                     <div class="form_labels">
                         <label for="company_name">Företag</label>
@@ -36,7 +36,7 @@
                         <br>
                         <input placeholder="Lösenord" type="input" name="password" id="password" value="" required>
                     </div>
-                    
+
                     <input class="myButton" id="create_student_account" type="submit" value="Skapa konto">
                 </form>
 
