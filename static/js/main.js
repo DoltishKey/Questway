@@ -44,7 +44,6 @@ function checkLogIn(){
       });
 }
 
-
 function checkCreateEmployer(){
     /****************
     Skriven av: Jacob & Philip
@@ -73,13 +72,13 @@ function checkCreateEmployer(){
                         document.getElementById("create_employer").submit();
                        }
                        else if(response=='User exists'){
-                           $('#error').html('Det finns redan en användare med angiven email!');
+                           //$('#error').html('Det finns redan en användare med angiven email!');
                        }
                        else if(response=='Bad input'){
-                           $('#error').html('Du måste skriva in en email!');
+                           //$('#error').html('Du måste skriva in en email!');
                        }
                        else{
-                           $('#error').html('Något har blivit fel!');
+                           //$('#error').html('Något har blivit fel!');
                        }
                    }
         });
@@ -157,7 +156,6 @@ function set_localstorage_val_for_ad(){
         localStorage.setItem("clicked_ad", val);
     });
 }
-
 
 // För att dölja/visa annonser:
 function showHide() {
