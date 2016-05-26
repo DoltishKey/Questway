@@ -1,5 +1,6 @@
 <!--
-Skriven av: ??Sofia/Philip?? (HTML+CSS)
+Skriven av: Sofia/Philip (HTML+CSS)
+Logotyp: Philip
 -->
 <footer>
     <div class="wrap">

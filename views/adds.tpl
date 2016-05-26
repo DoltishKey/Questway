@@ -1,6 +1,6 @@
 <!--
 Skriven av: Jari (HTML)
-Uppdaterad av ??Sofia?? (HTML + CSS)
+Uppdaterad av Sofia (HTML + CSS)
 -->
 <!DOCTYPE html>
 <html>

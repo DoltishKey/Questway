@@ -1,5 +1,6 @@
 <!--
-Skriven av: ??Philip?? (HTML + CSS)
+Skriven av: Sofia (HTML + CSS)
+Uppdaterad av: Philip (HTML + CSS)
 -->
 <!DOCTYPE html>
 <html lang="sv">

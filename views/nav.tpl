@@ -1,6 +1,7 @@
 <!--
 Skriven av: Jacob (HTML)
-Skriven av: ??Sofia?? (CSS)
+Skriven av: Sofia (HTML + CSS)
+Mindre uppdateringar: Philip (logotyp)
 -->
 <header>
     <div class="wrap" id="header_wrap">

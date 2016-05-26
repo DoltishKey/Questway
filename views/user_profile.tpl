@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--
 Skriven av: Jacob (HTML + CSS)
-Mindre uppdateringra av: Sofia
+Mindre uppdateringar av: Sofia
 -->
 <html>
 

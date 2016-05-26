@@ -402,6 +402,7 @@ function createAdValid(){
     }
 }
 
+// Ska användas i senare versioner:
 function menuSetUp(){
     /****************
     Skriven av: Philip

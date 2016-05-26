@@ -1,5 +1,6 @@
 <!--
 Skriven av: Philip (HTML + CSS)
+Uppdaterad av: Sofia (HTML, CSS)
 -->
 <!DOCTYPE html>
 <html>
