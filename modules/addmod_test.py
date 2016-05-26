@@ -6,11 +6,11 @@ from log import validate_user
 db = None
 cursor = None
 def call_database():
-	global db
-	global cursor
-	db = MySQLdb.connect(host="195.178.232.16", port=3306, user="AC8240", passwd="hejhej123", db="AC8240");
-	cursor = db.cursor()
-	return cursor
+    global db
+    global cursor
+    db = MySQLdb.connect(host="195.178.232.16", port=3306, user="AC8240", passwd="hejhej123", db="AC8240");
+    cursor = db.cursor()
+    return cursor
 
 def hang_up_on_database():
     global db
