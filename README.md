@@ -25,3 +25,5 @@ INSTALL MYSQLdb ON MAC
     $ sudo easy_install pip
     $ sudo pip install MySQL-python
    
+
+--- Author: Jari Rosenström ---
